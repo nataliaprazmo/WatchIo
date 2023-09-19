@@ -1,0 +1,3 @@
+App_src/data/*
+!App_src/data/placeholder.txt
+
