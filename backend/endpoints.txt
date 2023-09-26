@@ -19,9 +19,12 @@ GET /api/subscriptions/share_code # create and get user subscription share code
 POST /api/admins/login
 POST /api/admins/register
 
-/api/videos
+/api/series
+GET /api/series # get all series
+GET /api/series/:genre # get all series form set genre
+POST /api/series
+
 GET /api/videos/ # get all videos
-POST /api/videos/add_single_video # add single video
 POST /api/videos/add_series # add multiple videos
 POST /api/videos/find # search videos with multiple parameters
 
