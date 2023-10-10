@@ -1,27 +1,203 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;
+	@apply text-white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	@apply bg-grey-default;
+}
+
+/* GENERAL */
+
+.max-width {
+	@apply max-w-[1440px] mx-auto;
+}
+
+.padding-x {
+	@apply sm:px-16 px-6;
+}
+
+.padding-y {
+	@apply py-4;
+}
+
+.flex-center {
+	@apply flex items-center justify-center;
+}
+
+.flex-between {
+	@apply flex justify-between items-center;
+}
+
+.divider-sm {
+	@apply w-[220px] h-[0.5px] bg-white;
+}
+
+.divider-lg {
+	@apply w-[220px] h-[1.5px] bg-white;
+}
+
+/* SLIDER */
+
+.swiper-container,
+.swiper-wrapper {
+	@apply w-full;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+	@apply bg-transparent backdrop-blur-md rounded-full;
+	height: 48px !important;
+	width: 48px !important;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+	color: white;
+	font-size: 24px !important;
+}
+
+.swiper-button-next::after {
+	margin-left: 2px;
+}
+
+.swiper-button-prev::after {
+	margin-right: 2px;
+}
+
+.film-slide {
+	@apply bg-primary-orange h-[360px] w-fit my-18;
+}
+
+/* NAV */
+
+.nav {
+	@apply flex flex-row justify-between items-center bg-grey-300 px-[50px] w-full h-20 fixed right-0 top-0 z-50;
+}
+
+.nav__menu {
+	@apply flex space-x-6 xl:text-[16px] text-[12px] bg-grey-300;
+}
+
+.nav__logo {
+	@apply xl:max-w-[300px] lg:max-w-[200px] max-w-[150px] bg-grey-300;
+}
+
+.nav__buttons {
+	@apply flex items-center space-x-[32px] bg-grey-300;
+}
+
+/* HERO */
+
+.hero {
+	@apply flex xl:flex-row flex-col relative z-0 py-[72px] px-[50px] gap-5 items-center justify-between;
+}
+
+.hero__title {
+	@apply 2xl:text-[64px] sm:text-[56px] text-[48px] font-bold leading-[4.8rem] tracking-tight;
+}
+
+.hero__subtitle {
+	@apply text-[16px] font-medium mt-[24px] max-w-[610px];
+}
+
+.hero__buttons {
+	@apply flex sm:flex-row flex-col gap-[32px] mt-[32px];
+}
+
+.hero__plans {
+	@apply flex sm:flex-row flex-col gap-8 items-center justify-center mt-8;
+}
+
+.hero__plan {
+	@apply flex flex-col gap-5 border-2 p-6 justify-center items-center;
+}
+
+.hero__plan__type {
+	@apply leading-[20.8px] font-medium text-[16px];
+}
+
+.hero__plan__price {
+	@apply text-primary-orange font-bold text-[32px] mb-1;
+}
+
+.hero__plan__description {
+	@apply flex flex-col items-center justify-center gap-4 mb-3 text-center max-w-[220px];
+}
+
+/* BENEFITS */
+.benefits {
+	@apply flex flex-col items-center justify-between;
+}
+
+.benefit {
+	@apply flex xl:flex-row flex-col gap-[64px] items-center justify-between px-[50px] py-18;
+}
+
+.benefit__description {
+	@apply flex flex-col justify-center relative;
+}
+
+.benefit__description__name {
+	@apply flex flex-row gap-2 mb-8;
+}
+
+.benefit__description__title {
+	@apply 2xl:text-[48px] sm:text-[40px] text-[32px] leading-[57.6px] font-bold;
+}
+
+.benefit__description__text {
+	@apply text-[16px] leading-[28px] font-medium mt-4;
+}
+
+.benefit__description__buttons {
+	@apply flex sm:flex-row flex-col gap-[32px] mt-4;
+}
+
+/* FAQ SECTION */
+.faqSection {
+	@apply py-8 xl:px-32 md:px-20 xs:px-10 px-6;
+}
+
+.faqSection__title {
+	@apply 2xl:text-[32px] text-[24px] font-bold text-center mb-2;
+}
+
+.faqSection__subtitle {
+	@apply text-[16px] leading-[28px] font-medium mb-6 text-center;
+}
+
+.faq__accordion {
+	@apply bg-grey-default mb-2;
+}
+
+.faq__accordion__summary {
+	@apply bg-grey-200 rounded-[8px] mb-1;
+}
+
+.faq__accordion__details {
+	@apply bg-grey-default;
+}
+
+/* FOOTER */
+
+.footer {
+	@apply bg-grey-300 px-[5%] py-18;
+}
+
+.footer__grid {
+	@apply grid grid-cols-5;
+}
+
+.footer__logo {
+	@apply xl:max-w-[220px] lg:max-w-[150px] max-w-[100px];
 }
