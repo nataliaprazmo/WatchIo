@@ -33,28 +33,44 @@ const FilmsSlider = () => {
 				}}
 			>
 				<SwiperSlide>
-					<div className="film-slide">Slide 1</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 1
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="film-slide">Slide 2</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 2
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="film-slide">Slide 3</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 3
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="film-slide">Slide 4</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 4
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="film-slide">Slide 5</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 5
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="film-slide">Slide 6</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 6
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="film-slide">Slide 7</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 7
+					</div>
 				</SwiperSlide>
 				<SwiperSlide>
-					<div className="film-slide">Slide 8</div>
+					<div className="bg-primary-orange h-[360px] w-fit my-18">
+						Slide 8
+					</div>
 				</SwiperSlide>
 			</Swiper>
 		</div>

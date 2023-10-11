@@ -4,9 +4,9 @@ import Link from "next/link";
 
 const Footer = () => {
 	return (
-		<div className="footer">
-			<div className="footer__grid">
-				<div className="footer__logo">
+		<div className="bg-grey-300 px-[5%] py-18">
+			<div className="grid grid-cols-5">
+				<div className="xl:max-w-[220px] lg:max-w-[150px] max-w-[100px]">
 					<Image
 						src="/images/logo.svg"
 						height={48}

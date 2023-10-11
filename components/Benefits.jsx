@@ -3,7 +3,7 @@ import Benefit from "./Benefit";
 
 const Benefits = () => {
 	return (
-		<div className="benefits">
+		<div className="flex flex-col items-center justify-between">
 			<Benefit
 				side="left"
 				imageSrc="/images/rooms.svg"

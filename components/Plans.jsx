@@ -3,7 +3,7 @@ import Plan from "./Plan";
 
 const Plans = () => {
 	return (
-		<div className="hero__plans">
+		<div className="flex sm:flex-row flex-col gap-8 items-center justify-center mt-8">
 			<Plan
 				type="Plan podstawowy"
 				price="6,99zł"
