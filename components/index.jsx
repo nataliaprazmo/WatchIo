@@ -6,6 +6,8 @@ import FilmsSlider from "./FilmsSlider";
 import Benefits from "./Benefits";
 import Footer from "./Footer";
 import FaqSection from "./FaqSection";
+import { LoginContainer } from "./LoginContainer";
+import { SignupContainer } from "./SignupContainer";
 
 export {
 	Nav,
@@ -16,4 +18,6 @@ export {
 	Benefits,
 	Footer,
 	FaqSection,
+	LoginContainer,
+	SignupContainer,
 };

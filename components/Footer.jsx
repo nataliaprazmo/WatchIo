@@ -114,7 +114,7 @@ const Footer = () => {
 					</Link>
 				</div>
 			</div>
-			<div className="footer__grid mt-16">
+			<div className="grid grid-cols-5 mt-16">
 				<p className="font-regular text-[12px]">
 					&copy; 2023 Radłowski K. Prażmo N.
 				</p>
