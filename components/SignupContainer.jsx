@@ -11,9 +11,10 @@ import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import Link from "next/link";
-import RedirectButton from "./RedirectButton";
+import Button from "./buttons/Button";
 import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 import Person2Outlined from "@mui/icons-material/Person2Outlined";
+import LinkButton from "./buttons/LinkButton";
 
 export const SignupContainer = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -233,9 +234,9 @@ export const SignupContainer = () => {
 						polityką prywatności
 					</Link>
 				</div>
-				<RedirectButton to="/" variant="filled" type="submit">
+				<Button to="/" variant="filled" type="submit">
 					Zarejestruj się
-				</RedirectButton>
+				</Button>
 			</form>
 		</div>
 	);

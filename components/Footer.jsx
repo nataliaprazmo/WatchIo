@@ -1,147 +1,35 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Logo from "./Logo";
+import FooterGroup from "./FooterGroup";
+import { pages, policies } from "@/components/data";
 
 const Footer = () => {
 	return (
-		<div className="bg-grey-300 px-[5%] py-18">
-			<div className="grid grid-cols-5">
-				<div className="xl:max-w-[220px] lg:max-w-[150px] max-w-[100px]">
-					<Image
-						src="/images/logo.svg"
-						height={48}
-						width={376.5}
-						style={{ objectFit: "contain" }}
-						alt="logo"
+		<div className="bg-grey-300 px-[5%] py-18 ">
+			<div className="lg:grid lg:grid-cols-5 flex md:flex-row flex-col gap-4">
+				<Logo classes="xl:max-w-[220px] lg:max-w-[150px] max-w-[100px]" />
+				{pages.map((page, id) => (
+					<FooterGroup
+						key={id}
+						main_page={page.main_page}
+						subpages={page.subpages}
 					/>
-				</div>
-				<div>
-					<Link
-						href="/"
-						className="font-bold text-[16px] hover:text-primary-orange"
-					>
-						Strona główna
-					</Link>
-					<div className="flex flex-col">
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Rejestracja
-						</Link>
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Logowanie
-						</Link>
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							FAQ
-						</Link>
-					</div>
-				</div>
-				<div>
-					<Link
-						href="/"
-						className="font-bold text-[16px] hover:text-primary-orange"
-					>
-						Oferta
-					</Link>
-					<div className="flex flex-col">
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Wspólne pokoje
-						</Link>
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Dzielenie subskrypcją
-						</Link>
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Udostępnianie playlist
-						</Link>
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Filmy i seriale
-						</Link>
-					</div>
-				</div>
-				<div>
-					<Link
-						href="/"
-						className="font-bold text-[16px] hover:text-primary-orange"
-					>
-						Subskrypcje
-					</Link>
-					<div className="flex flex-col">
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Plan podstawowy
-						</Link>
-						<Link
-							href="/"
-							className="font-regular text-[14px] hover:text-primary-orange"
-						>
-							Subskrypcja dzielona
-						</Link>
-					</div>
-				</div>
-				<div>
-					<Link
-						href="/"
-						className="font-bold text-[16px] hover:text-primary-orange flex flex-col"
-					>
-						Kontakt
-					</Link>
-					<Link
-						href="/"
-						className="font-regular text-[14px] hover:text-primary-orange"
-					>
-						contact@watchio.com.pl
-					</Link>
-				</div>
+				))}
 			</div>
-			<div className="grid grid-cols-5 mt-16">
+			<div className="md:grid md:grid-cols-5 flex flex-col-reverse gap-4 mt-16">
 				<p className="font-regular text-[12px]">
 					&copy; 2023 Radłowski K. Prażmo N.
 				</p>
-				<Link
-					href="/"
-					className="font-semibold text-[12px] hover:text-primary-orange"
-				>
-					Pomoc
-				</Link>
-				<Link
-					href="/"
-					className="font-semibold text-[12px] hover:text-primary-orange"
-				>
-					Polityka prywatności
-				</Link>
-				<Link
-					href="/"
-					className="font-semibold text-[12px] hover:text-primary-orange"
-				>
-					Warunki korzystania
-				</Link>
-				<Link
-					href="/"
-					className="font-semibold text-[12px] hover:text-primary-orange"
-				>
-					Ciasteczka
-				</Link>
+				{policies.map((policy, id) => (
+					<Link
+						key={id}
+						href={policy.href}
+						className="font-semibold text-[12px] hover:text-primary-orange"
+					>
+						{policy.name}
+					</Link>
+				))}
 			</div>
 		</div>
 	);

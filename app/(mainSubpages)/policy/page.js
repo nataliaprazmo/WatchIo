@@ -1,10 +1,10 @@
 import React from "react";
-import { Home } from "@/components";
+import { Policy } from "@/components";
 
 export default function Page() {
 	return (
 		<main className="overflow-hidden">
-			<Home />
+			<Policy />
 		</main>
 	);
 }

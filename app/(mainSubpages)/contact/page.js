@@ -1,10 +1,10 @@
 import React from "react";
-import { Home } from "@/components";
+import { Contact } from "@/components";
 
 export default function Page() {
 	return (
 		<main className="overflow-hidden">
-			<Home />
+			<Contact />
 		</main>
 	);
 }

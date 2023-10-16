@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
-import { RedirectButton, Plans } from "./";
+import Plans from "./Plans";
+import { LinkButton } from "@/components/buttons";
 
 const Hero = () => {
 	return (
@@ -15,12 +15,12 @@ const Hero = () => {
 					serwisie.
 				</p>
 				<div className="flex sm:flex-row flex-col gap-[32px] mt-[32px]">
-					<RedirectButton to="/offer" variant="outlined">
+					<LinkButton to="/offer" variant="outlined">
 						Sprawdź ofertę
-					</RedirectButton>
-					<RedirectButton to="/signup" variant="filled">
+					</LinkButton>
+					<LinkButton to="/signup" variant="filled">
 						Zarejestruj się
-					</RedirectButton>
+					</LinkButton>
 				</div>
 			</div>
 			<div>

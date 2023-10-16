@@ -6,6 +6,7 @@ import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import { slides } from "@/components/data";
 SwiperCore.use([Navigation, FreeMode]);
 
 const FilmsSlider = () => {
@@ -32,46 +33,13 @@ const FilmsSlider = () => {
 					},
 				}}
 			>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 1
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 2
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 3
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 4
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 5
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 6
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 7
-					</div>
-				</SwiperSlide>
-				<SwiperSlide>
-					<div className="bg-primary-orange h-[360px] w-fit my-18">
-						Slide 8
-					</div>
-				</SwiperSlide>
+				{slides.map((slide, id) => (
+					<SwiperSlide key={id}>
+						<div className="bg-primary-orange h-[360px] w-fit my-18">
+							{slide}
+						</div>
+					</SwiperSlide>
+				))}
 			</Swiper>
 		</div>
 	);

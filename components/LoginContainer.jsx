@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
-import { OutlinedInput } from "@mui/material";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import VisibilityOutlined from "@mui/icons-material/VisibilityOutlined";
@@ -11,7 +11,7 @@ import VisibilityOffOutlined from "@mui/icons-material/VisibilityOffOutlined";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import Link from "next/link";
-import RedirectButton from "./RedirectButton";
+import Button from "./buttons/Button";
 
 export const LoginContainer = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -137,9 +137,9 @@ export const LoginContainer = () => {
 						Odzyskiwanie hasła
 					</Link>
 				</div>
-				<RedirectButton to="/" variant="filled" type="submit">
+				<Button variant="filled" type="submit">
 					Zaloguj się
-				</RedirectButton>
+				</Button>
 			</form>
 		</div>
 	);

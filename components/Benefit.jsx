@@ -1,6 +1,6 @@
 import React from "react";
 import { MdArrowForward } from "react-icons/md";
-import RedirectButton from "./RedirectButton";
+import { LinkButton } from "@/components/buttons";
 import Image from "next/image";
 
 const Benefit = ({ side, imageSrc, name, title, description }) => {
@@ -28,12 +28,12 @@ const Benefit = ({ side, imageSrc, name, title, description }) => {
 					{description}
 				</p>
 				<div className="flex sm:flex-row flex-col gap-[32px] mt-4">
-					<RedirectButton to="/offer" variant="outlined">
+					<LinkButton to="/offer" variant="outlined">
 						Dowiedz się więcej
-					</RedirectButton>
-					<RedirectButton to="/signup" variant="filled">
+					</LinkButton>
+					<LinkButton to="/signup" variant="filled">
 						Zarejestruj się
-					</RedirectButton>
+					</LinkButton>
 				</div>
 			</div>
 			{side === "right" && image}

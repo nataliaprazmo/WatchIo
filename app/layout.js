@@ -4,8 +4,12 @@ import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
+	applicationName: "Watch.IO",
 	title: "Watch.IO",
-	description: "Created by Radłowski K. and Prażmo N.",
+	description: "Stworzone przez Radłowski K. i Prażmo N.",
+	keywords: ["Streaming", "Platforma", "Platforma streamingowa"],
+	authors: [{ name: "Prażmo Natalia" }, { name: "Radłowski Kamil" }],
+	colorScheme: "dark",
 };
 
 export default function RootLayout({ children }) {
