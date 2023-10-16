@@ -1,5 +1,5 @@
 import React from "react";
-import { Subscriptions } from "@/components";
+import { Subscriptions } from "@/components/mainPage";
 
 export default function Page() {
 	return (

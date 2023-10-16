@@ -1,5 +1,5 @@
 import React from "react";
-import { Offer } from "@/components";
+import { Offer } from "@/components/mainPage";
 
 export default function Page() {
 	return (

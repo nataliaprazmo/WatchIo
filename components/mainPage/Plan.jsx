@@ -1,9 +1,9 @@
 import React from "react";
-import LinkButton from "./buttons/LinkButton";
+import LinkButton from "../buttons/LinkButton";
 
 const Plan = ({ type, price, description }) => {
 	return (
-		<div className="flex flex-col gap-5 border-2 p-6 justify-center items-center border-white hover:border-primary-orange hover:shadow-3xl">
+		<div className="flex flex-col gap-5 border-2 p-6 justify-center items-center border-white hover:border-primary-orange hover:shadow-3xl transition duration-500">
 			<p className="leading-[20.8px] font-medium text-[16px]">{type}</p>
 			<div className="w-[220px] h-[0.5px] bg-white" />
 			<h3 className="text-primary-orange font-bold text-[32px] mb-1">

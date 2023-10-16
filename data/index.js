@@ -7,6 +7,7 @@ import slides from "./slides";
 import cookiesDetails from "./cookies";
 import privacyPolicy from "./privacyPolicy";
 import termsOfUse from "./termsOfUse";
+import offer from "./offer";
 
 export {
 	benefits,
@@ -18,4 +19,5 @@ export {
 	cookiesDetails,
 	privacyPolicy,
 	termsOfUse,
+	offer,
 };

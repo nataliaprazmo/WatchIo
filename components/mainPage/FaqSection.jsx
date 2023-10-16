@@ -3,7 +3,7 @@
 import React from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { questions } from "@/components/data";
+import { questions } from "@/data";
 
 const FaqSection = () => {
 	const [expanded, setExpanded] = React.useState(false);

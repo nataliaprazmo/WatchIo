@@ -6,7 +6,7 @@ import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
-import { slides } from "@/components/data";
+import { slides } from "@/data";
 SwiperCore.use([Navigation, FreeMode]);
 
 const FilmsSlider = () => {

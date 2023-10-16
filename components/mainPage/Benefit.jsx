@@ -1,5 +1,5 @@
 import React from "react";
-import { MdArrowForward } from "react-icons/md";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { LinkButton } from "@/components/buttons";
 import Image from "next/image";
 
@@ -18,7 +18,10 @@ const Benefit = ({ side, imageSrc, name, title, description }) => {
 			{side === "left" && image}
 			<div className="flex flex-col justify-center relative">
 				<div className="flex flex-row gap-2 mb-8">
-					<MdArrowForward size="24" fill="#ff9900" />
+					<ArrowForwardRoundedIcon
+						size="24"
+						sx={{ path: { color: "#ff9900" } }}
+					/>
 					<p className="uppercase text-primary-orange">{name}</p>
 				</div>
 				<h2 className="2xl:text-[48px] sm:text-[40px] text-[32px] leading-[57.6px] font-bold">

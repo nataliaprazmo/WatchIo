@@ -1,6 +1,6 @@
 import React from "react";
 import Benefit from "./Benefit";
-import { benefits } from "@/components/data";
+import { benefits } from "@/data";
 
 const Benefits = () => {
 	return (

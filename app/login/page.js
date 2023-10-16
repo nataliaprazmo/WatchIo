@@ -1,11 +1,11 @@
 import React from "react";
-import { Nav, LoginContainer } from "@/components";
+import { Nav, LoginContainer } from "@/components/mainPage";
 import Link from "next/link";
 
-export default function Login() {
+export default function Page() {
 	return (
 		<main className="overflow-hidden flex flex-col items-center">
-			<Nav main={false} />
+			<Nav />
 			<LoginContainer />
 			<p className="mt-4 font-medium text-[16px]">
 				Nie posiadasz jeszcze konta?{" "}

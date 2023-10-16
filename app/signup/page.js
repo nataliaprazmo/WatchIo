@@ -1,11 +1,11 @@
 import React from "react";
-import { Nav, SignupContainer } from "@/components";
+import { Nav, SignupContainer } from "@/components/mainPage";
 import Link from "next/link";
 
-export default function Signup() {
+export default function Page() {
 	return (
 		<main className="overflow-hidden flex flex-col items-center">
-			<Nav main={false} />
+			<Nav />
 			<SignupContainer />
 			<p className="mt-4 font-medium text-[16px]">
 				Posiadasz już konto?{" "}

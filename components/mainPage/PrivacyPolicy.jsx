@@ -1,5 +1,5 @@
 import React from "react";
-import { privacyPolicy } from "./data";
+import { privacyPolicy } from "@/data";
 
 const PrivacyPolicy = () => {
 	return (

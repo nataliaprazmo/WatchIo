@@ -1,5 +1,5 @@
 import React from "react";
-import { termsOfUse } from "./data";
+import { termsOfUse } from "@/data";
 
 const TermsOfUse = () => {
 	return (

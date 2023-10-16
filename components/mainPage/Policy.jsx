@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 const Policy = () => {
 	return (
-		<div>
+		<>
 			<Nav />
 			<div className="px-[50px] py-18">
 				<PrivacyPolicy />
@@ -15,7 +15,7 @@ const Policy = () => {
 				<CookiesPolicy />
 			</div>
 			<Footer />
-		</div>
+		</>
 	);
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import FooterGroup from "./FooterGroup";
-import { pages, policies } from "@/components/data";
+import { pages, policies } from "@/data";
 
 const Footer = () => {
 	return (
@@ -16,6 +16,12 @@ const Footer = () => {
 						subpages={page.subpages}
 					/>
 				))}
+				<div>
+					<p className="font-bold text-[16px]">Kontakt</p>
+					<p className="font-regular text-[14px]">
+						contact@watchio.com.pl
+					</p>
+				</div>
 			</div>
 			<div className="md:grid md:grid-cols-5 flex flex-col-reverse gap-4 mt-16">
 				<p className="font-regular text-[12px]">

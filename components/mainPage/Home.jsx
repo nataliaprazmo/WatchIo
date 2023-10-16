@@ -6,12 +6,12 @@ import {
 	Benefits,
 	Footer,
 	FaqSection,
-} from "@/components";
+} from "@/components/mainPage";
 
 const Home = () => {
 	return (
 		<>
-			<Nav main={true} />
+			<Nav />
 			<Hero />
 			<FilmsSlider />
 			<Benefits />

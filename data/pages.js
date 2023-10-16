@@ -37,10 +37,6 @@ const pages = [
 				href: "/offer#sharingPlaylist",
 				name: "Udostępnianie playlist",
 			},
-			{
-				href: "/offer#films",
-				name: "Filmy i seriale",
-			},
 		],
 	},
 	{
@@ -56,18 +52,6 @@ const pages = [
 			{
 				href: "/subscriptions#sharing",
 				name: "Subskrypcja dzielona",
-			},
-		],
-	},
-	{
-		main_page: {
-			href: "/contact",
-			name: "Kontakt",
-		},
-		subpages: [
-			{
-				href: "/contact",
-				name: "contact@watchio.com.pl",
 			},
 		],
 	},

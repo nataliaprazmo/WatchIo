@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { cookiesDetails } from "./data";
+import { cookiesDetails } from "@/data";
 
 const CookiesPolicy = () => {
 	const [expanded, setExpanded] = useState(false);

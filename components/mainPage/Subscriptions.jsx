@@ -6,7 +6,7 @@ import Plans from "./Plans";
 const Subscriptions = () => {
 	return (
 		<div className="pt-18">
-			<Nav main={true} />
+			<Nav />
 			<Plans />
 			<Footer />
 		</div>

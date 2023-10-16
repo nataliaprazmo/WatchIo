@@ -1,0 +1,37 @@
+import React from "react";
+import { MdArrowForward } from "react-icons/md";
+import Image from "next/image";
+import OfferSteps from "./OfferSteps";
+
+const OfferService = ({ id, title, description, image, tutorial }) => {
+	return (
+		<div id={id} className="px-[50px] pt-16">
+			<h1 className="text-[24px] font-semibold pb-2 text-primary-orange uppercase flex items-center gap-[8px]">
+				<MdArrowForward size="28" fill="#ff9900" />
+				{title}
+			</h1>
+			<p className="pb-2 font-medium ">{description}</p>
+			<div className="flex xl:flex-row flex-col gap-[32px] xl:items-center items-start justify-between ">
+				<div>
+					{tutorial.map((t, id) => (
+						<div key={id}>
+							<h1 className="pb-1 font-semibold pt-2">
+								{t.name}
+							</h1>
+							<OfferSteps steps={t.content} />
+						</div>
+					))}
+				</div>
+				<Image
+					src={image}
+					height={150}
+					width={500}
+					style={{ objectFit: "contain" }}
+					alt="service"
+				/>
+			</div>
+		</div>
+	);
+};
+
+export default OfferService;

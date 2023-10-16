@@ -1,5 +1,5 @@
 import React from "react";
-import { Help } from "@/components";
+import { Help } from "@/components/mainPage";
 
 export default function Page() {
 	return (
