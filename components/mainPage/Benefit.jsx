@@ -3,7 +3,7 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { LinkButton } from "@/components/buttons";
 import Image from "next/image";
 
-const Benefit = ({ side, imageSrc, name, title, description }) => {
+const Benefit = ({ side, imageSrc, name, title, description, more }) => {
 	let image = (
 		<Image
 			src={imageSrc}
@@ -31,7 +31,7 @@ const Benefit = ({ side, imageSrc, name, title, description }) => {
 					{description}
 				</p>
 				<div className="flex sm:flex-row flex-col gap-[32px] mt-4">
-					<LinkButton to="/offer" variant="outlined">
+					<LinkButton to={more} variant="outlined">
 						Dowiedz się więcej
 					</LinkButton>
 					<LinkButton to="/signup" variant="filled">

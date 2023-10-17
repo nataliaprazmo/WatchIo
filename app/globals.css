@@ -50,3 +50,7 @@ body {
 	@apply text-primary-orange font-bold after:absolute after:w-full after:h-[2.5px] after:bg-primary-orange after:left-0 after:bottom-[-29px] after:rounded;
 	/* block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 underline; */
 }
+
+.activeNav {
+	@apply text-primary-orange font-bold;
+}

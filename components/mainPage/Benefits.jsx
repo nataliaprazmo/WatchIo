@@ -13,6 +13,7 @@ const Benefits = () => {
 					name={benefit.name}
 					title={benefit.title}
 					description={benefit.description}
+					more={benefit.more}
 				/>
 			))}
 		</div>
