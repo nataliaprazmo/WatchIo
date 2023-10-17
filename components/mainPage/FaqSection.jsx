@@ -17,8 +17,8 @@ const FaqSection = () => {
 				Najczęściej zadawane pytania
 			</h2>
 			<p className="text-[16px] leading-[28px] font-medium mb-6 text-center">
-				Poniżej znajdziesz odpowiedzi na najczęściej pojawiające się do
-				nas pytania. Oprócz tego zamieszczamy cenne informacje.
+				Poniżej znajdziesz cenne informacje oraz odpowiedzi na
+				najczęściej pojawiające się do nas pytania.
 			</p>
 			{questions.map((question, id) => (
 				<Accordion

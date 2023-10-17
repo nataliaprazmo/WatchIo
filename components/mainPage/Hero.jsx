@@ -10,9 +10,8 @@ const Hero = () => {
 					Zacznij oglądać już dziś!
 				</h1>
 				<p className="text-[16px] font-medium mt-[24px] max-w-[610px]">
-					Poniżej przedstawiamy coś tam ofertę oraz zachętę do
-					subskrypcji. Llallala. Fajna zachęta do zalogowania się w
-					serwisie.
+					Poniżej przedstawiamy naszą ofertę oraz plany subskrypcyjne.
+					Zachęcamy do zarejestrowania się w naszym serwisie.
 				</p>
 				<div className="flex sm:flex-row flex-col gap-[32px] mt-[32px]">
 					<LinkButton to="/offer" variant="outlined">

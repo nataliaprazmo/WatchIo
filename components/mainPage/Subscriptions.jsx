@@ -7,7 +7,9 @@ const Subscriptions = () => {
 	return (
 		<div className="pt-18">
 			<Nav />
-			<Plans />
+			<div className="pt-10 pb-18">
+				<Plans />
+			</div>
 			<Footer />
 		</div>
 	);
