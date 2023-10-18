@@ -13,7 +13,7 @@ services: # lista kontenerów do stworzenia
             - "5000:5000" # przypisanie portu 5000 hosta do portu 5000 dockera
         volumes:
             - ./backend:/app # przypisanie folderu backend do ścieżki /app w kontenerze
-            - /app/node_modules # stworzenie woluminu node_modules z obrazu stworzonego przez dockerfile'a
+            - ./backend/node_modules:/app/node_modules # stworzenie woluminu node_modules z obrazu stworzonego przez dockerfile'a
         depends_on: # wskazanie na kontener, który powinien zostać uruchomiony przed tym konetenerem
             - mongodb # wskazanie na mongodb
         networks:

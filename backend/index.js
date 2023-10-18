@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const Stripe = require("stripe");
 const cors = require("cors");
 const users = require("./routes/users");
 const auth = require("./routes/auth");

@@ -1,5 +1,6 @@
 const { User, validate } = require("../models/User");
 const bcrypt = require("bcrypt");
+const stripe = require("../utils/Stripe");
 
 const getCurrentUserData = async (userId) => {
 	try {
@@ -78,9 +79,19 @@ const registerNewUser = async (userData) => {
 			userData.credentials.password,
 			salt
 		);
+		const stripeCustomerId = await stripe.customers.create(
+			{
+				email: userData.credentials.email,
+			},
+			{
+				apiKey: process.env.STRIPE_SECRET_KEY,
+			}
+		);
+
 		await new User({
 			...userData,
 			"credentials.password": hashPassword,
+			stripe_customer_id: stripeCustomerId.id,
 		}).save();
 		return { statusCode: 201, message: "User created successfully" };
 	} catch (error) {
