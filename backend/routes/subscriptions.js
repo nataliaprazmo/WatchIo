@@ -4,7 +4,7 @@ const { User } = require("../models/User");
 const jwt_auth = require("../middleware/jwt_auth");
 
 // router.get("/prices", checkAuth, async (req, res) => {
-router.get("/prices", async (req, res) => {
+router.get("/prices",jwt_auth, async (req, res) => {
 	const prices = await stripe.prices.list({
 		apiKey: process.env.STRIPE_SECRET_KEY,
 	});
@@ -28,7 +28,7 @@ router.post("/session", jwt_auth, async (req, res) => {
 			],
 			success_url: "http://localhost:3000/",
 			cancel_url: "http://localhost:3000/",
-			customer: user.stripeCustomerId,
+			customer: user.stripe_customer_id,
 		},
 		{
 			apiKey: process.env.STRIPE_SECRET_KEY,

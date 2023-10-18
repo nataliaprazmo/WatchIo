@@ -66,8 +66,10 @@ const registerNewUser = async (userData) => {
 		if (error)
 			return { statusCode: 400, message: error.details[0].message };
 		const user = await User.findOne({
-			"user_data.email": userData.user_data.email,
+			"user_data.email": userData.credentials.email,
 		});
+		console.log("-----------------------")
+		console.log(user)
 		if (user)
 			return {
 				statusCode: 409,
@@ -87,6 +89,7 @@ const registerNewUser = async (userData) => {
 				apiKey: process.env.STRIPE_SECRET_KEY,
 			}
 		);
+		console.log(stripeCustomerId)
 
 		await new User({
 			...userData,
