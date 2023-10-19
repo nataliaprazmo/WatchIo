@@ -9,8 +9,6 @@ import FilmsSlider from "./FilmsSlider";
 import Benefits from "./Benefits";
 import Footer from "./Footer";
 import FaqSection from "./FaqSection";
-import { LoginContainer } from "../LoginContainer";
-import { SignupContainer } from "../SignupContainer";
 import Logo from "./Logo";
 import Offer from "./Offer";
 import Subscriptions from "./Subscriptions";
@@ -35,7 +33,5 @@ export {
 	Benefits,
 	Footer,
 	FaqSection,
-	LoginContainer,
-	SignupContainer,
 	FooterGroup,
 };
