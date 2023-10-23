@@ -20,6 +20,7 @@ export const SignupContainer = () => {
 		credentials: {
 			email: "",
 			password: "",
+			repeatedPassword: "",
 		},
 		user_data: {
 			first_name: "",
@@ -56,14 +57,14 @@ export const SignupContainer = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// if (data.credentials.password !== data.credentials.repeatedPassword) {
-		// 	setErrorPass("Hasła się nie zgadzają");
-		// 	setErrorPassState(true);
-		// 	return;
-		// } else {
-		// 	setErrorPass("");
-		// 	setErrorPassState(false);
-		// }
+		if (data.credentials.password !== data.credentials.repeatedPassword) {
+			setErrorPass("Hasła się nie zgadzają");
+			setErrorPassState(true);
+			return;
+		} else {
+			setErrorPass("");
+			setErrorPassState(false);
+		}
 
 		try {
 			const response = await fetch(
@@ -76,6 +77,8 @@ export const SignupContainer = () => {
 					body: JSON.stringify({ ...data }),
 				}
 			);
+			console.log(data);
+			console.log(response.status);
 			if (response.status == 201) {
 				localStorage.removeItem("formData");
 				console.log("success");
@@ -152,10 +155,8 @@ export const SignupContainer = () => {
 				<PasswordInput
 					label="Powtórz hasło"
 					id="repeatedPassword"
-					// name="credentials.repeatedPassword"
-					// value={data.credentials.repeatedPassword}
-					name="credentials.password"
-					value={data.credentials.password}
+					name="credentials.repeatedPassword"
+					value={data.credentials.repeatedPassword}
 					handleChange={handleChange}
 					handleClickShowPassword={() =>
 						setShowPassword2((show) => !show)
