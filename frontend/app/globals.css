@@ -54,3 +54,7 @@ body {
 .activeNav {
 	@apply text-primary-orange font-bold;
 }
+
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+	border-color: #ff9900 !important;
+}
