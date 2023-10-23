@@ -20,15 +20,15 @@ router.post("/login", async (req, res) => {
 			user.credentials.password
 		);
 		if (!validPassword) {
-			console.log(req.body.password);
-			console.log(user.credentials.password);
 			return res
 				.status(401)
 				.send({ message: "Invalid Email or Password" });
 		}
 		const token = user.generateAuthToken();
+		const role = user.is_admin === true ? "admin" : "user";
 		res.status(200).send({
 			data: token,
+			role: role,
 			message: "logged in successfully",
 		});
 	} catch (error) {
