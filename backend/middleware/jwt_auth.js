@@ -8,8 +8,8 @@ function tokenVerification(req, res, next) {
 	//jeśli przesłano token - weryfikacja jego poprawności:
 	jwt.verify(token, process.env.JWTPRIVATEKEY, (err, decodeduser) => {
 		if (err) {
-			console.log("Unauthorized!");
-			console.log(err);
+			console.error("Unauthorized!");
+			console.error(err);
 			res.status(401).send({ message: "Unauthorized!" });
 		}
 		console.log("Token poprawny, użytkownik: " + decodeduser.toString());
