@@ -25,7 +25,7 @@ services: # lista kontenerów do stworzenia
         ports:
             - "3000:3000" # przypisanie portu 3000 hosta do portu 3000 dockera
         volumes:
-            - ./frontend/src:/app/src # przypisanie folder ./frontend/src do /app/src
+            - ./frontend/:/app/ # przypisanie folder ./frontend/src do /app/src
         depends_on:
             - backend
         networks:

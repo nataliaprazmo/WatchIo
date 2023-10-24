@@ -4,7 +4,6 @@ const stripe = require("../utils/Stripe");
 
 const getCurrentUserData = async (userId) => {
 	try {
-		console.log(userId);
 		const user = await User.findOne({ _id: userId });
 		const user_data = user.user_data;
 		return user_data;
@@ -16,9 +15,7 @@ const getCurrentUserData = async (userId) => {
 const deleteCurrentUser = async (userId, password) => {
 	try {
 		const user = await User.findOne({ _id: userId });
-		console.log(userId);
-		console.log(password);
-		console.log(user);
+
 		const isValid = await bcrypt.compare(
 			password,
 			user.credentials.password
@@ -58,18 +55,26 @@ const changeCurrentUserPassword = async (userId, oldPassword, newPassword) => {
 
 const registerNewUser = async (userData) => {
 	try {
-		console.log(userData);
-		if (userData?.is_admin != true) {
+		console.log(userData.is_admin);
+		if (userData?.is_admin !== true) {
 			userData.is_admin = false;
 		}
+
+		console.log(userData.is_admin);
+		if (
+			userData.credentials.password !==
+			userData.credentials.repeatedPassword
+		) {
+			return { statusCode: 409, message: "Passwords are different" };
+		}
+		delete userData.credentials.repeatedPassword;
 		const { error } = validate(userData);
 		if (error)
 			return { statusCode: 400, message: error.details[0].message };
 		const user = await User.findOne({
-			"user_data.email": userData.credentials.email,
+			"credentials.email": userData.credentials.email,
 		});
-		console.log("-----------------------")
-		console.log(user)
+
 		if (user)
 			return {
 				statusCode: 409,
@@ -89,7 +94,6 @@ const registerNewUser = async (userData) => {
 				apiKey: process.env.STRIPE_SECRET_KEY,
 			}
 		);
-		console.log(stripeCustomerId)
 
 		await new User({
 			...userData,
