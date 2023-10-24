@@ -61,10 +61,13 @@ const registerNewUser = async (userData) => {
 		}
 
 		console.log(userData.is_admin);
-		if (userData.password !== userData.repeatedPassword) {
+		if (
+			userData.credentials.password !==
+			userData.credentials.repeatedPassword
+		) {
 			return { statusCode: 409, message: "Passwords are different" };
 		}
-
+		delete userData.credentials.repeatedPassword;
 		const { error } = validate(userData);
 		if (error)
 			return { statusCode: 400, message: error.details[0].message };
