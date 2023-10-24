@@ -111,12 +111,12 @@ export const LoginContainer = () => {
 							},
 						}}
 					/>
-					<Link
+					{/* <Link
 						href="/"
 						className="text-primary-orange text-[12px] font-regular"
 					>
 						Odzyskiwanie hasła
-					</Link>
+					</Link> */}
 				</div>
 				<Button variant="filled" type="submit">
 					Zaloguj się
