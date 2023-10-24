@@ -18,7 +18,7 @@ const login = async (email, password) => {
 			return { statusCode: 401, message: "Invalid Email or Password" };
 
 		const validPassword = await bcrypt.compare(
-			req.body.password,
+			password,
 			user.credentials.password
 		);
 
