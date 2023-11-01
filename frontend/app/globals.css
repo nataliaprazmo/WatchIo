@@ -65,7 +65,7 @@ body {
 }
 
 .MuiPopover-paper {
-	border: 1px solid #fafaf5 !important;
+	border: 1px solid #262626 !important;
 	background-color: #1a1a1a !important;
 }
 .MuiPopover-paper ul {
@@ -74,9 +74,12 @@ body {
 .MuiPopover-paper li {
 	display: flex;
 	justify-content: center;
-	border-bottom: 1px solid #fafaf5;
+	border-bottom: 1px solid #262626;
 }
 .MuiPopover-paper li:hover {
-	background-color: #fafaf5 !important;
-	color: black;
+	background-color: #262626 !important;
+}
+
+.MuiDrawer-paper {
+	background-color: #101010;
 }

@@ -5,6 +5,9 @@ import { Chips } from ".";
 import Image from "next/image";
 import FilmTable from "./filmTable/FilmTable";
 import SiteBreadcrumbs from "../SiteBreadcrumbs";
+import AddIcon from "@mui/icons-material/Add";
+import Fab from "@mui/material/Fab";
+import NavMenu from "./NavMenu";
 
 const series = [
 	{
@@ -26,7 +29,8 @@ const SeriesTable = () => {
 
 	const [selected, setSelected] = React.useState([]);
 	return (
-		<div className="py-18 px-[50px]">
+		<div className="pt-24 pb-18 pl-[115px] pr-[50px]">
+			<NavMenu />
 			<SiteBreadcrumbs
 				links={[{ to: "/admin", label: "Panel administratora" }]}
 			/>
@@ -49,6 +53,17 @@ const SeriesTable = () => {
 			<p>Director</p>
 			<br />*/}
 			<FilmTable />
+			<Fab
+				aria-label="add"
+				className="fixed bottom-8 right-6 bg-primary-orange hover:bg-primary-orange transition-all duration-700"
+				sx={{ "&:hover": { height: "60px", width: "60px" } }}
+			>
+				<AddIcon
+					sx={{
+						path: { color: "#1a1a1a" },
+					}}
+				/>
+			</Fab>
 		</div>
 	);
 };
