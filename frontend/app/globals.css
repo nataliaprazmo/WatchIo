@@ -9,7 +9,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Montserrat", sans-serif;
-	@apply text-white;
+	@apply text-white transition-all duration-700;
 }
 
 html,
@@ -57,4 +57,26 @@ body {
 
 .Mui-focused .MuiOutlinedInput-notchedOutline {
 	border-color: #ff9900 !important;
+}
+
+.Mui-active {
+	color: #ff9900 !important;
+	font-weight: 600 !important;
+}
+
+.MuiPopover-paper {
+	border: 1px solid #fafaf5 !important;
+	background-color: #1a1a1a !important;
+}
+.MuiPopover-paper ul {
+	padding: 0;
+}
+.MuiPopover-paper li {
+	display: flex;
+	justify-content: center;
+	border-bottom: 1px solid #fafaf5;
+}
+.MuiPopover-paper li:hover {
+	background-color: #fafaf5 !important;
+	color: black;
 }

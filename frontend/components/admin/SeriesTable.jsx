@@ -3,6 +3,8 @@
 import React from "react";
 import { Chips } from ".";
 import Image from "next/image";
+import FilmTable from "./filmTable/FilmTable";
+import SiteBreadcrumbs from "../SiteBreadcrumbs";
 
 const series = [
 	{
@@ -24,8 +26,11 @@ const SeriesTable = () => {
 
 	const [selected, setSelected] = React.useState([]);
 	return (
-		<div>
-			<Chips elements={cat} />
+		<div className="py-18 px-[50px]">
+			<SiteBreadcrumbs
+				links={[{ to: "/admin", label: "Panel administratora" }]}
+			/>
+			{/* <Chips elements={cat} />
 			<Image src="/images/poster.webp" width={100} height={200} />
 			<h1 className="font-semibold text-[24px]">Nazwa serii</h1>
 			<p className="text-justify">
@@ -42,6 +47,8 @@ const SeriesTable = () => {
 			</p>
 			<Chips elements={act} variant="outlined" />
 			<p>Director</p>
+			<br />*/}
+			<FilmTable />
 		</div>
 	);
 };

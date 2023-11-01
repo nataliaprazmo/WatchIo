@@ -8,6 +8,7 @@ import cookiesDetails from "./cookies";
 import privacyPolicy from "./privacyPolicy";
 import termsOfUse from "./termsOfUse";
 import offer from "./offer";
+import headCells from "./headCells";
 
 export {
 	benefits,
@@ -20,4 +21,5 @@ export {
 	privacyPolicy,
 	termsOfUse,
 	offer,
+	headCells,
 };
