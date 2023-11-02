@@ -1,40 +1,43 @@
-const {
-	Subscription,
-	validateSubscription,
-} = require("../models/Subscription");
+const stripe = require("../utils/Stripe");
+const { User } = require("../models/User");
 
-const getSubscritpionData = async (subscriptionId) => {
+const getPrices = async () => {
 	try {
-		const result = await Subscription.findOne({ _id: subscriptionId });
-		return result;
+		const prices = await stripe.prices.list({
+			apiKey: process.env.STRIPE_SECRET_KEY,
+		});
+		return prices;
 	} catch (error) {
 		throw error;
 	}
 };
 
-const createSubscription = async (paid, days, userId) => {
+const createSession = async (userId, priceId) => {
 	try {
-		if (paid != true) {
-			return { statusCode: 403, message: "Subscription wasn't paid" };
-		}
-		const result = await Subscription.findOne({ owner: userId });
-		if (result) {
-			if (Date.now < result.end_date)
-				return {
-					statusCode: 400,
-					message: "You already have an active subscription",
-				};
-			return {
-				statusCode: 400,
-				message: "Bad request",
-			};
-		}
-		// await new Subscription({
-		//     "end_date
-		// })
+		const user = await User.findOne({ _id: userId });
+		console.log(user);
+		const session = await stripe.checkout.sessions.create(
+			{
+				mode: "subscription",
+				payment_method_types: ["card"],
+				line_items: [
+					{
+						price: priceId,
+						quantity: 1,
+					},
+				],
+				success_url: "http://localhost:3000/",
+				cancel_url: "http://localhost:3000/",
+				customer: user.stripe_customer_id,
+			},
+			{
+				apiKey: process.env.STRIPE_SECRET_KEY,
+			}
+		);
+		return session;
 	} catch (error) {
 		throw error;
 	}
 };
 
-module.exports = {};
+module.exports = { getPrices, createSession };

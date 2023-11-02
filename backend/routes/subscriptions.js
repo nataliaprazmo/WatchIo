@@ -1,46 +1,34 @@
 const router = require("express").Router();
-const stripe = require("../utils/Stripe");
-const { User } = require("../models/User");
 const jwt_auth = require("../middleware/jwt_auth");
+const {
+	createSession,
+	getPrices,
+} = require("../controllers/subscriptions_controller");
 
 // router.get("/prices", checkAuth, async (req, res) => {
-router.get("/prices",jwt_auth, async (req, res) => {
-	const prices = await stripe.prices.list({
-		apiKey: process.env.STRIPE_SECRET_KEY,
-	});
-
-	return res.json(prices);
+router.get("/prices", async (req, res) => {
+	try {
+		const result = await getPrices();
+		res.status(200).send({
+			message: "Prices fetched succesfully",
+			data: result,
+		});
+	} catch (error) {
+		res.status(500).send({ message: error.message });
+	}
 });
 
 router.post("/session", jwt_auth, async (req, res) => {
 	// router.post("/session", async (req, res) => {
-	const user = await User.findOne({ _id: req.user._id });
-	console.log(user);
-	const session = await stripe.checkout.sessions.create(
-		{
-			mode: "subscription",
-			payment_method_types: ["card"],
-			line_items: [
-				{
-					price: req.body.priceId,
-					quantity: 1,
-				},
-			],
-			success_url: "http://localhost:3000/",
-			cancel_url: "http://localhost:3000/",
-			customer: user.stripe_customer_id,
-		},
-		{
-			apiKey: process.env.STRIPE_SECRET_KEY,
-		}
-	);
-	return res.json(session);
+	try {
+		const session = await createSession(req.user._id, req.body.priceId);
+		res.status(200).send({ message: "Session created", data: session });
+	} catch (error) {
+		res.status(500).send({ message: error.message });
+	}
 });
 
-router.get("/", (req, res) => {
-	try {
-	} catch (error) {}
-});
+router.get("/", (req, res) => {});
 
 router.post("/", (req, res) => {});
 
