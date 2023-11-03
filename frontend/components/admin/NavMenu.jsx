@@ -13,6 +13,7 @@ import {
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import Options from "./Options";
 
 const drawerWidth = 240;
 
@@ -81,7 +82,7 @@ const SiteDrawer = styled(Drawer, {
 	}),
 }));
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profil", "Konto", "Panel", "Wyloguj się"];
 
 const NavMenu = () => {
 	const theme = useTheme();
@@ -102,7 +103,7 @@ const NavMenu = () => {
 				open={open}
 				sx={{ backgroundColor: "#101010" }}
 			>
-				<Toolbar className="relative">
+				<Toolbar className="relative px-4">
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
@@ -146,6 +147,7 @@ const NavMenu = () => {
 							<MenuItem
 								key={setting}
 								onClick={() => setAnchorElUser(null)}
+								className="hover:text-primary-orange"
 							>
 								{setting}
 							</MenuItem>
@@ -173,6 +175,7 @@ const NavMenu = () => {
 						)}
 					</IconButton>
 				</DrawerHeader>
+				<Options open={open} />
 			</SiteDrawer>
 		</div>
 	);

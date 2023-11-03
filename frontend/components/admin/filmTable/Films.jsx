@@ -52,10 +52,13 @@ const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
 						<TableCell align="left" className="text-white">
 							{row.actors}
 						</TableCell> */}
-						<TableCell align="left" className="text-white">
+						<TableCell
+							align="left"
+							className="text-white w-[300px]"
+						>
 							<Chips elements={row.categories} />
 						</TableCell>
-						<Actions />
+						<Actions seriesId={row.id} />
 					</TableRow>
 				);
 			})}

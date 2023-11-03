@@ -1,18 +1,26 @@
 import React from "react";
 import { NavigateNextRounded } from "@mui/icons-material";
 import { Breadcrumbs } from "@mui/material";
-import { LinkButton } from "./buttons";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const SiteBreadcrumbs = ({ links }) => {
+	const pathname = usePathname();
 	return (
 		<Breadcrumbs
-			separator={<NavigateNextRounded fontSize="small" />}
+			separator={<NavigateNextRounded className="text-xs" />}
 			aria-label="breadcrumb"
 		>
 			{links.map((link) => (
-				<LinkButton key={link.label} to={link.to}>
+				<Link
+					key={link.label}
+					href={link.to}
+					className={`link ${
+						pathname === link.to ? "text-primary-orange" : ""
+					} text-xs uppercase font-medium hover:text-primary-orange`}
+				>
 					{link.label}
-				</LinkButton>
+				</Link>
 			))}
 		</Breadcrumbs>
 	);

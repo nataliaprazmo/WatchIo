@@ -46,9 +46,7 @@ body {
 }
 
 .active {
-	/* Add whatever CSS style will make your link look active. The example below (in my case) */
 	@apply text-primary-orange font-bold after:absolute after:w-full after:h-[2.5px] after:bg-primary-orange after:left-0 after:bottom-[-29px] after:rounded;
-	/* block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 underline; */
 }
 
 .activeNav {
@@ -82,4 +80,20 @@ body {
 
 .MuiDrawer-paper {
 	background-color: #101010;
+}
+
+.MuiTextField-root div {
+	border-bottom: 2px solid #fff !important;
+}
+
+.MuiTextField-root div::after {
+	border-bottom: 2px solid #ff9900 !important;
+}
+
+.MuiTextField-root input {
+	color: white;
+}
+
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+	color: #ff9900;
 }

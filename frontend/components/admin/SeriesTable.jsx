@@ -8,6 +8,7 @@ import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import NavMenu from "./NavMenu";
+import Analytics from "./Analytics";
 
 const series = [
 	{
@@ -31,31 +32,12 @@ const SeriesTable = () => {
 	return (
 		<div className="pt-24 pb-18 pl-[115px] pr-[50px]">
 			<NavMenu />
-			<SiteBreadcrumbs
-				links={[{ to: "/admin", label: "Panel administratora" }]}
-			/>
-			{/* <Chips elements={cat} />
-			<Image src="/images/poster.webp" width={100} height={200} />
-			<h1 className="font-semibold text-[24px]">Nazwa serii</h1>
-			<p className="text-justify">
-				Animowany film przygodowy science-fiction przedstawiający
-				początki Buzza Astrala, bohatera, który zainspirował powstanie
-				sławnej figurki. "Buzz Astral" śledzi losy legendarnego
-				strażnika kosmosu, który wraz z komandor i załogą trafia na
-				wrogą planetę odległą 4,2 mln lat świetlnych od Ziemi. Buzz
-				próbuje odnaleźć drogę powrotną w przestrzeni i czasie, a
-				towarzyszy mu grupa ambitnych rekrutów oraz uroczy robot-kot
-				Kotex. Sytuację komplikuje przybycie Zurga, który zagraża
-				powodzeniu misji. Nie są znane jego zamiary, lecz towarzyszy mu
-				armia bezlitosnych robotów.
-			</p>
-			<Chips elements={act} variant="outlined" />
-			<p>Director</p>
-			<br />*/}
+			<SiteBreadcrumbs links={[{ to: "/admin", label: "Serie" }]} />
+			<Analytics />
 			<FilmTable />
 			<Fab
 				aria-label="add"
-				className="fixed bottom-8 right-6 bg-primary-orange hover:bg-primary-orange transition-all duration-700"
+				className="fixed bottom-8 right-6 bg-primary-orange hover:bg-primary-orange transition-all duration-700 shadow-2xl shadow-primary-orange"
 				sx={{ "&:hover": { height: "60px", width: "60px" } }}
 			>
 				<AddIcon
