@@ -14,23 +14,22 @@ const Benefit = ({ side, imageSrc, name, title, description, more }) => {
 		/>
 	);
 	return (
-		<div className="flex xl:flex-row flex-col gap-[64px] items-center justify-between px-[50px] py-18">
+		<div className="flex xl:flex-row flex-col gap-16 items-center justify-between px-13 py-18">
 			{side === "left" && image}
 			<div className="flex flex-col justify-center relative">
-				<div className="flex flex-row gap-2 mb-8">
+				<div className="flex items-center gap-2 mb-8">
 					<ArrowForwardRoundedIcon
-						size="24"
-						sx={{ path: { color: "#ff9900" } }}
+						sx={{ fontSize: "20px", path: { color: "#ff9900" } }}
 					/>
 					<p className="uppercase text-primary-orange">{name}</p>
 				</div>
-				<h2 className="2xl:text-[48px] sm:text-[40px] text-[32px] leading-[57.6px] font-bold">
+				<h2 className="2xl:text-5xl sm:text-[40px] text-32 leading-[57.6px] font-bold">
 					{title}
 				</h2>
-				<p className="text-[16px] leading-[28px] font-medium mt-4">
+				<p className="text-base leading-7 font-medium mt-4">
 					{description}
 				</p>
-				<div className="flex sm:flex-row flex-col gap-[32px] mt-4">
+				<div className="flex sm:flex-row flex-col gap-8 mt-4">
 					<LinkButton to={more} variant="outlined">
 						Dowiedz się więcej
 					</LinkButton>

@@ -6,7 +6,7 @@ import FilterList from "@mui/icons-material/FilterList";
 const FilmToolbar = ({ numSelected, search }) => {
 	return (
 		<Toolbar className="flex flex-row justify-between items-center px-4">
-			<div className="flex items-center gap-[8px]">
+			<div className="flex items-center gap-2">
 				{numSelected > 0 ? (
 					<div>Wybrano {numSelected}</div>
 				) : (

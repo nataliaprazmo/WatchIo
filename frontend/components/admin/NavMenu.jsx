@@ -115,7 +115,7 @@ const NavMenu = () => {
 						}}
 					>
 						<MenuRoundedIcon
-							className="text-[32px] cursor-pointer"
+							className="text-32 cursor-pointer"
 							sx={{ "&:hover": { path: { color: "#ff9900" } } }}
 						/>
 					</IconButton>

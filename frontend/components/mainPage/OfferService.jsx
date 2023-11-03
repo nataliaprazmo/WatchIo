@@ -7,15 +7,15 @@ const OfferService = ({ id, title, description, image, tutorial }) => {
 	return (
 		<div
 			id={id}
-			className="px-[50px] pt-16 flex lg:flex-row flex-col justify-between items-center gap-[64px]"
+			className="px-13 pt-16 flex lg:flex-row flex-col justify-between items-center gap-16"
 		>
 			<div className="flex flex-col">
-				<h1 className="text-[24px] font-semibold pb-2 text-primary-orange uppercase flex items-center gap-[8px]">
+				<h1 className="text-2xl font-semibold pb-2 text-primary-orange uppercase flex items-center gap-2">
 					<MdArrowForward size="28" fill="#ff9900" />
 					{title}
 				</h1>
 				<p className="pb-2 font-medium ">{description}</p>
-				<div className="flex xl:flex-row flex-col gap-[32px] xl:items-center items-start justify-between ">
+				<div className="flex xl:flex-row flex-col gap-8 xl:items-center items-start justify-between ">
 					<div>
 						{tutorial.map((t, id) => (
 							<div key={id}>

@@ -106,7 +106,7 @@ const FilmTable = () => {
 	const searchBar = useMemo(() => {
 		return (
 			<OutlinedInput
-				className="w-[400px] bg-[#1d1d1d] rounded-[8px]"
+				className="w-[400px] bg-grey-250 rounded-lg"
 				sx={{
 					input: {
 						paddingLeft: "4px",
@@ -173,7 +173,7 @@ const FilmTable = () => {
 		setSelected(newSelected);
 	};
 	return (
-		<div className="bg-[#262626] my-8 rounded-[16px] p-4 font-medium">
+		<div className="bg-grey-225 my-8 rounded-2xl p-4 font-medium">
 			<FilmToolbar numSelected={selected.length} search={searchBar} />
 			<TableContainer>
 				<Table

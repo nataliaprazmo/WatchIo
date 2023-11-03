@@ -65,8 +65,8 @@ export const LoginContainer = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center p-12 bg-grey-200 rounded-[16px] w-fit h-fit mt-32">
-			<h1 className="font-bold text-[32px] mb-8">Witaj ponownie!</h1>
+		<div className="flex flex-col items-center p-12 bg-grey-200 rounded-2xl w-fit h-fit mt-32">
+			<h1 className="font-bold text-32 mb-8">Witaj ponownie!</h1>
 			<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 				<Input
 					label="Adres Email"
@@ -75,7 +75,7 @@ export const LoginContainer = () => {
 					name="email"
 					value={data.email}
 					handleChange={handleChange}
-					icon={<AlternateEmailIcon className="text-[20px]" />}
+					icon={<AlternateEmailIcon className="text-xl" />}
 				/>
 				<PasswordInput
 					label="Hasło"
@@ -92,7 +92,7 @@ export const LoginContainer = () => {
 					<FormControlLabel
 						control={
 							<Checkbox
-								className="h-[12px] pl-4"
+								className="h-3 pl-4"
 								sx={{
 									svg: {
 										fontSize: "16px",

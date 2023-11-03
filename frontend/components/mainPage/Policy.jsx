@@ -9,7 +9,7 @@ const Policy = () => {
 	return (
 		<>
 			<Nav />
-			<div className="px-[50px] py-18">
+			<div className="px-13 py-18">
 				<PrivacyPolicy />
 				<TermsOfUse />
 				<CookiesPolicy />

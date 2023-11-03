@@ -3,11 +3,11 @@ import React from "react";
 
 const AddEpisode = () => {
 	return (
-		<div className="flex flex-col gap-[16px]">
-			<div className="flex flex-col gap-[8px]">
+		<div className="flex flex-col gap-4">
+			<div className="flex flex-col gap-2">
 				<label htmlFor="title">Tytuł</label>
 				<OutlinedInput
-					className="w-[400px] bg-[#404040] rounded-[8px]"
+					className="w-[400px] bg-grey-150 rounded-lg"
 					sx={{
 						input: {
 							paddingLeft: "10px",
@@ -21,7 +21,7 @@ const AddEpisode = () => {
 					required
 				/>
 			</div>
-			<div className="flex flex-col gap-[8px]">
+			<div className="flex flex-col gap-2">
 				<label htmlFor="description">Opis</label>
 				<OutlinedInput
 					className="w-[400px] bg-[#404040] rounded-[8px]"

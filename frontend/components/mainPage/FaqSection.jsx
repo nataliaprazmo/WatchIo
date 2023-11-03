@@ -13,10 +13,10 @@ const FaqSection = () => {
 	};
 	return (
 		<div id="faq" className="py-8 xl:px-32 md:px-20 xs:px-10 px-6">
-			<h2 className="2xl:text-[32px] text-[24px] font-bold text-center mb-2">
+			<h2 className="2xl:text-32 text-2xl font-bold text-center mb-2">
 				Najczęściej zadawane pytania
 			</h2>
-			<p className="text-[16px] leading-[28px] font-medium mb-6 text-center">
+			<p className="text-base leading-7 font-medium mb-6 text-center">
 				Poniżej znajdziesz cenne informacje oraz odpowiedzi na
 				najczęściej pojawiające się do nas pytania.
 			</p>
@@ -31,7 +31,7 @@ const FaqSection = () => {
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls={`${question.panel}bh-content`}
 						id={`${question.panel}bh-header`}
-						className="bg-grey-200 rounded-[8px] mb-1"
+						className="bg-grey-200 rounded-lg mb-1"
 					>
 						<p>{question.title}</p>
 					</AccordionSummary>

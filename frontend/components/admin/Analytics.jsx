@@ -32,7 +32,7 @@ const Analytics = () => {
 	return (
 		<div className="relative w-full h-[300px]">
 			<Doughnut data={data} options={chartOptions} />
-			<div className="absolute w-[170px] h-[170px] shadow-3xl shadow-orange-400 text-orange-100 top-[65px] left-0 rounded-[100%] flex justify-center items-center font-medium ">
+			<div className="absolute w-[170px] h-[170px] shadow-3xl shadow-orange-400 text-orange-100 top-[65px] left-0 rounded-full flex justify-center items-center font-medium ">
 				Kategorie
 			</div>
 		</div>

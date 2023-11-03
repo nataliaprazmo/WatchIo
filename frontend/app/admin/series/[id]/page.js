@@ -62,7 +62,7 @@ export default function Page({ params }) {
 						elements={["Animacja", "Familijny", "Przygodowy"]}
 					/>
 					<span className="pb-4" />
-					<table className="lg:w-[45%] md:w-[75%] w-full text-[14px] mb-4 ">
+					<table className="lg:w-[45%] md:w-[75%] w-full text-sm mb-4 ">
 						<tr>
 							<td className="text-gray-400">Dystrybucja</td>
 							<td>Disney</td>

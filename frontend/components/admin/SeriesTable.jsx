@@ -30,7 +30,7 @@ const SeriesTable = () => {
 
 	const [selected, setSelected] = React.useState([]);
 	return (
-		<div className="pt-24 pb-18 pl-[115px] pr-[50px]">
+		<div className="pt-24 pb-18 pl-[115px] pr-13">
 			<NavMenu />
 			<SiteBreadcrumbs links={[{ to: "/admin", label: "Serie" }]} />
 			<Analytics />
