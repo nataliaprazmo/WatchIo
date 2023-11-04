@@ -9,8 +9,9 @@ export const metadata = {
 	description: "Stworzone przez Radłowski K. i Prażmo N.",
 	keywords: ["Streaming", "Platforma", "Platforma streamingowa"],
 	authors: [{ name: "Prażmo Natalia" }, { name: "Radłowski Kamil" }],
-	colorScheme: "dark",
 };
+
+export const viewport = { colorScheme: "dark" };
 
 export default function RootLayout({ children }) {
 	return (

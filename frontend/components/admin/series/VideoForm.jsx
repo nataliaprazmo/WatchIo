@@ -1,45 +1,33 @@
-import { OutlinedInput } from "@mui/material";
 import React from "react";
+import Input from "./Input";
+import MultilineInput from "./MultilineInput";
+import FileInput from "./FileInput";
 
-const VideoForm = () => {
+const VideoForm = ({ episode, videoCount, handleChange }) => {
 	return (
-		<div className="flex flex-col gap-4">
-			<div className="flex flex-col gap-2">
-				<label htmlFor="title">Tytuł</label>
-				<OutlinedInput
-					className="w-[400px] bg-grey-150 rounded-lg"
-					sx={{
-						input: {
-							paddingLeft: "10px",
-							color: "#fafaf5",
-						},
-					}}
-					color="primary"
-					name="title"
-					id="title"
-					placeholder="The best film"
-					required
-				/>
-			</div>
-			<div className="flex flex-col gap-2">
-				<label htmlFor="description">Opis</label>
-				<OutlinedInput
-					className="w-[400px] bg-[#404040] rounded-[8px]"
-					sx={{
-						input: {
-							paddingLeft: "10px",
-							color: "#fafaf5",
-						},
-					}}
-					color="primary"
-					name="description"
-					id="description"
-					placeholder="The best film is all about the best films"
-					multiline={true}
-					rows="5"
-					required
-				/>
-			</div>
+		<div className="pt-2 pb-8 flex flex-wrap items-center gap-10">
+			<Input
+				id="title"
+				name="title"
+				label="Nazwa odcinka"
+				type="text"
+				value={episode.title}
+				handleChange={handleChange}
+			/>
+			<MultilineInput
+				id="desc"
+				name="desc"
+				label="Opis odcinka"
+				type="text"
+				value={episode.desc}
+				handleChange={handleChange}
+			/>
+			<FileInput
+				label="Miniaturka"
+				id="episode_picture"
+				name="episode_picture"
+			/>
+			<FileInput label="Wideo" id="video" name="video" />
 		</div>
 	);
 };

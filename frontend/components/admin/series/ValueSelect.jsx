@@ -1,27 +1,27 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-const ValueSelect = ({ values }) => {
-	const [selected, setSelected] = useState("");
-	const handleChange = (event) => {
-		setSelected(event.target.value);
+const ValueSelect = ({ value, handleChange }) => {
+	const roles = ["aktor", "reżyser"];
+	const change = () => {
+		console.log(value);
 	};
 	return (
 		<FormControl variant="standard" className="md:w-72 w-full">
-			<InputLabel id="staff_role_label" className="text-white">
+			<InputLabel id="role_label" className="text-white">
 				Rola
 			</InputLabel>
 			<Select
-				labelId="staff_role_label"
-				id="staff_role"
-				value={selected}
-				onChange={handleChange}
+				labelId="role_label"
+				id="role"
+				name="role"
+				value={value}
+				onChange={change}
 				label="Rola"
 				className="text-white"
 			>
-				{values.map((value) => (
-					<MenuItem value={value}>{value}</MenuItem>
+				{roles.map((rol) => (
+					<MenuItem value={rol}>{rol}</MenuItem>
 				))}
 			</Select>
 		</FormControl>

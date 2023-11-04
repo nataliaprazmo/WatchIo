@@ -4,7 +4,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
-import SeriesForm from "./SeriesForm";
+import Form from "./Form";
 
 const steps = ["Dodaj szczegóły serii", "Dodaj obsadę", "Dodaj odcinki"];
 
@@ -86,7 +86,7 @@ const StepForm = () => {
 				) : (
 					<React.Fragment>
 						<p className="py-4 pl-2">Krok {activeStep + 1}</p>
-						<SeriesForm part={activeStep} />
+						<Form part={activeStep} />
 						<div className="flex pt-2">
 							<Button
 								color="inherit"

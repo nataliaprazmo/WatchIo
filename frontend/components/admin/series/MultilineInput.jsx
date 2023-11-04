@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 
-const MultilineInput = ({ id, name, label, type }) => {
+const MultilineInput = ({ id, name, label, type, value, handleChange }) => {
 	return (
 		<TextField
 			multiline
@@ -9,6 +9,8 @@ const MultilineInput = ({ id, name, label, type }) => {
 			id={id}
 			name={name}
 			label={label}
+			value={value}
+			onChange={handleChange}
 			type={type}
 			required
 			sx={{

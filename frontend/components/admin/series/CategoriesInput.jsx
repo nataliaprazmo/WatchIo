@@ -21,22 +21,15 @@ const initialGenres = [
 	"Familijny",
 ];
 
-const CategoriesInput = () => {
-	const [genreName, setGenreName] = useState([]);
+const CategoriesInput = ({ value, setValue, handleChange }) => {
 	const [genres, setGenres] = useState(initialGenres);
 	const [newGenre, setNewGenre] = useState("");
 	const [showTextField, setShowTextField] = useState(false);
 	const inputRef = useRef(null);
-	const handleChange = (event) => {
-		const {
-			target: { value },
-		} = event;
-		setGenreName(typeof value === "string" ? value.split(",") : value);
-	};
 	const handleAddNewGenre = () => {
 		if (newGenre.trim() !== "") {
 			setGenres([...genres, newGenre]);
-			setGenreName([...genreName, newGenre]);
+			setValue([...value, newGenre]);
 			setNewGenre("");
 			setShowTextField(false);
 		}
@@ -62,7 +55,7 @@ const CategoriesInput = () => {
 				id="categories"
 				name="genre"
 				multiple
-				value={genreName}
+				value={value}
 				onChange={handleChange}
 				input={<Input id="select_genres" label="Gatunek" />}
 				renderValue={(selected) => (
