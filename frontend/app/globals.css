@@ -9,7 +9,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Montserrat", sans-serif;
-	@apply text-white transition-all duration-700;
+	@apply text-white;
 }
 
 html,
@@ -82,18 +82,31 @@ body {
 	background-color: #101010;
 }
 
-.MuiTextField-root div {
-	border-bottom: 2px solid #fff !important;
+.MuiTextField-root div::after {
+	border-bottom: 1px solid #ff9900 !important;
 }
 
-.MuiTextField-root div::after {
-	border-bottom: 2px solid #ff9900 !important;
+.css-11fbwm6-MuiInputBase-root-MuiInput-root::before,
+.MuiTextField-root div {
+	border-bottom: 1px solid #fafaf5 !important;
+}
+
+.css-11fbwm6-MuiInputBase-root-MuiInput-root::after {
+	border-bottom: 1px solid #ff9900 !important;
 }
 
 .MuiTextField-root input {
 	color: white;
 }
 
-.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+.MuiInputLabel-root.Mui-focused {
 	color: #ff9900;
+}
+
+.Mui-completed {
+	color: #f5d2af !important;
+}
+
+.Mui-disabled {
+	color: #404040 !important;
 }

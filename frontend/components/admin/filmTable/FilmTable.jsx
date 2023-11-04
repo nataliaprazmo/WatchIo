@@ -6,7 +6,8 @@ import { TableContainer, Table, TableRow, TableCell } from "@mui/material";
 import FilmPagination from "./FilmPagination";
 import Films from "./Films";
 import FilmTableHead from "./FilmTableHead";
-
+import Link from "next/link";
+import AddIcon from "@mui/icons-material/PlaylistAddRounded";
 import { InputAdornment, OutlinedInput } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
@@ -105,23 +106,31 @@ const FilmTable = () => {
 
 	const searchBar = useMemo(() => {
 		return (
-			<OutlinedInput
-				className="w-[400px] bg-grey-250 rounded-lg"
-				sx={{
-					input: {
-						paddingLeft: "4px",
-						color: "#fafaf5",
-					},
-				}}
-				placeholder="Szukaj po nazwie..."
-				startAdornment={
-					<InputAdornment position="start">
-						<SearchRoundedIcon />
-					</InputAdornment>
-				}
-				value={filterValue}
-				onChange={onSearchChange}
-			/>
+			<div className="flex items-center gap-6">
+				<OutlinedInput
+					className="w-fit bg-grey-250 rounded-lg"
+					sx={{
+						input: {
+							paddingLeft: "4px",
+							color: "#fafaf5",
+						},
+					}}
+					placeholder="Szukaj po nazwie..."
+					startAdornment={
+						<InputAdornment position="start">
+							<SearchRoundedIcon />
+						</InputAdornment>
+					}
+					value={filterValue}
+					onChange={onSearchChange}
+				/>
+				<Link href="/admin/series/add">
+					<AddIcon
+						className="text-32"
+						sx={{ "&:hover": { path: { color: "#ff9900" } } }}
+					/>
+				</Link>
+			</div>
 		);
 	}, [filterValue, onSearchChange, hasSearchFilter]);
 

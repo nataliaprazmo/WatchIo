@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { NavigateNextRounded } from "@mui/icons-material";
 import { Breadcrumbs } from "@mui/material";
@@ -6,6 +8,12 @@ import { usePathname } from "next/navigation";
 
 const SiteBreadcrumbs = ({ links }) => {
 	const pathname = usePathname();
+	// const crumbs = pathname.split("/").shift().map((p, index) => {
+	// 		const pathArr = paths.slice(0, index + 1);
+	// 		const breadcrumbPath = "/" + pathArr.join("/");
+	// 		return { name: p, path: breadcrumbPath };
+	// 	});
+	// 	console.log(crumbs);
 	return (
 		<Breadcrumbs
 			separator={<NavigateNextRounded className="text-xs" />}

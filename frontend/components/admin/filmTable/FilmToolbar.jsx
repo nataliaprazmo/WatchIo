@@ -1,30 +1,17 @@
 import React from "react";
 import { Toolbar, Tooltip, IconButton } from "@mui/material";
-import Delete from "@mui/icons-material/Delete";
-import FilterList from "@mui/icons-material/FilterList";
+import FilterList from "@mui/icons-material/FilterListRounded";
 
 const FilmToolbar = ({ numSelected, search }) => {
 	return (
 		<Toolbar className="flex flex-row justify-between items-center px-4">
 			<div className="flex items-center gap-2">
-				{numSelected > 0 ? (
-					<div>Wybrano {numSelected}</div>
-				) : (
-					<div id="tableTitle">Serie</div>
-				)}
-				{numSelected > 0 ? (
-					<Tooltip title="Delete">
-						<IconButton>
-							<Delete />
-						</IconButton>
-					</Tooltip>
-				) : (
-					<Tooltip title="Filter list">
-						<IconButton>
-							<FilterList />
-						</IconButton>
-					</Tooltip>
-				)}
+				<div id="tableTitle">Serie</div>
+				<Tooltip title="Tryb sortowania">
+					<IconButton>
+						<FilterList />
+					</IconButton>
+				</Tooltip>
 			</div>
 			{search}
 		</Toolbar>

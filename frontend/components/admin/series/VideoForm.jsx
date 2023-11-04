@@ -1,7 +1,7 @@
 import { OutlinedInput } from "@mui/material";
 import React from "react";
 
-const AddEpisode = () => {
+const VideoForm = () => {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="flex flex-col gap-2">
@@ -44,4 +44,4 @@ const AddEpisode = () => {
 	);
 };
 
-export default AddEpisode;
+export default VideoForm;

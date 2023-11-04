@@ -1,9 +1,10 @@
+"use client";
+
 import React, { useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import {
 	AppBar,
 	Avatar,
-	Divider,
 	Drawer,
 	IconButton,
 	Menu,
