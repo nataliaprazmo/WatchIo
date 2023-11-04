@@ -13,7 +13,7 @@ router.get("/", jwt_auth, async (req, res) => {
 		const userData = await getCurrentUserData(req.user._id);
 		res.status(200).send({
 			message: "Data fetched successfully",
-			data: userData,
+			data: { userData: userData },
 		});
 	} catch (error) {
 		console.error(error);
@@ -61,7 +61,6 @@ router.post("/register", async (req, res) => {
 		console.error(error);
 		res.status(500).send({ message: "Internal Server Error" });
 	}
-
 });
 
 module.exports = router;
