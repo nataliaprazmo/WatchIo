@@ -2,10 +2,15 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const subscriptionSchema = new mongoose.Schema({
-	// start_date: { type: Date, required: true },
-	end_date: { type: Date, required: true },
-	owner: { type: Schema.ObjectId, ref: "User", required: true },
-	shared_with: { type: [Schema.ObjectId], ref: "User" },
+	owner: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+		required: true,
+	},
+	stripe_subscription_id: { type: String, required: true },
+	sharing_code: { type: String },
+	sharing_users_limit: { type: Number },
+	shared_with: { type: [mongoose.Schema.Types.ObjectId], ref: "User" },
 });
 
 const Subscription = mongoose.model(
@@ -16,10 +21,12 @@ const Subscription = mongoose.model(
 
 const validateSubscription = (data) => {
 	const schema = Joi.object({
-		// start_date: Joi.date().required().label("Subscription start date"),
-		end_date: Joi.date().required().label("Subscription end date"),
 		owner: Joi.object().required().label("Subscription owner id"),
 		shared_with: Joi.object().label("Shared with users"),
+		sharing_code: Joi.object().label("Sharing code"),
+		stripe_subscription_id: Joi.object()
+			.required()
+			.label("Stripe subscription id"),
 	});
 	return schema.validate(data);
 };
