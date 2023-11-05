@@ -43,10 +43,11 @@ export const LoginContainer = () => {
 				}
 			);
 			if (response.status == 200) {
-				console.log(response.role);
 				const { token, role } = await response.json();
 				if (rememberMe == false) localStorage.removeItem("loginData");
 				localStorage.setItem("token", token);
+				localStorage.setItem("role", role);
+				console.log(role);
 				router.push(`/${role}`); //role: user/admin
 			} else {
 				setError("Podano nieprawidłowe dane");

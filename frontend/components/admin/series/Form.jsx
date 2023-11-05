@@ -1,10 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Input from "./Input";
-import MultilineInput from "./MultilineInput";
-import CategoriesInput from "./CategoriesInput";
-import FileInput from "./FileInput";
 import VideoForm from "./VideoForm";
 import StaffForm from "./StaffForm";
 import SeriesForm from "./SeriesForm";
