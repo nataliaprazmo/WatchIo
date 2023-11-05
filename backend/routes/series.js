@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 		const result = getSeries(req.req.howMany);
 		res.status(200).send({
 			message: "Data fetched succesfully",
-			data: result,
+			data: { series: result },
 		});
 	} catch (error) {
 		console.error(error);
@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
 		const result = getSeriesByGenre(req.query.howMany, req.query.genre);
 		res.status(200).send({
 			message: "Data fetched successfully",
-			data: result,
+			data: { series: result },
 		});
 	} catch (error) {
 		console.error(error);
