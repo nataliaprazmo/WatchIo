@@ -15,6 +15,8 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import Options from "./Options";
+import { useAuth } from "@/app/AuthContext";
+import ProfileOptions from "./ProfileOptions";
 
 const drawerWidth = 240;
 
@@ -83,8 +85,6 @@ const SiteDrawer = styled(Drawer, {
 	}),
 }));
 
-const settings = ["Profil", "Konto", "Panel", "Wyloguj się"];
-
 const NavMenu = () => {
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
@@ -96,6 +96,11 @@ const NavMenu = () => {
 
 	const handleDrawerClose = () => {
 		setOpen(false);
+	};
+	const { logout } = useAuth();
+	const handleLogout = () => {
+		setAnchorElUser(null);
+		logout();
 	};
 	return (
 		<div className="flex">
@@ -144,15 +149,10 @@ const NavMenu = () => {
 						open={Boolean(anchorElUser)}
 						onClose={() => setAnchorElUser(null)}
 					>
-						{settings.map((setting) => (
-							<MenuItem
-								key={setting}
-								onClick={() => setAnchorElUser(null)}
-								className="hover:text-primary-orange"
-							>
-								{setting}
-							</MenuItem>
-						))}
+						<ProfileOptions
+							handleLogout={handleLogout}
+							setAnchorElUser={setAnchorElUser}
+						/>
 					</Menu>
 				</Toolbar>
 			</SiteBar>

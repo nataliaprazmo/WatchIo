@@ -17,7 +17,7 @@ const Form = ({ part }) => {
 	const [staffDetails, setStaffDetails] = useState({
 		name: "",
 		surname: "",
-		role: "",
+		role: "aktor",
 	});
 	const [genres, setGenres] = useState([]);
 	const [series, setSeries] = useState({
@@ -101,11 +101,13 @@ const Form = ({ part }) => {
 					staffDetails={staffDetails}
 					handleChange={handleChange}
 					handleAddStaff={handleAddStaff}
+					series={series}
 				/>
 			) : (
 				<VideoForm
 					episode={episode}
-					videoCount={videosCount}
+					videosCount={videosCount}
+					setVideosCount={setVideosCount}
 					handleChange={handleChange}
 				/>
 			)}

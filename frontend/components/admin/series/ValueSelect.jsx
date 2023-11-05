@@ -1,30 +1,23 @@
+import { Chip } from "@mui/material";
 import React from "react";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const ValueSelect = ({ value, handleChange }) => {
-	const roles = ["aktor", "reżyser"];
-	const change = () => {
-		console.log(value);
-	};
+	const roles = ["aktor", "reżyser", "scenarzysta", "producent"];
 	return (
-		<FormControl variant="standard" className="md:w-72 w-full">
-			<InputLabel id="role_label" className="text-white">
-				Rola
-			</InputLabel>
-			<Select
-				labelId="role_label"
+		<div className="flex items-center w-full gap-4">
+			<label htmlFor="role">Rola:</label>
+			<select
 				id="role"
 				name="role"
 				value={value}
-				onChange={change}
-				label="Rola"
-				className="text-white"
+				onChange={handleChange}
+				className="w-full bg-transparent border-b focus:border-primary-orange "
 			>
 				{roles.map((rol) => (
-					<MenuItem value={rol}>{rol}</MenuItem>
+					<option value={rol}>{rol}</option>
 				))}
-			</Select>
-		</FormControl>
+			</select>
+		</div>
 	);
 };
 

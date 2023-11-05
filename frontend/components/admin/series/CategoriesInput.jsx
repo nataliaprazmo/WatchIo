@@ -64,10 +64,8 @@ const CategoriesInput = ({ value, setValue, handleChange }) => {
 							<Chip
 								key={value}
 								label={value}
-								className="bg-white hover:bg-orange-200"
-								sx={{
-									span: { color: "#101010" },
-								}}
+								variant="outlined"
+								className="border-secondary-violet"
 							/>
 						))}
 					</div>
