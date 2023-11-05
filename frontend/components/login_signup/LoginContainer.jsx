@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/app/AuthContext";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -12,6 +13,7 @@ import Input from "./Input";
 import PasswordInput from "./PasswordInput";
 
 export const LoginContainer = () => {
+	const { login } = useAuth();
 	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 	const [data, setData] = useState({ email: "", password: "" });
@@ -32,23 +34,20 @@ export const LoginContainer = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/auth/login",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({ ...data }),
-				}
-			);
+			const response = await fetch("http://localhost:5000/api/auth/", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ ...data }),
+			});
 			if (response.status == 200) {
-				const { token, role } = await response.json();
+				const res = await response.json();
 				if (rememberMe == false) localStorage.removeItem("loginData");
-				localStorage.setItem("token", token);
-				localStorage.setItem("role", role);
-				console.log(role);
-				router.push(`/${role}`); //role: user/admin
+				localStorage.setItem("token", res.data.token);
+				localStorage.setItem("role", res.role);
+				login();
+				router.push(`/${res.role}`); //role: user/admin
 			} else {
 				setError("Podano nieprawidłowe dane");
 				console.log(response);
