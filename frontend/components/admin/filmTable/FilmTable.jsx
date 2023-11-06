@@ -182,7 +182,7 @@ const FilmTable = () => {
 		setSelected(newSelected);
 	};
 	return (
-		<div className="bg-grey-225 my-8 rounded-2xl p-4 font-medium">
+		<div className="bg-grey-225 mb-8 rounded-2xl p-4 font-medium">
 			<FilmToolbar numSelected={selected.length} search={searchBar} />
 			<TableContainer>
 				<Table

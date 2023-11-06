@@ -1,5 +1,5 @@
 import React from "react";
-import NavMenu from "../NavMenu";
+import NavMenu from "../../NavMenu";
 import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
 import StepForm from "./StepForm";
 

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Chips } from "@/components/admin";
-import NavMenu from "@/components/admin/NavMenu";
+import NavMenu from "@/components/NavMenu";
 import { Chip } from "@mui/material";
 import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
 

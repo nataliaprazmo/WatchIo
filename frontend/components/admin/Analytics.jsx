@@ -1,42 +1,74 @@
-"use client";
-
 import React from "react";
-import "chart.js/auto";
-import { Doughnut } from "react-chartjs-2";
+import LocalMoviesOutlinedIcon from "@mui/icons-material/LocalMoviesOutlined";
+import MovieCreationOutlinedIcon from "@mui/icons-material/MovieCreationOutlined";
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
+import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBulletedRounded";
 
 const Analytics = () => {
-	const data = {
-		labels: ["Przygodowy", "Animacja", "Horror"],
-		datasets: [
-			{
-				label: "Gatunki",
-				data: [300, 50, 100],
-				backgroundColor: ["#ff6600", "#ffcc00", "#ff3300"],
-				hoverOffset: 2,
-				borderWidth: 0,
-				shadowOffset: 10,
-			},
-		],
-	};
-	const chartOptions = {
-		cutout: "90%",
-		plugins: {
-			legend: {
-				display: true,
-				position: "right",
-				labels: {
-					color: "#aaa",
-				},
-			},
-		},
-	};
-
-	return (
-		<div className="relative w-full h-[300px]">
-			<Doughnut data={data} options={chartOptions} />
-			<div className="absolute w-[170px] h-[170px] shadow-3xl shadow-orange-400 text-orange-100 top-[65px] left-0 rounded-full flex justify-center items-center font-medium ">
-				Kategorie
+	const Column = ({ icon, number, name, addClass }) => {
+		return (
+			<div className={`flex flex-col items-center ${addClass}`}>
+				{icon}
+				<p className="font-semibold">{number}</p>
+				<p className="text-neutral-400">{name}</p>
 			</div>
+		);
+	};
+	return (
+		<div className="w-full flex justify-between items-center my-12 px-4">
+			<Column
+				icon={
+					<LocalMoviesOutlinedIcon
+						className="text-6xl"
+						sx={{ path: { color: "#9126d9" } }}
+					/>
+				}
+				number="500"
+				name="filmów"
+			/>
+			<Column
+				icon={
+					<Person2OutlinedIcon
+						className="text-7xl"
+						sx={{ path: { color: "#9126d9" } }}
+					/>
+				}
+				number="2000"
+				name="użytkowników"
+			/>
+			<Column
+				icon={
+					<AutoAwesomeOutlinedIcon
+						className="text-6xl"
+						sx={{ path: { color: "#9126d9" } }}
+					/>
+				}
+				number="25"
+				name="kategorii"
+				addClass="md:flex hidden"
+			/>
+			<Column
+				icon={
+					<FormatListBulletedRoundedIcon
+						className="text-6xl"
+						sx={{ path: { color: "#9126d9" } }}
+					/>
+				}
+				number="120"
+				name="playlist"
+				addClass="lg:flex hidden"
+			/>
+			<Column
+				icon={
+					<MovieCreationOutlinedIcon
+						className="text-6xl"
+						sx={{ path: { color: "#9126d9" } }}
+					/>
+				}
+				number="100"
+				name="seriali"
+			/>
 		</div>
 	);
 };

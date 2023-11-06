@@ -1,11 +1,10 @@
-"use client";
-
-import React, { useEffect } from "react";
+import Dashboard from "@/components/user/Dashboard";
+import React from "react";
 
 export default function Page() {
-	useEffect(() => {
-		console.log(localStorage.getItem("token"));
-		console.log(localStorage.getItem("role"));
-	});
-	return <main className="overflow-hidden">User page</main>;
+	return (
+		<main className="overflow-hidden">
+			<Dashboard />
+		</main>
+	);
 }

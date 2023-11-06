@@ -1,6 +1,6 @@
 import Chips from "./Chips";
 import Analytics from "./Analytics";
-import NavMenu from "./NavMenu";
+import NavMenu from "../NavMenu";
 import Dashboard from "./Dashboard";
 import Options from "./Options";
 import SeriesDetails from "./SeriesDetails";

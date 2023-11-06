@@ -8,15 +8,17 @@ import {
 	Drawer,
 	IconButton,
 	Menu,
-	MenuItem,
 	Toolbar,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import Options from "./Options";
+import Options from "./admin/Options";
 import { useAuth } from "@/app/AuthContext";
-import ProfileOptions from "./ProfileOptions";
+import ProfileOptions from "./admin/ProfileOptions";
+import { usePathname } from "next/navigation";
+import UserProfileOptions from "./user/UserProfileOptions";
+import UserOptions from "./user/UserOptions";
 
 const drawerWidth = 240;
 
@@ -86,6 +88,7 @@ const SiteDrawer = styled(Drawer, {
 }));
 
 const NavMenu = () => {
+	const pathname = usePathname();
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -149,10 +152,17 @@ const NavMenu = () => {
 						open={Boolean(anchorElUser)}
 						onClose={() => setAnchorElUser(null)}
 					>
-						<ProfileOptions
-							handleLogout={handleLogout}
-							setAnchorElUser={setAnchorElUser}
-						/>
+						{pathname.startsWith("/admin") ? (
+							<ProfileOptions
+								handleLogout={handleLogout}
+								setAnchorElUser={setAnchorElUser}
+							/>
+						) : (
+							<UserProfileOptions
+								handleLogout={handleLogout}
+								setAnchorElUser={setAnchorElUser}
+							/>
+						)}
 					</Menu>
 				</Toolbar>
 			</SiteBar>
@@ -176,7 +186,11 @@ const NavMenu = () => {
 						)}
 					</IconButton>
 				</DrawerHeader>
-				<Options open={open} />
+				{pathname.startsWith("/admin") ? (
+					<Options open={open} />
+				) : (
+					<UserOptions open={open} />
+				)}
 			</SiteDrawer>
 		</div>
 	);
