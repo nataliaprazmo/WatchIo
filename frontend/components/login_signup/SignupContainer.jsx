@@ -101,8 +101,10 @@ export const SignupContainer = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center py-10 px-12 bg-grey-200 rounded-2xl w-fit h-fit mt-32">
-			<h1 className="font-bold text-32 mb-3">Witaj!</h1>
+		<div className="flex flex-col items-center py-10 px-12 bg-grey-200 rounded-lg w-fit h-fit mt-32">
+			<h1 className="font-bold text-2xl text-primary-orange mb-4">
+				Witaj!
+			</h1>
 			<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 				<Input
 					label="Imię"
@@ -165,7 +167,7 @@ export const SignupContainer = () => {
 					error={errorPass}
 					error_state={errorPassState}
 				/>
-				<div className="px-2 mb-4">
+				<div className="mb-6">
 					<Checkbox
 						id="agreement"
 						required
