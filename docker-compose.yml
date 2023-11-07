@@ -2,6 +2,8 @@ version: "3.8" # wersja docker compose'a
 services: # lista kontenerów do stworzenia
     mongodb: # kontener mongodb
         image: "mongo" # obraz na podstawie którego będzie bazował kontener
+        ports:
+            - "27017:27017"
         volumes: # lista podpiętych wolumenów
             - ./data:/data/db # dołączenie folderu data, do ścieżki /data/db w kontenrze aby zachować dane pomiędzy uruchomieniami
         networks: # lista sieci do których ma być podłączony kontener

@@ -6,7 +6,7 @@ const {
 	generateShareCode,
 	deactivateShareCode,
 	deleteSharedUser,
-} = require("../controllers/subscriptions_controller");
+} = require("../controllers/subscriptionSharing_controller");
 
 router.post("/join", jwt_auth, async (req, res) => {
 	try {
@@ -24,7 +24,7 @@ router.post("/join", jwt_auth, async (req, res) => {
 	}
 });
 
-router.get("/share_code", jwt_auth, async (req, res) => {
+router.get("/code", jwt_auth, async (req, res) => {
 	try {
 		const shareCode = await generateShareCode(req.user._id);
 		if (!shareCode)
@@ -41,7 +41,7 @@ router.get("/share_code", jwt_auth, async (req, res) => {
 	}
 });
 
-router.post("/deactivate_share_code", jwt_auth, async (req, res) => {
+router.post("/deactivate", jwt_auth, async (req, res) => {
 	try {
 		const result = await deactivateShareCode(req.user._id);
 		if (!result)
@@ -55,7 +55,7 @@ router.post("/deactivate_share_code", jwt_auth, async (req, res) => {
 	}
 });
 
-router.get("/shared_subscriptions", jwt_auth, async (req, res) => {
+router.get("/shared", jwt_auth, async (req, res) => {
 	try {
 		const sharedUsers = await getSharedUsers(req.user._id);
 		if (!sharedUsers)
@@ -69,7 +69,7 @@ router.get("/shared_subscriptions", jwt_auth, async (req, res) => {
 	}
 });
 
-router.delete("/delete_shared_user", jwt_auth, async (req, res) => {
+router.delete("/shared", jwt_auth, async (req, res) => {
 	try {
 		const sharedUsers = await deleteSharedUser(
 			req.user._id,

@@ -30,7 +30,7 @@ const upload_Series = async (
 	files
 ) => {
 	try {
-		const series = await Series.findOne({ series_name: series_name });
+		const series = await Series.findOne({ series_title: series_name });
 		if (series)
 			return { statusCode: 409, message: "Series already exists" };
 		let videos_ids = [];
@@ -47,7 +47,7 @@ const upload_Series = async (
 			videos_ids.push(video._id);
 		}
 		const newSeries = new Series({
-			series_name: series_name,
+			series_title: series_name,
 			episodes: videos_ids,
 			genre: genre,
 		});

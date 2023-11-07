@@ -12,23 +12,25 @@ const { getSubscriptionId } = require("../utils/Stripe_utils");
 router.get("/prices", jwt_auth, checkSubscription, async (req, res) => {
 	try {
 		const result = await getPrices();
-		res.status(200).send({
+		return res.status(200).send({
 			message: "Prices fetched succesfully",
 			data: { prices: result },
 		});
 	} catch (error) {
 		console.error(error);
-		res.status(500).send({ message: error.message });
+		return res.status(500).send({ message: error.message });
 	}
 });
 
 router.post("/session", jwt_auth, async (req, res) => {
 	try {
 		const session = await createSession(req.user._id, req.body.priceId);
-		res.status(200).send({ message: "Session created", data: session });
+		return res
+			.status(200)
+			.send({ message: "Session created", data: session });
 	} catch (error) {
 		console.error(error);
-		res.status(500).send({ message: error.message });
+		return res.status(500).send({ message: error.message });
 	}
 });
 
@@ -36,11 +38,11 @@ router.post("/cancel", jwt_auth, (req, res) => {
 	try {
 		const subId = getSubscriptionId(req.user._id);
 		if (!cancelSubscription(subId)) {
-			res.status(500).send({ message: "Something gone wrong" });
+			return res.status(500).send({ message: "Something gone wrong" });
 		}
 	} catch (error) {
 		console.error(error);
-		res.status(500).send({ message: error.message });
+		return res.status(500).send({ message: error.message });
 	}
 });
 

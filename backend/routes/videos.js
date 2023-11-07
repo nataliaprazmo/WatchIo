@@ -33,20 +33,20 @@ router.post("/upload", uploads.single("file"), async (req, res) => {
 				.status(409)
 				.send({ message: "Video with given filename already Exist!" });
 		await new Video({ ...video }).save();
-		res.status(201).send({ message: "Video added successfully" });
+		return res.status(201).send({ message: "Video added successfully" });
 	} catch (error) {
-		console.log(error);
-		res.status(500).send({ message: "Internal Server Error" });
+		console.error(error);
+		return res.status(500).send({ message: "Internal Server Error" });
 	}
 });
 
 router.get("/", async (req, res) => {
 	try {
 		const vid = await Video.find();
-		res.status(200).send({ data: vid });
+		return res.status(200).send({ data: vid });
 	} catch (error) {
-		console.log(error);
-		res.status(500).send({ message: "Internal Server Error" });
+		console.error(error);
+		return res.status(500).send({ message: "Internal Server Error" });
 	}
 });
 
@@ -58,10 +58,10 @@ router.delete("/:filename", async (req, res) => {
 			console.error(err);
 		});
 		await vid.deleteOne();
-		res.status(200).send({ message: "Video deleted successfully" });
+		return res.status(200).send({ message: "Video deleted successfully" });
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({ message: "Internal Server Error" });
+		console.error(err);
+		return res.status(500).send({ message: "Internal Server Error" });
 	}
 });
 
@@ -101,8 +101,8 @@ router.get("/:filename", async (req, res) => {
 			fs.createReadStream(filePath).pipe(res);
 		}
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({ message: "Internal Server Error" });
+		console.error(err);
+		return res.status(500).send({ message: "Internal Server Error" });
 	}
 });
 
