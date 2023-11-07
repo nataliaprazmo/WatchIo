@@ -101,8 +101,10 @@ export const SignupContainer = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center py-10 px-12 bg-grey-200 rounded-[16px] w-fit h-fit mt-32">
-			<h1 className="font-bold text-[32px] mb-3">Witaj!</h1>
+		<div className="flex flex-col items-center py-10 px-12 bg-grey-200 rounded-lg w-fit h-fit mt-32">
+			<h1 className="font-bold text-2xl text-primary-orange mb-4">
+				Witaj!
+			</h1>
 			<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 				<Input
 					label="Imię"
@@ -111,7 +113,7 @@ export const SignupContainer = () => {
 					value={data.user_data.first_name}
 					handleChange={handleChange}
 					type="text"
-					icon={<Person2Outlined className="text-[20px]" />}
+					icon={<Person2Outlined className="text-xl" />}
 				/>
 				<Input
 					label="Nazwisko"
@@ -120,7 +122,7 @@ export const SignupContainer = () => {
 					value={data.user_data.last_name}
 					type="text"
 					handleChange={handleChange}
-					icon={<Person2Outlined className="text-[20px]" />}
+					icon={<Person2Outlined className="text-xl" />}
 				/>
 				<Input
 					label="Numer telefonu"
@@ -129,7 +131,7 @@ export const SignupContainer = () => {
 					value={data.user_data.phone_number}
 					type="tel"
 					handleChange={handleChange}
-					icon={<LocalPhoneOutlined className="text-[20px]" />}
+					icon={<LocalPhoneOutlined className="text-xl" />}
 				/>
 				<Input
 					label="Adres Email"
@@ -138,7 +140,7 @@ export const SignupContainer = () => {
 					value={data.credentials.email}
 					type="email"
 					handleChange={handleChange}
-					icon={<AlternateEmailIcon className="text-[20px]" />}
+					icon={<AlternateEmailIcon className="text-xl" />}
 				/>
 				<PasswordInput
 					label="Hasło"
@@ -165,32 +167,32 @@ export const SignupContainer = () => {
 					error={errorPass}
 					error_state={errorPassState}
 				/>
-				<div className="px-2 mb-4">
+				<div className="mb-6">
 					<Checkbox
 						id="agreement"
 						required
-						className="h-[12px] pl-4"
+						className="h-3 pl-4"
 						sx={{
 							svg: {
 								fontSize: "16px",
 							},
 						}}
 					/>
-					<label htmlFor="agreement" className="text-[12px]">
-						Zgadzam się z
+					<label htmlFor="agreement" className="text-xs">
+						Zgadzam się z{" "}
 						{
 							<Link
 								href="/policy#privacy"
-								className="text-primary-orange text-[12px] font-regular"
+								className="text-primary-orange text-xs font-regular"
 							>
-								polityką prywatności
+								polityką prywatności{" "}
 							</Link>
 						}{" "}
-						i
+						i{" "}
 						{
 							<Link
 								href="/policy#terms"
-								className="text-primary-orange text-[12px] font-regular"
+								className="text-primary-orange text-xs font-regular"
 							>
 								regulaminem
 							</Link>

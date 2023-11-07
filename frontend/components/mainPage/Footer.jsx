@@ -17,21 +17,21 @@ const Footer = () => {
 					/>
 				))}
 				<div>
-					<p className="font-bold text-[16px]">Kontakt</p>
-					<p className="font-regular text-[14px]">
+					<p className="font-bold text-base">Kontakt</p>
+					<p className="font-regular text-sm">
 						contact@watchio.com.pl
 					</p>
 				</div>
 			</div>
 			<div className="md:grid md:grid-cols-5 flex flex-col-reverse gap-4 mt-16">
-				<p className="font-regular text-[12px]">
+				<p className="font-regular text-xs">
 					&copy; 2023 Radłowski K. Prażmo N.
 				</p>
 				{policies.map((policy, id) => (
 					<Link
 						key={id}
 						href={policy.href}
-						className="font-semibold text-[12px] hover:text-primary-orange"
+						className="font-semibold text-xs hover:text-primary-orange"
 					>
 						{policy.name}
 					</Link>

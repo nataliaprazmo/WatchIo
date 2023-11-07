@@ -15,7 +15,7 @@ const Offer = () => {
 	return (
 		<div>
 			<Nav />
-			<div className="flex flex-wrap md:flex-row flex-col gap-[40px] items-center justify-center pt-12 mt-[80px]">
+			<div className="flex flex-wrap md:flex-row flex-col gap-10 items-center justify-center pt-12 mt-20">
 				{offer.map((item, index) => (
 					<div
 						key={index}
@@ -23,14 +23,14 @@ const Offer = () => {
 						onClick={() => setOffer(index)}
 					>
 						{index === 0 ? (
-							<LightRoundedIcon className="text-[48px] mb-4" />
+							<LightRoundedIcon className="text-5xl mb-4" />
 						) : index === 1 ? (
-							<TvRoundedIcon className="text-[48px] mb-4" />
+							<TvRoundedIcon className="text-5xl mb-4" />
 						) : (
-							<AddToQueueRoundedIcon className="text-[48px] mb-4" />
+							<AddToQueueRoundedIcon className="text-5xl mb-4" />
 						)}
 						<div className="md:w-[300px] w-[235px] h-[1.5px] bg-white" />
-						<h1 className="md:text-[24px] text-[20px] font-semibold text-primary-orange">
+						<h1 className="md:text-2xl text-xl font-semibold text-primary-orange">
 							{item.title}
 						</h1>
 					</div>

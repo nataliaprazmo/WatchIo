@@ -12,26 +12,26 @@ const CookiesPolicy = () => {
 	};
 	return (
 		<div id="cookies" className="py-16 text-justify">
-			<h1 className="font-semibold text-primary-orange text-[24px] mb-1">
+			<h1 className="font-semibold text-primary-orange text-2xl mb-1">
 				Polityka plików cookie dla Watch.io
 			</h1>
 			<p>
 				To jest Polityka plików cookie dla Watch.io, dostępna pod
 				adresem watch.io.
 			</p>
-			<p className="font-medium text-[20px] mt-4 mb-1">
+			<p className="font-medium text-xl mt-4 mb-1">
 				Co to są pliki cookie
 			</p>
 			<p>{cookiesDetails.definition}</p>
-			<p className="font-medium text-[20px] mt-4 mb-1">
+			<p className="font-medium text-xl mt-4 mb-1">
 				Jak wykorzystujemy pliki cookie
 			</p>
 			<p>{cookiesDetails.use}</p>
-			<p className="font-medium text-[20px] mt-4 mb-1">
+			<p className="font-medium text-xl mt-4 mb-1">
 				Wyłączanie plików cookie
 			</p>
 			<p>{cookiesDetails.turnOff}</p>
-			<p className="font-medium text-[20px] mt-4 mb-3">
+			<p className="font-medium text-xl mt-4 mb-3">
 				Pliki cookie, które ustawiamy
 			</p>
 			{cookiesDetails.cookies.map((cookie, id) => (
@@ -45,7 +45,7 @@ const CookiesPolicy = () => {
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls={`panel${id}bh-content`}
 						id={`panel${id}bh-header`}
-						className="bg-grey-200 rounded-[8px] mb-1"
+						className="bg-grey-200 rounded-lg mb-1"
 					>
 						<p>{cookie.title}</p>
 					</AccordionSummary>
@@ -54,14 +54,12 @@ const CookiesPolicy = () => {
 					</AccordionDetails>
 				</Accordion>
 			))}
-			<p className="font-medium text-[20px] mt-4 mb-1">
+			<p className="font-medium text-xl mt-4 mb-1">
 				Pliki cookie osób trzecich
 			</p>
 			<p>{cookiesDetails.thirdParty}</p>
 			<p>{cookiesDetails.add}</p>
-			<p className="font-medium text-[20px] mt-4 mb-1">
-				Więcej informacji
-			</p>
+			<p className="font-medium text-xl mt-4 mb-1">Więcej informacji</p>
 			<p>{cookiesDetails.moreInfo.description}</p>
 
 			<p>{cookiesDetails.moreInfo.readMore}</p>

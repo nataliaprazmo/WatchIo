@@ -6,7 +6,7 @@ const FooterGroup = ({ main_page, subpages }) => {
 		<div>
 			<Link
 				href={main_page.href}
-				className="font-bold text-[16px] hover:text-primary-orange"
+				className="font-bold text-base hover:text-primary-orange"
 			>
 				{main_page.name}
 			</Link>
@@ -15,7 +15,7 @@ const FooterGroup = ({ main_page, subpages }) => {
 					<Link
 						key={id}
 						href={subpage.href}
-						className="font-regular text-[14px] hover:text-primary-orange"
+						className="font-regular text-sm hover:text-primary-orange"
 					>
 						{subpage.name}
 					</Link>

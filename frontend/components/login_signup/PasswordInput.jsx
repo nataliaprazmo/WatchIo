@@ -21,10 +21,15 @@ const PasswordInput = ({
 		event.preventDefault();
 	};
 	return (
-		<div className="flex flex-col gap-[8px] w-full">
-			<p className="font-semibold text-[16px] pl-3">{label}</p>
+		<div className="flex flex-col gap-1 w-full">
+			<label
+				htmlFor={id}
+				className="font-medium text-sm text-neutral-200 pl-3"
+			>
+				{label}
+			</label>
 			<OutlinedInput
-				className="w-[400px] bg-[#404040] rounded-[8px]"
+				className="w-[350px] bg-grey-150 rounded-md"
 				sx={{
 					input: {
 						paddingLeft: "4px",
@@ -40,7 +45,7 @@ const PasswordInput = ({
 				onChange={handleChange}
 				startAdornment={
 					<InputAdornment position="start">
-						<HttpsOutlinedIcon className="text-[20px]" />
+						<HttpsOutlinedIcon className="text-lg" />
 					</InputAdornment>
 				}
 				endAdornment={
@@ -53,16 +58,16 @@ const PasswordInput = ({
 							className="pr-3"
 						>
 							{showPassword ? (
-								<VisibilityOffOutlined className="text-[20px]" />
+								<VisibilityOffOutlined className="text-xl" />
 							) : (
-								<VisibilityOutlined className="text-[20px]" />
+								<VisibilityOutlined className="text-xl" />
 							)}
 						</IconButton>
 					</InputAdornment>
 				}
 			/>
 			{error_state == true ? (
-				<span className="text-red-500 text-[14px] pl-4">{error}</span>
+				<span className="text-red-500 text-sm pl-4">{error}</span>
 			) : (
 				""
 			)}

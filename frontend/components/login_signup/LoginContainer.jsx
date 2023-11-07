@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/app/AuthContext";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -12,6 +13,7 @@ import Input from "./Input";
 import PasswordInput from "./PasswordInput";
 
 export const LoginContainer = () => {
+	const { login } = useAuth();
 	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 	const [data, setData] = useState({ email: "", password: "" });
@@ -32,22 +34,20 @@ export const LoginContainer = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/auth/login",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({ ...data }),
-				}
-			);
+			const response = await fetch("http://localhost:5000/api/auth/", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ ...data }),
+			});
 			if (response.status == 200) {
-				console.log(response.role);
-				const { token, role } = await response.json();
+				const res = await response.json();
 				if (rememberMe == false) localStorage.removeItem("loginData");
-				localStorage.setItem("token", token);
-				router.push(`/${role}`); //role: user/admin
+				localStorage.setItem("token", res.data.token);
+				localStorage.setItem("role", res.role);
+				login();
+				router.push(`/${res.role}`); //role: user/admin
 			} else {
 				setError("Podano nieprawidłowe dane");
 				console.log(response);
@@ -65,8 +65,10 @@ export const LoginContainer = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center p-12 bg-grey-200 rounded-[16px] w-fit h-fit mt-32">
-			<h1 className="font-bold text-[32px] mb-8">Witaj ponownie!</h1>
+		<div className="flex flex-col items-center py-12 px-10 bg-grey-200 rounded-lg w-fit h-fit mt-32">
+			<h1 className="font-bold text-2xl text-primary-orange mb-6">
+				Witaj ponownie!
+			</h1>
 			<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 				<Input
 					label="Adres Email"
@@ -75,7 +77,7 @@ export const LoginContainer = () => {
 					name="email"
 					value={data.email}
 					handleChange={handleChange}
-					icon={<AlternateEmailIcon className="text-[20px]" />}
+					icon={<AlternateEmailIcon className="text-lg" />}
 				/>
 				<PasswordInput
 					label="Hasło"
@@ -88,11 +90,11 @@ export const LoginContainer = () => {
 					}
 					showPassword={showPassword}
 				/>
-				<div className="flex justify-between items-center px-2 mb-4">
+				<div className="flex justify-between items-center px-2 mb-8">
 					<FormControlLabel
 						control={
 							<Checkbox
-								className="h-[12px] pl-4"
+								className="h-3 pl-4"
 								sx={{
 									svg: {
 										fontSize: "16px",

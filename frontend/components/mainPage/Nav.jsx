@@ -34,8 +34,8 @@ const Nav = () => {
 		setOpen(false);
 	};
 	return (
-		<div className="flex flex-row justify-between items-center bg-grey-300 xm:px-[50px] px-6 w-full h-20 fixed right-0 top-0 z-50">
-			<div className="md:flex space-x-6 xl:text-[16px] text-[12px] bg-grey-300 hidden">
+		<div className="flex flex-row justify-between items-center bg-grey-300 xm:px-13 px-6 w-full h-20 fixed right-0 top-0 z-50">
+			<div className="md:flex space-x-6 xl:text-base text-xs bg-grey-300 hidden">
 				<LinkText to="/">Strona główna</LinkText>
 				<LinkText to="/offer">Oferta</LinkText>
 				<LinkText to="/subscriptions">Subskrypcje</LinkText>
@@ -49,7 +49,7 @@ const Nav = () => {
 					sx={{ mr: 2, ...(open && { display: "none" }) }}
 				>
 					<MenuRoundedIcon
-						className="text-[32px] cursor-pointer"
+						className="text-32 cursor-pointer"
 						sx={{ "&:hover": { path: { color: "#ff9900" } } }}
 					/>
 				</IconButton>
@@ -101,7 +101,7 @@ const Nav = () => {
 				<LinkButton to="/signup">Zarejestruj się</LinkButton>
 			</Drawer>
 			<Logo classes="xl:max-w-[300px] lg:max-w-[200px] md:max-w-[150px] max-w-[200px]" />
-			<div className="md:flex items-center space-x-[32px] bg-grey-300 hidden">
+			<div className="md:flex items-center space-x-8 bg-grey-300 hidden">
 				<LinkButton to="/login" variant="outlined">
 					Zaloguj się
 				</LinkButton>
@@ -109,10 +109,10 @@ const Nav = () => {
 					Zarejestruj się
 				</LinkButton>
 			</div>
-			<div className="flex items-center space-x-[16px] bg-grey-300 md:hidden">
+			<div className="flex items-center space-x-4 bg-grey-300 md:hidden">
 				<LinkButton to="/signup">
 					<LoginRoundedIcon
-						className="text-[32px] hover:text-primary-orange"
+						className="text-32 hover:text-primary-orange"
 						sx={{ "&:hover": { path: { color: "#ff9900" } } }}
 					/>
 				</LinkButton>
