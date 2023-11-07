@@ -11,13 +11,13 @@ const {
 router.get("/", jwt_auth, async (req, res) => {
 	try {
 		const userData = await getCurrentUserData(req.user._id);
-		res.status(200).send({
+		return res.status(200).send({
 			message: "Data fetched successfully",
 			data: { userData: userData },
 		});
 	} catch (error) {
 		console.error(error);
-		res.status(500).send({ message: error.message });
+		return res.status(500).send({ message: error.message });
 	}
 });
 
@@ -25,12 +25,12 @@ router.delete("/", jwt_auth, async (req, res) => {
 	try {
 		const result = await deleteCurrentUser(req.user._id, req.body.password);
 		if (!result) {
-			res.status(409).send({ message: "Wrong Password" });
+			return res.status(409).send({ message: "Wrong Password" });
 		}
-		res.redirect("/");
+		return res.redirect("/");
 	} catch (error) {
 		console.error(error);
-		res.status(500).send({ message: error.message });
+		return res.status(500).send({ message: error.message });
 	}
 });
 
@@ -42,24 +42,24 @@ router.post("/password", jwt_auth, async (req, res) => {
 			req.body.newPassword
 		);
 		if (!result) {
-			res.status(409).send({ message: "Wrong old Password" });
+			return res.status(409).send({ message: "Wrong old Password" });
 		}
-		res.status(200).send({
+		return res.status(200).send({
 			message: "Password changed succesfully",
 		});
 	} catch (error) {
 		console.error(error);
-		res.status(500).send({ message: error.message });
+		return res.status(500).send({ message: error.message });
 	}
 });
 
 router.post("/register", async (req, res) => {
 	try {
 		const result = await registerNewUser(req.body);
-		res.status(result.statusCode).send({ message: result.message });
+		return res.status(result.statusCode).send({ message: result.message });
 	} catch (error) {
 		console.error(error);
-		res.status(500).send({ message: "Internal Server Error" });
+		return res.status(500).send({ message: "Internal Server Error" });
 	}
 });
 

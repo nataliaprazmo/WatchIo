@@ -1,5 +1,5 @@
 data/*
 !data/placeholder.txt
 
-App_src/backend/videos/*
-!App_src/backend/videos/placeholder.txt
+/backend/videos/*
+!/backend/videos/placeholder.txt

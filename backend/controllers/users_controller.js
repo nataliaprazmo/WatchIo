@@ -1,6 +1,7 @@
 const { User, validate } = require("../models/User");
 const bcrypt = require("bcrypt");
 const stripe = require("../utils/Stripe");
+const { Watchlist } = require("../models/Watchlist");
 
 const getCurrentUserData = async (userId) => {
 	try {
@@ -95,10 +96,15 @@ const registerNewUser = async (userData) => {
 			}
 		);
 
-		await new User({
+		const newUser = await new User({
 			...userData,
 			"credentials.password": hashPassword,
 			stripe_customer_id: stripeCustomerId.id,
+		}).save();
+		console.log(newUser);
+		await new Watchlist({
+			owner: newUser._id,
+			series: [],
 		}).save();
 		return { statusCode: 201, message: "User created successfully" };
 	} catch (error) {
