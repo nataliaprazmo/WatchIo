@@ -8,6 +8,7 @@ import Person2RoundedIcon from "@mui/icons-material/Person2Rounded";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
+import { Alert } from "@mui/material";
 
 const Profile = () => {
 	const role = localStorage.getItem("role");
@@ -84,12 +85,13 @@ const Profile = () => {
 				);
 				console.log(response.status);
 				if (response.status == 409) {
-					console.log("wrong passwd");
+					console.log("wrong password");
 					setError_state(true);
 				}
 				if (response.status == 200) {
 					const res = await response.json();
 					console.log("changed password");
+					setAlertState(true);
 					setError_state(false);
 					setPasswordEdit(false);
 				}
@@ -111,6 +113,7 @@ const Profile = () => {
 		setPasswordEdit(true);
 	};
 	const [error_state, setError_state] = useState(false);
+	const [alertState, setAlertState] = useState(false);
 	return (
 		<div className="mt-10 relative p-6 rounded-md bg-grey-200">
 			{/* <div className="bg-gradient-to-tr from-secondary-violet to-purple-400 absolute bottom-48 right-4 w-full h-18 opacity-80 rounded-lg" /> */}
@@ -203,6 +206,21 @@ const Profile = () => {
 						</IconButton>
 					</>
 				)}
+				{alertState ? (
+					<Alert
+						severity="success"
+						onClose={() => {
+							setAlertState(false);
+						}}
+						className="bg-grey-300 col-span-2"
+						sx={{
+							div: { color: "green" },
+							path: { color: "green" },
+						}}
+					>
+						Zmieniono hasło
+					</Alert>
+				) : null}
 			</div>
 		</div>
 	);
