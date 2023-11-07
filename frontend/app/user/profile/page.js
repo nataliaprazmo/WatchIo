@@ -9,8 +9,8 @@ export default function Page() {
 			<NavMenu />
 			<SiteBreadcrumbs
 				links={[
-					{ label: "Panel", to: "/admin" },
-					{ label: "Konto", to: "/admin/profile" },
+					{ label: "Panel", to: "/user" },
+					{ label: "Konto", to: "/user/profile" },
 				]}
 			/>
 			<Profile />
