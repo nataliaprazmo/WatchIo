@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import NavMenu from "../NavMenu";
 import { NavigateNextRounded } from "@mui/icons-material";
 import SiteBreadcrumbs from "../SiteBreadcrumbs";
+import SeriesHero from "./SeriesHero";
+import Section from "./Section";
 
 const Dashboard = () => {
 	// const getPrices = async () => {
@@ -42,16 +44,22 @@ const Dashboard = () => {
 	// 	getPrices();
 	// }, []);
 	return (
-		<div className="pt-24 pb-18 pl-[115px] pr-13">
+		<div className="pt-24 pb-18 pl-24 pr-8">
 			<NavMenu />
-			<div className="flex gap-1 items-center">
+			<div className="flex gap-1 items-center mb-6">
 				<NavigateNextRounded
 					className="text-xs"
 					sx={{ path: { color: "#ff9900" } }}
 				/>
 				<SiteBreadcrumbs links={[{ to: "/user", label: "Panel" }]} />
 			</div>
-			<h1 className="mt-8">User</h1>
+			<SeriesHero />
+			<Section text="Najpopularniejsze" items_count={4} />
+			<Section text="Najlepiej oceniane" items_count={6} />
+			<Section text="Ostatnio dodane" items_count={6} />
+			<Section text="Polecane" items_count={4} />
+			<Section text="Seriale" items_count={6} />
+			<Section text="Filmy" items_count={6} />
 		</div>
 	);
 };

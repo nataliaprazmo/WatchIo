@@ -7,10 +7,13 @@ import {
 	Avatar,
 	Drawer,
 	IconButton,
+	InputAdornment,
 	Menu,
+	OutlinedInput,
 	Toolbar,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import Options from "./admin/Options";
@@ -128,6 +131,31 @@ const NavMenu = () => {
 							sx={{ "&:hover": { path: { color: "#ff9900" } } }}
 						/>
 					</IconButton>
+					{pathname.startsWith("/user") ? (
+						<div className="flex justify-between items-center w-full pr-24">
+							<div className="flex gap-6">
+								<p>Filmy</p>
+								<p>Seriale</p>
+							</div>
+							<OutlinedInput
+								className="w-fit bg-grey-250 rounded-lg h-10"
+								sx={{
+									input: {
+										paddingLeft: "4px",
+										color: "#fafaf5",
+									},
+								}}
+								placeholder="Szukaj"
+								startAdornment={
+									<InputAdornment position="start">
+										<SearchRoundedIcon />
+									</InputAdornment>
+								}
+							/>
+						</div>
+					) : (
+						<></>
+					)}
 					<IconButton
 						onClick={(event) =>
 							setAnchorElUser(event.currentTarget)

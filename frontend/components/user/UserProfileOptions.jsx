@@ -8,17 +8,23 @@ const UserProfileOptions = ({ handleLogout, setAnchorElUser }) => {
 				onClick={() => setAnchorElUser(null)}
 				className="hover:text-primary-orange"
 			>
+				<Link href="/user">Panel</Link>
+			</MenuItem>
+			<MenuItem
+				onClick={() => setAnchorElUser(null)}
+				className="hover:text-primary-orange"
+			>
 				<Link href="/user/profile">Konto</Link>
 			</MenuItem>
 			<MenuItem
 				onClick={() => setAnchorElUser(null)}
 				className="hover:text-primary-orange"
 			>
-				<Link href="/user">Panel</Link>
+				<Link href="/user/settings">Ustawienia</Link>
 			</MenuItem>
 			<MenuItem
 				onClick={handleLogout}
-				className="hover:text-primary-orange"
+				className="hover:text-primary-orange font-montserrat"
 			>
 				Wyloguj się
 			</MenuItem>

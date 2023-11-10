@@ -2,6 +2,13 @@ import React from "react";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
+import SubscriptionsRoundedIcon from "@mui/icons-material/SubscriptionsRounded";
+import ChairOutlinedIcon from "@mui/icons-material/ChairOutlined";
+import ChairRoundedIcon from "@mui/icons-material/ChairRounded";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBulletedRounded";
 import Link from "next/link";
 import { Divider, IconButton } from "@mui/material";
 import { usePathname } from "next/navigation";
@@ -40,8 +47,84 @@ const UserOptions = ({ open }) => {
 					/>
 				)}
 			</Option>
+			<Option href="/user/watchlist" text="Lista do obejrzenia">
+				{pathname === "/user/watchlist" ? (
+					<FormatListBulletedRoundedIcon
+						sx={{
+							path: { color: "#ff9900" },
+							fontSize: "22px",
+							minHeight: 48,
+						}}
+						className="mr-[2px]"
+					/>
+				) : (
+					<FormatListBulletedRoundedIcon
+						sx={{
+							"&:hover": { path: { color: "#ff9900" } },
+							fontSize: "22px",
+							minHeight: 48,
+						}}
+						className="mr-[2px]"
+					/>
+				)}
+			</Option>
+			<Option href="/user/rooms" text="Pokoje">
+				{pathname === "/user/rooms" ? (
+					<ChairRoundedIcon
+						sx={{
+							path: { color: "#ff9900" },
+							fontSize: "22px",
+							minHeight: 48,
+						}}
+					/>
+				) : (
+					<ChairOutlinedIcon
+						sx={{
+							"&:hover": { path: { color: "#ff9900" } },
+							fontSize: "22px",
+							minHeight: 48,
+						}}
+					/>
+				)}
+			</Option>
+			<Option href="/user/subscriptions" text="Subskrypcje">
+				{pathname === "/user/subscriptions" ? (
+					<SubscriptionsRoundedIcon
+						sx={{
+							path: { color: "#ff9900" },
+							fontSize: "24px",
+							minHeight: 48,
+						}}
+					/>
+				) : (
+					<SubscriptionsOutlinedIcon
+						sx={{
+							"&:hover": { path: { color: "#ff9900" } },
+							fontSize: "24px",
+							minHeight: 48,
+						}}
+					/>
+				)}
+			</Option>
 			<Divider className="bg-grey-100 mx-2 my-4" />
-			<div className="ml-3">
+			<Option href="/user/settings" text="Ustawienia">
+				{pathname === "/user/settings" ? (
+					<SettingsRoundedIcon
+						sx={{
+							path: { color: "#ff9900" },
+							minHeight: 48,
+						}}
+					/>
+				) : (
+					<SettingsOutlinedIcon
+						sx={{
+							"&:hover": { path: { color: "#ff9900" } },
+							minHeight: 48,
+						}}
+					/>
+				)}
+			</Option>
+			<div className="pl-3">
 				<IconButton onClick={handleLogout}>
 					<LogoutRoundedIcon
 						sx={{
