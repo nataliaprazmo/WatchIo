@@ -10,7 +10,18 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-	const [user, setUser] = useState({ user: null, role: null });
+	const [user, setUser] = useState(() => {
+		if (typeof window === "undefined") {
+			return { user: null, role: null };
+		}
+		const token = window.localStorage.getItem("token");
+		const role = window.localStorage.getItem("role");
+		if (token && role) {
+			return { user: token, role: role };
+		} else {
+			return { user: null, role: null };
+		}
+	});
 	const router = useRouter();
 	const pathname = usePathname();
 	const login = () => {
@@ -32,6 +43,7 @@ export function AuthProvider({ children }) {
 		}
 	};
 	const protectAdmin = () => {
+		console.log(user);
 		if (user.user === null) {
 			logout();
 		} else if (user.role !== "admin" && pathname.startsWith("/admin")) {
@@ -39,6 +51,7 @@ export function AuthProvider({ children }) {
 		}
 	};
 	const protectUser = () => {
+		console.log(user);
 		if (user.user === null) {
 			logout();
 		} else if (pathname.startsWith("/user") && user.role === "admin") {

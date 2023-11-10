@@ -39,6 +39,7 @@ const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
 							{/* {row.poster} */}
 							<Image
 								src="/images/poster.webp"
+								alt="poster"
 								width={100}
 								height={200}
 							/>
