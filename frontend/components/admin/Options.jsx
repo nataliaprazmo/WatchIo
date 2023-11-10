@@ -29,7 +29,7 @@ const Options = ({ open }) => {
 		logout();
 	};
 	return (
-		<div className="flex flex-col h-full justify-start pt-2">
+		<div className="flex flex-col h-full justify-start pt-2 bg-grey-300">
 			<Option href="/admin" text="Panel">
 				{pathname === "/admin" ? (
 					<HomeRoundedIcon

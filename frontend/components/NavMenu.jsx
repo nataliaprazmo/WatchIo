@@ -153,9 +153,7 @@ const NavMenu = () => {
 								}
 							/>
 						</div>
-					) : (
-						<></>
-					)}
+					) : null}
 					<IconButton
 						onClick={(event) =>
 							setAnchorElUser(event.currentTarget)
@@ -194,7 +192,11 @@ const NavMenu = () => {
 					</Menu>
 				</Toolbar>
 			</SiteBar>
-			<SiteDrawer variant="permanent" open={open}>
+			<SiteDrawer
+				variant="permanent"
+				open={open}
+				sx={{ div: { backgroundColor: "#101010" } }}
+			>
 				<DrawerHeader>
 					<IconButton onClick={handleDrawerClose}>
 						{theme.direction === "ltr" ? (
