@@ -1,12 +1,29 @@
 const stripe = require("../utils/Stripe");
 const { User } = require("../models/User");
 
-const getPrices = async () => {
+const getPrices = async (currency) => {
 	try {
-		const prices = await stripe.prices.list({
-			apiKey: process.env.STRIPE_SECRET_KEY,
+		var prices = await stripe.prices.list({
+			currency: currency,
+			active: true,
 		});
-		return prices;
+
+		if (prices.data.length <= 0) {
+			var prices = await stripe.prices.list({
+				currency: "usd",
+				active: true,
+			});
+		}
+
+		var pricesParsed = [];
+		prices.data.forEach((element) => {
+			pricesParsed.push({
+				id: element.id,
+				amount_decimal: element.unit_amount,
+				currency: element.currency,
+			});
+		});
+		return pricesParsed;
 	} catch (error) {
 		throw error;
 	}

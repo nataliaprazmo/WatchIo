@@ -9,9 +9,9 @@ const {
 const { getSubscriptionId } = require("../utils/Stripe_utils");
 
 // router.get("/prices", checkAuth, async (req, res) => {
-router.get("/prices", jwt_auth, checkSubscription, async (req, res) => {
+router.get("/prices", async (req, res) => {
 	try {
-		const result = await getPrices();
+		const result = await getPrices(req.query.currency);
 		return res.status(200).send({
 			message: "Prices fetched succesfully",
 			data: { prices: result },

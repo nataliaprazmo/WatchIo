@@ -11,7 +11,7 @@ const {
 
 router.get("/", (req, res) => {
 	try {
-		const result = getSeries(req.req.howMany);
+		const result = getSeries(req.query.howMany);
 		return res.status(200).send({
 			message: "Data fetched succesfully",
 			data: { series: result },

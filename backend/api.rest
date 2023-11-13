@@ -61,7 +61,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 
 
 ###
-GET http://localhost:5000/api/subscriptions/prices HTTP/1.1
+GET http://localhost:5000/api/subscriptions/prices?currency=pln HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkwMTI0MTAsImV4cCI6MTY5OTYxNzIxMH0.1dooNaUHbeaDCxpBKGUHow0Ixfalt0ZT4Audh4KRZdg
 ###
 
