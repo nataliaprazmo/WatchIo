@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const jwt_auth = require("../middleware/jwt_auth");
+const subscription_check = require("../middleware/subscription_check");
 const {
 	getSharedUsers,
 	joinSubscription,
@@ -7,6 +8,9 @@ const {
 	deactivateShareCode,
 	deleteSharedUser,
 } = require("../controllers/subscriptionSharing_controller");
+
+router.use(jwt_auth);
+router.use(subscription_check);
 
 router.post("/join", jwt_auth, async (req, res) => {
 	try {
