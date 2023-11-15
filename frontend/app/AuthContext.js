@@ -43,7 +43,6 @@ export function AuthProvider({ children }) {
 		}
 	};
 	const protectAdmin = () => {
-		console.log(user);
 		if (user.user === null) {
 			logout();
 		} else if (user.role !== "admin" && pathname.startsWith("/admin")) {
@@ -51,7 +50,6 @@ export function AuthProvider({ children }) {
 		}
 	};
 	const protectUser = () => {
-		console.log(user);
 		if (user.user === null) {
 			logout();
 		} else if (pathname.startsWith("/user") && user.role === "admin") {
