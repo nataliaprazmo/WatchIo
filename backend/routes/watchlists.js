@@ -66,7 +66,6 @@ router.delete("/:seriesId", jwt_auth, async (req, res) => {
 			req.params.seriesId
 		);
 		if (!result) return res.status(500);
-		console.log(result);
 		return res.status(result.status).send({ message: result.message });
 	} catch (error) {
 		console.error(error);

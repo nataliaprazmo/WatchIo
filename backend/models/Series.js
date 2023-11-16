@@ -3,8 +3,9 @@ const Joi = require("joi");
 
 const seriesSchema = new mongoose.Schema({
 	series_title: { type: String, required: true },
-	series_picture_file_name: { type: String },
+	series_picture_path: { type: String },
 	description: { type: String },
+	year_of_production: { type: String },
 	staff: [
 		{
 			name: { type: String },
@@ -18,7 +19,8 @@ const seriesSchema = new mongoose.Schema({
 			ep: { type: [mongoose.Schema.Types.ObjectId], ref: "Video" },
 		},
 	],
-	genre: [{ type: String }],
+	genres: [{ type: String }],
+	rating: { type: String },
 });
 
 const Series = mongoose.model("Series", seriesSchema, "series");

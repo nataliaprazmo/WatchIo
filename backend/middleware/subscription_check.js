@@ -22,7 +22,6 @@ const checkSubscription = async (req, res, next) => {
 		}
 
 		const stripeSubscriptionId = await getSubscriptionId(req.user._id);
-		console.log(stripeSubscriptionId);
 		if (!stripeSubscriptionId)
 			return res.status(403).send({ message: "No active subscription" });
 

@@ -1,5 +1,11 @@
 data/*
 !data/placeholder.txt
 
-/backend/videos/*
 !/backend/videos/placeholder.txt
+/backend/videos/*
+
+!/backend/series_thumbnails/placeholder.txt
+/backend/series_thumbnails/*
+
+!/backend/video_thumbnails/placeholder.txt
+/backend/video_thumbnails/*
