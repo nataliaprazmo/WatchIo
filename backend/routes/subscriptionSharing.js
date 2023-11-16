@@ -14,9 +14,7 @@ router.use(subscription_check);
 
 router.post("/join", jwt_auth, async (req, res) => {
 	try {
-		console.log(req.body);
 		const result = await joinSubscription(req.user._id, req.body.shareCode);
-		console.log(result);
 		if (!result)
 			return res
 				.status(403)

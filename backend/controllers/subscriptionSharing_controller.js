@@ -30,13 +30,11 @@ const generateShareCode = async (userId) => {
 		const subscription = await Subscription.findOne({
 			owner: userId,
 		});
-		console.log(subscription);
 		if (!subscription) return null;
 
 		const shareCode = Math.round(Math.random() * 1e9);
 		subscription.sharing_code = shareCode;
 		await subscription.save();
-		console.log(shareCode);
 		return shareCode;
 	} catch (error) {
 		throw error;
@@ -69,7 +67,6 @@ const getSharedUsers = async (userId) => {
 		subscription.shared_with.forEach((element) => {
 			users.push(element.credentials.email);
 		});
-		console.log(users);
 		return users;
 	} catch (error) {
 		throw error;
