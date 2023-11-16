@@ -9,13 +9,11 @@ const checkSubscription = async (req, res, next) => {
 			subscription = await Subscription.findOne({
 				shared_with: req.user._id,
 			});
-
 		if (subscription) {
 			const stripeSubscription = await stripe.subscriptions.retrieve(
 				subscription.stripe_subscription_id
 			);
-
-			if (stripeSubscription.status == "active") next();
+			if (stripeSubscription.status == "active") return next();
 
 			await Subscription.deleteOne({ _id: subscription._id });
 			return res.status(403).send({ message: "No active subscription" });
