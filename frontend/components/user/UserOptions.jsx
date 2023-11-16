@@ -87,8 +87,8 @@ const UserOptions = ({ open }) => {
 					/>
 				)}
 			</Option>
-			<Option href="/user/subscriptions" text="Subskrypcje">
-				{pathname === "/user/subscriptions" ? (
+			<Option href="/user/subscriptionSettings" text="Subskrypcje">
+				{pathname === "/user/subscriptionSettings" ? (
 					<SubscriptionsRoundedIcon
 						sx={{
 							path: { color: "#ff9900" },

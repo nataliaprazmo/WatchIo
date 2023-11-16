@@ -1,10 +1,10 @@
-import Settings from "@/components/user/settings/Settings";
+import SubscriptionSettings from "@/components/user/settings/SubscriptionSettings";
 import React from "react";
 
 export default function Page() {
 	return (
 		<main className="overflow-hidden">
-			<Settings />
+			<SubscriptionSettings />
 		</main>
 	);
 }

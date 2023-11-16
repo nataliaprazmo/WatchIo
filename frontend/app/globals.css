@@ -110,3 +110,6 @@ body {
 .Mui-disabled {
 	color: #404040 !important;
 }
+.MuiOutlinedInput-input.Mui-disabled {
+	-webkit-text-fill-color: #a3a3a3 !important;
+}

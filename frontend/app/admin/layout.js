@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useAuth } from "../AuthContext";
+import NavMenu from "@/components/NavMenu";
 
 export default function AdminLayout({ children }) {
 	const { user, protectAdmin } = useAuth();
@@ -8,5 +9,10 @@ export default function AdminLayout({ children }) {
 		protectAdmin();
 	}, []);
 	if (user.user === null || user.role !== "admin") return;
-	return <section>{children}</section>;
+	return (
+		<section>
+			<NavMenu />
+			{children}
+		</section>
+	);
 }

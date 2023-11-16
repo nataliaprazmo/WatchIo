@@ -4,14 +4,12 @@ import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import { NavigateNextRounded } from "@mui/icons-material";
-import NavMenu from "../NavMenu";
 import Analytics from "./Analytics";
 import Link from "next/link";
 
 const Dashboard = () => {
 	return (
 		<div className="pt-24 pb-18 pl-[115px] pr-13">
-			<NavMenu />
 			<div className="flex gap-1 items-center">
 				<NavigateNextRounded
 					className="text-xs"

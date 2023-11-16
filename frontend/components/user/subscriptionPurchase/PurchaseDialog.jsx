@@ -4,13 +4,9 @@ import React, { useState } from "react";
 import Plan from "./Plan";
 import JoinSubForm from "./JoinSubForm";
 
-const PurchaseDialog = ({ price }) => {
-	const [open, setOpen] = useState(true);
+const PurchaseDialog = ({ price, setHasSubscription }) => {
 	const [choice, setChoice] = useState("");
 	const [step, setStep] = useState(1);
-	const handleClose = () => {
-		setOpen(false);
-	};
 	const Column = ({ title, children }) => {
 		return (
 			<div className="flex flex-col gap-6">
@@ -19,10 +15,38 @@ const PurchaseDialog = ({ price }) => {
 			</div>
 		);
 	};
-	const goToPurchase = (e) => {
-		e.preventDefault();
+	const goToPurchase = async () => {
 		setChoice("purchase");
-		//go to session purchase
+		const token = localStorage.getItem("token");
+		if (token) {
+			try {
+				const response = await fetch(
+					"http://localhost:5000/api/subscriptions/session",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"x-access-token": token,
+						},
+						body: JSON.stringify({ priceId: price.id }),
+					}
+				);
+				if (response.status == 200) {
+					const res = await response.json();
+					const url = res.data.url;
+					console.log(url);
+					window.location.href = url;
+				}
+			} catch (error) {
+				if (
+					error.response &&
+					error.response.status >= 400 &&
+					error.response.status <= 500
+				) {
+					console.error(error);
+				}
+			}
+		}
 	};
 	const goToJoin = (e) => {
 		e.preventDefault();
@@ -59,7 +83,7 @@ const PurchaseDialog = ({ price }) => {
 					</Column>
 				) : step == 2 && choice === "join" ? (
 					<Column>
-						<JoinSubForm />
+						<JoinSubForm setHasSubscription={setHasSubscription} />
 						<button
 							onClick={returnClick}
 							className="hover:text-primary-orange font-medium self-start mt-8"

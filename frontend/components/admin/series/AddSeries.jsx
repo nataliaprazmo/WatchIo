@@ -6,7 +6,6 @@ import StepForm from "./StepForm";
 const AddSeries = () => {
 	return (
 		<div className="py-24 pl-24 pr-10">
-			<NavMenu />
 			<SiteBreadcrumbs
 				links={[
 					{ label: "Panel", to: "/admin" },

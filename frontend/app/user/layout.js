@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useAuth } from "../AuthContext";
+import NavMenu from "@/components/NavMenu";
 
 export default function UserLayout({ children }) {
 	const { protectUser, user } = useAuth();
@@ -9,5 +10,10 @@ export default function UserLayout({ children }) {
 		protectUser();
 	}, []);
 	if (user.user === null || user.role !== "user") return;
-	return <section>{children}</section>;
+	return (
+		<section>
+			<NavMenu />
+			{children}
+		</section>
+	);
 }

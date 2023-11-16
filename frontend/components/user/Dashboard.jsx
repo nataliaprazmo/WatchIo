@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import NavMenu from "../NavMenu";
 import { NavigateNextRounded } from "@mui/icons-material";
 import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import SeriesHero from "./SeriesHero";
@@ -10,7 +9,7 @@ import PurchaseDialog from "./subscriptionPurchase/PurchaseDialog";
 
 const Dashboard = () => {
 	const [price, setPrice] = useState(0);
-	//fetch prices
+	const [hasSubscription, setHasSubscription] = useState(false);
 	const getPrices = async () => {
 		const token = localStorage.getItem("token");
 		if (token) {
@@ -44,13 +43,8 @@ const Dashboard = () => {
 	useEffect(() => {
 		getPrices();
 	}, []);
-	useEffect(() => {
-		console.log(price.amount_decimal / 100);
-		console.log(price.id);
-	}, [price]);
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
-			<NavMenu />
 			<div className="flex gap-1 items-center mb-6">
 				<NavigateNextRounded
 					className="text-xs"
@@ -58,9 +52,14 @@ const Dashboard = () => {
 				/>
 				<SiteBreadcrumbs links={[{ to: "/user", label: "Panel" }]} />
 			</div>
-			<div className="z-50 fixed top-0 left-0 w-full h-full backdrop-blur-md flex flex-row justify-center items-center pl-14">
-				<PurchaseDialog price={price} />
-			</div>
+			{!hasSubscription ? (
+				<div className="z-50 fixed top-0 left-0 w-full h-full backdrop-blur-md flex flex-row justify-center items-center pl-14">
+					<PurchaseDialog
+						price={price}
+						setHasSubscription={setHasSubscription}
+					/>
+				</div>
+			) : null}
 			<SeriesHero />
 			<Section text="Najpopularniejsze" items_count={4} />
 			<Section text="Najlepiej oceniane" items_count={6} />

@@ -13,7 +13,10 @@ const SeriesHero = () => {
 					<Chip
 						label={
 							<p className="flex gap-2 font-semibold">
-								IMDB <p className="text-primary-orange ">6.0</p>
+								IMDB{" "}
+								<span className="text-primary-orange ">
+									6.0
+								</span>
 							</p>
 						}
 						variant="outlined"
