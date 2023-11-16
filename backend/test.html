@@ -3,65 +3,63 @@
 	method="POST"
 	enctype="multipart/form-data"
 >
+	<label> series thumbanil</label>
+	<input type="file" name="series_thumbnail" />
 	<label>Series Name</label>
 	<input type="text" name="series_title" />
 	<label>Genre</label>
-	<input type="text" name="genre" />
+	<input type="text" name="series_genres" />
+	<label>Genre</label>
+	<input type="text" name="series_genres" />
+	<label>Genre</label>
+	<input type="text" name="series_genres" />
+
+	<label>staff name</label>
+	<input type="text" name="series_staff[0][name]" />
+	<label>staff surname</label>
+	<input type="text" name="series_staff[0][surname]" />
+	<label>staff role</label>
+	<input type="text" name="series_staff[0][role]" />
+
+	<label>staff name</label>
+	<input type="text" name="series_staff[1][name]" />
+	<label>staff surname</label>
+	<input type="text" name="series_staff[1][surname]" />
+	<label>staff role</label>
+	<input type="text" name="series_staff[1][role]" />
+
+	<label>Episode Description:</label>
+	<textarea name="series_desc"></textarea>
+	<label>Year of Production:</label>
+	<textarea name="series_year_of_production"></textarea>
 	<br />
 	<br />
 	<div>
+		<label>thumbanil</label>
+		<input type="file" name="video_thumbnails" />
+
 		<label>File</label>
-		<input type="file" name="files" />
+		<input type="file" name="videos" />
 		<br />
 		<label>Title:</label>
-		<input type="text" name="title" />
+		<input type="text" name="episode_titles" />
 		<label>Episode Description:</label>
-		<textarea name="desc"></textarea>
-		<label>datalink:</label>
-		<textarea name="datalink"></textarea>
+		<textarea name="episode_desc"></textarea>
 	</div>
 	<br />
 	<br />
 	<br />
 	<div>
+		<label>thumbanil</label>
+		<input type="file" name="video_thumbnails" />
+
 		<label>File</label>
-		<input type="file" name="files" />
+		<input type="file" name="videos" />
 		<br />
 		<label>Title:</label>
-		<input type="text" name="title" />
+		<input type="text" name="episode_titles" />
 		<label>Episode Description:</label>
-		<textarea name="desc"></textarea>
-		<label>datalink:</label>
-		<textarea name="datalink"></textarea>
+		<textarea name="episode_desc"></textarea>
 	</div>
 	<button type="submit">Upload</button>
 </form>
-<!-- <form>
-	<input type="text" name="file-name" id="name" />
-	<input type="file" name="file" id="files" multiple />
-	<button type="submit">Submit</button>
-</form>
-<script>
-	const form = document.querySelector("form");
-	form.addEventListener("submit", (e) => {
-		e.preventDefault();
-		// Prevents HTML handling submission
-		const name = document.getElementById("name");
-		const files = document.getElementById("files");
-		const formData = new FormData();
-		// Creates empty formData object
-		formData.append("name", name.value);
-		// Appends value of text input
-		for (let i = 0; i < files.files.length; i++) {
-			formData.append("files", files.files[i]);
-		}
-		// Appends value(s) of file input
-		// Post data to Node and Express server:
-		fetch("http://127.0.0.1:5000/api/series", {
-			method: "POST",
-			body: formData, // Payload is formData object
-		})
-			.then((res) => res.json())
-			.then((data) => console.log(data));
-	});
-</script> -->

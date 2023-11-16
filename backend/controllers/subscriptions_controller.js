@@ -32,7 +32,6 @@ const getPrices = async (currency) => {
 const createSession = async (userId, priceId) => {
 	try {
 		const user = await User.findOne({ _id: userId });
-		console.log(user);
 		const session = await stripe.checkout.sessions.create(
 			{
 				mode: "subscription",

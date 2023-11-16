@@ -56,12 +56,10 @@ const changeCurrentUserPassword = async (userId, oldPassword, newPassword) => {
 
 const registerNewUser = async (userData) => {
 	try {
-		console.log(userData.is_admin);
 		if (userData?.is_admin !== true) {
 			userData.is_admin = false;
 		}
 
-		console.log(userData.is_admin);
 		if (
 			userData.credentials.password !==
 			userData.credentials.repeatedPassword
@@ -101,7 +99,7 @@ const registerNewUser = async (userData) => {
 			"credentials.password": hashPassword,
 			stripe_customer_id: stripeCustomerId.id,
 		}).save();
-		console.log(newUser);
+
 		await new Watchlist({
 			owner: newUser._id,
 			series: [],

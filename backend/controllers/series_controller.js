@@ -3,7 +3,6 @@ const { Video, validateVideo } = require("../models/Video");
 
 const getSeries = async (howMany) => {
 	try {
-		console.log(howMany);
 		const result = Series.find.limit(howMany);
 		return result;
 	} catch (error) {
@@ -13,7 +12,6 @@ const getSeries = async (howMany) => {
 
 const getSeriesByGenre = async (howMany, genre) => {
 	try {
-		console.log(howMany);
 		const result = Series.find({ genre: genre }).limit(howMany);
 		return result;
 	} catch (error) {
@@ -22,34 +20,42 @@ const getSeriesByGenre = async (howMany, genre) => {
 };
 
 const upload_Series = async (
-	series_name,
-	genre,
-	titles,
-	descs,
-	datalinks,
-	files
+	series_title,
+	series_genres,
+	series_desc,
+	series_year_of_production,
+	series_staff,
+	episode_titles,
+	episode_desc,
+	files_videos,
+	files_series_thumbnail,
+	files_video_thumbnail
 ) => {
 	try {
-		const series = await Series.findOne({ series_title: series_name });
+		const series = await Series.findOne({ series_title: series_title });
 		if (series)
 			return { statusCode: 409, message: "Series already exists" };
 		let videos_ids = [];
-		console.log(files);
-		for (let i = 0; i < files.length; i++) {
+		console.log(files_video_thumbnail);
+		for (let i = 0; i < files_videos.length; i++) {
 			const video = new Video({
-				fileName: files[i].filename.slice(0, -4),
-				title: titles[i],
-				desc: descs[i],
-				path: files[i].path,
-				data_link: datalinks[i],
+				fileName: files_videos[i].filename.slice(0, -4),
+				title: episode_titles[i],
+				desc: episode_desc[i],
+				path: files_videos[i].path,
+				thumbnail_path: files_video_thumbnail[i].path,
 			});
 			await video.save();
 			videos_ids.push(video._id);
 		}
 		const newSeries = new Series({
-			series_title: series_name,
+			series_title: series_title,
 			episodes: videos_ids,
-			genre: genre,
+			genres: series_genres,
+			description: series_desc,
+			year_of_production: series_year_of_production,
+			series_picture_path: files_series_thumbnail.path,
+			staff: series_staff,
 		});
 		await newSeries.save();
 		return { statusCode: 200, message: "Series added successfully" };
