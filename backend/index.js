@@ -10,6 +10,7 @@ const subscriptions = require("./routes/subscriptions");
 const series = require("./routes/series");
 const subscriptionSharing = require("./routes/subscriptionSharing");
 const watchlists = require("./routes/watchlists");
+const genres = require("./routes/genres");
 
 app.use(express.json());
 app.use(cors());
@@ -21,6 +22,7 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/series", series);
 // app.use("/api/subscriptions", jwt_auth);
+app.use("/api/genres", genres);
 app.use("/api/subsciptions/sharing", subscriptionSharing);
 app.use("/api/subscriptions", subscriptions);
 app.use("/api/watchlists", watchlists);
