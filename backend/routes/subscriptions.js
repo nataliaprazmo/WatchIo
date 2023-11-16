@@ -27,7 +27,7 @@ router.post("/session", jwt_auth, async (req, res) => {
 		const session = await createSession(req.user._id, req.body.priceId);
 		return res
 			.status(200)
-			.send({ message: "Session created", data: session });
+			.send({ message: "Session created", data: { url: session } });
 	} catch (error) {
 		console.error(error);
 		return res.status(500).send({ message: error.message });
