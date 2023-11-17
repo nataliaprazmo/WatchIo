@@ -61,6 +61,7 @@ const cancelSubscription = async (subscriptionId) => {
 		const sub = await stripe.subscriptions.update(subscriptionId, {
 			cancel_at_period_end: true,
 		});
+		console.log("po cancelu");
 		return true;
 	} catch (error) {
 		throw error;

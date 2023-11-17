@@ -13,6 +13,7 @@ const checkSubscription = async (req, res, next) => {
 			const stripeSubscription = await stripe.subscriptions.retrieve(
 				subscription.stripe_subscription_id
 			);
+			console.log(stripeSubscription);
 			if (stripeSubscription.status == "active") return next();
 
 			await Subscription.deleteOne({ _id: subscription._id });

@@ -34,12 +34,14 @@ router.post("/session", jwt_auth, async (req, res) => {
 	}
 });
 
-router.post("/cancel", jwt_auth, (req, res) => {
+router.post("/cancel", jwt_auth, async (req, res) => {
 	try {
-		const subId = getSubscriptionId(req.user._id);
+		const subId = await getSubscriptionId(req.user._id);
+		console.log(subId);
 		if (!cancelSubscription(subId)) {
 			return res.status(500).send({ message: "Something gone wrong" });
 		}
+		return res.status(200).send({ message: "canceled" });
 	} catch (error) {
 		console.error(error);
 		return res.status(500).send({ message: error.message });
