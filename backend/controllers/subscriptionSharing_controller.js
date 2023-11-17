@@ -1,4 +1,5 @@
 const { Subscription } = require("../models/Subscription");
+const { User } = require("../models/User");
 
 const joinSubscription = async (userId, shareCode) => {
 	try {
@@ -9,8 +10,7 @@ const joinSubscription = async (userId, shareCode) => {
 		if (!subscription) return null;
 
 		if (
-			subscription.sharing_users_limit <=
-				subscription.shared_with.length ||
+			subscription.sharing_users_limit <= subscription.shared_with.length ||
 			subscription.owner == userId ||
 			subscription.shared_with.includes(userId)
 		) {
