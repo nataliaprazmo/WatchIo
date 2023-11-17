@@ -11,9 +11,9 @@ export default function UserLayout({ children }) {
 	}, []);
 	if (user.user === null || user.role !== "user") return;
 	return (
-		<section>
+		<>
 			<NavMenu />
 			{children}
-		</section>
+		</>
 	);
 }

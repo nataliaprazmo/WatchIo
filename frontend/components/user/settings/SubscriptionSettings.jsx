@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import { IconButton, OutlinedInput, Tooltip } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Chip, IconButton, OutlinedInput, Tooltip } from "@mui/material";
 import KeyRoundedIcon from "@mui/icons-material/KeyRounded";
 import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
+import DeleteShareUser from "./DeleteShareUser";
 
 const SubscriptionSettings = () => {
 	const [active, setActive] = useState(false);
@@ -70,6 +71,38 @@ const SubscriptionSettings = () => {
 			}
 		}
 	};
+	const [sharedWith, setSharedWith] = useState([]);
+	const [manage, setManage] = useState(false);
+	const get = async () => {
+		const token = localStorage.getItem("token");
+		try {
+			const response = await fetch(
+				"http://localhost:5000/api/subsciptions/sharing/shared",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"x-access-token": token,
+					},
+				}
+			);
+			if (response.status == 200) {
+				const res = await response.json();
+				setSharedWith(res.data.shared_with);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		get();
+	}, []);
+	const [open, setOpen] = useState(false);
+	const [toDelete, setToDelete] = useState("");
+	const handleClickDelete = (email) => {
+		setToDelete(email);
+		setOpen(true);
+	};
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
 			<h1 className="font-bold md:text-32 text-2xl pb-2">
@@ -104,11 +137,13 @@ const SubscriptionSettings = () => {
 				</button>
 				<div className="border-2 border-secondary-violet hover:bg-secondary-violet w-fit h-fit rounded-lg">
 					<Tooltip title="Skopiuj kod">
-						<IconButton disabled={!active} onClick={copy}>
-							<ContentPasteRoundedIcon
-								sx={{ fontSize: "16px" }}
-							/>
-						</IconButton>
+						<span>
+							<IconButton disabled={!active} onClick={copy}>
+								<ContentPasteRoundedIcon
+									sx={{ fontSize: "16px" }}
+								/>
+							</IconButton>
+						</span>
 					</Tooltip>
 				</div>
 			</div>
@@ -123,12 +158,46 @@ const SubscriptionSettings = () => {
 			<h3 className="font-semibold md:text-base text-sm pt-6 pb-4">
 				Użytkownicy należący do Twojej subskrypcji
 			</h3>
-			<p className="text-neutral-400 font-medium">
-				Nie dzielisz jeszcze z nikim subskrypcji.
-			</p>
-			<button className="pt-2 font-medium hover:border-secondary-violet hover:border-b-2 transition-all ease-linear duration-300">
-				Zarządzaj użytkownikami
-			</button>
+			{sharedWith && sharedWith.length === 0 ? (
+				<p className="text-neutral-400 font-medium">
+					Nie dzielisz jeszcze z nikim subskrypcji.
+				</p>
+			) : (
+				<>
+					<div className="flex items-center gap-4 flex-row flex-wrap mb-4">
+						{manage
+							? sharedWith.map((user, index) => (
+									<Chip
+										key={index}
+										label={user}
+										variant="outlined"
+										onDelete={() => handleClickDelete(user)}
+										sx={{ borderColor: "#9126d9" }}
+									/>
+							  ))
+							: sharedWith.map((user, index) => (
+									<Chip
+										key={index}
+										label={user}
+										variant="outlined"
+										sx={{ borderColor: "#9126d9" }}
+									/>
+							  ))}
+					</div>
+					<button
+						onClick={() => setManage(!manage)}
+						className="pt-2 font-medium hover:border-secondary-violet hover:border-b-2 transition-all ease-linear duration-300"
+					>
+						Zarządzaj użytkownikami
+					</button>
+				</>
+			)}
+			<DeleteShareUser
+				open={open}
+				setOpen={setOpen}
+				setSharedWith={setSharedWith}
+				toDelete={toDelete}
+			/>
 		</div>
 	);
 };

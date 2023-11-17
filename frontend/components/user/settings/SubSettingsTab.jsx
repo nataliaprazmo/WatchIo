@@ -1,8 +1,35 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 const SubSettingsTab = () => {
+	const [sharedWith, setSharedWith] = useState(null);
+	const get = async () => {
+		const token = localStorage.getItem("token");
+		try {
+			const response = await fetch(
+				"http://localhost:5000/api/subsciptions/sharing/shared",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"x-access-token": token,
+					},
+				}
+			);
+			if (response.status == 200) {
+				const res = await response.json();
+				setSharedWith(res.data.shared_with.length);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		get();
+	}, []);
 	const Button = () => {
 		return (
 			<Link
@@ -27,7 +54,7 @@ const SubSettingsTab = () => {
 					<h3 className="text-neutral-400 font-medium">
 						Podłączone konta
 					</h3>
-					<p className="font-medium">0</p>
+					<p className="font-medium">{sharedWith}</p>
 				</div>
 				<div className="flex flex-col">
 					<h3 className="text-neutral-400 font-medium">Ważna do</h3>

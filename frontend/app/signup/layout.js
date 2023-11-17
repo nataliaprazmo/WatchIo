@@ -4,5 +4,5 @@ export const metadata = {
 };
 
 export default function SignupLayout({ children }) {
-	return <section>{children}</section>;
+	return <>{children}</>;
 }
