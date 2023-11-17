@@ -39,24 +39,24 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 
 GET http://localhost:5000/api/subscriptions/prices HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkxMTQ2MjUsImV4cCI6MTY5OTcxOTQyNX0.lupXiV1C3wy07CMyux5lA5Q_4aW-tvRQ-VloJGPO9UI
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1MmE4NDBiMDdlOWQ3YjBmMTFiNmEiLCJpYXQiOjE3MDAxMzg2NjQsImV4cCI6MTcwMDc0MzQ2NH0.WW3Fpsgh3b41zigo6HP2Qfy_12aFv1uk7s5Dlmze0Ic
 ###
 
 POST http://localhost:5000/api/subscriptions/session HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1MmE4NDBiMDdlOWQ3YjBmMTFiNmEiLCJpYXQiOjE2OTkwMzE2OTMsImV4cCI6MTY5OTYzNjQ5M30.TWLA-OJY8SDNIQ_C2PBcg1At8wwjFbNkkxxNbTOct-Y
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU2NGQ5YjdmNTczNDVhZjg1NjU1ZTIiLCJpYXQiOjE3MDAxNTQ3OTYsImV4cCI6MTcwMDc1OTU5Nn0.MuBgrtScA1TKWRLbpXsJIYwYaqLOTooqSzZM0vx0pPQ
 
 {
-    "priceId":"price_1NzL8yAn9ZF4sVGmGfwLCtYu"
+    "priceId":"price_1OC534An9ZF4sVGm1A5YRzGh"
 }
 
 ###
 POST http://localhost:5000/api/subscriptions/cancel HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTg5NDQ4NTcsImV4cCI6MTY5OTU0OTY1N30.rd8fGbA24_V966rBgt2zPswSGnu7POEz-Yidm1aXLrk
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU2NGQ5YjdmNTczNDVhZjg1NjU1ZTIiLCJpYXQiOjE3MDAxNTQ3OTYsImV4cCI6MTcwMDc1OTU5Nn0.MuBgrtScA1TKWRLbpXsJIYwYaqLOTooqSzZM0vx0pPQ
 
 {
-    "subscriptionId":"sub_1O85SSAn9ZF4sVGmnzvzXfVB"
+    "subscriptionId":"sub_1OD9hrAn9ZF4sVGmKTDPmiH7"
 }
 
 
@@ -77,8 +77,8 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:5000/api/subscriptions/deactivate_share_code HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkwMTI0MTAsImV4cCI6MTY5OTYxNzIxMH0.1dooNaUHbeaDCxpBKGUHow0Ixfalt0ZT4Audh4KRZdg
+GET http://localhost:5000/api/subsciptions/sharing/code HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU2NGQ5YjdmNTczNDVhZjg1NjU1ZTIiLCJpYXQiOjE3MDAxNTQ3OTYsImV4cCI6MTcwMDc1OTU5Nn0.MuBgrtScA1TKWRLbpXsJIYwYaqLOTooqSzZM0vx0pPQ
 Content-Type: application/json
 ###
 POST  http://localhost:5000/api/watchlists/654793fce94b9d7aff14a1ac HTTP/1.1

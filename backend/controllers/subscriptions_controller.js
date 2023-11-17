@@ -42,16 +42,15 @@ const createSession = async (userId, priceId) => {
 						quantity: 1,
 					},
 				],
-				success_url: "http://localhost:3000/",
-				cancel_url: "http://localhost:3000/",
+				success_url: "http://localhost:3000/user",
+				cancel_url: "http://localhost:3000/user",
 				customer: user.stripe_customer_id,
 			},
 			{
 				apiKey: process.env.STRIPE_SECRET_KEY,
 			}
 		);
-		console.log(session);
-		return session;
+		return session.url;
 	} catch (error) {
 		throw error;
 	}
@@ -62,6 +61,7 @@ const cancelSubscription = async (subscriptionId) => {
 		const sub = await stripe.subscriptions.update(subscriptionId, {
 			cancel_at_period_end: true,
 		});
+		console.log("po cancelu");
 		return true;
 	} catch (error) {
 		throw error;
