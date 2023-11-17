@@ -1,7 +1,7 @@
 import React from "react";
-import NavMenu from "../../NavMenu";
 import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
 import StepForm from "./StepForm";
+import { SeriesProvider } from "./SeriesContext";
 
 const AddSeries = () => {
 	return (
@@ -15,7 +15,9 @@ const AddSeries = () => {
 			<h1 className="pt-8 pb-4 text-2xl font-semibold">
 				Dodaj nową serię
 			</h1>
-			<StepForm />
+			<SeriesProvider>
+				<StepForm />
+			</SeriesProvider>
 		</div>
 	);
 };

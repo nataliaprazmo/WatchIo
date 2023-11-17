@@ -4,7 +4,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
-import Form from "./Form";
+import AddForm from "./AddForm";
 
 const steps = ["Dodaj szczegóły serii", "Dodaj obsadę", "Dodaj odcinki"];
 
@@ -31,9 +31,7 @@ const StepForm = () => {
 	const handleNext = () => {
 		const newActiveStep =
 			isLastStep() && !allStepsCompleted()
-				? // It's the last step, but not all steps have been completed,
-				  // find the first step that has been completed
-				  steps.findIndex((step, i) => !(i in completed))
+				? steps.findIndex((step, i) => !(i in completed))
 				: activeStep + 1;
 		setActiveStep(newActiveStep);
 	};
@@ -84,42 +82,13 @@ const StepForm = () => {
 						</div>
 					</React.Fragment>
 				) : (
-					<React.Fragment>
-						<p className="py-4 pl-2">Krok {activeStep + 1}</p>
-						<Form part={activeStep} />
-						<div className="flex pt-2">
-							<Button
-								color="inherit"
-								disabled={activeStep === 0}
-								onClick={handleBack}
-								sx={{ mr: 1 }}
-							>
-								Powrót
-							</Button>
-							<div className="flex flex-auto" />
-							<Button
-								onClick={handleNext}
-								sx={{ mr: 1, color: "#ff9900" }}
-							>
-								Przejdź dalej
-							</Button>
-							{activeStep !== steps.length &&
-								(completed[activeStep] ? (
-									<p className="caption-top inline-block text-base mt-1">
-										Ukończono krok {activeStep + 1}.
-									</p>
-								) : (
-									<Button
-										onClick={handleComplete}
-										sx={{ color: "#ff9900" }}
-									>
-										{completedSteps() === totalSteps() - 1
-											? "Dodaj serię"
-											: "Ukończ krok"}
-									</Button>
-								))}
-						</div>
-					</React.Fragment>
+					<AddForm
+						activeStep={activeStep}
+						handleBack={handleBack}
+						steps={steps}
+						handleComplete={handleComplete}
+						totalSteps={totalSteps()}
+					/>
 				)}
 			</div>
 		</div>
