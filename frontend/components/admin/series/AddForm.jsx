@@ -15,10 +15,11 @@ const AddForm = ({
 		<form
 			// action="http://localhost:5000/api/series"
 			method="POST"
-			enctype="multipart/form-data"
-			onSubmit={() => {
-				handleComplete;
-				handleAddSeries;
+			encType="multipart/form-data"
+			onSubmit={(e) => {
+				e.preventDefault();
+				handleComplete();
+				handleAddSeries(e);
 			}}
 		>
 			<p className="py-4 pl-2">Krok {activeStep + 1}</p>

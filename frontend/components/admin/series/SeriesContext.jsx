@@ -48,7 +48,7 @@ export function SeriesProvider({ children }) {
 		setStaffDetails({
 			name: "",
 			surname: "",
-			role: "",
+			role: "aktor",
 		});
 	};
 	const [episode, setEpisode] = useState({
@@ -61,29 +61,67 @@ export function SeriesProvider({ children }) {
 	const [video_thumbnails, setVideo_thumbnails] = useState([]);
 	const [videos, setVideos] = useState([]);
 	const handleAddVideoThumbnail = () => {
-		console.log("adding video thumb");
 		setVideo_thumbnails((prev) => [...prev, episode.thumb]);
 	};
 	const handleAddVideo = () => {
-		console.log("adding video");
 		setVideos((prev) => [...prev, episode.video]);
 	};
 	const [videosCount, setVideosCount] = useState(1);
-
-	const handleAddSeries = () => {
-		setBodyData({
-			series_title: "",
-			series_desc: "",
-			series_year_of_production: 2000,
-			series_genres: [],
-			series_staff: [],
-			episode_titles: [],
-			episode_desc: [],
-		});
-		setSeries_thumbnail(null);
-		setVideo_thumbnails([]);
-		setVideos([]);
-		setVideosCount(1);
+	const handleAddSeries = async (e) => {
+		e.preventDefault();
+		const token = localStorage.getItem("token");
+		if (token) {
+			try {
+				console.log("dziala");
+				console.log(JSON.stringify({ ...bodyData }));
+				console.log(videos);
+				console.log(series_thumbnail);
+				console.log(video_thumbnails);
+				const response = await fetch(
+					"http://localhost:5000/api/series/",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"x-access-token": token,
+						},
+						body: JSON.stringify({
+							...bodyData,
+							videos: videos,
+							series_thumbnail: series_thumbnail,
+							video_thumbnails: video_thumbnails,
+						}),
+					}
+				);
+				console.log("zadzialalo");
+				if (response.status == 200) {
+					const res = response.json();
+					console.log("added series");
+					console.log(res.message);
+					// setBodyData({
+					// 	series_title: "",
+					// 	series_desc: "",
+					// 	series_year_of_production: 2000,
+					// 	series_genres: [],
+					// 	series_staff: [],
+					// 	episode_titles: [],
+					// 	episode_desc: [],
+					// });
+					// setSeries_thumbnail(null);
+					// setVideo_thumbnails([]);
+					// setVideos([]);
+					// setVideosCount(1);
+				}
+			} catch (error) {
+				if (
+					error.response &&
+					error.response.status >= 400 &&
+					error.response.status <= 500
+				) {
+					console.error(error);
+				}
+			}
+		}
 	};
 
 	return (

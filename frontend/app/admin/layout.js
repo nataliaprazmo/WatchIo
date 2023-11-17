@@ -10,9 +10,9 @@ export default function AdminLayout({ children }) {
 	}, []);
 	if (user.user === null || user.role !== "admin") return;
 	return (
-		<section>
+		<>
 			<NavMenu />
 			{children}
-		</section>
+		</>
 	);
 }

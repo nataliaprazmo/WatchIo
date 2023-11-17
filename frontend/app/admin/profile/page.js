@@ -4,7 +4,7 @@ import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
 
 export default function Page() {
 	return (
-		<main className="overflow-hidden pt-24 pb-8 pl-24 pr-8 ">
+		<div className="overflow-hidden pt-24 pb-8 pl-24 pr-8 ">
 			<SiteBreadcrumbs
 				links={[
 					{ label: "Panel", to: "/admin" },
@@ -12,6 +12,6 @@ export default function Page() {
 				]}
 			/>
 			<Profile />
-		</main>
+		</div>
 	);
 }

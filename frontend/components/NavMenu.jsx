@@ -109,7 +109,7 @@ const NavMenu = () => {
 		logout();
 	};
 	return (
-		<div className="flex">
+		<>
 			<SiteBar
 				position="fixed"
 				open={open}
@@ -222,7 +222,7 @@ const NavMenu = () => {
 					<UserOptions open={open} />
 				)}
 			</SiteDrawer>
-		</div>
+		</>
 	);
 };
 
