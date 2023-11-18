@@ -23,11 +23,24 @@ const DeleteDialog = ({ open, setOpen }) => {
 	};
 	return (
 		<Dialog open={open} onClose={handleClose}>
-			<DialogTitle className="bg-neutral-600 font-semibold font-montserrat">
+			<DialogTitle
+				sx={{
+					backgroundColor: "rgb(82 82 82)",
+					fontWeight: "600",
+					fontFamily: "montserrat",
+					color: "#ff9900",
+				}}
+			>
 				Usuń serię
 			</DialogTitle>
-			<DialogContent className="bg-neutral-600">
-				<DialogContentText className="font-medium font-montserrat text-white">
+			<DialogContent sx={{ backgroundColor: "rgb(82 82 82)" }}>
+				<DialogContentText
+					sx={{
+						color: "rgb(212 212 212)",
+						fontWeight: "500",
+						fontFamily: "montserrat",
+					}}
+				>
 					Aby usunąć serię, potwierdź swoją tożsamość. Podaj swoje
 					hasło:
 				</DialogContentText>
@@ -41,19 +54,27 @@ const DeleteDialog = ({ open, setOpen }) => {
 					variant="standard"
 					value={password}
 					onChange={handleChange}
-					sx={{ label: { color: "white" } }}
+					sx={{ label: { color: "white", fontFamily: "montserrat" } }}
 				/>
 			</DialogContent>
-			<DialogActions className="bg-neutral-600">
+			<DialogActions sx={{ backgroundColor: "rgb(82 82 82)" }}>
 				<Button
 					onClick={handleClose}
-					className="text-white font-montserrat font-semibold"
+					sx={{
+						color: "#fafaf5",
+						fontFamily: "montserrat",
+						fontWeight: "500",
+					}}
 				>
 					Anuluj
 				</Button>
 				<Button
 					onClick={handleDelete}
-					className="text-primary-orange font-montserrat font-semibold"
+					sx={{
+						color: "#ff9900",
+						fontFamily: "montserrat",
+						fontWeight: "600",
+					}}
 				>
 					Usuń
 				</Button>

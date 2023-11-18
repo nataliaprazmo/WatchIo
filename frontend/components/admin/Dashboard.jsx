@@ -25,8 +25,15 @@ const Dashboard = () => {
 			<Link href="/admin/series/add">
 				<Fab
 					aria-label="add"
-					className="fixed bottom-8 right-6 bg-primary-orange hover:bg-primary-orange transition-all duration-700 shadow-2xl shadow-primary-orange"
-					sx={{ "&:hover": { height: "60px", width: "60px" } }}
+					sx={{
+						position: "fixed",
+						bottom: "32px",
+						right: "24px",
+						backgroundColor: "#9126d9",
+						"&:hover": {
+							backgroundColor: "#b267e4",
+						},
+					}}
 				>
 					<AddIcon
 						sx={{

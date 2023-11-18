@@ -34,7 +34,7 @@ const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
 							id={labelId}
 							scope="row"
 							padding="none"
-							className="text-white"
+							sx={{ color: "#fafaf5", fontFamily: "montserrat" }}
 						>
 							{/* {row.poster} */}
 							<Image
@@ -44,18 +44,25 @@ const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
 								height={200}
 							/>
 						</TableCell>
-						<TableCell align="left" className="text-white">
+						<TableCell
+							align="left"
+							sx={{ color: "#fafaf5", fontFamily: "montserrat" }}
+						>
 							{row.name}
 						</TableCell>
-						{/* <TableCell align="left" className="text-white">
+						{/* <TableCell align="left" sx={{ color: "#fafaf5" }}>
 							{row.description}
 						</TableCell>
-						<TableCell align="left" className="text-white">
+						<TableCell align="left" sx={{ color: "#fafaf5" }}>
 							{row.actors}
 						</TableCell> */}
 						<TableCell
 							align="left"
-							className="text-white w-[300px]"
+							sx={{
+								color: "#fafaf5",
+								width: "300px",
+								fontFamily: "montserrat",
+							}}
 						>
 							<Chips elements={row.categories} />
 						</TableCell>
