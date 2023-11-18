@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "./Input";
 import ValueSelect from "./ValueSelect";
-import { Chip } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { useSeries } from "./SeriesContext";
 
@@ -67,14 +67,14 @@ const StaffForm = () => {
 						value={staffDetails.role}
 						handleChange={handleChange}
 					/>
-					<button onClick={handleAddStaff}>
+					<Button onClick={handleAddStaff}>
 						<AddCircleRoundedIcon
 							className="text-32 cursor-pointer"
 							sx={{
 								"&:hover": { path: { color: "#9126d9" } },
 							}}
 						/>
-					</button>
+					</Button>
 				</div>
 			</div>
 		</div>
