@@ -44,22 +44,22 @@ router.post(
 	]),
 	async (req, res) => {
 		try {
-			console.log(req.body.series_staff);
+			console.log(req.body);
 			const result = await upload_Series(
 				req.body.series_title,
-				req.body.series_genres,
+				JSON.parse(req.body.series_genres),
+				// req.body.series_genres,
 				req.body.series_desc,
 				req.body.series_year_of_production,
-				req.body.series_staff,
+				JSON.parse(req.body.series_staff),
+				// req.body.series_staff,
 				req.body.episode_titles,
 				req.body.episode_desc,
 				req.files.videos,
 				req.files.series_thumbnail,
 				req.files.video_thumbnails
 			);
-			return res
-				.status(result.statusCode)
-				.send({ message: result.message });
+			return res.status(result.statusCode).send({ message: result.message });
 		} catch (error) {
 			console.error(error);
 			return res.status(500).send({ message: error.message });
