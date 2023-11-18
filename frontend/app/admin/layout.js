@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import NavMenu from "@/components/NavMenu";
+import FooterSection from "@/components/FooterSection";
 
 export default function AdminLayout({ children }) {
 	const { user, protectAdmin } = useAuth();

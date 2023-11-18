@@ -2,28 +2,37 @@
 
 import React, { useEffect, useState } from "react";
 import Instruction from "./Instruction";
-import { FilmTable } from "@/components/admin";
+import List from "./List";
 
 const Watchlist = () => {
 	const [watchlist, setWatchlist] = useState(null);
+	const getWatchlist = async () => {
+		const token = localStorage.getItem("token");
+		try {
+			const response = await fetch(
+				"http://localhost:5000/api/watchlists",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"x-access-token": token,
+					},
+				}
+			);
+			if (response.status === 404) {
+				setWatchlist(null);
+			}
+			if (response.status === 200) {
+				const res = response.json();
+				console.log(res.data.series);
+				setWatchlist(res.data.series);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	useEffect(() => {
-		// router.get("/", jwt_auth, async (req, res) => {
-		//     try {
-		//         const watchlist = await getCurrentUserWatchlist(req.user._id);
-		//         if (!watchlist)
-		//             return res.status(404).send({ message: "Watchlist not found" });
-		//         return res.status(200).send({
-		//             message: "Watchlist data found",
-		//             data: {
-		//                 owner: watchlist.owner.credentials.email,
-		//                 series: watchlist.series,
-		//             },
-		//         });
-		//     } catch (error) {
-		//         console.error(error);
-		//         return res.status(500).send({ message: error.message });
-		//     }
-		// });
+		// getWatchlist();
 	}, []);
 	return (
 		<div className="pt-24 pl-24 pr-8">
@@ -32,7 +41,8 @@ const Watchlist = () => {
 				<span className="text-secondary-violet">Do obejrzenia</span>
 			</h1>
 			<div className="mt-4 mb-18 flex flex-col items-center justify-center">
-				{watchlist ? <FilmTable /> : <Instruction />}
+				<List series={watchlist} />
+				{/* {watchlist ? <List series={watchlist}/> : <Instruction />} */}
 			</div>
 		</div>
 	);
