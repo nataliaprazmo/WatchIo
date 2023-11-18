@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "./Input";
 import MultilineInput from "./MultilineInput";
-import { Chip, Divider } from "@mui/material";
+import { Button, Chip, Divider } from "@mui/material";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useSeries } from "./SeriesContext";
 import FileUploader from "./FileUploader";
@@ -113,12 +113,20 @@ const VideoForm = () => {
 					/>
 				</div>
 			</div>
-			<button
+			<Button
 				onClick={handleAddEpisode}
+				sx={{
+					backgroundColor: "#9126d9",
+					color: "#1a1a1a",
+					"&:hover": {
+						backgroundColor: "#9126d9",
+						color: "#fafaf5",
+					},
+				}}
 				className="flex justify-center w-48 mt-2 md:pb-2 pb-[6px] md:pt-[7px] pt-[5px] border-2 border-secondary-violet rounded-lg h-fit font-medium transition duration-300 2xl:text-base xl:text-sm text-xs hover:bg-transparent bg-secondary-violet text-black hover:text-white"
 			>
 				Dodaj odcinek
-			</button>
+			</Button>
 		</div>
 	);
 };
