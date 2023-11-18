@@ -72,25 +72,29 @@ export function SeriesProvider({ children }) {
 		const token = localStorage.getItem("token");
 		if (token) {
 			try {
+				const formData = new FormData();
+				Object.entries(bodyData).forEach(([key, value]) => {
+					if (Array.isArray(value)) {
+						formData.append(key, JSON.stringify(value));
+					} else {
+						formData.append(key, value);
+					}
+				});
+				videos.forEach((video, index) => {
+					formData.append("videos", video);
+				});
+				video_thumbnails.forEach((thumbnail, index) => {
+					formData.append("video_thumbnails", thumbnail);
+				});
+				formData.append("series_thumbnail", series_thumbnail);
 				console.log("dziala");
-				console.log(JSON.stringify({ ...bodyData }));
-				console.log(videos);
-				console.log(series_thumbnail);
-				console.log(video_thumbnails);
+				console.log(formData);
 				const response = await fetch(
 					"http://localhost:5000/api/series/",
 					{
 						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-							"x-access-token": token,
-						},
-						body: JSON.stringify({
-							...bodyData,
-							videos: videos,
-							series_thumbnail: series_thumbnail,
-							video_thumbnails: video_thumbnails,
-						}),
+						headers: { "x-access-token": token },
+						body: formData,
 					}
 				);
 				console.log("zadzialalo");
@@ -98,19 +102,19 @@ export function SeriesProvider({ children }) {
 					const res = response.json();
 					console.log("added series");
 					console.log(res.message);
-					// setBodyData({
-					// 	series_title: "",
-					// 	series_desc: "",
-					// 	series_year_of_production: 2000,
-					// 	series_genres: [],
-					// 	series_staff: [],
-					// 	episode_titles: [],
-					// 	episode_desc: [],
-					// });
-					// setSeries_thumbnail(null);
-					// setVideo_thumbnails([]);
-					// setVideos([]);
-					// setVideosCount(1);
+					setBodyData({
+						series_title: "",
+						series_desc: "",
+						series_year_of_production: 2000,
+						series_genres: [],
+						series_staff: [],
+						episode_titles: [],
+						episode_desc: [],
+					});
+					setSeries_thumbnail(null);
+					setVideo_thumbnails([]);
+					setVideos([]);
+					setVideosCount(1);
 				}
 			} catch (error) {
 				if (
