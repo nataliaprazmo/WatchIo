@@ -9,9 +9,9 @@ const {
 
 // router.use(jwt_auth);
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 	try {
-		const result = getSeries(req.query.howMany);
+		const result = await getSeries(req.query.howMany);
 		return res.status(200).send({
 			message: "Data fetched succesfully",
 			data: { series: result },
@@ -22,9 +22,9 @@ router.get("/", (req, res) => {
 	}
 });
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 	try {
-		const result = getSeriesByGenre(req.query.howMany, req.query.genre);
+		const result = await getSeriesByGenre(req.query.howMany, req.query.genre);
 		return res.status(200).send({
 			message: "Data fetched successfully",
 			data: { series: result },
@@ -48,11 +48,9 @@ router.post(
 			const result = await upload_Series(
 				req.body.series_title,
 				JSON.parse(req.body.series_genres),
-				// req.body.series_genres,
 				req.body.series_desc,
 				req.body.series_year_of_production,
 				JSON.parse(req.body.series_staff),
-				// req.body.series_staff,
 				req.body.episode_titles,
 				req.body.episode_desc,
 				req.files.videos,
