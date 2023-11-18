@@ -13,6 +13,7 @@ export default function AdminLayout({ children }) {
 		<>
 			<NavMenu />
 			{children}
+			<FooterSection />
 		</>
 	);
 }

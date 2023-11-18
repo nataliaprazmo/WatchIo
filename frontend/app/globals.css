@@ -27,7 +27,7 @@ body {
 
 .swiper-button-prev,
 .swiper-button-next {
-	@apply bg-transparent backdrop-blur-md rounded-full;
+	@apply bg-black bg-opacity-10 backdrop-blur-md rounded-full;
 	height: 48px !important;
 	width: 48px !important;
 }
@@ -43,6 +43,11 @@ body {
 
 .swiper-button-prev::after {
 	margin-right: 2px;
+}
+
+.swiper-slide {
+	width: 280px !important;
+	margin-right: 32px !important;
 }
 
 .active {

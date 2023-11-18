@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import NavMenu from "@/components/NavMenu";
+import FooterSection from "@/components/FooterSection";
 
 export default function UserLayout({ children }) {
 	const { protectUser, user } = useAuth();
@@ -14,6 +15,7 @@ export default function UserLayout({ children }) {
 		<>
 			<NavMenu />
 			{children}
+			<FooterSection />
 		</>
 	);
 }

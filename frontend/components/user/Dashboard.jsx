@@ -9,7 +9,7 @@ import PurchaseDialog from "./subscriptionPurchase/PurchaseDialog";
 
 const Dashboard = () => {
 	const [price, setPrice] = useState(0);
-	const [hasSubscription, setHasSubscription] = useState(false);
+	const [hasSubscription, setHasSubscription] = useState(true);
 	const getPrices = async () => {
 		const token = localStorage.getItem("token");
 		if (token) {

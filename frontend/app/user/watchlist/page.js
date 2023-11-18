@@ -1,5 +1,10 @@
+import Watchlist from "@/components/user/watchlists/Watchlist";
 import React from "react";
 
 export default function Page() {
-	return <main className="overflow-hidden">Watchlist</main>;
+	return (
+		<div className="overflow-hidden">
+			<Watchlist />
+		</div>
+	);
 }
