@@ -5,6 +5,7 @@ const {
 	createSession,
 	getPrices,
 	cancelSubscription,
+	getSubscriptionData,
 } = require("../controllers/subscriptions_controller");
 const { getSubscriptionId } = require("../utils/Stripe_utils");
 const { Subscription } = require("../models/Subscription");
@@ -38,8 +39,7 @@ router.post("/session", jwt_auth, async (req, res) => {
 
 router.post("/cancel", jwt_auth, async (req, res) => {
 	try {
-		const subId = await getSubscriptionId(req.user._id);
-		console.log(subId);
+		// const subId = await cancelSubscription(req.user._id);
 		if (!cancelSubscription(subId)) {
 			return res.status(500).send({ message: "Something gone wrong" });
 		}

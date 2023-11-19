@@ -1,5 +1,6 @@
 const stripe = require("../utils/Stripe");
 const { User } = require("../models/User");
+const { Subscription } = require("../models/Subscription");
 
 const getPrices = async (currency) => {
 	try {
@@ -68,8 +69,54 @@ const cancelSubscription = async (subscriptionId) => {
 	}
 };
 
+const getSubscriptionData = async (user_id) => {
+	try {
+		var subscription = await Subscription.findOne({})
+			.populate("owner")
+			.populate("shared_with")
+			.exec();
+		if (subscription) {
+			var users = [];
+			subscription.shared_with.forEach((element) => {
+				users.push(element.credentials.email);
+			});
+			return {
+				subscriptionUserType: "owner",
+				subscription: {
+					owner: subscription.owner.credentials.email,
+					shared_with_count: subscription.shared_with.length,
+					shared_with: users,
+					status: subscription.status,
+					end_date: subscription.end_date,
+				},
+			};
+		}
+
+		subscription = await Subscription.findOne({
+			shared_with: req.user._id,
+		});
+
+		if (subscription) {
+			return {
+				subscriptionUserType: "shared",
+				subscription: {
+					owner: subscription.owner.credentials.email,
+					status: subscription.status,
+					shared_with_count: subscription.shared_with.length,
+					end_date: subscription.end_date,
+				},
+			};
+		}
+
+		return false;
+	} catch (error) {
+		throw error;
+	}
+};
+
 module.exports = {
 	getPrices,
 	createSession,
 	cancelSubscription,
+	getSubscriptionData,
 };
