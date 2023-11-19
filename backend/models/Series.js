@@ -14,11 +14,7 @@ const seriesSchema = new mongoose.Schema({
 		},
 	],
 
-	episodes: [
-		{
-			ep: { type: [mongoose.Schema.Types.ObjectId], ref: "Video" },
-		},
-	],
+	episodes: { type: [mongoose.Schema.Types.ObjectId], ref: "Video" },
 	genres: [{ type: String }],
 	rating: { type: String },
 });
