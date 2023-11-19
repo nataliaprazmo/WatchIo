@@ -1,8 +1,11 @@
 import React from "react";
 
-const Button = ({ children, variant, type }) => {
-	let buttonClasses =
-		" flex justify-center lg:px-8 px-4 md:pb-2 pb-[6px] md:pt-[7px] pt-[5px] border-2 border-primary-orange rounded-lg h-fit font-medium transition duration-300 2xl:text-base xl:text-sm text-xs ";
+const Button = ({ children, variant, type, color }) => {
+	let buttonClasses = ` flex justify-center lg:px-8 px-4 md:pb-2 pb-[6px] md:pt-[7px] pt-[5px] border-2 ${
+		color === "secondary"
+			? "border-secondary-violet"
+			: "border-primary-orange"
+	} rounded-lg h-fit font-medium transition duration-300 2xl:text-base xl:text-sm text-xs `;
 	return (
 		<button
 			className={

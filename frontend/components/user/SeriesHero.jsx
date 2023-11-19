@@ -1,6 +1,7 @@
 import { Chip } from "@mui/material";
 import React from "react";
 import { Chips } from "../admin";
+import Skeleton from "@mui/material/Skeleton";
 
 const SeriesHero = () => {
 	return (
@@ -44,7 +45,13 @@ const SeriesHero = () => {
 					elements={["Animacja", "Familijny", "Przygodowy"]}
 				/>
 			</div>
-			<div className="xl:col-span-9 lg:col-span-8 md:col-span-7 rounded-lg bg-purple-950 lg:h-96 md:h-72 h-64"></div>
+			<div className="xl:col-span-9 lg:col-span-8 md:col-span-7 rounded-lg lg:h-96 md:h-72 h-64">
+				<Skeleton
+					animation="wave"
+					variant="rounded"
+					sx={{ bgcolor: "rgb(59 7 100)", height: "100%" }}
+				/>
+			</div>
 		</div>
 	);
 };
