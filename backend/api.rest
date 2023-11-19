@@ -44,7 +44,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1MmE4NDBiMDd
 
 POST http://localhost:5000/api/subscriptions/session HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU2NGQ5YjdmNTczNDVhZjg1NjU1ZTIiLCJpYXQiOjE3MDAxNTQ3OTYsImV4cCI6MTcwMDc1OTU5Nn0.MuBgrtScA1TKWRLbpXsJIYwYaqLOTooqSzZM0vx0pPQ
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA0MTg3MDMsImV4cCI6MTcwMTAyMzUwM30.HoGUQsw7116xDeqZ9y58C8l_2gI2N34GKyj3xEbPk7k
 
 {
     "priceId":"price_1OC534An9ZF4sVGm1A5YRzGh"
@@ -112,3 +112,7 @@ Content-Type: application/json
 {
     "genre":["horror","fantasy","rpg","fps"]
 }
+###
+GET http://localhost:5000/api/subscriptions/test HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA0MTg3MDMsImV4cCI6MTcwMTAyMzUwM30.HoGUQsw7116xDeqZ9y58C8l_2gI2N34GKyj3xEbPk7k
+Content-Type: application/json
