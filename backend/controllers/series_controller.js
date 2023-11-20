@@ -1,12 +1,24 @@
 const { Series, validateSeries } = require("../models/Series");
 const { Video, validateVideo } = require("../models/Video");
 const { Subscription } = require("../models/Subscription");
-const { deleteFile } = require("../utils/File_utils");
+const { deleteFile, getImgToBase64 } = require("../utils/File_utils");
 
 const getSeries = async (howMany) => {
 	try {
-		const result = Series.find().populate("episodes").exec();
-		return result;
+		var series = await Series.find().populate("episodes").lean().exec();
+		for (let i = 0; i < series.length; i++) {
+			series[i].picture = await getImgToBase64(
+				series[i].series_picture_path
+			);
+			delete series[i].series_picture_path;
+			for (let j = 0; j < series[i].episodes.length; j++) {
+				series[i].episodes[j].thumbnail = await getImgToBase64(
+					series[i].episodes[j].thumbnail_path
+				);
+				delete series[i].episodes[j].thumbnail_path;
+			}
+		}
+		return series;
 	} catch (error) {
 		throw error;
 	}

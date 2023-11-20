@@ -25,6 +25,7 @@ const genreCreateIfDontExists = async (genresList) => {
 	try {
 		const genres = await Genre.find();
 		const parsedGenres = parseGenres(genres);
+		//sprawdzić for eacha, nie działa z async
 		genresList.forEach(async (element) => {
 			if (!parsedGenres.includes(element))
 				await new Genre({ name: element }).save();
