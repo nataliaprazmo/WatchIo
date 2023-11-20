@@ -50,7 +50,7 @@ router.post("/cancel", jwt_auth, async (req, res) => {
 	}
 });
 
-router.get("/test", jwt_auth, async (req, res) => {
+router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 	try {
 		var subscription = await Subscription.findOne({ owner: req.user._id });
 		var subscriptionUserType = "owner";
@@ -65,8 +65,8 @@ router.get("/test", jwt_auth, async (req, res) => {
 				subscription.stripe_subscription_id
 			);
 			if (stripeSubscription.status == "active")
-				return res.status(403).send({
-					message: "sucess",
+				return res.status(200).send({
+					message: "success",
 					data: { subscription_user_type: subscriptionUserType },
 				});
 
@@ -85,7 +85,7 @@ router.get("/test", jwt_auth, async (req, res) => {
 			sharing_users_limit: 5,
 			shared_with: [],
 		}).save();
-		res.status(200).send({
+		return res.status(200).send({
 			message: "success",
 			data: { subscription_user_type: subscriptionUserType },
 		});
@@ -98,10 +98,12 @@ router.get("/test", jwt_auth, async (req, res) => {
 router.get("/", jwt_auth, async (req, res) => {
 	try {
 		const subscriptionData = await getSubscriptionData();
-		if (!subscriptionData) return res.status(400).send({ message: "error" }); // change to proper status code and error mesaage later
-		return res
-			.status(200)
-			.send({ message: "retrieved", data: { subscription: subscriptionData } });
+		if (!subscriptionData)
+			return res.status(400).send({ message: "error" }); // change to proper status code and error mesaage later
+		return res.status(200).send({
+			message: "retrieved",
+			data: { subscription: subscriptionData },
+		});
 	} catch (error) {
 		console.error(error);
 		return res.status(500).send({ message: "Server error" });

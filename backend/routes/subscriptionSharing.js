@@ -10,7 +10,7 @@ const {
 } = require("../controllers/subscriptionSharing_controller");
 
 router.use(jwt_auth);
-router.use(subscription_check);
+// router.use(subscription_check);
 
 router.post("/join", jwt_auth, async (req, res) => {
 	try {
