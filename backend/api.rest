@@ -20,7 +20,7 @@ POST http://localhost:5000/api/auth HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"example@example.com",
+    "email":"example22@com.com",
     "password":"Qwerty1234!"
 }
 ###
@@ -70,6 +70,8 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 ###
 POST http://localhost:5000/api/subsciptions/sharing/join HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
+POST http://localhost:5000/api/subsciptions/sharing/join HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
 Content-Type: application/json
 
 {
@@ -81,8 +83,8 @@ GET http://localhost:5000/api/subsciptions/sharing/code HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
 Content-Type: application/json
 ###
-POST  http://localhost:5000/api/watchlists/654793fce94b9d7aff14a1ac HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkxOTc5MDQsImV4cCI6MTY5OTgwMjcwNH0.rte-23Amurvk_TslT4EXKgle0AOILgaMJFXJwDZRkFU
+POST  http://localhost:5000/api/watchlists/655b371524cc9560ffdd0e69 HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDA0NzU4OTYsImV4cCI6MTcwMTA4MDY5Nn0.j6zd9sSDEmbBLt-y21iL630ut9pltDQB8UkfNGaht3g
 Content-Type: application/json
 ###
 DELETE  http://localhost:5000/api/watchlists/654793fce94b9d7aff14a1ac HTTP/1.1
@@ -90,10 +92,10 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 Content-Type: application/json
 ###
 GET  http://localhost:5000/api/watchlists/ HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkxOTc5MDQsImV4cCI6MTY5OTgwMjcwNH0.rte-23Amurvk_TslT4EXKgle0AOILgaMJFXJwDZRkFU
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDA0NzU4OTYsImV4cCI6MTcwMTA4MDY5Nn0.j6zd9sSDEmbBLt-y21iL630ut9pltDQB8UkfNGaht3g
 Content-Type: application/json
 ###
-GET  http://localhost:5000/api/genres/ HTTP/1.1
+GET  http://localhost:5000/api/series/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkxOTc5MDQsImV4cCI6MTY5OTgwMjcwNH0.rte-23Amurvk_TslT4EXKgle0AOILgaMJFXJwDZRkFU
 Content-Type: application/json
 ###
@@ -112,6 +114,13 @@ Content-Type: application/json
 {
     "genre":["horror","fantasy","rpg","fps"]
 }
+###
+
+DELETE http://localhost:5000/api/series/655b7ddb85dac16305572c73 HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViODVjZGZhYjRmOTMyZjUzZmQxNGYiLCJpYXQiOjE3MDA0OTcwMDIsImV4cCI6MTcwMTEwMTgwMn0.mYnnx21CX8NaPH2Ki5uLwoYxIgUmrxRieTbxuMHVU-E
+Content-Type: application/json
+###
+
 ###
 GET http://localhost:5000/api/subscriptions/test HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA0MTg3MDMsImV4cCI6MTcwMTAyMzUwM30.HoGUQsw7116xDeqZ9y58C8l_2gI2N34GKyj3xEbPk7k

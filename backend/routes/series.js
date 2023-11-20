@@ -1,17 +1,19 @@
 const router = require("express").Router();
 const jwt_auth = require("../middleware/jwt_auth");
+const admin_auth = require("../middleware/admin_auth");
 const video_upload = require("../middleware/video_upload");
 const {
 	getSeries,
 	getSeriesByGenre,
 	upload_Series,
+	deleteSeries,
 } = require("../controllers/series_controller");
 
 // router.use(jwt_auth);
 
 router.get("/", async (req, res) => {
 	try {
-		const result = await getSeries(req.query.howMany);
+		const result = await getSeries();
 		return res.status(200).send({
 			message: "Data fetched succesfully",
 			data: { series: result },
@@ -24,7 +26,10 @@ router.get("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
 	try {
-		const result = await getSeriesByGenre(req.query.howMany, req.query.genre);
+		const result = await getSeriesByGenre(
+			req.query.howMany,
+			req.query.genre
+		);
 		return res.status(200).send({
 			message: "Data fetched successfully",
 			data: { series: result },
@@ -35,8 +40,23 @@ router.get("/", async (req, res) => {
 	}
 });
 
+router.delete("/:id", jwt_auth, admin_auth, async (req, res) => {
+	try {
+		const result = await deleteSeries(req.params.id);
+		if (!result) return res.status(404).send({ message: "Not found" });
+		return res.status(200).send({
+			message: "success",
+		});
+	} catch (error) {
+		console.error(error);
+		return res.status(500).send({ message: error.message });
+	}
+});
+
 router.post(
 	"/",
+	jwt_auth,
+	admin_auth,
 	video_upload.fields([
 		{ name: "videos" },
 		{ name: "series_thumbnail" },
@@ -57,7 +77,9 @@ router.post(
 				req.files.series_thumbnail,
 				req.files.video_thumbnails
 			);
-			return res.status(result.statusCode).send({ message: result.message });
+			return res
+				.status(result.statusCode)
+				.send({ message: result.message });
 		} catch (error) {
 			console.error(error);
 			return res.status(500).send({ message: error.message });

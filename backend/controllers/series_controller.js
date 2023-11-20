@@ -1,10 +1,24 @@
 const { Series, validateSeries } = require("../models/Series");
 const { Video, validateVideo } = require("../models/Video");
+const { Subscription } = require("../models/Subscription");
+const { deleteFile, getImgToBase64 } = require("../utils/File_utils");
 
 const getSeries = async (howMany) => {
 	try {
-		const result = Series.find.limit(howMany);
-		return result;
+		var series = await Series.find().populate("episodes").lean().exec();
+		for (let i = 0; i < series.length; i++) {
+			series[i].picture = await getImgToBase64(
+				series[i].series_picture_path
+			);
+			delete series[i].series_picture_path;
+			for (let j = 0; j < series[i].episodes.length; j++) {
+				series[i].episodes[j].thumbnail = await getImgToBase64(
+					series[i].episodes[j].thumbnail_path
+				);
+				delete series[i].episodes[j].thumbnail_path;
+			}
+		}
+		return series;
 	} catch (error) {
 		throw error;
 	}
@@ -33,7 +47,8 @@ const upload_Series = async (
 ) => {
 	try {
 		const series = await Series.findOne({ series_title: series_title });
-		if (series) return { statusCode: 409, message: "Series already exists" };
+		if (series)
+			return { statusCode: 409, message: "Series already exists" };
 		let videos_ids = [];
 		for (let i = 0; i < files_videos.length; i++) {
 			const video = new Video({
@@ -46,14 +61,14 @@ const upload_Series = async (
 			await video.save();
 			videos_ids.push(video._id);
 		}
-
+		console.log(files_series_thumbnail);
 		const newSeries = new Series({
 			series_title: series_title,
 			episodes: videos_ids,
 			genres: series_genres,
 			description: series_desc,
 			year_of_production: series_year_of_production,
-			series_picture_path: files_series_thumbnail.path,
+			series_picture_path: files_series_thumbnail[0].path,
 			staff: series_staff,
 		});
 		await newSeries.save();
@@ -63,4 +78,28 @@ const upload_Series = async (
 	}
 };
 
-module.exports = { getSeries, getSeriesByGenre, upload_Series };
+const deleteSeries = async (id) => {
+	try {
+		const series = await Series.findOne({ _id: id })
+			.populate("episodes")
+			.exec();
+		if (!series) return false;
+		try {
+			series.episodes.forEach(async (element) => {
+				deleteFile(element.path);
+				deleteFile(element.thumbnail_path);
+				await element.deleteOne();
+			});
+			deleteFile(series.series_picture_path);
+		} catch (error) {
+			console.error(error);
+		}
+
+		await series.deleteOne();
+		return true;
+	} catch (error) {
+		throw error;
+	}
+};
+
+module.exports = { getSeries, getSeriesByGenre, upload_Series, deleteSeries };
