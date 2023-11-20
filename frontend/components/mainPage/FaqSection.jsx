@@ -25,17 +25,24 @@ const FaqSection = () => {
 					key={id}
 					expanded={expanded === `${question.panel}`}
 					onChange={handleChange(`${question.panel}`)}
-					className="bg-grey-default mb-2"
+					sx={{
+						backgroundColor: "rgb(26 26 26)",
+						marginBottom: "8px",
+					}}
 				>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls={`${question.panel}bh-content`}
 						id={`${question.panel}bh-header`}
-						className="bg-grey-200 rounded-lg mb-1"
+						sx={{
+							backgroundColor: "rgb(51 51 51)",
+							borderRadius: "8px",
+							marginBottom: "4px",
+						}}
 					>
 						<p>{question.title}</p>
 					</AccordionSummary>
-					<AccordionDetails className="bg-grey-default">
+					<AccordionDetails sx={{ backgroundColor: "rgb(26 26 26)" }}>
 						<p>{question.answer}</p>
 					</AccordionDetails>
 				</Accordion>

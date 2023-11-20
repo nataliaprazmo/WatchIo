@@ -3,8 +3,8 @@ import React from "react";
 
 export default function Page({ params }) {
 	return (
-		<main className="overflow-hidden">
+		<div className="overflow-hidden">
 			<SeriesDetails id={params.id} />
-		</main>
+		</div>
 	);
 }

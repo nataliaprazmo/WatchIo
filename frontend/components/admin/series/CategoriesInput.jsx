@@ -10,6 +10,7 @@ import {
 	Select,
 	TextField,
 } from "@mui/material";
+import { useSeries } from "./SeriesContext";
 
 const initialGenres = [
 	"Komedia",
@@ -21,7 +22,8 @@ const initialGenres = [
 	"Familijny",
 ];
 
-const CategoriesInput = ({ value, setValue, handleChange }) => {
+const CategoriesInput = () => {
+	const { bodyData, handleGenresChange, handleAddGenre } = useSeries();
 	const [genres, setGenres] = useState(initialGenres);
 	const [newGenre, setNewGenre] = useState("");
 	const [showTextField, setShowTextField] = useState(false);
@@ -29,7 +31,7 @@ const CategoriesInput = ({ value, setValue, handleChange }) => {
 	const handleAddNewGenre = () => {
 		if (newGenre.trim() !== "") {
 			setGenres([...genres, newGenre]);
-			setValue([...value, newGenre]);
+			handleAddGenre(newGenre);
 			setNewGenre("");
 			setShowTextField(false);
 		}
@@ -55,8 +57,8 @@ const CategoriesInput = ({ value, setValue, handleChange }) => {
 				id="categories"
 				name="genre"
 				multiple
-				value={value}
-				onChange={handleChange}
+				value={bodyData.series_genres}
+				onChange={(e) => handleGenresChange(e)}
 				input={<Input id="select_genres" label="Gatunek" />}
 				renderValue={(selected) => (
 					<div className="flex flex-wrap gap-1">

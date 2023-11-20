@@ -1,72 +1,133 @@
 import React from "react";
 import Input from "./Input";
 import MultilineInput from "./MultilineInput";
-import FileInput from "./FileInput";
-import { Button } from "@/components/buttons";
-import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import { Divider, IconButton } from "@mui/material";
+import { Button, Chip, Divider } from "@mui/material";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import { useSeries } from "./SeriesContext";
+import FileUploader from "./FileUploader";
 
-const VideoForm = ({ episode, videosCount, setVideosCount, handleChange }) => {
-	const handleIncrementVideoCount = () => {
-		setVideosCount((prevCount) => prevCount + 1);
+const VideoForm = () => {
+	const {
+		videosCount,
+		bodyData,
+		episode,
+		setEpisode,
+		setVideosCount,
+		setBodyData,
+		handleAddVideoThumbnail,
+		handleAddVideo,
+	} = useSeries();
+	const handleChange = ({ currentTarget: input }) => {
+		const { name, value } = input;
+		setEpisode((ep) => ({ ...ep, [name]: value }));
 	};
-
-	const RenderVideoForm = () => {
-		const forms = [];
-		for (let i = 0; i < videosCount; i++) {
-			forms.push(
-				<div className="pb-8 flex flex-col">
-					<p className="mt-10 pb-6 font-bold text-primary-orange">
-						Odcinek {i + 1}
-						<Divider sx={{ backgroundColor: "#ff9900" }} />
-					</p>
-					<div className="flex flex-wrap items-center gap-x-10 gap-y-4">
-						<Input
-							id="title"
-							name="title"
-							label="Nazwa odcinka"
-							type="text"
-							value={episode.title}
-							handleChange={handleChange}
-						/>
-						<MultilineInput
-							id="desc"
-							name="desc"
-							label="Opis odcinka"
-							type="text"
-							value={episode.desc}
-							handleChange={handleChange}
-						/>
-					</div>
-					<div className="pt-8 flex flex-col gap-8">
-						<FileInput
-							label="Miniaturka"
-							id="episode_picture"
-							name="episode_picture"
-						/>
-						<FileInput label="Wideo" id="video" name="video" />
-					</div>
-				</div>
-			);
-		}
-		return forms;
+	const areEpisodesEmpty =
+		bodyData.episode_titles && bodyData.episode_titles.length === 0;
+	const handleAddEpisode = () => {
+		if (
+			episode.title === "" ||
+			episode.desc === "" ||
+			episode.thumb === null ||
+			episode.video === null
+		)
+			return;
+		setBodyData((prevData) => ({
+			...prevData,
+			episode_titles: [...prevData.episode_titles, episode.title],
+			episode_desc: [...prevData.episode_desc, episode.desc],
+		}));
+		handleAddVideoThumbnail();
+		handleAddVideo();
+		setEpisode({
+			title: "",
+			desc: "",
+			thumb: null,
+			video: null,
+		});
+		setVideosCount((count) => count + 1);
 	};
-
 	return (
-		<>
-			{RenderVideoForm()}
-			<div className="flex gap-4 items-center pt-10 w-full justify-end">
-				<p>Dodaj kolejny odcinek</p>
-				<IconButton onClick={handleIncrementVideoCount}>
-					<AddBoxOutlinedIcon
-						className="text-6xl"
-						sx={{
-							"&:hover": { path: { color: "#ff9900" } },
-						}}
-					/>
-				</IconButton>
+		<div>
+			<div className="py-4">
+				{areEpisodesEmpty ? (
+					<p>Dodaj odcinek poniżej:</p>
+				) : (
+					<>
+						<p className="pb-4">Dodane odcinki:</p>
+						<div className="flex flex-wrap w-full gap-4">
+							{bodyData.episode_titles.map((title, index) => {
+								return (
+									<Chip
+										key={index}
+										label={`${index + 1}. ${title}`}
+										variant="outlined"
+										sx={{ borderColor: "#9126d9" }}
+									/>
+								);
+							})}
+						</div>
+					</>
+				)}
 			</div>
-		</>
+			<div className="pb-8 flex flex-col">
+				<div className="mb-6">
+					<p className="mt-10 font-bold text-primary-orange">
+						Odcinek {videosCount}
+					</p>
+					<Divider sx={{ backgroundColor: "#ff9900" }} />
+				</div>
+				<div className="flex flex-wrap items-center gap-x-10 gap-y-4">
+					<Input
+						id="title"
+						name="title"
+						label="Nazwa odcinka"
+						type="text"
+						value={episode.title}
+						handleChange={handleChange}
+					/>
+					<MultilineInput
+						id="desc"
+						name="desc"
+						label="Opis odcinka"
+						type="text"
+						value={episode.desc}
+						handleChange={handleChange}
+					/>
+				</div>
+				<div className="flex flex-wrap items-center gap-4 mt-8">
+					<FileUploader
+						fileType="img"
+						file={episode.thumb}
+						setFile={(file) =>
+							setEpisode((ep) => ({ ...ep, thumb: file }))
+						}
+						label="Miniaturka odcinka"
+					/>
+					<FileUploader
+						fileType="video"
+						file={episode.video}
+						setFile={(file) =>
+							setEpisode((ep) => ({ ...ep, video: file }))
+						}
+						label="Wideo odcinka"
+					/>
+				</div>
+			</div>
+			<Button
+				onClick={handleAddEpisode}
+				sx={{
+					backgroundColor: "#9126d9",
+					color: "#1a1a1a",
+					"&:hover": {
+						backgroundColor: "#9126d9",
+						color: "#fafaf5",
+					},
+				}}
+				className="flex justify-center w-48 mt-2 md:pb-2 pb-[6px] md:pt-[7px] pt-[5px] border-2 border-secondary-violet rounded-lg h-fit font-medium transition duration-300 2xl:text-base xl:text-sm text-xs hover:bg-transparent bg-secondary-violet text-black hover:text-white"
+			>
+				Dodaj odcinek
+			</Button>
+		</div>
 	);
 };
 
