@@ -44,7 +44,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1MmE4NDBiMDd
 
 POST http://localhost:5000/api/subscriptions/session HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA0MTg3MDMsImV4cCI6MTcwMTAyMzUwM30.HoGUQsw7116xDeqZ9y58C8l_2gI2N34GKyj3xEbPk7k
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViYWM1YjY2Y2JjMjc4NjU0NTZhNWMiLCJpYXQiOjE3MDA1MDY3MjAsImV4cCI6MTcwMTExMTUyMH0.j4_XnfdvJd0W2NTWUqAK3UFQFiLhzZxho9g9SLBnHNE
 
 {
     "priceId":"price_1OC534An9ZF4sVGm1A5YRzGh"
@@ -122,6 +122,6 @@ Content-Type: application/json
 ###
 
 ###
-GET http://localhost:5000/api/subscriptions/test HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA0MTg3MDMsImV4cCI6MTcwMTAyMzUwM30.HoGUQsw7116xDeqZ9y58C8l_2gI2N34GKyj3xEbPk7k
+GET http://localhost:5000/api/subscriptions/ HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViYWM1YjY2Y2JjMjc4NjU0NTZhNWMiLCJpYXQiOjE3MDA1MDY3MjAsImV4cCI6MTcwMTExMTUyMH0.j4_XnfdvJd0W2NTWUqAK3UFQFiLhzZxho9g9SLBnHNE
 Content-Type: application/json

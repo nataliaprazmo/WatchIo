@@ -60,6 +60,7 @@ router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 			});
 			subscriptionUserType = "shared";
 		}
+		console.log(subscription);
 		if (subscription) {
 			const stripeSubscription = await stripe.subscriptions.retrieve(
 				subscription.stripe_subscription_id
@@ -84,7 +85,10 @@ router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 			sharing_code: "",
 			sharing_users_limit: 5,
 			shared_with: [],
+			status: "work in progress",
+			end_date: 1732125318,
 		}).save();
+		subscriptionUserType = "owner";
 		return res.status(200).send({
 			message: "success",
 			data: { subscription_user_type: subscriptionUserType },
@@ -97,7 +101,7 @@ router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 
 router.get("/", jwt_auth, async (req, res) => {
 	try {
-		const subscriptionData = await getSubscriptionData();
+		const subscriptionData = await getSubscriptionData(req.user._id);
 		if (!subscriptionData)
 			return res.status(400).send({ message: "error" }); // change to proper status code and error mesaage later
 		return res.status(200).send({
