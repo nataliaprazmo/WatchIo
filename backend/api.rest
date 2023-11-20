@@ -20,7 +20,7 @@ POST http://localhost:5000/api/auth HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"example@com.com",
+    "email":"example@example.com",
     "password":"Qwerty1234!"
 }
 ###
@@ -44,7 +44,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1MmE4NDBiMDd
 
 POST http://localhost:5000/api/subscriptions/session HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU2NGQ5YjdmNTczNDVhZjg1NjU1ZTIiLCJpYXQiOjE3MDAxNTQ3OTYsImV4cCI6MTcwMDc1OTU5Nn0.MuBgrtScA1TKWRLbpXsJIYwYaqLOTooqSzZM0vx0pPQ
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA0MTg3MDMsImV4cCI6MTcwMTAyMzUwM30.HoGUQsw7116xDeqZ9y58C8l_2gI2N34GKyj3xEbPk7k
 
 {
     "priceId":"price_1OC534An9ZF4sVGm1A5YRzGh"
@@ -68,8 +68,8 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 GET http://localhost:5000/api/subscriptions/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkxMTQ2MjUsImV4cCI6MTY5OTcxOTQyNX0.lupXiV1C3wy07CMyux5lA5Q_4aW-tvRQ-VloJGPO9UI
 ###
-POST http://localhost:5000/api/subscriptions/join HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkwMTI0MTAsImV4cCI6MTY5OTYxNzIxMH0.1dooNaUHbeaDCxpBKGUHow0Ixfalt0ZT4Audh4KRZdg
+POST http://localhost:5000/api/subsciptions/sharing/join HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
 Content-Type: application/json
 
 {
@@ -78,7 +78,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5000/api/subsciptions/sharing/code HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU2NGQ5YjdmNTczNDVhZjg1NjU1ZTIiLCJpYXQiOjE3MDAxNTQ3OTYsImV4cCI6MTcwMDc1OTU5Nn0.MuBgrtScA1TKWRLbpXsJIYwYaqLOTooqSzZM0vx0pPQ
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
 Content-Type: application/json
 ###
 POST  http://localhost:5000/api/watchlists/654793fce94b9d7aff14a1ac HTTP/1.1
@@ -112,3 +112,7 @@ Content-Type: application/json
 {
     "genre":["horror","fantasy","rpg","fps"]
 }
+###
+GET http://localhost:5000/api/subscriptions/test HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA0MTg3MDMsImV4cCI6MTcwMTAyMzUwM30.HoGUQsw7116xDeqZ9y58C8l_2gI2N34GKyj3xEbPk7k
+Content-Type: application/json

@@ -34,6 +34,7 @@ const checkSubscription = async (req, res, next) => {
 		next();
 	} catch (error) {
 		console.error(error);
+		return res.status(500).send({ message: "server error" });
 	}
 };
 

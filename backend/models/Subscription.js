@@ -8,6 +8,8 @@ const subscriptionSchema = new mongoose.Schema({
 		required: true,
 	},
 	stripe_subscription_id: { type: String, required: true },
+	end_date: { type: Date },
+	status: { type: String },
 	sharing_code: { type: String },
 	sharing_users_limit: { type: Number },
 	shared_with: { type: [mongoose.Schema.Types.ObjectId], ref: "User" },
