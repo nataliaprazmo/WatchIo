@@ -98,7 +98,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -109,7 +108,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -120,7 +118,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -131,7 +128,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -142,7 +138,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -153,7 +148,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -164,7 +158,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -175,7 +168,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}
@@ -186,7 +178,6 @@ const FilmsSlider = () => {
 				<SwiperSlide>
 					<div className="h-80 w-full rounded 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8">
 						<Skeleton
-							animation="wave"
 							variant="rounded"
 							width={300}
 							height={320}

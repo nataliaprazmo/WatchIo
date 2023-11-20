@@ -2,7 +2,7 @@ import Input from "@/components/login_signup/Input";
 import VpnKeyRoundedIcon from "@mui/icons-material/VpnKeyRounded";
 import React, { useState } from "react";
 
-const JoinSubForm = ({ setHasSubscription }) => {
+const JoinSubForm = ({ setHasSubscription, setOpen }) => {
 	const [shareCode, setShareCode] = useState("");
 	const change = (e) => {
 		e.preventDefault();
@@ -27,6 +27,7 @@ const JoinSubForm = ({ setHasSubscription }) => {
 					const res = await response.json();
 					console.log(res.message);
 					setHasSubscription(true);
+					setOpen(true);
 				}
 			} catch (error) {
 				if (
@@ -51,7 +52,12 @@ const JoinSubForm = ({ setHasSubscription }) => {
 				value={shareCode}
 				placeholder="xxx xxx xxx"
 			/>
-			<button onClick={join}>Dołącz</button>
+			<button
+				onClick={join}
+				className="flex justify-center px-10 md:pb-2 pb-[6px] md:pt-[7px] pt-[5px] border-2 border-secondary-violet rounded-lg h-fit font-bold transition duration-300 2xl:text-base xl:text-sm text-xs bg-secondary-violet hover:bg-transparent"
+			>
+				Dołącz
+			</button>
 		</div>
 	);
 };

@@ -6,43 +6,49 @@ import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import SeriesHero from "./SeriesHero";
 import Section from "./Section";
 import PurchaseDialog from "./subscriptionPurchase/PurchaseDialog";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { useSubscription } from "./SubscriptionContext";
 
 const Dashboard = () => {
-	const [price, setPrice] = useState(0);
-	const [hasSubscription, setHasSubscription] = useState(true);
-	const getPrices = async () => {
-		const token = localStorage.getItem("token");
-		if (token) {
-			try {
-				const response = await fetch(
-					"http://localhost:5000/api/subscriptions/prices?currency=pln",
-					{
-						method: "GET",
-						headers: {
-							"Content-Type": "application/json",
-							"x-access-token": token,
-						},
-					}
-				);
-				if (response.status == 200) {
-					const res = await response.json();
-					setPrice(res.data.prices[0]);
-				}
-			} catch (error) {
-				if (
-					error.response &&
-					error.response.status >= 400 &&
-					error.response.status <= 500
-				) {
-					setError("Błąd serwera");
-					console.error(error);
-				}
-			}
+	const [open, setOpen] = useState(false);
+	const handleClose = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
 		}
+		setOpen(false);
 	};
+	const action = (
+		<React.Fragment>
+			<IconButton
+				size="small"
+				aria-label="close"
+				color="inherit"
+				onClick={handleClose}
+			>
+				<CloseIcon fontSize="small" />
+			</IconButton>
+		</React.Fragment>
+	);
+
+	const {
+		price,
+		hasSubscription,
+		checkSubscription,
+		getPrices,
+		setHasSubscription,
+		loading,
+	} = useSubscription();
 	useEffect(() => {
-		getPrices();
+		checkSubscription();
 	}, []);
+	useEffect(() => {
+		if (!hasSubscription) getPrices();
+	}, [hasSubscription, setHasSubscription]);
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
 			<div className="flex gap-1 items-center mb-6">
@@ -57,6 +63,7 @@ const Dashboard = () => {
 					<PurchaseDialog
 						price={price}
 						setHasSubscription={setHasSubscription}
+						setOpen={setOpen}
 					/>
 				</div>
 			) : null}
@@ -67,6 +74,17 @@ const Dashboard = () => {
 			<Section text="Polecane" items_count={4} />
 			<Section text="Seriale" items_count={6} />
 			<Section text="Filmy" items_count={6} />
+			<Snackbar
+				open={open}
+				autoHideDuration={6000}
+				onClose={handleClose}
+				message="Miłego korzystania z platformy!"
+				action={action}
+				sx={{
+					marginLeft: "50px",
+					div: { fontWeight: "600", fontFamily: "montserrat" },
+				}}
+			/>
 		</div>
 	);
 };

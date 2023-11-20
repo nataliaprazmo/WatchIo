@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Plan from "./Plan";
 import JoinSubForm from "./JoinSubForm";
 
-const PurchaseDialog = ({ price, setHasSubscription }) => {
+const PurchaseDialog = ({ price, setHasSubscription, setOpen }) => {
 	const [choice, setChoice] = useState("");
 	const [step, setStep] = useState(1);
 	const Column = ({ title, children }) => {
@@ -71,7 +71,9 @@ const PurchaseDialog = ({ price, setHasSubscription }) => {
 						<Plan
 							title="Plan subskrypcyjny"
 							description="Miesięczny plan subskrypcyjny"
-							price={price.amount_decimal / 100 + "zł/mies."}
+							price={
+								price && price.amount_decimal / 100 + "zł/mies."
+							}
 							click={goToPurchase}
 						/>
 						<Plan
@@ -83,7 +85,10 @@ const PurchaseDialog = ({ price, setHasSubscription }) => {
 					</Column>
 				) : step == 2 && choice === "join" ? (
 					<Column>
-						<JoinSubForm setHasSubscription={setHasSubscription} />
+						<JoinSubForm
+							setHasSubscription={setHasSubscription}
+							setOpen={setOpen}
+						/>
 						<button
 							onClick={returnClick}
 							className="hover:text-primary-orange font-medium self-start mt-8"
