@@ -4,14 +4,12 @@ import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import { NavigateNextRounded } from "@mui/icons-material";
-import NavMenu from "../NavMenu";
 import Analytics from "./Analytics";
 import Link from "next/link";
 
 const Dashboard = () => {
 	return (
 		<div className="pt-24 pb-18 pl-[115px] pr-13">
-			<NavMenu />
 			<div className="flex gap-1 items-center">
 				<NavigateNextRounded
 					className="text-xs"
@@ -27,8 +25,15 @@ const Dashboard = () => {
 			<Link href="/admin/series/add">
 				<Fab
 					aria-label="add"
-					className="fixed bottom-8 right-6 bg-primary-orange hover:bg-primary-orange transition-all duration-700 shadow-2xl shadow-primary-orange"
-					sx={{ "&:hover": { height: "60px", width: "60px" } }}
+					sx={{
+						position: "fixed",
+						bottom: "32px",
+						right: "24px",
+						backgroundColor: "#9126d9",
+						"&:hover": {
+							backgroundColor: "#b267e4",
+						},
+					}}
 				>
 					<AddIcon
 						sx={{

@@ -11,7 +11,7 @@ const Input = ({ id, name, label, type, value, handleChange }) => {
 			onChange={handleChange}
 			label={label}
 			type={type}
-			required
+			// required
 			sx={{ label: { color: "#fafaf5" } }}
 			className="md:w-72 w-full"
 		/>

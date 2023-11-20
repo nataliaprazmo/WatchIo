@@ -2,14 +2,12 @@
 
 import React from "react";
 import { Chips } from "@/components/admin";
-import NavMenu from "@/components/NavMenu";
 import { Chip } from "@mui/material";
 import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
 
 const SeriesDetails = ({ id }) => {
 	return (
 		<div>
-			<NavMenu />
 			<div className="sm:mt-16 mt-14 w-full sm:h-96 h-80 bg-[url('/images/poster.webp')] bg-cover bg-center flex justify-end">
 				<div className="absolute top-0 left-0 sm:mt-16 mt-14 w-full sm:h-96 h-80 bg-gradient-to-t from-black to-transparent" />
 				<div className="flex items-center gap-4 absolute right-8 top-[430px]">

@@ -1,5 +1,5 @@
 import React from "react";
-import { MdArrowForward } from "react-icons/md";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import Image from "next/image";
 import OfferSteps from "./OfferSteps";
 
@@ -11,7 +11,10 @@ const OfferService = ({ id, title, description, image, tutorial }) => {
 		>
 			<div className="flex flex-col">
 				<h1 className="text-2xl font-semibold pb-2 text-primary-orange uppercase flex items-center gap-2">
-					<MdArrowForward size="28" fill="#ff9900" />
+					<ArrowForwardRoundedIcon
+						size="28"
+						sx={{ path: { color: "#ff9900" } }}
+					/>
 					{title}
 				</h1>
 				<p className="pb-2 font-medium ">{description}</p>

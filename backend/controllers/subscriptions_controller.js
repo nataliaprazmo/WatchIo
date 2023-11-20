@@ -71,7 +71,7 @@ const cancelSubscription = async (subscriptionId) => {
 
 const getSubscriptionData = async (user_id) => {
 	try {
-		var subscription = await Subscription.findOne({})
+		var subscription = await Subscription.findOne({ owner: user_id })
 			.populate("owner")
 			.populate("shared_with")
 			.exec();
@@ -93,7 +93,7 @@ const getSubscriptionData = async (user_id) => {
 		}
 
 		subscription = await Subscription.findOne({
-			shared_with: req.user._id,
+			shared_with: user_id,
 		});
 
 		if (subscription) {

@@ -95,4 +95,17 @@ router.get("/test", jwt_auth, async (req, res) => {
 	}
 });
 
+router.get("/", jwt_auth, async (req, res) => {
+	try {
+		const subscriptionData = await getSubscriptionData();
+		if (!subscriptionData) return res.status(400).send({ message: "error" }); // change to proper status code and error mesaage later
+		return res
+			.status(200)
+			.send({ message: "retrieved", data: { subscription: subscriptionData } });
+	} catch (error) {
+		console.error(error);
+		return res.status(500).send({ message: "Server error" });
+	}
+});
+
 module.exports = router;

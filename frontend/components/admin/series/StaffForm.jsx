@@ -1,11 +1,22 @@
 import React from "react";
 import Input from "./Input";
 import ValueSelect from "./ValueSelect";
-import { Chip, IconButton } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import { useSeries } from "./SeriesContext";
 
-const StaffForm = ({ staffDetails, handleChange, handleAddStaff, series }) => {
-	const isStaffEmpty = series.staff && series.staff.length === 0;
+const StaffForm = () => {
+	const { bodyData, staffDetails, handleAddStaff, setStaffDetails } =
+		useSeries();
+	const isStaffEmpty =
+		bodyData.series_staff && bodyData.series_staff.length === 0;
+	const handleChange = ({ currentTarget: input }) => {
+		const { name, value } = input;
+		setStaffDetails((prevStaffDetails) => ({
+			...prevStaffDetails,
+			[name]: value,
+		}));
+	};
 	return (
 		<div>
 			<div className="py-4">
@@ -15,7 +26,7 @@ const StaffForm = ({ staffDetails, handleChange, handleAddStaff, series }) => {
 					<>
 						<p className="pb-4">Dodana obsada:</p>
 						<div className="flex flex-wrap w-full gap-4">
-							{series.staff.map((person, index) => {
+							{bodyData.series_staff.map((person, index) => {
 								return (
 									<Chip
 										key={index}
@@ -26,7 +37,7 @@ const StaffForm = ({ staffDetails, handleChange, handleAddStaff, series }) => {
 											person.surname
 										}`}
 										variant="outlined"
-										className="border-secondary-violet"
+										sx={{ borderColor: "#9126d9" }}
 									/>
 								);
 							})}
@@ -56,14 +67,14 @@ const StaffForm = ({ staffDetails, handleChange, handleAddStaff, series }) => {
 						value={staffDetails.role}
 						handleChange={handleChange}
 					/>
-					<IconButton onClick={handleAddStaff}>
+					<Button onClick={handleAddStaff}>
 						<AddCircleRoundedIcon
 							className="text-32 cursor-pointer"
 							sx={{
 								"&:hover": { path: { color: "#9126d9" } },
 							}}
 						/>
-					</IconButton>
+					</Button>
 				</div>
 			</div>
 		</div>

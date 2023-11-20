@@ -12,7 +12,7 @@ const MultilineInput = ({ id, name, label, type, value, handleChange }) => {
 			value={value}
 			onChange={handleChange}
 			type={type}
-			required
+			// required
 			sx={{
 				textarea: { color: "#fafaf5" },
 				label: { color: "#fafaf5" },

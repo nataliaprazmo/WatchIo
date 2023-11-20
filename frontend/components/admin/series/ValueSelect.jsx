@@ -13,8 +13,10 @@ const ValueSelect = ({ value, handleChange }) => {
 				onChange={handleChange}
 				className="w-full bg-transparent border-b focus:border-primary-orange "
 			>
-				{roles.map((rol) => (
-					<option value={rol}>{rol}</option>
+				{roles.map((rol, index) => (
+					<option key={index} value={rol}>
+						{rol}
+					</option>
 				))}
 			</select>
 		</div>

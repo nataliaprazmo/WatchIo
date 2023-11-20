@@ -1,7 +1,16 @@
 import React from "react";
 import { OutlinedInput } from "@mui/material";
 
-const Input = ({ label, id, type, handleChange, icon, name, value }) => {
+const Input = ({
+	label,
+	id,
+	type,
+	handleChange,
+	icon,
+	name,
+	value,
+	placeholder,
+}) => {
 	return (
 		<div className="flex flex-col gap-1 w-full">
 			<label
@@ -18,6 +27,7 @@ const Input = ({ label, id, type, handleChange, icon, name, value }) => {
 						color: "#fafaf5",
 					},
 				}}
+				placeholder={placeholder}
 				id={id}
 				name={name}
 				value={value}

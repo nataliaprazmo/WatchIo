@@ -3,8 +3,8 @@ import { AddSeries } from "@/components/admin";
 
 export default function Page() {
 	return (
-		<main className="overflow-hidden">
+		<div className="overflow-hidden">
 			<AddSeries />
-		</main>
+		</div>
 	);
 }

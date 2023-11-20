@@ -18,7 +18,7 @@ const ProfileOptions = ({ handleLogout, setAnchorElUser }) => {
 			</MenuItem>
 			<MenuItem
 				onClick={handleLogout}
-				className="hover:text-primary-orange"
+				className="hover:text-primary-orange font-montserrat"
 			>
 				Wyloguj się
 			</MenuItem>
