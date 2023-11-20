@@ -5,7 +5,7 @@ const { deleteFile } = require("../utils/File_utils");
 
 const getSeries = async (howMany) => {
 	try {
-		const result = Series.find.limit(howMany);
+		const result = Series.find().populate("episodes").exec();
 		return result;
 	} catch (error) {
 		throw error;

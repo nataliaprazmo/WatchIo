@@ -95,7 +95,7 @@ GET  http://localhost:5000/api/watchlists/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDA0NzU4OTYsImV4cCI6MTcwMTA4MDY5Nn0.j6zd9sSDEmbBLt-y21iL630ut9pltDQB8UkfNGaht3g
 Content-Type: application/json
 ###
-GET  http://localhost:5000/api/genres/ HTTP/1.1
+GET  http://localhost:5000/api/series/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkxOTc5MDQsImV4cCI6MTY5OTgwMjcwNH0.rte-23Amurvk_TslT4EXKgle0AOILgaMJFXJwDZRkFU
 Content-Type: application/json
 ###

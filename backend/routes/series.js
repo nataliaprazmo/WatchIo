@@ -13,7 +13,7 @@ const {
 
 router.get("/", async (req, res) => {
 	try {
-		const result = await getSeries(req.query.howMany);
+		const result = await getSeries();
 		return res.status(200).send({
 			message: "Data fetched succesfully",
 			data: { series: result },
