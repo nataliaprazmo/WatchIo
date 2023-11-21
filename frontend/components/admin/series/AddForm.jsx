@@ -24,7 +24,7 @@ const AddForm = ({
 		>
 			<p className="py-4 pl-2">Krok {activeStep + 1}</p>
 			<Form part={activeStep} />
-			<div className="flex pt-2">
+			<div className="flex mt-20">
 				<Button
 					color="inherit"
 					disabled={activeStep === 0}
@@ -36,7 +36,10 @@ const AddForm = ({
 				<div className="flex flex-auto" />
 				{activeStep !== steps.length &&
 				activeStep === totalSteps - 1 ? (
-					<button type="submit" className="text-primary-orange">
+					<button
+						type="submit"
+						className="text-primary-orange uppercase font-medium"
+					>
 						Dodaj serię
 					</button>
 				) : (

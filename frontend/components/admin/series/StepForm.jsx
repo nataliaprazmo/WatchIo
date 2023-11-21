@@ -73,10 +73,13 @@ const StepForm = () => {
 			<div>
 				{allStepsCompleted() ? (
 					<React.Fragment>
-						<p className="mt-2 mb-1">Udało się dodać serię</p>
-						<div className="flex pt-2">
+						<p className="mt-8">Udało się dodać serię</p>
+						<div className="flex mt-16 mb-[46px]">
 							<div className="flex flex-auto" />
-							<Button onClick={handleReset}>
+							<Button
+								onClick={handleReset}
+								sx={{ color: "#ff9900", fontWeight: "500" }}
+							>
 								Dodaj kolejną serię
 							</Button>
 						</div>
