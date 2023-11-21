@@ -9,7 +9,7 @@ const FooterSection = () => {
 				<p className="font-regular text-sm">contact@watchio.com.pl</p>
 				<p className="sm:block hidden">|</p>
 				<p className="font-regular text-xs">
-					&copy; 2023 Radłowski K. Prażmo N.
+					&copy; 2023 Prażmo N. Radłowski K.
 				</p>
 			</div>
 		</div>
