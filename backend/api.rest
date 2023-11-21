@@ -125,3 +125,5 @@ Content-Type: application/json
 GET http://localhost:5000/api/subscriptions/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViYWM1YjY2Y2JjMjc4NjU0NTZhNWMiLCJpYXQiOjE3MDA1MDY3MjAsImV4cCI6MTcwMTExMTUyMH0.j4_XnfdvJd0W2NTWUqAK3UFQFiLhzZxho9g9SLBnHNE
 Content-Type: application/json
+###
+GET http://localhost:5000/api/series/test
