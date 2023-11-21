@@ -70,7 +70,8 @@ const upload_Series = async (
 			year_of_production: series_year_of_production,
 			series_picture_path: files_series_thumbnail[0].path,
 			staff: series_staff,
-			rating: 5.0,
+			age_rating: "pg-13",
+			imdb_score: 5.0,
 		});
 		await newSeries.save();
 		return { statusCode: 200, message: "Series added successfully" };
