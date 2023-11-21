@@ -16,7 +16,8 @@ const seriesSchema = new mongoose.Schema({
 
 	episodes: { type: [mongoose.Schema.Types.ObjectId], ref: "Video" },
 	genres: [{ type: String }],
-	rating: { type: String },
+	imdb_score: { type: String },
+	age_rating: { type: String },
 });
 
 const Series = mongoose.model("Series", seriesSchema, "series");
