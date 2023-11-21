@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
 	Chip,
 	FormControl,
@@ -12,19 +12,32 @@ import {
 } from "@mui/material";
 import { useSeries } from "./SeriesContext";
 
-const initialGenres = [
-	"Komedia",
-	"Dramat",
-	"Akcja",
-	"Przygodowy",
-	"Romans",
-	"Animacja",
-	"Familijny",
-];
-
 const CategoriesInput = () => {
-	const { bodyData, handleGenresChange, handleAddGenre } = useSeries();
+	const [initialGenres, setInitialGenres] = useState([
+		"Animacja",
+		"Przygodowy",
+	]);
 	const [genres, setGenres] = useState(initialGenres);
+	useEffect(() => {
+		const getGenres = async () => {
+			try {
+				const response = await fetch(
+					"http://localhost:5000/api/genres",
+					{ method: "GET" }
+				);
+				if (response.status === 200) {
+					const res = await response.json();
+					setInitialGenres(res.data.genres);
+					setGenres(res.data.genres);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getGenres();
+	}, []);
+	const { bodyData, handleGenresChange, handleAddGenre } = useSeries();
+
 	const [newGenre, setNewGenre] = useState("");
 	const [showTextField, setShowTextField] = useState(false);
 	const inputRef = useRef(null);

@@ -67,6 +67,22 @@ export function SeriesProvider({ children }) {
 		setVideos((prev) => [...prev, episode.video]);
 	};
 	const [videosCount, setVideosCount] = useState(1);
+	const addNewGenres = async () => {
+		try {
+			const response = await fetch(
+				"http://localhost:5000/api/genres/testmultiple",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ genre: bodyData.series_genres }),
+				}
+			);
+			const res = await response.json;
+			console.log(res.message);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	const handleAddSeries = async (e) => {
 		e.preventDefault();
 		const token = localStorage.getItem("token");
@@ -87,8 +103,6 @@ export function SeriesProvider({ children }) {
 					formData.append("video_thumbnails", thumbnail);
 				});
 				formData.append("series_thumbnail", series_thumbnail);
-				console.log("dziala");
-				console.log(formData);
 				const response = await fetch(
 					"http://localhost:5000/api/series/",
 					{
@@ -97,11 +111,10 @@ export function SeriesProvider({ children }) {
 						body: formData,
 					}
 				);
-				console.log("zadzialalo");
 				if (response.status == 200) {
 					const res = response.json();
 					console.log("added series");
-					console.log(res.message);
+					addNewGenres();
 					setBodyData({
 						series_title: "",
 						series_desc: "",
