@@ -7,14 +7,10 @@ const headCells = [
 		id: "name",
 		label: "Nazwa serii",
 	},
-	// {
-	// 	id: "description",
-	// 	label: "Opis",
-	// },
-	// {
-	// 	id: "actors",
-	// 	label: "Aktorzy",
-	// },
+	{
+		id: "description",
+		label: "Opis",
+	},
 	{
 		id: "categories",
 		label: "Kategorie",

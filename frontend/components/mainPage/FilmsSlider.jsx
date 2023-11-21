@@ -6,6 +6,7 @@ import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import dynamic from "next/dynamic";
 import LoadingFilms from "./loading";
 import FilmSlide from "./FilmSlide";
 SwiperCore.use([Navigation, FreeMode, Autoplay]);
@@ -79,4 +80,4 @@ const FilmsSlider = () => {
 	);
 };
 
-export default FilmsSlider;
+export default dynamic(() => Promise.resolve(FilmsSlider), { ssr: false });

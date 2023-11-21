@@ -1,3 +1,4 @@
+"use client";
 import {
 	Button,
 	Dialog,
@@ -9,7 +10,13 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-const DeleteDialog = ({ open, setOpen }) => {
+const DeleteDialog = ({
+	open,
+	setOpen,
+	setOpenSnackbar,
+	seriesId,
+	getFilms,
+}) => {
 	const handleClose = () => {
 		setOpen(false);
 	};
@@ -18,8 +25,31 @@ const DeleteDialog = ({ open, setOpen }) => {
 		e.preventDefault;
 		setPassword(e.target.value);
 	};
+	const deleteSerie = async () => {
+		const token = localStorage.getItem("token");
+		console.log(seriesId);
+		try {
+			const response = await fetch(
+				"http://localhost:5000/api/series/" + seriesId,
+				{
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						"x-access-token": token,
+					},
+				}
+			);
+			if (response.status === 200) {
+				setOpenSnackbar(true);
+				getFilms();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	const handleDelete = () => {
 		setOpen(false);
+		deleteSerie();
 	};
 	return (
 		<Dialog open={open} onClose={handleClose}>

@@ -19,8 +19,10 @@ const Chips = ({ elements, variant }) => {
 					sx={{
 						span: { color: { color } },
 						fontFamily: "montserrat",
+						fontSize: "12px",
 						backgroundColor: !color,
 					}}
+					size="small"
 				/>
 			))}
 		</div>

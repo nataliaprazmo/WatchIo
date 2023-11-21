@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import FilmToolbar from "./FilmToolbar";
 import { TableContainer, Table, TableRow, TableCell } from "@mui/material";
 import FilmPagination from "./FilmPagination";
@@ -8,43 +8,20 @@ import Films from "./Films";
 import FilmTableHead from "./FilmTableHead";
 import Link from "next/link";
 import AddIcon from "@mui/icons-material/PlaylistAddRounded";
-import { InputAdornment, OutlinedInput } from "@mui/material";
+import { InputAdornment, OutlinedInput, IconButton } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import Snackbar from "@mui/material/Snackbar";
+import CloseIcon from "@mui/icons-material/Close";
 
-function createData(id, poster, name, description, actors, categories) {
+function createData(id, poster, name, description, categories) {
 	return {
 		id,
 		poster,
 		name,
 		description,
-		actors,
 		categories,
 	};
 }
-
-const rows = [
-	createData(1, "plakat", "anazwa", "copis", "aktorzy", [
-		"kategorie",
-		"akategorie",
-	]),
-	createData(2, "plakat", "nazwa", "opis", "waktorzy", ["kategorie"]),
-	createData(3, "aplakat", "nazwa", "zopis", "baktorzy", ["bkategorie"]),
-	createData(4, "plakat", "bnazwa", "aopis", "caktorzy", ["kategorie"]),
-	createData(5, "plakat", "nazwa", "opis", "aktorzy", ["akategorie"]),
-	createData(6, "eplakat", "xnazwa", "eopis", "aktorzy", ["dkategorie"]),
-	createData(7, "plakat", "cnazwa", "opis", "kaktorzy", ["ckategorie"]),
-	createData(8, "zplakat", "nazwa", "ztopis", "daktorzy", [
-		"ekategorie",
-		"akategorie",
-	]),
-	createData(9, "qplakat", "nazwa", "ropis", "aktorzy", ["kategorie"]),
-	createData(10, "bplakat", "dnazwa", "topis", "saktorzy", ["xkategorie"]),
-	createData(11, "cplakat", "wnazwa", "bopis", "aktorzy", ["kategorie"]),
-	createData(12, "dplakat", "nazwa", "fopis", "zaktorzy", ["wkategorie"]),
-	createData(13, "plakat", "enazwa", "opis", "aktorzy", ["qkategorie"]),
-	createData(14, "tplakat", "nazwa", "opis", "raktorzy", ["tkategorie"]),
-	createData(15, "splakat", "znazwa", "opis", "aktorzy", ["zkategorie"]),
-];
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -75,6 +52,59 @@ function stableSort(array, comparator) {
 }
 
 const FilmTable = () => {
+	const [openSnackbar, setOpenSnackbar] = useState(false);
+	const handleClose = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setOpenSnackbar(false);
+	};
+	const action = (
+		<React.Fragment>
+			<IconButton
+				size="small"
+				aria-label="close"
+				color="inherit"
+				onClick={handleClose}
+			>
+				<CloseIcon fontSize="small" />
+			</IconButton>
+		</React.Fragment>
+	);
+	const getFilms = async () => {
+		try {
+			const response = await fetch("http://localhost:5000/api/series", {
+				method: "GET",
+			});
+			if (response.status === 200) {
+				const res = await response.json();
+				setSeries(res.data.series);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const [series, setSeries] = useState(null);
+	useEffect(() => {
+		getFilms();
+	}, []);
+
+	let rows = [];
+	if (series !== null) {
+		series.forEach((serie) => {
+			rows.push(
+				createData(
+					serie._id,
+					serie.picture,
+					serie.series_title,
+					serie.description,
+					serie.genres
+				)
+			);
+		});
+	}
+
 	const [selected, setSelected] = useState([]);
 	const isSelected = (id) => selected.indexOf(id) !== -1;
 	const [order, setOrder] = useState("asc");
@@ -204,6 +234,8 @@ const FilmTable = () => {
 							emptyRows={emptyRows}
 							handleClick={handleClick}
 							isSelected={isSelected}
+							setOpenSnackbar={setOpenSnackbar}
+							getFilms={getFilms}
 						/>
 					) : (
 						<TableRow>
@@ -220,6 +252,24 @@ const FilmTable = () => {
 				setRowsPerPage={setRowsPerPage}
 				page={page}
 				setPage={setPage}
+			/>
+			<Snackbar
+				open={openSnackbar}
+				autoHideDuration={6000}
+				onClose={handleClose}
+				message="Udało się usunąć serię!"
+				action={action}
+				sx={{
+					marginLeft: "50px",
+					borderRadius: "4px",
+					div: {
+						fontWeight: "600",
+						fontFamily: "montserrat",
+						color: "#101010",
+						backgroundColor: "#45bf5f",
+					},
+					svg: { path: { color: "#101010" } },
+				}}
 			/>
 		</div>
 	);

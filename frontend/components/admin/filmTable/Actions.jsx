@@ -5,7 +5,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { useRouter } from "next/navigation";
 import DeleteDialog from "./DeleteDialog";
 
-const Actions = ({ seriesId }) => {
+const Actions = ({ seriesId, setOpenSnackbar, getFilms }) => {
 	const router = useRouter();
 	const [open, setOpen] = useState(false);
 	const handleClickOpen = () => {
@@ -25,7 +25,13 @@ const Actions = ({ seriesId }) => {
 			>
 				<DeleteOutlinedIcon />
 			</IconButton>
-			<DeleteDialog open={open} setOpen={setOpen} />
+			<DeleteDialog
+				open={open}
+				setOpen={setOpen}
+				setOpenSnackbar={setOpenSnackbar}
+				seriesId={seriesId}
+				getFilms={getFilms}
+			/>
 		</TableCell>
 	);
 };
