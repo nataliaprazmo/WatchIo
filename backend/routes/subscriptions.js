@@ -79,14 +79,28 @@ router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 		if (!stripeSubscriptionId)
 			return res.status(403).send({ message: "noSubscription" });
 
+		var stripeData = {};
+		try {
+			const stripeSubscription = await stripe.subscriptions.retrieve(
+				stripeSubscriptionId
+			);
+			stripeData.current_period_end =
+				stripeSubscription.current_period_end;
+			stripeData.status = "active";
+			if (stripeData.cancel_at_period_end) stripeData.status = "canceled";
+		} catch (error) {
+			console.error(error);
+			return res.status(500).send({ message: "Server error" });
+		}
+
 		await new Subscription({
 			owner: req.user._id,
 			stripe_subscription_id: stripeSubscriptionId,
 			sharing_code: "",
 			sharing_users_limit: 5,
 			shared_with: [],
-			status: "work in progress",
-			end_date: 1732125318,
+			status: stripeData.status,
+			end_date: stripeData.current_period_end,
 		}).save();
 		subscriptionUserType = "owner";
 		return res.status(200).send({

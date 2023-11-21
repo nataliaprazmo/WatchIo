@@ -62,6 +62,29 @@ const upload_Series = async (
 			videos_ids.push(video._id);
 		}
 		console.log(files_series_thumbnail);
+		console.log();
+		const URL =
+			"http://www.omdbapi.com/?t=" +
+			series_title.replace(" ", "+") +
+			"&y=" +
+			series_year_of_production +
+			"&apikey=" +
+			process.env.OMDB_API_KEY;
+		console.log(URL);
+
+		var apiData = {};
+		try {
+			const omdbRes = await fetch(URL);
+			const omdbData = await omdbRes.json();
+			if (omdbData.Response == "False") throw "No data";
+			apiData.Rated = omdbData.Rated;
+			apiData.imdbRating = omdbData.imdbRating;
+		} catch (error) {
+			console.error(error);
+			apiData.Rated = null;
+			apiData.imdbRating = null;
+		}
+
 		const newSeries = new Series({
 			series_title: series_title,
 			episodes: videos_ids,
@@ -70,8 +93,8 @@ const upload_Series = async (
 			year_of_production: series_year_of_production,
 			series_picture_path: files_series_thumbnail[0].path,
 			staff: series_staff,
-			age_rating: "pg-13",
-			imdb_score: 5.0,
+			age_rating: apiData.Rated,
+			imdb_score: apiData.imdbRating,
 		});
 		await newSeries.save();
 		return { statusCode: 200, message: "Series added successfully" };
