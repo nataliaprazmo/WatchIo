@@ -46,9 +46,9 @@ const Dashboard = () => {
 	useEffect(() => {
 		if (!hasSubscription) getPrices();
 	}, [hasSubscription, setHasSubscription]);
-	if (loading) {
-		return <div>Loading...</div>;
-	}
+	// if (loading) {
+	// 	return <div>Loading...</div>;
+	// }
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
 			<div className="flex gap-1 items-center mb-6">

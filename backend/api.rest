@@ -112,7 +112,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 Content-Type: application/json
 
 {
-    "genre":["horror","fantasy","rpg","fps"]
+    "genre":["Akcja", "Animacja","Horror","Fantasy","Komedia","Dramat","Romans","Sci-Fi"]
 }
 ###
 
@@ -123,7 +123,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/api/subscriptions/ HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViYWM1YjY2Y2JjMjc4NjU0NTZhNWMiLCJpYXQiOjE3MDA1MDY3MjAsImV4cCI6MTcwMTExMTUyMH0.j4_XnfdvJd0W2NTWUqAK3UFQFiLhzZxho9g9SLBnHNE
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVkOWMzNWFkY2NmNTljNDE0NWEwNzkiLCJpYXQiOjE3MDA2MzY3NzMsImV4cCI6MTcwMTI0MTU3M30.i9JqWwv4BNQnZtmSTl5lpZ8btUdcqUMRjIVyXmSaGK0
 Content-Type: application/json
 ###
 GET http://localhost:5000/api/subscriptions/subscriptionCheck

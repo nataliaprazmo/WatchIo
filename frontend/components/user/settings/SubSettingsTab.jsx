@@ -8,28 +8,27 @@ const SubSettingsTab = () => {
 	const [sharedCount, setSharedCount] = useState(null);
 	const [subscriptionUserType, setSubscriptionUserType] = useState(null);
 	const [owner, setOwner] = useState(null);
+	const [date, setDate] = useState(null);
+	const formatDate = (dateString) => {
+		var dateTime = new Date(dateString);
+		return dateTime.toLocaleDateString("pl-PL");
+	};
 	const get = async () => {
 		const token = localStorage.getItem("token");
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/subscriptions/",
-				{
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						"x-access-token": token,
-					},
-				}
-			);
+			const response = await fetch("http://localhost:5000/api/subscriptions/", {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					"x-access-token": token,
+				},
+			});
 			if (response.status == 200) {
 				const res = await response.json();
-				setSharedCount(
-					res.data.subscription.subscription.shared_with_count
-				);
-				setSubscriptionUserType(
-					res.data.subscription.subscriptionUserType
-				);
+				setSharedCount(res.data.subscription.subscription.shared_with_count);
+				setSubscriptionUserType(res.data.subscription.subscriptionUserType);
 				setOwner(res.data.subscription.subscription.owner);
+				setDate(formatDate(res.data.subscription.subscription.end_date * 1000));
 			}
 		} catch (error) {
 			console.error(error);
@@ -63,14 +62,12 @@ const SubSettingsTab = () => {
 					<p className="font-medium">{owner}</p>
 				</div>
 				<div className="flex flex-col">
-					<h3 className="text-neutral-400 font-medium">
-						Podłączone konta
-					</h3>
+					<h3 className="text-neutral-400 font-medium">Podłączone konta</h3>
 					<p className="font-medium">{sharedCount}</p>
 				</div>
 				<div className="flex flex-col">
 					<h3 className="text-neutral-400 font-medium">Ważna do</h3>
-					<p className="font-medium">16.12.2023</p>
+					<p className="font-medium">{date}</p>
 				</div>
 				<Button />
 			</div>

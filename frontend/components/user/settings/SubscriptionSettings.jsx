@@ -78,22 +78,17 @@ const SubscriptionSettings = () => {
 	const get = async () => {
 		const token = localStorage.getItem("token");
 		try {
-			const response = await fetch(
-				"http://localhost:5000/api/subscriptions/",
-				{
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						"x-access-token": token,
-					},
-				}
-			);
+			const response = await fetch("http://localhost:5000/api/subscriptions/", {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					"x-access-token": token,
+				},
+			});
 			if (response.status == 200) {
 				const res = await response.json();
 				setSharedWith(res.data.subscription.subscription.shared_with);
-				setSubscriptionUserType(
-					res.data.subscription.subscriptionUserType
-				);
+				setSubscriptionUserType(res.data.subscription.subscriptionUserType);
 				setOwner(res.data.subscription.subscription.owner);
 			}
 		} catch (error) {
@@ -111,9 +106,7 @@ const SubscriptionSettings = () => {
 	};
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
-			<h1 className="font-bold md:text-32 text-2xl pb-2">
-				Twoja subskrypcja
-			</h1>
+			<h1 className="font-bold md:text-32 text-2xl pb-2">Twoja subskrypcja</h1>
 			<p className="font-medium text-neutral-400 text-sm pb-6">
 				{subscriptionUserType === "owner"
 					? "Jesteś właścicielem planu podstawowego. Możesz dzielić się subskrypcją!"
@@ -147,13 +140,8 @@ const SubscriptionSettings = () => {
 						<div className="border-2 border-secondary-violet hover:bg-secondary-violet w-fit h-fit rounded-lg">
 							<Tooltip title="Skopiuj kod">
 								<span>
-									<IconButton
-										disabled={!active}
-										onClick={copy}
-									>
-										<ContentPasteRoundedIcon
-											sx={{ fontSize: "16px" }}
-										/>
+									<IconButton disabled={!active} onClick={copy}>
+										<ContentPasteRoundedIcon sx={{ fontSize: "16px" }} />
 									</IconButton>
 								</span>
 							</Tooltip>
@@ -172,7 +160,7 @@ const SubscriptionSettings = () => {
 			<h3 className="font-semibold md:text-base text-sm pt-6 pb-4">
 				{subscriptionUserType === "owner"
 					? "Użytkownicy należący do Twojej subskrypcji"
-					: "Użytkownicy należący do subskrypcji dzielonej i właściciel"}
+					: "Właściciel subskrypcji dzielonej"}
 			</h3>
 			{sharedWith && sharedWith.length === 0 ? (
 				<p className="text-neutral-400 font-medium">
