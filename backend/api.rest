@@ -96,7 +96,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I
 Content-Type: application/json
 ###
 GET  http://localhost:5000/api/series/ HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjRmOGQyM2QwOWVkMGYiLCJpYXQiOjE2OTkxOTc5MDQsImV4cCI6MTY5OTgwMjcwNH0.rte-23Amurvk_TslT4EXKgle0AOILgaMJFXJwDZRkFU
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA3NjE2OTMsImV4cCI6MTcwMTM2NjQ5M30.9FUxF6lskheA4XNC1KCjyuyzmdz3T2-RBaiBbk9sLQ8
 Content-Type: application/json
 ###
 POST  http://localhost:5000/api/genres/ HTTP/1.1
@@ -116,8 +116,8 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:5000/api/series/655b7ddb85dac16305572c73 HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViODVjZGZhYjRmOTMyZjUzZmQxNGYiLCJpYXQiOjE3MDA0OTcwMDIsImV4cCI6MTcwMTEwMTgwMn0.mYnnx21CX8NaPH2Ki5uLwoYxIgUmrxRieTbxuMHVU-E
+GET http://localhost:5000/api/series/655fbb9cd11b214f6db65e80 HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA3NjE2OTMsImV4cCI6MTcwMTM2NjQ5M30.9FUxF6lskheA4XNC1KCjyuyzmdz3T2-RBaiBbk9sLQ8
 Content-Type: application/json
 ###
 
