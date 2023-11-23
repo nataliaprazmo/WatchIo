@@ -1,13 +1,21 @@
 const { Watchlist } = require("../models/Watchlist");
 const { Series } = require("../models/Series");
+const { getImgToBase64 } = require("../utils/File_utils");
 
 const getWatchlist = async (watchlistId) => {
 	try {
 		const watchlist = await Watchlist.findOne({ _id: watchlistId })
 			.populate("owner")
 			.populate("series")
+			.lean()
 			.exec();
 		if (!watchlist) return false;
+		for (let i = 0; i < watchlist.series.length; i++) {
+			watchlist.series[i].picture = await getImgToBase64(
+				watchlist.series[i].series_picture_path
+			);
+			delete watchlist.series[i].series_picture_path;
+		}
 		return watchlist;
 	} catch (error) {
 		throw error;
@@ -19,8 +27,17 @@ const getCurrentUserWatchlist = async (userId) => {
 		var watchlist = await Watchlist.findOne({ owner: userId })
 			.populate("owner")
 			.populate("series")
+			.lean()
 			.exec();
 		if (!watchlist) return false;
+
+		for (let i = 0; i < watchlist.series.length; i++) {
+			watchlist.series[i].picture = await getImgToBase64(
+				watchlist.series[i].series_picture_path
+			);
+			delete watchlist.series[i].series_picture_path;
+		}
+
 		return watchlist;
 	} catch (error) {
 		throw error;
