@@ -1,6 +1,6 @@
 const { Watchlist } = require("../models/Watchlist");
 const { Series } = require("../models/Series");
-const { getImgToBase64 } = require("../utils/File_utils");
+const { addImgsToSeries, getImgToBase64 } = require("../utils/Img_utils");
 
 const getWatchlist = async (watchlistId) => {
 	try {
@@ -10,12 +10,8 @@ const getWatchlist = async (watchlistId) => {
 			.lean()
 			.exec();
 		if (!watchlist) return false;
-		for (let i = 0; i < watchlist.series.length; i++) {
-			watchlist.series[i].picture = await getImgToBase64(
-				watchlist.series[i].series_picture_path
-			);
-			delete watchlist.series[i].series_picture_path;
-		}
+
+		await addImgsToSeries(watchlist);
 		return watchlist;
 	} catch (error) {
 		throw error;
@@ -30,14 +26,7 @@ const getCurrentUserWatchlist = async (userId) => {
 			.lean()
 			.exec();
 		if (!watchlist) return false;
-
-		for (let i = 0; i < watchlist.series.length; i++) {
-			watchlist.series[i].picture = await getImgToBase64(
-				watchlist.series[i].series_picture_path
-			);
-			delete watchlist.series[i].series_picture_path;
-		}
-
+		await addImgsToSeries(watchlist.series);
 		return watchlist;
 	} catch (error) {
 		throw error;
