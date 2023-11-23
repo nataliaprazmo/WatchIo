@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {
 	getAllGenres,
 	addGenre,
-	genreCreateIfDontExists,
+	genreCreateIfDontExists_testMultiple,
 } = require("../controllers/genres_controller");
 
 router.get("/", async (req, res) => {
@@ -32,7 +32,9 @@ router.post("/", async (req, res) => {
 
 router.post("/testmultiple", async (req, res) => {
 	try {
-		const result = await genreCreateIfDontExists(req.body.genre);
+		const result = await genreCreateIfDontExists_testMultiple(
+			req.body.genre
+		);
 		if (!result)
 			return res.status(400).send({ message: "Genre already exsits" });
 		return res.status(200).send({ message: "Genre added successfully" });

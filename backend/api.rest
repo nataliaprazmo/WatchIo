@@ -112,7 +112,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 Content-Type: application/json
 
 {
-    "genre":["horror","fantasy","rpg","fps"]
+    "genre":["horror","fantasy","rpg","fps","romans"]
 }
 ###
 

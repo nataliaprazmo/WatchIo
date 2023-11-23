@@ -2,6 +2,7 @@ const { Series, validateSeries } = require("../models/Series");
 const { Video, validateVideo } = require("../models/Video");
 const { Subscription } = require("../models/Subscription");
 const { deleteFile, getImgToBase64 } = require("../utils/File_utils");
+const { genreCreateIfDontExists } = require("../utils/Genres_utils");
 
 const getSeries = async (howMany) => {
 	try {
@@ -97,6 +98,7 @@ const upload_Series = async (
 			imdb_score: apiData.imdbRating,
 		});
 		await newSeries.save();
+		await genreCreateIfDontExists(series_genres);
 		return { statusCode: 200, message: "Series added successfully" };
 	} catch (error) {
 		throw error;
