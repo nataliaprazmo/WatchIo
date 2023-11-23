@@ -102,6 +102,8 @@ const VideoForm = () => {
 							setEpisode((ep) => ({ ...ep, thumb: file }))
 						}
 						label="Miniaturka odcinka"
+						errorName="thumb"
+						error={errors.thumb}
 					/>
 					<FileUploader
 						fileType="video"
@@ -110,6 +112,8 @@ const VideoForm = () => {
 							setEpisode((ep) => ({ ...ep, video: file }))
 						}
 						label="Wideo odcinka"
+						errorName="video"
+						error={errors.video}
 					/>
 				</div>
 			</div>

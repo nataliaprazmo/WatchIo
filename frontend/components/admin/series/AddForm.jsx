@@ -13,9 +13,6 @@ const AddForm = ({
 	const { handleAddSeries } = useSeries();
 	return (
 		<form
-			// action="http://localhost:5000/api/series"
-			method="POST"
-			encType="multipart/form-data"
 			onSubmit={(e) => {
 				e.preventDefault();
 				handleComplete();

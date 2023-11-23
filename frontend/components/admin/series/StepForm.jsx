@@ -1,10 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
-import Button from "@mui/material/Button";
+import { Button, IconButton, Snackbar } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import AddForm from "./AddForm";
+import { useSeries } from "./SeriesContext";
 
 const steps = ["Dodaj szczegóły serii", "Dodaj obsadę", "Dodaj odcinki"];
 
@@ -43,14 +45,42 @@ const StepForm = () => {
 	const handleStep = (step) => () => {
 		setActiveStep(step);
 	};
-
-	const handleComplete = () => {
-		const newCompleted = completed;
-		newCompleted[activeStep] = true;
-		setCompleted(newCompleted);
-		handleNext();
+	const { errors, setErrors } = useSeries();
+	useEffect(() => {
+		console.log(errors);
+	}, [errors, setErrors]);
+	const [open, setOpen] = useState(false);
+	const handleClose = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setOpen(false);
 	};
-
+	const action = (
+		<React.Fragment>
+			<IconButton
+				size="small"
+				aria-label="close"
+				color="inherit"
+				onClick={handleClose}
+			>
+				<CloseIcon fontSize="small" />
+			</IconButton>
+		</React.Fragment>
+	);
+	const handleComplete = () => {
+		const anyErrorIsNull = Object.values(errors).some(
+			(value) => value === null
+		);
+		if (!anyErrorIsNull) {
+			const newCompleted = completed;
+			newCompleted[activeStep] = true;
+			setCompleted(newCompleted);
+			handleNext();
+		} else {
+			setOpen(true);
+		}
+	};
 	const handleReset = () => {
 		setActiveStep(0);
 		setCompleted({});
@@ -93,6 +123,25 @@ const StepForm = () => {
 						totalSteps={totalSteps()}
 					/>
 				)}
+				<Snackbar
+					open={open}
+					autoHideDuration={6000}
+					onClose={handleClose}
+					message="Uzupełnij pola lub napraw błędy!"
+					action={action}
+					sx={{
+						marginLeft: "50px",
+						borderRadius: "4px",
+						border: "2.5px solid rgb(153 27 27)",
+						div: {
+							fontWeight: "600",
+							fontFamily: "montserrat",
+							color: "rgb(239 68 68)",
+							backgroundColor: "#101010",
+						},
+						svg: { path: { color: "rgb(239 68 68)" } },
+					}}
+				/>
 			</div>
 		</div>
 	);

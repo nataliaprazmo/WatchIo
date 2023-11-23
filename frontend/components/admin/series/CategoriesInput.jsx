@@ -11,6 +11,7 @@ import {
 	TextField,
 } from "@mui/material";
 import { useSeries } from "./SeriesContext";
+import ErrorDesc from "./ErrorDesc";
 
 const CategoriesInput = () => {
 	const [initialGenres, setInitialGenres] = useState([
@@ -36,7 +37,8 @@ const CategoriesInput = () => {
 		};
 		getGenres();
 	}, []);
-	const { bodyData, handleGenresChange, handleAddGenre } = useSeries();
+	const { bodyData, handleGenresChange, handleAddGenre, errors } =
+		useSeries();
 
 	const [newGenre, setNewGenre] = useState("");
 	const [showTextField, setShowTextField] = useState(false);
@@ -61,7 +63,11 @@ const CategoriesInput = () => {
 		}
 	};
 	return (
-		<FormControl sx={{ m: 1, width: 300 }} className="md:w-72 w-full">
+		<FormControl
+			error={errors.genre}
+			sx={{ m: 1, width: 300 }}
+			className="md:w-72 w-full"
+		>
 			<InputLabel id="categories_label" className="text-white">
 				Gatunki
 			</InputLabel>
@@ -115,6 +121,7 @@ const CategoriesInput = () => {
 					</MenuItem>
 				)}
 			</Select>
+			<ErrorDesc error={errors.genre} />
 		</FormControl>
 	);
 };

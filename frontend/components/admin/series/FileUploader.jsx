@@ -4,8 +4,11 @@ import React, { useState } from "react";
 import Image from "next/image";
 import WallpaperRoundedIcon from "@mui/icons-material/WallpaperRounded";
 import PostAddRoundedIcon from "@mui/icons-material/PostAddRounded";
+import ErrorDesc from "./ErrorDesc";
+import { useSeries } from "./SeriesContext";
 
-const FileUploader = ({ fileType, file, setFile, label }) => {
+const FileUploader = ({ fileType, file, setFile, label, errorName, error }) => {
+	const { setErrors } = useSeries();
 	const title = `${
 		fileType === "img" ? "Wybierz obraz" : "Wybierz plik"
 	} lub upuść`;
@@ -16,21 +19,37 @@ const FileUploader = ({ fileType, file, setFile, label }) => {
 	const onFileUploadChange = (e) => {
 		const fileInput = e.target;
 		if (!fileInput.files) {
-			alert("Nie wybrano żadnego pliku");
+			setErrors((prev) => ({
+				...prev,
+				[errorName]: "Nie wybrano żadnego pliku",
+			}));
 			return;
 		}
 		if (!fileInput.files || fileInput.files.length === 0) {
-			alert("Lista obrazów jest pusta");
+			setErrors((prev) => ({
+				...prev,
+				[errorName]: "Lista obrazów jest pusta",
+			}));
 			return;
 		}
 		const file = fileInput.files[0];
 		if (fileType === "img" && !file.type.startsWith("image")) {
-			alert("Wybierz plik z formatem obrazu");
+			setErrors((prev) => ({
+				...prev,
+				[errorName]: "Wybierz plik z formatem obrazu",
+			}));
 			return;
 		} else if (fileType === "video" && !file.type.startsWith("video")) {
-			alert("Wybierz plik z formatem wideo");
+			setErrors((prev) => ({
+				...prev,
+				[errorName]: "Wybierz plik z formatem wideo",
+			}));
 			return;
 		}
+		setErrors((prev) => ({
+			...prev,
+			[errorName]: null,
+		}));
 		setFile(file);
 		setPreviewUrl(URL.createObjectURL(file));
 		e.currentTarget.type = "text";
@@ -69,7 +88,7 @@ const FileUploader = ({ fileType, file, setFile, label }) => {
 		e.currentTarget.type = "file";
 	};
 	return (
-		<div className="flex flex-col gap-2">
+		<div className="flex flex-col">
 			<label htmlFor="file">{label}</label>
 			<div
 				onDrop={handleFileDrop}
@@ -81,7 +100,9 @@ const FileUploader = ({ fileType, file, setFile, label }) => {
 				className={`w-80 h-fit p-2 border rounded-2xl ${
 					isDragOver
 						? "border-secondary-violet shadow-secondary-violet shadow-inner border-solid"
-						: "border-gray-500 border-dashed"
+						: `${
+								error ? "border-red-600" : "border-gray-500"
+						  } border-dashed`
 				}`}
 			>
 				<div className="flex flex-col md:flex-row gap-2 md:py-4 items-center justify-center">
@@ -138,6 +159,7 @@ const FileUploader = ({ fileType, file, setFile, label }) => {
 					</div>
 				) : null}
 			</div>
+			<ErrorDesc error={error} />
 		</div>
 	);
 };

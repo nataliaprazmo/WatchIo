@@ -17,6 +17,21 @@ export function SeriesProvider({ children }) {
 		episode_titles: [],
 		episode_desc: [],
 	});
+	const [errors, setErrors] = useState({
+		series_title: null,
+		series_year_of_production: null,
+		series_desc: null,
+		series_thumbnail: null,
+		genre: null,
+		name: null,
+		surname: null,
+		series_staff: null,
+		title: null,
+		desc: null,
+		thumb: null,
+		video: null,
+		videosCount: null,
+	});
 	const handleGenresChange = (event) => {
 		const {
 			target: { value },
@@ -85,59 +100,66 @@ export function SeriesProvider({ children }) {
 	};
 	const handleAddSeries = async (e) => {
 		e.preventDefault();
-		const token = localStorage.getItem("token");
-		if (token) {
-			try {
-				const formData = new FormData();
-				Object.entries(bodyData).forEach(([key, value]) => {
-					if (Array.isArray(value)) {
-						formData.append(key, JSON.stringify(value));
-					} else {
-						formData.append(key, value);
-					}
-				});
-				videos.forEach((video, index) => {
-					formData.append("videos", video);
-				});
-				video_thumbnails.forEach((thumbnail, index) => {
-					formData.append("video_thumbnails", thumbnail);
-				});
-				formData.append("series_thumbnail", series_thumbnail);
-				const response = await fetch(
-					"http://localhost:5000/api/series/",
-					{
-						method: "POST",
-						headers: { "x-access-token": token },
-						body: formData,
-					}
-				);
-				if (response.status == 200) {
-					const res = response.json();
-					console.log("added series");
-					addNewGenres();
-					setBodyData({
-						series_title: "",
-						series_desc: "",
-						series_year_of_production: 2000,
-						series_genres: [],
-						series_staff: [],
-						episode_titles: [],
-						episode_desc: [],
+		const anyErrorIsNull = Object.values(errors).some(
+			(value) => value === null
+		);
+		if (!anyErrorIsNull) {
+			const token = localStorage.getItem("token");
+			if (token) {
+				try {
+					const formData = new FormData();
+					Object.entries(bodyData).forEach(([key, value]) => {
+						if (Array.isArray(value)) {
+							formData.append(key, JSON.stringify(value));
+						} else {
+							formData.append(key, value);
+						}
 					});
-					setSeries_thumbnail(null);
-					setVideo_thumbnails([]);
-					setVideos([]);
-					setVideosCount(1);
-				}
-			} catch (error) {
-				if (
-					error.response &&
-					error.response.status >= 400 &&
-					error.response.status <= 500
-				) {
-					console.error(error);
+					videos.forEach((video, index) => {
+						formData.append("videos", video);
+					});
+					video_thumbnails.forEach((thumbnail, index) => {
+						formData.append("video_thumbnails", thumbnail);
+					});
+					formData.append("series_thumbnail", series_thumbnail);
+					const response = await fetch(
+						"http://localhost:5000/api/series/",
+						{
+							method: "POST",
+							headers: { "x-access-token": token },
+							body: formData,
+						}
+					);
+					if (response.status == 200) {
+						const res = response.json();
+						console.log("added series");
+						addNewGenres();
+						setBodyData({
+							series_title: "",
+							series_desc: "",
+							series_year_of_production: 2000,
+							series_genres: [],
+							series_staff: [],
+							episode_titles: [],
+							episode_desc: [],
+						});
+						setSeries_thumbnail(null);
+						setVideo_thumbnails([]);
+						setVideos([]);
+						setVideosCount(1);
+					}
+				} catch (error) {
+					if (
+						error.response &&
+						error.response.status >= 400 &&
+						error.response.status <= 500
+					) {
+						console.error(error);
+					}
 				}
 			}
+		} else {
+			console.log("there are errors!");
 		}
 	};
 
@@ -164,6 +186,8 @@ export function SeriesProvider({ children }) {
 				videosCount,
 				setVideosCount,
 				handleAddSeries,
+				errors,
+				setErrors,
 			}}
 		>
 			{children}
