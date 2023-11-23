@@ -1,4 +1,3 @@
-const { errorMonitor } = require("events");
 const fsPromises = require("fs/promises");
 const fs = require("fs");
 
@@ -30,13 +29,18 @@ const addImgsToSeries = async (series) => {
 };
 
 const addImgsToEpisodes = async (episodes) => {
-	for (let j = 0; j < episodes.length; j++) {
-		episodes[j].thumbnail = await getImgToBase64(
-			episodes[j].thumbnail_path
-		);
-		episodes[j].thumbnail_path;
+	try {
+		for (let j = 0; j < episodes.length; j++) {
+			episodes[j].thumbnail = await getImgToBase64(
+				episodes[j].thumbnail_path
+			);
+			delete episodes[j].thumbnail_path;
+		}
+		return episodes;
+	} catch (error) {
+		console.error(error);
+		throw error;
 	}
-	return episodes;
 };
 
 module.exports = {

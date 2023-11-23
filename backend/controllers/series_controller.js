@@ -2,13 +2,33 @@ const { Series, validateSeries } = require("../models/Series");
 const { Video, validateVideo } = require("../models/Video");
 const { Subscription } = require("../models/Subscription");
 const { deleteFile } = require("../utils/File_utils");
-const { addImgsToSeries } = require("../utils/Img_utils");
+const { addImgsToSeries, addImgsToEpisodes } = require("../utils/Img_utils");
 const { genreCreateIfDontExists } = require("../utils/Genres_utils");
 
 const getSeries = async () => {
 	try {
 		var series = await Series.find().lean().exec();
 		await addImgsToSeries(series);
+		return series;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getSeriesDetails = async (seriesId) => {
+	try {
+		// console.log(seriesId);
+		var series = await Series.findById(seriesId)
+			.populate("episodes")
+			.lean()
+			.exec();
+		if (!series) return false;
+		// console.log(series);
+		console.log(series);
+		await addImgsToSeries([series]);
+		// console.log(series.episodes.length);
+		await addImgsToEpisodes(series.episodes);
+		// console.log(series);
 		return series;
 	} catch (error) {
 		throw error;
@@ -37,6 +57,8 @@ const upload_Series = async (
 	files_video_thumbnail
 ) => {
 	try {
+		console.log(episode_titles);
+		console.log(episode_desc);
 		const series = await Series.findOne({ series_title: series_title });
 		if (series)
 			return { statusCode: 409, message: "Series already exists" };
@@ -119,4 +141,10 @@ const deleteSeries = async (id) => {
 	}
 };
 
-module.exports = { getSeries, getSeriesByGenre, upload_Series, deleteSeries };
+module.exports = {
+	getSeries,
+	getSeriesByGenre,
+	upload_Series,
+	deleteSeries,
+	getSeriesDetails,
+};
