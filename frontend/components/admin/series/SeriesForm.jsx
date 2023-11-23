@@ -28,19 +28,20 @@ const SeriesForm = () => {
 			}));
 		} else if (
 			name === "series_year_of_production" &&
-			(value < 1980 || value > new Date().getFullYear())
+			(value < 1900 || value > new Date().getFullYear())
 		) {
 			setErrors((prev) => ({
 				...prev,
 				[name]:
-					"Ustaw rok pomiędzy latami 1980 a " +
+					"Ustaw rok pomiędzy latami 1900 a " +
 					new Date().getFullYear(),
 			}));
+		} else {
+			setErrors((prev) => ({
+				...prev,
+				[name]: null,
+			}));
 		}
-		setErrors((prev) => ({
-			...prev,
-			[name]: null,
-		}));
 		setBodyData((prev) => ({
 			...prev,
 			[name]: value,

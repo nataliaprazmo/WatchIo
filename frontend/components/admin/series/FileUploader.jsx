@@ -61,6 +61,10 @@ const FileUploader = ({ fileType, file, setFile, label, errorName, error }) => {
 			return;
 		}
 		setFile(null);
+		setErrors((prev) => ({
+			...prev,
+			[errorName]: "Uzupełnij pole",
+		}));
 		setPreviewUrl(null);
 	};
 	const [isDragOver, setIsDragOver] = useState(false);

@@ -45,10 +45,7 @@ const StepForm = () => {
 	const handleStep = (step) => () => {
 		setActiveStep(step);
 	};
-	const { errors, setErrors } = useSeries();
-	useEffect(() => {
-		console.log(errors);
-	}, [errors, setErrors]);
+	const { errors } = useSeries();
 	const [open, setOpen] = useState(false);
 	const handleClose = (event, reason) => {
 		if (reason === "clickaway") {
@@ -68,17 +65,18 @@ const StepForm = () => {
 			</IconButton>
 		</React.Fragment>
 	);
+	const [anyErrorIsNull, setAnyErrorIsNull] = useState(true);
 	const handleComplete = () => {
-		const anyErrorIsNull = Object.values(errors).some(
-			(value) => value === null
+		setAnyErrorIsNull(
+			Object.values(errors).some((value) => value === null)
 		);
 		if (!anyErrorIsNull) {
+			setOpen(true);
+		} else {
 			const newCompleted = completed;
 			newCompleted[activeStep] = true;
 			setCompleted(newCompleted);
 			handleNext();
-		} else {
-			setOpen(true);
 		}
 	};
 	const handleReset = () => {

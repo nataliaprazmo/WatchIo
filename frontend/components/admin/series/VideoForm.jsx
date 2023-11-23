@@ -2,7 +2,6 @@ import React from "react";
 import Input from "./Input";
 import MultilineInput from "./MultilineInput";
 import { Button, Chip, Divider } from "@mui/material";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useSeries } from "./SeriesContext";
 import FileUploader from "./FileUploader";
 
@@ -16,9 +15,22 @@ const VideoForm = () => {
 		setBodyData,
 		handleAddVideoThumbnail,
 		handleAddVideo,
+		errors,
+		setErrors,
 	} = useSeries();
 	const handleChange = ({ currentTarget: input }) => {
 		const { name, value } = input;
+		if (!value || value === "") {
+			setErrors((prev) => ({
+				...prev,
+				[name]: "Uzupełnij pole",
+			}));
+		} else {
+			setErrors((prev) => ({
+				...prev,
+				[name]: null,
+			}));
+		}
 		setEpisode((ep) => ({ ...ep, [name]: value }));
 	};
 	const areEpisodesEmpty =
@@ -84,6 +96,7 @@ const VideoForm = () => {
 						type="text"
 						value={episode.title}
 						handleChange={handleChange}
+						error={errors.title}
 					/>
 					<MultilineInput
 						id="desc"
@@ -92,6 +105,7 @@ const VideoForm = () => {
 						type="text"
 						value={episode.desc}
 						handleChange={handleChange}
+						error={errors.desc}
 					/>
 				</div>
 				<div className="flex flex-wrap items-center gap-4 mt-8">

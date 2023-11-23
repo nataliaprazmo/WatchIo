@@ -82,84 +82,60 @@ export function SeriesProvider({ children }) {
 		setVideos((prev) => [...prev, episode.video]);
 	};
 	const [videosCount, setVideosCount] = useState(1);
-	const addNewGenres = async () => {
-		try {
-			const response = await fetch(
-				"http://localhost:5000/api/genres/testmultiple",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ genre: bodyData.series_genres }),
-				}
-			);
-			const res = await response.json;
-			console.log(res.message);
-		} catch (error) {
-			console.log(error);
-		}
-	};
 	const handleAddSeries = async (e) => {
 		e.preventDefault();
-		const anyErrorIsNull = Object.values(errors).some(
-			(value) => value === null
-		);
-		if (!anyErrorIsNull) {
-			const token = localStorage.getItem("token");
-			if (token) {
-				try {
-					const formData = new FormData();
-					Object.entries(bodyData).forEach(([key, value]) => {
-						if (Array.isArray(value)) {
-							formData.append(key, JSON.stringify(value));
-						} else {
-							formData.append(key, value);
-						}
-					});
-					videos.forEach((video, index) => {
-						formData.append("videos", video);
-					});
-					video_thumbnails.forEach((thumbnail, index) => {
-						formData.append("video_thumbnails", thumbnail);
-					});
-					formData.append("series_thumbnail", series_thumbnail);
-					const response = await fetch(
-						"http://localhost:5000/api/series/",
-						{
-							method: "POST",
-							headers: { "x-access-token": token },
-							body: formData,
-						}
-					);
-					if (response.status == 200) {
-						const res = response.json();
-						console.log("added series");
-						addNewGenres();
-						setBodyData({
-							series_title: "",
-							series_desc: "",
-							series_year_of_production: 2000,
-							series_genres: [],
-							series_staff: [],
-							episode_titles: [],
-							episode_desc: [],
-						});
-						setSeries_thumbnail(null);
-						setVideo_thumbnails([]);
-						setVideos([]);
-						setVideosCount(1);
+		const token = localStorage.getItem("token");
+		if (token) {
+			try {
+				const formData = new FormData();
+				Object.entries(bodyData).forEach(([key, value]) => {
+					if (Array.isArray(value)) {
+						formData.append(key, JSON.stringify(value));
+					} else {
+						formData.append(key, value);
 					}
-				} catch (error) {
-					if (
-						error.response &&
-						error.response.status >= 400 &&
-						error.response.status <= 500
-					) {
-						console.error(error);
+				});
+				videos.forEach((video, index) => {
+					formData.append("videos", video);
+				});
+				video_thumbnails.forEach((thumbnail, index) => {
+					formData.append("video_thumbnails", thumbnail);
+				});
+				formData.append("series_thumbnail", series_thumbnail);
+				const response = await fetch(
+					"http://localhost:5000/api/series/",
+					{
+						method: "POST",
+						headers: { "x-access-token": token },
+						body: formData,
 					}
+				);
+				if (response.status == 200) {
+					const res = response.json();
+					console.log("added series");
+					setBodyData({
+						series_title: "",
+						series_desc: "",
+						series_year_of_production: 2000,
+						series_genres: [],
+						series_staff: [],
+						episode_titles: [],
+						episode_desc: [],
+					});
+					setSeries_thumbnail(null);
+					setVideo_thumbnails([]);
+					setVideos([]);
+					setVideosCount(1);
+				}
+			} catch (error) {
+				if (
+					error.response &&
+					error.response.status >= 400 &&
+					error.response.status <= 500
+				) {
+					console.error(error);
 				}
 			}
-		} else {
-			console.log("there are errors!");
 		}
 	};
 

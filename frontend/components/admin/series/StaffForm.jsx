@@ -6,12 +6,29 @@ import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { useSeries } from "./SeriesContext";
 
 const StaffForm = () => {
-	const { bodyData, staffDetails, handleAddStaff, setStaffDetails } =
-		useSeries();
+	const {
+		bodyData,
+		staffDetails,
+		handleAddStaff,
+		setStaffDetails,
+		errors,
+		setErrors,
+	} = useSeries();
 	const isStaffEmpty =
 		bodyData.series_staff && bodyData.series_staff.length === 0;
 	const handleChange = ({ currentTarget: input }) => {
 		const { name, value } = input;
+		if (!value || value === "") {
+			setErrors((prev) => ({
+				...prev,
+				[name]: "Uzupełnij pole",
+			}));
+		} else {
+			setErrors((prev) => ({
+				...prev,
+				[name]: null,
+			}));
+		}
 		setStaffDetails((prevStaffDetails) => ({
 			...prevStaffDetails,
 			[name]: value,
@@ -53,6 +70,7 @@ const StaffForm = () => {
 					type="text"
 					value={staffDetails.name}
 					handleChange={handleChange}
+					error={errors.name}
 				/>
 				<Input
 					id="surname"
@@ -61,6 +79,7 @@ const StaffForm = () => {
 					type="text"
 					value={staffDetails.surname}
 					handleChange={handleChange}
+					error={errors.surname}
 				/>
 				<div className="flex gap-8 w-full">
 					<ValueSelect
