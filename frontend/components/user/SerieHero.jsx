@@ -41,7 +41,7 @@ const SerieHero = () => {
 	};
 	const HeroSerieSlider = React.lazy(async () => {
 		let series = await getFilms();
-		// let heroSeries = series.slice(0, 3);
+		let heroSeries = series.slice(0, 3);
 		await new Promise((resolve) => setTimeout(resolve, 3000));
 		if (series === null) return <></>;
 		else
@@ -54,23 +54,23 @@ const SerieHero = () => {
 							scrollbar={{ hide: false }}
 							centeredSlides={true}
 							autoplay={{
-								delay: 1500,
+								delay: 3000,
 								disableOnInteraction: false,
 							}}
-							className="h-full w-full"
+							className="h-full w-full rounded"
 						>
-							{/* {series &&
-								series.map((heroSerie, id) => {
-									<SwiperSlide key={id}>
-										<HeroSerieSlide serie={heroSerie} />
-									</SwiperSlide>;
-								})} */}
-							<SwiperSlide className="h-full w-full bg-pink-300" />
-							<SwiperSlide className="h-full w-full bg-pink-300" />
-							<SwiperSlide className="h-full w-full bg-pink-300" />
-							<SwiperSlide className="h-full w-full bg-pink-300" />
-							<SwiperSlide className="h-full w-full bg-pink-300" />
-							<SwiperSlide className="h-full w-full bg-pink-300" />
+							{heroSeries && (
+								<>
+									{heroSeries.map((serie, id) => (
+										<SwiperSlide
+											key={id}
+											className="h-full w-full"
+										>
+											<HeroSerieSlide serie={serie} />
+										</SwiperSlide>
+									))}
+								</>
+							)}
 						</Swiper>
 					</div>
 				),

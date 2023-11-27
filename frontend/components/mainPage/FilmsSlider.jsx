@@ -61,7 +61,10 @@ const FilmsSlider = () => {
 						>
 							{series &&
 								series.map((serie, id) => (
-									<SwiperSlide key={id}>
+									<SwiperSlide
+										key={id}
+										className="main-slide"
+									>
 										<FilmSlide serie={serie} />
 									</SwiperSlide>
 								))}
