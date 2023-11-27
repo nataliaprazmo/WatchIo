@@ -4,6 +4,7 @@ const admin_auth = require("../middleware/admin_auth");
 const video_upload = require("../middleware/video_upload");
 const {
 	getSeries,
+	getSeriesDetails,
 	getSeriesByGenre,
 	upload_Series,
 	deleteSeries,
@@ -17,6 +18,20 @@ router.get("/", async (req, res) => {
 		return res.status(200).send({
 			message: "Data fetched succesfully",
 			data: { series: result },
+		});
+	} catch (error) {
+		console.error(error);
+		return res.status(500).send({ message: error.message });
+	}
+});
+
+router.get("/:id", async (req, res) => {
+	try {
+		const result = await getSeriesDetails(req.params.id);
+		// console.log(result);
+		return res.status(200).send({
+			message: "Data fetched succesfully",
+			data: { seriesDetails: result },
 		});
 	} catch (error) {
 		console.error(error);
@@ -71,8 +86,8 @@ router.post(
 				req.body.series_desc,
 				req.body.series_year_of_production,
 				JSON.parse(req.body.series_staff),
-				req.body.episode_titles,
-				req.body.episode_desc,
+				JSON.parse(req.body.episode_titles),
+				JSON.parse(req.body.episode_desc),
 				req.files.videos,
 				req.files.series_thumbnail,
 				req.files.video_thumbnails

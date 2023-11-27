@@ -1,23 +1,34 @@
 const { Series, validateSeries } = require("../models/Series");
 const { Video, validateVideo } = require("../models/Video");
 const { Subscription } = require("../models/Subscription");
-const { deleteFile, getImgToBase64 } = require("../utils/File_utils");
+const { deleteFile } = require("../utils/File_utils");
+const { addImgsToSeries, addImgsToEpisodes } = require("../utils/Img_utils");
+const { genreCreateIfDontExists } = require("../utils/Genres_utils");
 
-const getSeries = async (howMany) => {
+const getSeries = async () => {
 	try {
-		var series = await Series.find().populate("episodes").lean().exec();
-		for (let i = 0; i < series.length; i++) {
-			series[i].picture = await getImgToBase64(
-				series[i].series_picture_path
-			);
-			delete series[i].series_picture_path;
-			for (let j = 0; j < series[i].episodes.length; j++) {
-				series[i].episodes[j].thumbnail = await getImgToBase64(
-					series[i].episodes[j].thumbnail_path
-				);
-				delete series[i].episodes[j].thumbnail_path;
-			}
-		}
+		var series = await Series.find().lean().exec();
+		await addImgsToSeries(series);
+		return series;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getSeriesDetails = async (seriesId) => {
+	try {
+		// console.log(seriesId);
+		var series = await Series.findById(seriesId)
+			.populate("episodes")
+			.lean()
+			.exec();
+		if (!series) return false;
+		// console.log(series);
+		console.log(series);
+		await addImgsToSeries([series]);
+		// console.log(series.episodes.length);
+		await addImgsToEpisodes(series.episodes);
+		// console.log(series);
 		return series;
 	} catch (error) {
 		throw error;
@@ -46,6 +57,8 @@ const upload_Series = async (
 	files_video_thumbnail
 ) => {
 	try {
+		console.log(episode_titles);
+		console.log(episode_desc);
 		const series = await Series.findOne({ series_title: series_title });
 		if (series)
 			return { statusCode: 409, message: "Series already exists" };
@@ -97,6 +110,7 @@ const upload_Series = async (
 			imdb_score: apiData.imdbRating,
 		});
 		await newSeries.save();
+		await genreCreateIfDontExists(series_genres);
 		return { statusCode: 200, message: "Series added successfully" };
 	} catch (error) {
 		throw error;
@@ -127,4 +141,10 @@ const deleteSeries = async (id) => {
 	}
 };
 
-module.exports = { getSeries, getSeriesByGenre, upload_Series, deleteSeries };
+module.exports = {
+	getSeries,
+	getSeriesByGenre,
+	upload_Series,
+	deleteSeries,
+	getSeriesDetails,
+};

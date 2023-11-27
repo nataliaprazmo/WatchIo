@@ -1,5 +1,10 @@
 const { Genre } = require("../models/Genre");
-const { parseGenres } = require("../utils/Genres_utils");
+const {
+	parseGenres,
+	genreCreateIfDontExists,
+} = require("../utils/Genres_utils");
+
+const genreCreateIfDontExists_utils = genreCreateIfDontExists;
 
 const getAllGenres = async () => {
 	try {
@@ -21,19 +26,18 @@ const addGenre = async (newGenre) => {
 	}
 };
 
-const genreCreateIfDontExists = async (genresList) => {
+const genreCreateIfDontExists_testMultiple = async (genresList) => {
 	try {
-		const genres = await Genre.find();
-		const parsedGenres = parseGenres(genres);
-		//sprawdzić for eacha, nie działa z async
-		genresList.forEach(async (element) => {
-			if (!parsedGenres.includes(element))
-				await new Genre({ name: element }).save();
-		});
+		const result = await genreCreateIfDontExists_utils(genresList);
+		if (!result) return false;
 		return true;
 	} catch (error) {
 		throw error;
 	}
 };
 
-module.exports = { getAllGenres, addGenre, genreCreateIfDontExists };
+module.exports = {
+	getAllGenres,
+	addGenre,
+	genreCreateIfDontExists_testMultiple,
+};

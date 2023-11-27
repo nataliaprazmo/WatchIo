@@ -1,13 +1,17 @@
 const { Watchlist } = require("../models/Watchlist");
 const { Series } = require("../models/Series");
+const { addImgsToSeries, getImgToBase64 } = require("../utils/Img_utils");
 
 const getWatchlist = async (watchlistId) => {
 	try {
 		const watchlist = await Watchlist.findOne({ _id: watchlistId })
 			.populate("owner")
 			.populate("series")
+			.lean()
 			.exec();
 		if (!watchlist) return false;
+
+		await addImgsToSeries(watchlist);
 		return watchlist;
 	} catch (error) {
 		throw error;
@@ -19,8 +23,10 @@ const getCurrentUserWatchlist = async (userId) => {
 		var watchlist = await Watchlist.findOne({ owner: userId })
 			.populate("owner")
 			.populate("series")
+			.lean()
 			.exec();
 		if (!watchlist) return false;
+		await addImgsToSeries(watchlist.series);
 		return watchlist;
 	} catch (error) {
 		throw error;
