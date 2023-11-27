@@ -3,13 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { NavigateNextRounded } from "@mui/icons-material";
 import SiteBreadcrumbs from "../SiteBreadcrumbs";
-import SeriesHero from "./SeriesHero";
-import Section from "./Section";
 import PurchaseDialog from "./subscriptionPurchase/PurchaseDialog";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSubscription } from "./SubscriptionContext";
+import SeriesSections from "./SeriesSections";
 
 const Dashboard = () => {
 	const [open, setOpen] = useState(false);
@@ -38,7 +37,6 @@ const Dashboard = () => {
 		checkSubscription,
 		getPrices,
 		setHasSubscription,
-		loading,
 	} = useSubscription();
 	useEffect(() => {
 		checkSubscription();
@@ -46,9 +44,6 @@ const Dashboard = () => {
 	useEffect(() => {
 		if (!hasSubscription) getPrices();
 	}, [hasSubscription, setHasSubscription]);
-	// if (loading) {
-	// 	return <div>Loading...</div>;
-	// }
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
 			<div className="flex gap-1 items-center mb-6">
@@ -67,13 +62,7 @@ const Dashboard = () => {
 					/>
 				</div>
 			) : null}
-			<SeriesHero />
-			<Section text="Najpopularniejsze" items_count={4} />
-			<Section text="Najlepiej oceniane" items_count={6} />
-			<Section text="Ostatnio dodane" items_count={6} />
-			<Section text="Polecane" items_count={4} />
-			<Section text="Seriale" items_count={6} />
-			<Section text="Filmy" items_count={6} />
+			<SeriesSections />
 			<Snackbar
 				open={open}
 				autoHideDuration={6000}

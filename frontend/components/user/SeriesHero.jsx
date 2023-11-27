@@ -1,31 +1,20 @@
-import { Chip } from "@mui/material";
 import React from "react";
 import { Chips } from "../admin";
 import Skeleton from "@mui/material/Skeleton";
+import SerieHero from "./SerieHero";
 
 const SeriesHero = () => {
 	return (
 		<div className="md:grid md:grid-cols-12 lg:gap-16 gap-8 flex flex-col-reverse">
 			<div className="flex flex-col xl:col-span-3 lg:col-span-4 md:col-span-5">
-				<div className="flex gap-6 items-center mb-3">
+				<div className="flex gap-4 items-center mb-3">
 					<h2 className="lg:text-2xl text-xl font-semibold">
 						Buzz Astral
 					</h2>
-					<Chip
-						label={
-							<p className="flex gap-2 font-semibold">
-								IMDB{" "}
-								<span className="text-primary-orange ">
-									6.0
-								</span>
-							</p>
-						}
-						variant="outlined"
-						className="lg:px-2 px-1 bg-grey-200 border-white rounded"
-						sx={{
-							span: { color: "#fafaf5" },
-						}}
-					/>
+					<p className="ml-1 py-1 px-2 rounded border-2 border-white text-xs bg-opacity-20 bg-neutral-600 ">
+						IMDB{" "}
+						<span className="text-primary-orange ml-1">6.0</span>
+					</p>
 				</div>
 				<p className="font-medium pb-4 text-justify lg:text-base text-sm line-clamp-6 mb-4">
 					Animowany film przygodowy science-fiction przedstawiający
@@ -45,13 +34,14 @@ const SeriesHero = () => {
 					elements={["Animacja", "Familijny", "Przygodowy"]}
 				/>
 			</div>
-			<div className="xl:col-span-9 lg:col-span-8 md:col-span-7 rounded-lg lg:h-96 md:h-72 h-64">
+			{/* <div className="xl:col-span-9 lg:col-span-8 md:col-span-7 rounded-lg lg:h-96 md:h-72 h-64">
 				<Skeleton
 					animation="wave"
 					variant="rounded"
 					sx={{ bgcolor: "rgb(59 7 100)", height: "100%" }}
 				/>
-			</div>
+			</div> */}
+			<SerieHero />
 		</div>
 	);
 };

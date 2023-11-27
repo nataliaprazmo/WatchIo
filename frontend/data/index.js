@@ -1,6 +1,5 @@
 import benefits from "./benefits";
 import pages from "./pages";
-import plans from "./plans";
 import policies from "./policies";
 import questions from "./questions";
 import slides from "./slides";
@@ -13,7 +12,6 @@ import headCells from "./headCells";
 export {
 	benefits,
 	pages,
-	plans,
 	policies,
 	questions,
 	slides,
