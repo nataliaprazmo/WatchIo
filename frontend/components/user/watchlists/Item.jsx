@@ -10,7 +10,7 @@ const Item = ({ serie, index }) => {
 			{/* <Image
 				src={`data:image/jpg;base64, ${serie.picture}`}
 				alt={serie.series_title}
-				idth={120}
+				width={120}
 				height={200}
 				style={{ objectFit: "cover" }}
 				className="bg-cover rounded"
@@ -32,7 +32,9 @@ const Item = ({ serie, index }) => {
 						liczba odcinków: {serie.episodes.length}
 					</p>
 					{serie.age_rating && (
-						<p className="text-sm text-neutral-400">{serie.age_rating}</p>
+						<p className="text-sm text-neutral-400">
+							{serie.age_rating}
+						</p>
 					)}
 				</div>
 				<p className="line-clamp-2">{serie.description}</p>
