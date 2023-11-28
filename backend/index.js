@@ -11,6 +11,7 @@ const series = require("./routes/series");
 const subscriptionSharing = require("./routes/subscriptionSharing");
 const watchlists = require("./routes/watchlists");
 const genres = require("./routes/genres");
+const videos = require("./routes/videos")
 
 app.use(express.json());
 app.use(cors());
@@ -26,6 +27,8 @@ app.use("/api/genres", genres);
 app.use("/api/subsciptions/sharing", subscriptionSharing);
 app.use("/api/subscriptions", subscriptions);
 app.use("/api/watchlists", watchlists);
+app.use("/api/videos", videos);
+
 
 app.listen(process.env.PORT, () => {
 	console.log(`Nasłuchiwanie na porcie ${process.env.PORT}`);
