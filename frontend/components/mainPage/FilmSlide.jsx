@@ -20,7 +20,7 @@ const FilmSlide = ({ serie }) => {
 					<h3 className="text-xl font-semibold">
 						{serie.series_title}
 					</h3>
-					<p className="ml-1 py-1 px-2 rounded border-2 border-white text-xs bg-opacity-20 bg-neutral-600 ">
+					<p className="ml-1 py-1 px-2 rounded border-2 border-white text-xs bg-opacity-20 bg-neutral-600 font-medium">
 						IMDB{" "}
 						<span className="text-primary-orange ml-1">
 							{serie.imdb_score}

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
-import { Chip, Button } from "@mui/material";
+import { Chip } from "@mui/material";
 import Image from "next/image";
 
 const SeriesDetails = ({ id }) => {
@@ -39,97 +39,105 @@ const SeriesDetails = ({ id }) => {
 			/>
 			{seriesDetails && (
 				<>
-					<div className="mt-8 flex flex-row flex-wrap items-start gap-8">
-						<Image
-							src={`data:image/jpg;base64, ${seriesDetails.picture}`}
-							alt={seriesDetails.series_title}
-							width={240}
-							height={400}
-							style={{ objectFit: "cover" }}
-							className="bg-cover rounded"
-						/>
-						<div className="flex flex-col w-96">
-							<h1 className="font-semibold text-32">
-								{seriesDetails.series_title}
-							</h1>
-							<div className="flex flex-row items-center my-1">
-								<StarOutlineRoundedIcon
-									sx={{
-										fontSize: "18px",
-										path: { color: "#ff9900" },
-									}}
-								/>
-								<p className="text-sm mr-1 text-neutral-400">
-									{seriesDetails.imdb_score
-										? seriesDetails.imdb_score
-										: 5.0}
-								</p>
-								<p className="text-sm ml-1 text-neutral-400">
-									IMDB
-								</p>
-								<p className="mx-6 text-sm text-neutral-400">
-									{seriesDetails.year_of_production}
-								</p>
-								<p className="text-sm mr-6 text-neutral-400">
-									liczba odcinków:{" "}
-									{seriesDetails.episodes.length}
-								</p>
-								{seriesDetails.age_rating && (
-									<p className="text-sm text-neutral-400">
-										{seriesDetails.age_rating}
-									</p>
-								)}
-							</div>
-							<p className="line-clamp-4">
-								{seriesDetails.description}
-							</p>
-							<div className="flex flex-row items-center gap-2 mt-8">
-								<p className="text-neutral-400 mr-2">
-									Gatunki:
-								</p>
-								{seriesDetails.genres.map((gatunek, index) => (
-									<Chip
-										key={index}
-										label={gatunek}
-										variant="outlined"
-										sx={{ borderColor: "#9126d9" }}
+					<div className="mt-8 flex flex-row flex-wrap items-start justify-between">
+						<div className="flex flex-row flex-wrap items-start gap-8">
+							<Image
+								src={`data:image/jpg;base64, ${seriesDetails.picture}`}
+								alt={seriesDetails.series_title}
+								width={240}
+								height={400}
+								style={{ objectFit: "cover" }}
+								className="bg-cover rounded"
+							/>
+							<div className="flex flex-col w-96">
+								<h1 className="font-semibold sm:text-32 text-2xl">
+									{seriesDetails.series_title}
+								</h1>
+								<div className="flex flex-row items-center my-1">
+									<StarOutlineRoundedIcon
+										sx={{
+											fontSize: "18px",
+											path: { color: "#ff9900" },
+										}}
 									/>
-								))}
+									<p className="text-sm mr-1 text-neutral-400">
+										{seriesDetails.imdb_score
+											? seriesDetails.imdb_score
+											: 5.0}
+									</p>
+									<p className="text-sm ml-1 text-neutral-400">
+										IMDB
+									</p>
+									<p className="mx-6 text-sm text-neutral-400">
+										{seriesDetails.year_of_production}
+									</p>
+									<p className="text-sm mr-6 text-neutral-400">
+										liczba odcinków:{" "}
+										{seriesDetails.episodes.length}
+									</p>
+									{seriesDetails.age_rating && (
+										<p className="text-sm text-neutral-400">
+											{seriesDetails.age_rating}
+										</p>
+									)}
+								</div>
+								<p className="line-clamp-6 text-justify sm:text-base text-sm">
+									{seriesDetails.description}
+								</p>
+								<div className="flex flex-row items-center gap-2 mt-8">
+									<p className="text-neutral-400 mr-2">
+										Gatunki:
+									</p>
+									{seriesDetails.genres.map(
+										(gatunek, index) => (
+											<Chip
+												key={index}
+												label={gatunek}
+												variant="outlined"
+												sx={{ borderColor: "#9126d9" }}
+											/>
+										)
+									)}
+								</div>
 							</div>
 						</div>
+						<div className="flex flex-col w-96 bg-grey-150 rounded px-4 py-2 xl:mt-0 mt-8 md:mr-16 mr-4">
+							<p className="text-xl font-semibold text-center border-b-[1px] pb-1 border-grey-100">
+								Odcinki
+							</p>
+							{seriesDetails.episodes.map((ep, index) =>
+								ep._id === episodeId ? (
+									<p className="font-bold pt-2 text-base text-primary-orange">
+										Odcinek {index + 1}
+									</p>
+								) : (
+									<p className="font-medium pt-2 text-base">
+										Odcinek {index + 1}
+									</p>
+								)
+							)}
+						</div>
 					</div>
+
 					<div className="flex flex-row items-center gap-2 mt-8">
 						<p className="text-neutral-400 mr-2">Odcinki:</p>
 						{seriesDetails.episodes.map((ep, index) =>
 							ep._id === episodeId ? (
-								<Button
+								<button
 									key={index}
-									variant="contained"
-									sx={{
-										backgroundColor: "#9126d9",
-										"&:hover": {
-											backgroundColor: "#b267e4",
-										},
-									}}
+									className="text-sm bg-secondary-violet rounded py-2 px-4 font-medium uppercase hover:text-black hover:bg-[#bd7de8]"
 									onClick={() => setEpisodeId(ep._id)}
 								>
 									Odcinek {index + 1}.
-								</Button>
+								</button>
 							) : (
-								<Button
+								<button
 									key={index}
-									variant="outlined"
-									sx={{
-										borderColor: "#9126d9",
-										"&:hover": {
-											borderColor: "#b267e4",
-										},
-										color: "#fafaf5",
-									}}
+									className="text-sm border-[1px] border-secondary-violet rounded py-2 px-4 font-medium uppercase hover:border-2 hover:border-[#bd7de8]"
 									onClick={() => setEpisodeId(ep._id)}
 								>
 									Odcinek {index + 1}.
-								</Button>
+								</button>
 							)
 						)}
 					</div>
