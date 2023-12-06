@@ -1,13 +1,11 @@
 import React from "react";
 import SeriesHero from "./SeriesHero";
 import Section from "./Section";
-import FilmsSlider from "./FilmsSlider";
 
 const SeriesSections = () => {
 	return (
 		<>
-			<FilmsSlider />
-			{/* <SeriesHero /> */}
+			<SeriesHero />
 			<Section text="Najpopularniejsze" items_count={4} />
 			<Section text="Najlepiej oceniane" items_count={6} />
 			<Section text="Ostatnio dodane" items_count={6} />

@@ -8,7 +8,6 @@ const Plans = () => {
 		const getPrices = async () => {
 			const token = localStorage.getItem("token");
 			if (token) {
-				setLoading(true);
 				try {
 					const response = await fetch(
 						"http://localhost:5000/api/subscriptions/prices?currency=pln",
@@ -24,7 +23,6 @@ const Plans = () => {
 						const res = await response.json();
 						setPrice(res.data.prices[0]);
 					}
-					setLoading(false);
 				} catch (error) {
 					if (
 						error.response &&
