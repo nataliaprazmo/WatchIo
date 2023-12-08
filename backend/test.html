@@ -72,11 +72,30 @@
 	</head>
 	<body>
 		Client1
-		<button onclick="sendMessage()">Send Msg</button>
+		<video
+			src="http://localhost:5000/api/videos/656623c900a0869bc3cda3b2"
+			controls
+			autoplay
+		></video>
 	</body>
 	<script>
 		// Create WebSocket connection.
 		const socket = new WebSocket("ws://localhost:5000");
+		const video = document.querySelector("video");
+		socket.binaryType = "arrayBuffer";
+
+		video.addEventListener("play", (event) => {
+			console.log(video);
+			socket.send(["play", video.currentTime]);
+		});
+
+		video.addEventListener("pause", (event) => {
+			socket.send(["pause", video.currentTime]);
+		});
+
+		video.addEventListener("timeupdate", (event) => {
+			socket.send(["timeupdate", video.currentTime]);
+		});
 
 		// Connection opened
 		socket.addEventListener("open", function (event) {
@@ -85,7 +104,29 @@
 
 		// Listen for messages
 		socket.addEventListener("message", function (event) {
-			console.log("Message from server ", event.data);
+			// let data = JSON.stringify(event.data);
+			let arrData = event.data.split(",");
+			console.log(arrData[1] - video.currentTime);
+
+			if (arrData[0] == "play") {
+				video.currentTime = parseFloat(arrData[1]);
+				video.play();
+			}
+			if (arrData[0] == "pause") {
+				video.pause();
+			}
+			if (arrData[0] == "timeupdate") {
+				console.log("cos");
+				if (
+					arrData[1] - video.currentTime > 5 ||
+					arrData[1] - video.currentTime < -5
+				) {
+					video.currentTime = parseFloat(arrData[1]);
+					video.play();
+				}
+			}
+
+			console.log("Message from server ");
 		});
 
 		const sendMessage = () => {

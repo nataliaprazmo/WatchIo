@@ -12,31 +12,34 @@ const watchlists = require("./routes/watchlists");
 const genres = require("./routes/genres");
 const videos = require("./routes/videos");
 const tests = require("./routes/test_sync");
-const WebSocket = require("ws");
+// const WebSocket = require("ws");
 
 const server = require("http").createServer(app);
-const wss = new WebSocket.Server({ server, server });
+// const wss = new WebSocket.Server({ server, server });
 
-wss.on("connection", function connection(ws) {
-	console.log("A new client Connected!");
-	ws.send("Welcome New Client!");
+// wss.on("connection", function connection(ws) {
+// 	console.log("A new client Connected!");
+// 	ws.send("Welcome New Client!");
 
-	ws.on("message", function incoming(message) {
-		console.log("received: %s", message);
+// 	ws.on("message", function incoming(message) {
+// 		console.log("received: %s", message);
 
-		wss.clients.forEach(function each(client) {
-			if (client !== ws && client.readyState === WebSocket.OPEN) {
-				client.send("BLAY");
-			}
-		});
-	});
-});
+// 		wss.clients.forEach(function each(client) {
+// 			if (client !== ws && client.readyState === WebSocket.OPEN) {
+// 				client.send("BLAY");
+// 			}
+// 		});
+// 	});
+// });
+
+const webS = require("./controllers/WEBSOCKETS");
+webS.init(server);
 
 app.use(express.json());
 app.use(cors());
 
-// const connection = require("./db");
-// connection();
+const connection = require("./db");
+connection();
 
 app.use("/api/users", users);
 app.use("/api/auth", auth);
