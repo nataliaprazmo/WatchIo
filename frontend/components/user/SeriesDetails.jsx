@@ -4,6 +4,7 @@ import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import { Chip } from "@mui/material";
 import Image from "next/image";
+import { PlaylistAddRounded } from "@mui/icons-material";
 
 const SeriesDetails = ({ id }) => {
 	const [seriesDetails, setSeriesDetails] = useState(null);
@@ -29,6 +30,19 @@ const SeriesDetails = ({ id }) => {
 		};
 		getSeriesDetails();
 	}, []);
+	const addToWatchlist = async (id) => {
+		const token = localStorage.getItem("token");
+		const response = await fetch(
+			"http://localhost:5000/api/watchlists/" + id,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"x-access-token": token,
+				},
+			}
+		);
+	};
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
 			<SiteBreadcrumbs
@@ -84,24 +98,40 @@ const SeriesDetails = ({ id }) => {
 								<p className="line-clamp-6 text-justify sm:text-base text-sm">
 									{seriesDetails.description}
 								</p>
-								<div className="flex flex-row items-center gap-2 mt-8">
-									<p className="text-neutral-400 mr-2">
-										Gatunki:
-									</p>
-									{seriesDetails.genres.map(
-										(gatunek, index) => (
-											<Chip
-												key={index}
-												label={gatunek}
-												variant="outlined"
-												sx={{ borderColor: "#9126d9" }}
-											/>
-										)
-									)}
+								<div className="flex items-end justify-between">
+									<div className="flex flex-row items-center gap-2 mt-8">
+										<p className="text-neutral-400 mr-2">
+											Gatunki:
+										</p>
+										{seriesDetails.genres.map(
+											(gatunek, index) => (
+												<Chip
+													key={index}
+													label={gatunek}
+													variant="outlined"
+													sx={{
+														borderColor: "#9126d9",
+													}}
+												/>
+											)
+										)}
+									</div>
+									<PlaylistAddRounded
+										onClick={() =>
+											addToWatchlist(seriesDetails._id)
+										}
+										sx={{
+											fontSize: "28px",
+											"&:hover": {
+												path: { color: "#9126d9" },
+											},
+										}}
+										className="cursor-pointer"
+									/>
 								</div>
 							</div>
 						</div>
-						<div className="flex flex-col w-96 bg-grey-150 rounded px-4 py-2 xl:mt-0 mt-8 md:mr-16 mr-4">
+						{/* <div className="flex flex-col w-96 bg-grey-150 rounded px-4 py-2 xl:mt-0 mt-8 md:mr-16 mr-4">
 							<p className="text-xl font-semibold text-center border-b-[1px] pb-1 border-grey-100">
 								Odcinki
 							</p>
@@ -116,7 +146,7 @@ const SeriesDetails = ({ id }) => {
 									</p>
 								)
 							)}
-						</div>
+						</div> */}
 					</div>
 
 					<div className="flex flex-row items-center gap-2 mt-8">

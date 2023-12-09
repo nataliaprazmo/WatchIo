@@ -13,7 +13,7 @@ SwiperCore.use([Autoplay, Scrollbar]);
 
 const SeriesHero = () => {
 	const router = useRouter();
-	const redirect = () => router.push(`/user/series/${serie._id}`);
+	const redirect = (id) => router.push(`/user/series/${id}`);
 	const getFilms = async () => {
 		try {
 			const response = await fetch("http://localhost:5000/api/series", {
@@ -26,6 +26,7 @@ const SeriesHero = () => {
 		} catch (error) {
 			console.log(error);
 			return [];
+			l;
 		}
 	};
 	const HeroSerieSlider = React.lazy(async () => {
@@ -61,7 +62,9 @@ const SeriesHero = () => {
 										>
 											<HeroSerieSlide
 												serie={serie}
-												redirect={redirect}
+												redirect={() =>
+													redirect(serie._id)
+												}
 											/>
 										</SwiperSlide>
 									))}
