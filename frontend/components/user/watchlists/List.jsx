@@ -2,7 +2,7 @@ import React from "react";
 import Item from "./Item";
 import CopyTooltip from "./CopyTooltip";
 
-const List = ({ series, getWatchlist }) => {
+const List = ({ series, getWatchlist, redirect }) => {
 	const deleteFromWatchlist = async (id) => {
 		const token = localStorage.getItem("token");
 		const response = await fetch(
@@ -31,6 +31,7 @@ const List = ({ series, getWatchlist }) => {
 					index={index + 1}
 					serie={serie}
 					deleteFromWatchlist={() => deleteFromWatchlist(serie._id)}
+					redirect={() => redirect(serie._id)}
 				/>
 			))}
 		</div>

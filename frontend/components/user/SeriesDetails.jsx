@@ -4,11 +4,14 @@ import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import { Chip } from "@mui/material";
 import Image from "next/image";
-import { PlaylistAddRounded } from "@mui/icons-material";
+import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import BookmarkAddedRoundedIcon from "@mui/icons-material/BookmarkAddedRounded";
+import Player from "./Player";
 
 const SeriesDetails = ({ id }) => {
 	const [seriesDetails, setSeriesDetails] = useState(null);
 	const [episodeId, setEpisodeId] = useState(null);
+	const [added, setAdded] = useState(false);
 	useEffect(() => {
 		const getSeriesDetails = async () => {
 			try {
@@ -42,6 +45,7 @@ const SeriesDetails = ({ id }) => {
 				},
 			}
 		);
+		if (response.status === 200) setAdded(true);
 	};
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
@@ -116,18 +120,29 @@ const SeriesDetails = ({ id }) => {
 											)
 										)}
 									</div>
-									<PlaylistAddRounded
-										onClick={() =>
-											addToWatchlist(seriesDetails._id)
-										}
-										sx={{
-											fontSize: "28px",
-											"&:hover": {
+									{added ? (
+										<BookmarkAddedRoundedIcon
+											sx={{
+												fontSize: "28px",
 												path: { color: "#9126d9" },
-											},
-										}}
-										className="cursor-pointer"
-									/>
+											}}
+										/>
+									) : (
+										<BookmarkBorderRoundedIcon
+											onClick={() =>
+												addToWatchlist(
+													seriesDetails._id
+												)
+											}
+											sx={{
+												fontSize: "28px",
+												"&:hover": {
+													path: { color: "#9126d9" },
+												},
+											}}
+											className="cursor-pointer"
+										/>
+									)}
 								</div>
 							</div>
 						</div>
@@ -173,14 +188,7 @@ const SeriesDetails = ({ id }) => {
 					</div>
 				</>
 			)}
-			{episodeId && (
-				<video key={episodeId} controls className="mt-6 h-96">
-					<source
-						src={`http://localhost:5000/api/videos/${episodeId}`}
-						type="video/mp4"
-					/>
-				</video>
-			)}
+			{episodeId && <Player key={episodeId} episodeId={episodeId} />}
 		</div>
 	);
 };

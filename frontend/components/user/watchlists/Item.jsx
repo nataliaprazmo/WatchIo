@@ -4,7 +4,7 @@ import { Chip } from "@mui/material";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 
-const Item = ({ serie, index, deleteFromWatchlist }) => {
+const Item = ({ serie, index, deleteFromWatchlist, redirect }) => {
 	return (
 		<div className="flex flex-row w-full items-center justify-start gap-4 py-4 border-b-2 border-grey-150">
 			<p className="self-start">{index}.</p>
@@ -17,7 +17,12 @@ const Item = ({ serie, index, deleteFromWatchlist }) => {
 				className="bg-cover rounded"
 			/>
 			<div className="flex flex-col justify-center items-start">
-				<h2 className="font-semibold">{serie.series_title}</h2>
+				<h2
+					onClick={redirect}
+					className="font-semibold cursor-pointer hover:text-secondary-violet"
+				>
+					{serie.series_title}
+				</h2>
 				<div className="flex flex-row items-center my-1">
 					<StarOutlineRoundedIcon
 						sx={{ fontSize: "18px", path: { color: "#ff9900" } }}

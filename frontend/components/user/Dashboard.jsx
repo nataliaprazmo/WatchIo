@@ -51,7 +51,9 @@ const Dashboard = () => {
 					className="text-xs"
 					sx={{ path: { color: "#ff9900" } }}
 				/>
-				<SiteBreadcrumbs links={[{ to: "/user", label: "Panel" }]} />
+				<SiteBreadcrumbs
+					links={[{ to: "/user", label: "Strona główna" }]}
+				/>
 			</div>
 			{!hasSubscription ? (
 				<div className="z-50 fixed top-0 left-0 w-full h-full backdrop-blur-md flex flex-row justify-center items-center pl-14">

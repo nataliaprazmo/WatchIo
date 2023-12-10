@@ -1,10 +1,11 @@
-import Rooms from "@/components/user/rooms/Rooms";
 import React from "react";
 
 export default function Page() {
 	return (
 		<main className="overflow-hidden">
-			<Rooms />
+			<div className="pt-24 pb-18 pl-24 pr-8">
+				<p>Page in progress...</p>
+			</div>
 		</main>
 	);
 }

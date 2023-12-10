@@ -16,19 +16,30 @@ const SubSettingsTab = () => {
 	const get = async () => {
 		const token = localStorage.getItem("token");
 		try {
-			const response = await fetch("http://localhost:5000/api/subscriptions/", {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					"x-access-token": token,
-				},
-			});
+			const response = await fetch(
+				"http://localhost:5000/api/subscriptions/",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"x-access-token": token,
+					},
+				}
+			);
 			if (response.status == 200) {
 				const res = await response.json();
-				setSharedCount(res.data.subscription.subscription.shared_with_count);
-				setSubscriptionUserType(res.data.subscription.subscriptionUserType);
+				setSharedCount(
+					res.data.subscription.subscription.shared_with_count
+				);
+				setSubscriptionUserType(
+					res.data.subscription.subscriptionUserType
+				);
 				setOwner(res.data.subscription.subscription.owner);
-				setDate(formatDate(res.data.subscription.subscription.end_date * 1000));
+				setDate(
+					formatDate(
+						res.data.subscription.subscription.end_date * 1000
+					)
+				);
 			}
 		} catch (error) {
 			console.error(error);
@@ -49,7 +60,7 @@ const SubSettingsTab = () => {
 		);
 	};
 	return (
-		<div className="flex flex-col gap-1">
+		<div className="flex flex-col gap-1 mt-12">
 			<h1 className="text-2xl font-semibold">Ustawienia subskrypcji</h1>
 			<p className="text-neutral-500 font-semibold">
 				{subscriptionUserType === "owner"
@@ -62,7 +73,9 @@ const SubSettingsTab = () => {
 					<p className="font-medium">{owner}</p>
 				</div>
 				<div className="flex flex-col">
-					<h3 className="text-neutral-400 font-medium">Podłączone konta</h3>
+					<h3 className="text-neutral-400 font-medium">
+						Podłączone konta
+					</h3>
 					<p className="font-medium">{sharedCount}</p>
 				</div>
 				<div className="flex flex-col">
