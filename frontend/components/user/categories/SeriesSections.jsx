@@ -1,18 +1,21 @@
 import React from "react";
 import SeriesHero from "../SeriesHero";
-import { getBestRated } from "./categories";
-import { getNewest } from "./categories";
 import { getByOneEpisode } from "./categories";
 import { getByEpisodeCount } from "./categories";
+import { getByQuery } from "./categories";
 import Category from "./Category";
 
 const SeriesSections = () => {
 	return (
 		<>
 			<SeriesHero />
-			<Category getFunction={getNewest} count={4} text="Najnowsze" />
 			<Category
-				getFunction={getBestRated}
+				getFunction={() => getByQuery(4, "sortedBy=year_of_production")}
+				count={4}
+				text="Najnowsze"
+			/>
+			<Category
+				getFunction={() => getByQuery(4, "sortedBy=imdb_score")}
 				count={4}
 				text="Najlepiej oceniane"
 			/>
