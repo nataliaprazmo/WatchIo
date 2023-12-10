@@ -31,7 +31,7 @@ const SeriesHero = () => {
 	const HeroSerieSlider = React.lazy(async () => {
 		let series = await getFilms();
 		let heroSeries = series.slice(0, 4);
-		await new Promise((resolve) => setTimeout(resolve, 3000));
+		await new Promise((resolve) => setTimeout(resolve, 500));
 		if (series === null) return <></>;
 		else
 			return {

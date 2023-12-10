@@ -26,7 +26,7 @@ export const getNewest = async () => {
 			let sorted = [...res.data.series].sort(
 				(a, b) => b.year_of_production - a.year_of_production
 			);
-			return sorted.slice(0, 6);
+			return sorted.slice(0, 4);
 		} else return [];
 	} catch (error) {
 		console.log(error);
@@ -58,7 +58,9 @@ export const getByOneEpisode = async () => {
 		if (response.status === 200) {
 			const res = await response.json();
 			let all = res.data.series;
-			return all.filter((serie) => serie.episodes.length === 1);
+			return all
+				.filter((serie) => serie.episodes.length === 1)
+				.slice(0, 6);
 		} else return [];
 	} catch (error) {
 		console.log(error);
@@ -74,7 +76,9 @@ export const getByEpisodeCount = async (count) => {
 		if (response.status === 200) {
 			const res = await response.json();
 			let all = res.data.series;
-			return all.filter((serie) => serie.episodes.length > count);
+			return all
+				.filter((serie) => serie.episodes.length > count)
+				.slice(0, 6);
 		} else return [];
 	} catch (error) {
 		console.log(error);

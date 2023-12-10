@@ -1,11 +1,10 @@
 import React, { Suspense } from "react";
-import { getBestRated } from "./categories";
 import Section from "./Section";
 import Serie from "./Serie";
 
-const BestRated = () => {
+const Category = ({ getFunction, count, text }) => {
 	const Series = React.lazy(async () => {
-		let series = await getBestRated();
+		let series = await getFunction();
 		if (series === null) return <></>;
 		else
 			return {
@@ -20,12 +19,12 @@ const BestRated = () => {
 	});
 	return (
 		<div className="my-8">
-			<h1 className="text-xl font-semibold mb-4">Najlepiej oceniane</h1>
-			<Suspense fallback={<Section items_count={4} />}>
+			<h1 className="text-xl font-semibold mb-4">{text}</h1>
+			<Suspense fallback={<Section items_count={count} />}>
 				<Series />
 			</Suspense>
 		</div>
 	);
 };
 
-export default BestRated;
+export default Category;

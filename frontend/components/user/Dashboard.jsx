@@ -8,7 +8,7 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSubscription } from "./SubscriptionContext";
-import SeriesSections from "./SeriesSections";
+import SeriesSections from "./categories/SeriesSections";
 
 const Dashboard = () => {
 	const [open, setOpen] = useState(false);
