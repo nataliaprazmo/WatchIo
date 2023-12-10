@@ -76,11 +76,17 @@ const getByOneEpisode = async (howMany) => {
 
 const getByEpisodeCount = async (howMany) => {
 	try {
-		const result = await Series.find({ episodes: { $size: { $gt: 1 } } })
+		const result = await Series.find({
+			$nor: [
+				{ episodes: { $exists: false } },
+				{ episodes: { $size: 0 } },
+				{ episodes: { $size: 1 } },
+			],
+		})
 			.limit(howMany)
 			.lean()
 			.exec();
-		await addImgsToSeries(result);
+		// await addImgsToSeries(result);
 		return result;
 	} catch (error) {
 		throw error;
