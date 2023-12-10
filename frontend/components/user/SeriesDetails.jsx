@@ -4,9 +4,10 @@ import SiteBreadcrumbs from "../SiteBreadcrumbs";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import { Chip } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import BookmarkAddedRoundedIcon from "@mui/icons-material/BookmarkAddedRounded";
-import Player from "./Player";
+import LocalPlayOutlinedIcon from "@mui/icons-material/LocalPlayOutlined";
 
 const SeriesDetails = ({ id }) => {
 	const [seriesDetails, setSeriesDetails] = useState(null);
@@ -185,10 +186,31 @@ const SeriesDetails = ({ id }) => {
 								</button>
 							)
 						)}
+						<Link
+							key={episodeId}
+							href={`/user/rooms/${episodeId}`}
+							className="ml-2"
+						>
+							<LocalPlayOutlinedIcon
+								sx={{
+									fontSize: "28px",
+									"&:hover": {
+										path: { color: "#9126d9" },
+									},
+								}}
+							/>
+						</Link>
 					</div>
 				</>
 			)}
-			{episodeId && <Player key={episodeId} episodeId={episodeId} />}
+			{episodeId && (
+				<video key={episodeId} controls className="w-full mt-6 h-96">
+					<source
+						src={`http://localhost:5000/api/videos/${episodeId}`}
+						type="video/mp4"
+					/>
+				</video>
+			)}
 		</div>
 	);
 };
