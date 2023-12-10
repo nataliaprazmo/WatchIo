@@ -17,6 +17,7 @@ router.get("/:watchlistId", async (req, res) => {
 			message: "Watchlist data found",
 			data: {
 				owner: watchlist.owner.credentials.email,
+				watchlist_id: watchlist._id,
 				series: watchlist.series,
 			},
 		});
@@ -36,6 +37,7 @@ router.get("/", jwt_auth, async (req, res) => {
 			message: "Watchlist data found",
 			data: {
 				owner: watchlist.owner.credentials.email,
+				watchlist_id: watchlist._id,
 				series: watchlist.series,
 			},
 		});
