@@ -63,7 +63,7 @@ const getSeriesSortedBy = async (sortedBy, howMany) => {
 
 const getByOneEpisode = async (howMany) => {
 	try {
-		const result = await Series.find({ "episodes.length": 1 })
+		const result = await Series.find({ episodes: { $size: 1 } })
 			.limit(howMany)
 			.lean()
 			.exec();
@@ -76,9 +76,7 @@ const getByOneEpisode = async (howMany) => {
 
 const getByEpisodeCount = async (howMany) => {
 	try {
-		const result = await Series.find({
-			"episodes.length": { $gt: 1 },
-		})
+		const result = await Series.find({ episodes: { $size: { $gt: 1 } } })
 			.limit(howMany)
 			.lean()
 			.exec();
@@ -104,8 +102,7 @@ const upload_Series = async (
 		console.log(episode_titles);
 		console.log(episode_desc);
 		const series = await Series.findOne({ series_title: series_title });
-		if (series)
-			return { statusCode: 409, message: "Series already exists" };
+		if (series) return { statusCode: 409, message: "Series already exists" };
 		let videos_ids = [];
 		for (let i = 0; i < files_videos.length; i++) {
 			const video = new Video({
