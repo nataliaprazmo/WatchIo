@@ -34,7 +34,10 @@ const server = require("http").createServer(app);
 
 const webS = require("./controllers/WEBSOCKETS");
 webS.init(server);
-
+app.get("/test/ws", (req, res) => {
+	console.log(webS.clients);
+	// console.log(JSON.stringify(webS.clients));
+});
 app.use(express.json());
 app.use(cors());
 
