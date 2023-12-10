@@ -35,15 +35,59 @@ const getSeriesDetails = async (seriesId) => {
 	}
 };
 
-const getSeriesByGenre = async (howMany, genre) => {
+const getSeriesByGenre = async (genre) => {
 	try {
-		const result = Series.find({ genre: genre }).limit(howMany);
+		const result = await Series.find({ genres: { $in: [genre] } })
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
 		return result;
 	} catch (error) {
 		throw error;
 	}
 };
 
+const getSeriesSortedBy = async (sortedBy, howMany) => {
+	try {
+		const result = await Series.find()
+			.sort({ [sortedBy]: -1 })
+			.limit(howMany)
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getByOneEpisode = async (howMany) => {
+	try {
+		const result = await Series.find({ "episodes.length": 1 })
+			.limit(howMany)
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getByEpisodeCount = async (howMany) => {
+	try {
+		const result = await Series.find({
+			"episodes.length": { $gt: 1 },
+		})
+			.limit(howMany)
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
 const upload_Series = async (
 	series_title,
 	series_genres,
@@ -147,4 +191,7 @@ module.exports = {
 	upload_Series,
 	deleteSeries,
 	getSeriesDetails,
+	getByEpisodeCount,
+	getByOneEpisode,
+	getSeriesSortedBy,
 };
