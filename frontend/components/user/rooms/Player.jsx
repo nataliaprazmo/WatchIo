@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import { ws } from "./socket";
+import ws from "./socket";
 
 const Player = ({ id }) => {
 	const video = useRef(document.getElementById("video"));
