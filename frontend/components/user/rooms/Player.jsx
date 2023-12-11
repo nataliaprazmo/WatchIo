@@ -74,10 +74,26 @@ const Player = ({ id }) => {
 		if (arrData[0] === "pause") {
 			video.current.pause();
 		}
+
 		if (arrData[0] === "seeked") {
-			video.current.currentTime = parseFloat(arrData[1]);
-			video.current.play();
+			if (
+				video.current.currentTime - arrData[1] > 2 ||
+				video.current.currentTime - arrData[1] < -2
+			) {
+				video.current.currentTime = parseFloat(arrData[1]);
+				video.current.play();
+			}
 		}
+
+		// if (arrData[0] === "timeupdate") {
+		// 	if (
+		// 		video.current.currentTime - arrData[1] > 2 ||
+		// 		video.current.currentTime - arrData[1] < -2
+		// 	) {
+		// 		video.current.currentTime = parseFloat(arrData[1]);
+		// 		video.current.play();
+		// 	}
+		// }
 		if (arrData[0] === "watching") {
 			setWatching(arrData[1]);
 		}
@@ -92,6 +108,7 @@ const Player = ({ id }) => {
 				onPlay={sendEvent("play")}
 				onPause={sendEvent("pause")}
 				onSeeked={sendEvent("seeked")}
+				// onTimeUpdate={sendEvent("timeupdate")}
 				onDoubleClick={sendDoubleClick}
 				onAuxClick={sendAux}
 				onError={sendError}

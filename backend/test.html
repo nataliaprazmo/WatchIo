@@ -84,7 +84,6 @@
 		const HEARTBEAT_VALUE = 1;
 		const ws = new WebSocket("ws://localhost:5000/api/rooms/1235678");
 		const video = document.querySelector("video");
-
 		function closeConnection() {
 			if (!!ws) {
 				ws.close();
