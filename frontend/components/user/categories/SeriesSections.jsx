@@ -9,7 +9,7 @@ const SeriesSections = () => {
 	return (
 		<>
 			<SeriesHero />
-			<Category
+			{/* <Category
 				getFunction={() => getByQuery(4, "sortedBy=year_of_production")}
 				count={4}
 				text="Najnowsze"
@@ -24,7 +24,7 @@ const SeriesSections = () => {
 				getFunction={() => getByEpisodeCount(1)}
 				count={6}
 				text="Seriale"
-			/>
+			/> */}
 		</>
 	);
 };
