@@ -61,9 +61,9 @@ const init = (server) => {
 		const idr = req.url.indexOf("?");
 		const uri = idr >= 0 ? req.url.slice(0, idr) : req.url;
 		const paths = uri.split("/").filter((p) => !!p);
-		switch (paths[0]) {
+		switch (paths[1]) {
 			case "rooms":
-				sendRoomId(ws, paths[1]);
+				sendRoomId(ws, paths[2]);
 			default:
 				break;
 		}
