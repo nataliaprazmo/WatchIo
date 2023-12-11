@@ -80,33 +80,65 @@
 	</body>
 	<script>
 		// Create WebSocket connection.
-		const socket = new WebSocket("ws://localhost:5000");
+		const HEARTBEAT_TIMEOUT = 1000 * 5 + 1000 * 1; // 5 + 1 second
+		const HEARTBEAT_VALUE = 1;
+		const ws = new WebSocket("ws://localhost:5000/api/rooms/1235678");
 		const video = document.querySelector("video");
-		socket.binaryType = "arrayBuffer";
+
+		function closeConnection() {
+			if (!!ws) {
+				ws.close();
+			}
+		}
+
+		function heartbeat() {
+			if (!ws) {
+				return;
+			} else if (!!ws.pingTimeout) {
+				clearTimeout(ws.pingTimeout);
+			}
+
+			ws.pingTimeout = setTimeout(() => {
+				ws.close();
+
+				// business logic for deciding whether or not to reconnect
+			}, HEARTBEAT_TIMEOUT);
+
+			const data = new Uint8Array(1);
+
+			data[0] = HEARTBEAT_VALUE;
+
+			ws.send(data);
+		}
 
 		video.addEventListener("play", (event) => {
 			console.log(video);
-			socket.send(["play", video.currentTime]);
+			ws.send(["play", video.currentTime]);
 		});
 
 		video.addEventListener("pause", (event) => {
-			socket.send(["pause", video.currentTime]);
+			ws.send(["pause", video.currentTime]);
 		});
 
 		video.addEventListener("timeupdate", (event) => {
-			socket.send(["timeupdate", video.currentTime]);
+			ws.send(["timeupdate", video.currentTime]);
 		});
 
 		// Connection opened
-		socket.addEventListener("open", function (event) {
+		ws.addEventListener("open", function (event) {
 			console.log("Connected to WS Server");
 		});
 
-		// Listen for messages
-		socket.addEventListener("message", function (event) {
+		// Listen for messages~
+		ws.addEventListener("message", function (event) {
 			// let data = JSON.stringify(event.data);
+			console.log(typeof event.data);
+			if ("string" != typeof event.data) {
+				console.log(heartbeat);
+				heartbeat();
+				return;
+			}
 			let arrData = event.data.split(",");
-			console.log(arrData[1] - video.currentTime);
 
 			if (arrData[0] == "play") {
 				video.currentTime = parseFloat(arrData[1]);
@@ -126,11 +158,11 @@
 				}
 			}
 
-			console.log("Message from server ");
+			console.log(event.data);
 		});
 
 		const sendMessage = () => {
-			socket.send("Hello From Client1!");
+			ws.send("Hello From Client1!");
 		};
 	</script>
 </html>

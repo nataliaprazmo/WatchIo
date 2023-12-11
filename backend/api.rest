@@ -129,6 +129,9 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/subscriptions/subscriptionCheck
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA1ODAyODcsImV4cCI6MTcwMTE4NTA4N30.4J1H-xxoyR2vHItsPqwoxAYXtkv8piRf7qqXRy91NxQ
+
+###
+GET http://localhost:5000/test/ws
 ###
 GET  http://localhost:5000/api/series?getByEpisodeCount=1&howMany=2 HTTP/1.1
 
