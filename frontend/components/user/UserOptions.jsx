@@ -69,7 +69,7 @@ const UserOptions = ({ open }) => {
 				)}
 			</Option>
 			<Option href="/user/rooms" text="Pokoje">
-				{pathname === "/user/rooms" ? (
+				{pathname.startsWith("/user/rooms") ? (
 					<ChairRoundedIcon
 						sx={{
 							path: { color: "#ff9900" },

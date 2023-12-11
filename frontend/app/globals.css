@@ -118,3 +118,8 @@ body {
 .MuiOutlinedInput-input.Mui-disabled {
 	-webkit-text-fill-color: #a3a3a3 !important;
 }
+
+/* TODO HIDING HYDRATION ERROR */
+nextjs-portal {
+	display: none;
+}

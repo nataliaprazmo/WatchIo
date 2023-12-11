@@ -137,7 +137,11 @@ const NavMenu = () => {
 							<div className="flex gap-6">
 								<Link
 									href="/user/explore"
-									className="hover:text-primary-orange hover:font-semibold"
+									className={`hover:font-semibold ${
+										pathname === "/user/explore"
+											? "text-primary-orange"
+											: "hover:text-primary-orange"
+									}`}
 								>
 									Eksploruj
 								</Link>

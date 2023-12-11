@@ -2,7 +2,7 @@ import React from "react";
 import Item from "./Item";
 import CopyTooltip from "./CopyTooltip";
 
-const List = ({ series, getWatchlist, redirect }) => {
+const List = ({ series, getWatchlist, redirect, watchlist_id }) => {
 	const deleteFromWatchlist = async (id) => {
 		const token = localStorage.getItem("token");
 		const response = await fetch(
@@ -18,7 +18,9 @@ const List = ({ series, getWatchlist, redirect }) => {
 		if (response.status === 200) getWatchlist();
 	};
 	const shareWatchlist = async () => {
-		navigator.clipboard.writeText("Id watchlisty");
+		navigator.clipboard.writeText(
+			`http://localhost:3000/watchlist/${watchlist_id}`
+		);
 	};
 	return (
 		<div className="bg-neutral-800 px-4 py-4 rounded-lg flex flex-col xl:px-24 lg:px-12 md:px-4">
@@ -32,6 +34,7 @@ const List = ({ series, getWatchlist, redirect }) => {
 					serie={serie}
 					deleteFromWatchlist={() => deleteFromWatchlist(serie._id)}
 					redirect={() => redirect(serie._id)}
+					guest={false}
 				/>
 			))}
 		</div>

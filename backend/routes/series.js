@@ -8,13 +8,29 @@ const {
 	getSeriesByGenre,
 	upload_Series,
 	deleteSeries,
+	getByEpisodeCount,
+	getByOneEpisode,
+	getSeriesSortedBy,
 } = require("../controllers/series_controller");
 
 // router.use(jwt_auth);
 
 router.get("/", async (req, res) => {
 	try {
-		const result = await getSeries();
+		let result;
+		console.log(req.query);
+		if (req.query?.genres) {
+			result = await getSeriesByGenre(req.query.genres);
+		} else if (req.query?.howMany && req.query?.sortedBy) {
+			result = await getSeriesSortedBy(
+				req.query.sortedBy,
+				req.query.howMany
+			);
+		} else if (req.query?.howMany && req.query?.getByOneEpisode) {
+			result = await getByOneEpisode(req.query.howMany);
+		} else if (req.query?.howMany && req.query?.getByEpisodeCount) {
+			result = await getByEpisodeCount(req.query.howMany);
+		} else result = await getSeries();
 		return res.status(200).send({
 			message: "Data fetched succesfully",
 			data: { series: result },
@@ -39,21 +55,21 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-router.get("/", async (req, res) => {
-	try {
-		const result = await getSeriesByGenre(
-			req.query.howMany,
-			req.query.genre
-		);
-		return res.status(200).send({
-			message: "Data fetched successfully",
-			data: { series: result },
-		});
-	} catch (error) {
-		console.error(error);
-		return res.status(500).send({ message: error.message });
-	}
-});
+// router.get("/", async (req, res) => {
+// 	try {
+// 		const result = await getSeriesByGenre(
+// 			req.query.howMany,
+// 			req.query.genre
+// 		);
+// 		return res.status(200).send({
+// 			message: "Data fetched successfully",
+// 			data: { series: result },
+// 		});
+// 	} catch (error) {
+// 		console.error(error);
+// 		return res.status(500).send({ message: error.message });
+// 	}
+// });
 
 router.delete("/:id", jwt_auth, admin_auth, async (req, res) => {
 	try {

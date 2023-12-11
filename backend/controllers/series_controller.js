@@ -35,15 +35,63 @@ const getSeriesDetails = async (seriesId) => {
 	}
 };
 
-const getSeriesByGenre = async (howMany, genre) => {
+const getSeriesByGenre = async (genre) => {
 	try {
-		const result = Series.find({ genre: genre }).limit(howMany);
+		const result = await Series.find({ genres: { $in: [genre] } })
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
 		return result;
 	} catch (error) {
 		throw error;
 	}
 };
 
+const getSeriesSortedBy = async (sortedBy, howMany) => {
+	try {
+		const result = await Series.find()
+			.sort({ [sortedBy]: -1 })
+			.limit(howMany)
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getByOneEpisode = async (howMany) => {
+	try {
+		const result = await Series.find({ episodes: { $size: 1 } })
+			.limit(howMany)
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getByEpisodeCount = async (howMany) => {
+	try {
+		const result = await Series.find({
+			$nor: [
+				{ episodes: { $exists: false } },
+				{ episodes: { $size: 0 } },
+				{ episodes: { $size: 1 } },
+			],
+		})
+			.limit(howMany)
+			.lean()
+			.exec();
+		// await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
 const upload_Series = async (
 	series_title,
 	series_genres,
@@ -60,8 +108,7 @@ const upload_Series = async (
 		console.log(episode_titles);
 		console.log(episode_desc);
 		const series = await Series.findOne({ series_title: series_title });
-		if (series)
-			return { statusCode: 409, message: "Series already exists" };
+		if (series) return { statusCode: 409, message: "Series already exists" };
 		let videos_ids = [];
 		for (let i = 0; i < files_videos.length; i++) {
 			const video = new Video({
@@ -147,4 +194,7 @@ module.exports = {
 	upload_Series,
 	deleteSeries,
 	getSeriesDetails,
+	getByEpisodeCount,
+	getByOneEpisode,
+	getSeriesSortedBy,
 };

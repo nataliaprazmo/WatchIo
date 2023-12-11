@@ -10,6 +10,7 @@ const Watchlist = () => {
 	const router = useRouter();
 	const redirect = (id) => router.push(`/user/series/${id}`);
 	const [watchlist, setWatchlist] = useState(null);
+	const [watchlist_id, setWatchlistId] = useState("");
 	const getWatchlist = async () => {
 		const token = localStorage.getItem("token");
 		try {
@@ -29,7 +30,7 @@ const Watchlist = () => {
 			if (response.status === 200) {
 				const res = await response.json();
 				setWatchlist(res.data.series);
-				console.log(res);
+				setWatchlistId(res.data.watchlist_id);
 			}
 		} catch (error) {
 			console.log(error);
@@ -56,6 +57,7 @@ const Watchlist = () => {
 						series={watchlist}
 						getWatchlist={getWatchlist}
 						redirect={redirect}
+						watchlist_id={watchlist_id}
 					/>
 				) : (
 					<Instruction
