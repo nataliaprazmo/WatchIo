@@ -35,7 +35,8 @@ const server = require("http").createServer(app);
 const webS = require("./controllers/WEBSOCKETS");
 webS.init(server);
 app.get("/test/ws", (req, res) => {
-	console.log(webS.clients);
+	console.log(webS.clients.rooms);
+	res.send(JSON.stringify(webS.clients));
 	// console.log(JSON.stringify(webS.clients));
 });
 app.use(express.json());

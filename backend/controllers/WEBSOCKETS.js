@@ -1,4 +1,7 @@
 const WebSocket = require("ws");
+const url = require("url");
+const { parse } = require("path");
+const { binary } = require("joi");
 
 const clients = {
 	rooms: {},
@@ -7,7 +10,7 @@ const clients = {
 const HEARTBEAT_INTERVAL = 1000 * 5; // 5 seconds
 const HEARTBEAT_VALUE = 1;
 
-const sendRoomId = (ws, roomId) => {
+const sendRoomId = (ws, roomId, videoId) => {
 	if (!roomId) {
 		ws.on("close", () => {
 			console.log("closed");
@@ -16,9 +19,12 @@ const sendRoomId = (ws, roomId) => {
 	}
 	const rooms = clients.rooms;
 	if (!rooms[roomId]) {
-		rooms[roomId] = [ws];
+		rooms[roomId] = { sockets: [ws], videoId: videoId };
 	} else {
-		rooms[roomId].push(ws);
+		rooms[roomId].sockets.push(ws);
+		ws.send(JSON.stringify(["videoId", rooms[roomId].videoId]), {
+			binary: false,
+		});
 	}
 
 	ws.on("message", function incoming(message) {
@@ -28,7 +34,7 @@ const sendRoomId = (ws, roomId) => {
 		}
 
 		console.log("received: %s", message);
-		rooms[roomId].forEach(function each(client) {
+		rooms[roomId].sockets.forEach(function each(client) {
 			if (client !== ws && client.readyState === WebSocket.OPEN) {
 				client.send(message, { binary: false });
 			}
@@ -37,10 +43,10 @@ const sendRoomId = (ws, roomId) => {
 
 	ws.on("close", () => {
 		console.log("connection closed");
-		const idr = rooms[roomId].indexOf(ws);
+		const idr = rooms[roomId].sockets.indexOf(ws);
 		if (idr >= 0) {
-			rooms[roomId].splice(idr, 1);
-			if (rooms[roomId].length === 0) {
+			rooms[roomId].sockets.splice(idr, 1);
+			if (rooms[roomId].sockets.length === 0) {
 				delete rooms[roomId];
 			}
 		}
@@ -58,12 +64,14 @@ const init = (server) => {
 		ws.isAlive = true;
 		console.log("connected");
 		ws.send("Welcome New Client!");
-		const idr = req.url.indexOf("?");
-		const uri = idr >= 0 ? req.url.slice(0, idr) : req.url;
-		const paths = uri.split("/").filter((p) => !!p);
+		const parsedUrl = url.parse(req.url, true);
+		// console.log(parsedUrl);
+		// const idr = req.url.indexOf("?");
+		// const uri = idr >= 0 ? req.url.slice(0, idr) : req.url;
+		const paths = parsedUrl.pathname.split("/").filter((p) => !!p);
 		switch (paths[1]) {
 			case "rooms":
-				sendRoomId(ws, paths[2]);
+				sendRoomId(ws, paths[2], parsedUrl.query?.videoId);
 			default:
 				break;
 		}
