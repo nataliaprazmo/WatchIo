@@ -8,6 +8,7 @@ import Link from "next/link";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import BookmarkAddedRoundedIcon from "@mui/icons-material/BookmarkAddedRounded";
 import LocalPlayOutlinedIcon from "@mui/icons-material/LocalPlayOutlined";
+import roomId from "./roomId";
 
 const SeriesDetails = ({ id }) => {
 	const [seriesDetails, setSeriesDetails] = useState(null);
@@ -188,7 +189,7 @@ const SeriesDetails = ({ id }) => {
 						)}
 						<Link
 							key={episodeId}
-							href={`/user/rooms/${episodeId}`}
+							href={`/user/rooms/${roomId}?videoId=${episodeId}`}
 							className="ml-2"
 						>
 							<LocalPlayOutlinedIcon

@@ -1,9 +1,11 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import ws from "./socket";
+import createWS from "./socket";
 
-const Player = ({ id }) => {
+const Player = ({ roomId, videoId }) => {
+	const ws = useMemo(() => createWS(roomId, videoId), [roomId, videoId]);
+
 	const video = useRef(document.getElementById("video"));
 	const [watching, setWatching] = useState(1);
 	const HEARTBEAT_TIMEOUT = 1000 * 5 + 1000 * 1; // 5 + 1 second
@@ -15,24 +17,12 @@ const Player = ({ id }) => {
 			ws.send([eventType, e.target.currentTime]);
 		}
 	};
-	const sendError = (e) => {
-		e.preventDefault();
-		console.log("error occured");
-	};
-	const sendDoubleClick = (e) => {
-		e.preventDefault();
-		console.log("doubleClicked");
-	};
-	const sendAux = (e) => {
-		e.preventDefault();
-		console.log("right mouse clicked");
-	};
 
-	// function closeConnection() {
-	// 	if (!!ws) {
-	// 		ws.close();
-	// 	}
-	// }
+	function closeConnection() {
+		if (!!ws) {
+			ws.close();
+		}
+	}
 
 	function heartbeat() {
 		if (!ws) {
@@ -43,8 +33,6 @@ const Player = ({ id }) => {
 
 		ws.pingTimeout = setTimeout(() => {
 			ws.close();
-
-			// business logic for deciding whether or not to reconnect
 		}, HEARTBEAT_TIMEOUT);
 
 		const data = new Uint8Array(1);
@@ -65,7 +53,6 @@ const Player = ({ id }) => {
 			return;
 		}
 		let arrData = event.data.split(",");
-		// console.log(arrData[1] - video.current.currentTime);
 
 		if (arrData[0] === "play") {
 			video.current.currentTime = parseFloat(arrData[1]);
@@ -75,7 +62,7 @@ const Player = ({ id }) => {
 			video.current.pause();
 		}
 
-		if (arrData[0] === "seeked") {
+		if (arrData[0] === "timeupdate") {
 			if (
 				video.current.currentTime - arrData[1] > 2 ||
 				video.current.currentTime - arrData[1] < -2
@@ -84,16 +71,6 @@ const Player = ({ id }) => {
 				video.current.play();
 			}
 		}
-
-		// if (arrData[0] === "timeupdate") {
-		// 	if (
-		// 		video.current.currentTime - arrData[1] > 2 ||
-		// 		video.current.currentTime - arrData[1] < -2
-		// 	) {
-		// 		video.current.currentTime = parseFloat(arrData[1]);
-		// 		video.current.play();
-		// 	}
-		// }
 		if (arrData[0] === "watching") {
 			setWatching(arrData[1]);
 		}
@@ -102,21 +79,17 @@ const Player = ({ id }) => {
 	return (
 		<>
 			<video
-				key={id}
+				key={videoId}
 				id="video"
 				controls
 				onPlay={sendEvent("play")}
 				onPause={sendEvent("pause")}
-				onSeeked={sendEvent("seeked")}
-				// onTimeUpdate={sendEvent("timeupdate")}
-				onDoubleClick={sendDoubleClick}
-				onAuxClick={sendAux}
-				onError={sendError}
+				onTimeUpdate={sendEvent("timeupdate")}
 				ref={video}
 				className="w-full mt-6 h-96"
 			>
 				<source
-					src={`http://localhost:5000/api/videos/${id}`}
+					src={`http://localhost:5000/api/videos/${videoId}`}
 					type="video/mp4"
 				/>
 			</video>
