@@ -12,6 +12,7 @@ const watchlists = require("./routes/watchlists");
 const genres = require("./routes/genres");
 const videos = require("./routes/videos");
 const tests = require("./routes/test_sync");
+const statistics = require("./routes/statistics");
 // const WebSocket = require("ws");
 
 const server = require("http").createServer(app);
@@ -54,6 +55,7 @@ app.use("/api/subscriptions", subscriptions);
 app.use("/api/watchlists", watchlists);
 app.use("/api/videos", videos);
 app.use("/tests", tests);
+app.use("/api/statistics", statistics);
 
 server.listen(process.env.PORT, () => {
 	console.log(`Nasłuchiwanie na porcie ${process.env.PORT}`);

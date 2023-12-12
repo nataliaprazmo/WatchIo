@@ -135,3 +135,5 @@ GET http://localhost:5000/test/ws
 ###
 GET  http://localhost:5000/api/series?getByEpisodeCount=1&howMany=2 HTTP/1.1
 
+###
+GET  http://localhost:5000/api/statistics HTTP/1.1
