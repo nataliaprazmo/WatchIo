@@ -1,15 +1,14 @@
 import React from "react";
-import Skeleton from "@mui/material/Skeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode, Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import FilmSlide from "./FilmSlide";
 SwiperCore.use([Navigation, FreeMode, Autoplay]);
 
-export default function LoadingFilms() {
-	const howMany = Array.from({ length: 6 });
+const Films = ({ series }) => {
 	return (
 		<>
 			<Swiper
@@ -37,17 +36,15 @@ export default function LoadingFilms() {
 					},
 				}}
 			>
-				{howMany.map((_, index) => (
-					<SwiperSlide key={index} className="main-slide">
-						<Skeleton
-							variant="rounded"
-							width={300}
-							height={320}
-							className="bg-grey-200"
-						/>
-					</SwiperSlide>
-				))}
+				{series &&
+					series.map((serie, id) => (
+						<SwiperSlide key={id} className="main-slide">
+							<FilmSlide serie={serie} />
+						</SwiperSlide>
+					))}
 			</Swiper>
 		</>
 	);
-}
+};
+
+export default Films;
