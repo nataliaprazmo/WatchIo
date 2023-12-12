@@ -1,14 +1,10 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-import { Chip } from "@mui/material";
-import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Chip } from "@mui/material";
 
-const Explore = () => {
-	const [genres, setGenres] = useState(null);
-	const [activeId, setActiveId] = useState(0);
+const SeriesByGenre = ({ genre }) => {
 	const [series, setSeries] = useState(null);
 	const getByGenre = async (genre) => {
 		try {
@@ -28,55 +24,10 @@ const Explore = () => {
 		}
 	};
 	useEffect(() => {
-		const getGenres = async () => {
-			try {
-				const response = await fetch(
-					"http://localhost:5000/api/genres",
-					{ method: "GET" }
-				);
-				if (response.status === 200) {
-					const res = await response.json();
-					setGenres(res.data.genres);
-					const gen = res.data.genres[0];
-					setSeries(getByGenre(gen));
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getGenres();
-	}, []);
-	const onGenreClick = (genre, id) => {
-		setActiveId(id);
 		getByGenre(genre);
-	};
+	}, []);
 	return (
-		<div className="pt-24 pb-18 pl-24 pr-8">
-			<SiteBreadcrumbs
-				links={[
-					{ to: "/user", label: "Strona główna" },
-					{ to: "/user/explore", label: "Eksploruj" },
-				]}
-			/>
-			{genres && (
-				<div className="flex gap-3 mt-8">
-					{genres.map((genre, id) => (
-						<Chip
-							key={id}
-							onClick={() => onGenreClick(genre, id)}
-							label={genre}
-							variant="outlined"
-							sx={{
-								backgroundColor:
-									activeId === id ? "#9126d9" : "transparent",
-								borderColor: "#9126d9",
-								"&:hover": { backgroundColor: "#9126d9" },
-								cursor: "pointer",
-							}}
-						/>
-					))}
-				</div>
-			)}
+		<>
 			{series != null && series.length !== 0 ? (
 				<div className="flex flex-wrap gap-8 mt-12 mb-18">
 					{series.map((serie, id) => (
@@ -116,8 +67,8 @@ const Explore = () => {
 			) : (
 				<p className="mt-8">Nie znaleziono serii</p>
 			)}
-		</div>
+		</>
 	);
 };
 
-export default Explore;
+export default SeriesByGenre;
