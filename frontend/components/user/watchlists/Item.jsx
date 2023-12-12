@@ -8,16 +8,14 @@ const Item = ({ serie, index, deleteFromWatchlist, redirect, guest }) => {
 	return (
 		<div className="flex flex-row w-full items-center justify-start gap-4 py-4 border-b-2 border-grey-150">
 			<p className="self-start">{index}.</p>
-			{!guest && (
-				<Image
-					src={`data:image/jpg;base64, ${serie.picture}`}
-					alt={serie.series_title}
-					width={120}
-					height={200}
-					style={{ objectFit: "cover" }}
-					className="bg-cover rounded"
-				/>
-			)}
+			<Image
+				src={`data:image/jpg;base64, ${serie.picture}`}
+				alt={serie.series_title}
+				width={120}
+				height={200}
+				style={{ objectFit: "cover" }}
+				className="bg-cover rounded"
+			/>
 			<div className="flex flex-col justify-center items-start">
 				<h2
 					onClick={redirect}
