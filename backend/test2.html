@@ -79,10 +79,32 @@
 		></video>
 	</body>
 	<script>
+		const throttle = (func, limit) => {
+			let lastFunc;
+			let lastRan;
+			return function () {
+				const context = this;
+				const args = arguments;
+				if (!lastRan) {
+					func.apply(context, args);
+					lastRan = Date.now();
+				} else {
+					clearTimeout(lastFunc);
+					lastFunc = setTimeout(function () {
+						if (Date.now() - lastRan >= limit) {
+							func.apply(context, args);
+							lastRan = Date.now();
+						}
+					}, limit - (Date.now() - lastRan));
+				}
+			};
+		};
 		// Create WebSocket connection.
 		const HEARTBEAT_TIMEOUT = 1000 * 5 + 1000 * 1; // 5 + 1 second
 		const HEARTBEAT_VALUE = 1;
-		const ws = new WebSocket("ws://localhost:5000/api/rooms/1235678");
+		const ws = new WebSocket(
+			"ws://localhost:5000/api/rooms/1235678?videoId=656623c900a0869bc3cda3b2"
+		);
 		const video = document.querySelector("video");
 		function closeConnection() {
 			if (!!ws) {
@@ -110,14 +132,19 @@
 			ws.send(data);
 		}
 
-		video.addEventListener("play", (event) => {
-			console.log(video);
-			ws.send(["play", video.currentTime]);
-		});
+		video.addEventListener(
+			"play",
+			throttle((event) => {
+				ws.send(["play", video.currentTime]);
+			}, 50)
+		);
 
-		video.addEventListener("pause", (event) => {
-			ws.send(["pause", video.currentTime]);
-		});
+		video.addEventListener(
+			"pause",
+			throttle((event) => {
+				ws.send(["pause", video.currentTime]);
+			}, 50)
+		);
 
 		video.addEventListener("timeupdate", (event) => {
 			ws.send(["timeupdate", video.currentTime]);
