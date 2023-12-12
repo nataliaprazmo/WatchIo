@@ -1,10 +1,12 @@
 "use client";
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+import Skeleton from "@mui/material/Skeleton";
 import createWS from "./socket";
 
 const Player = ({ roomId, videoId }) => {
 	const ws = useMemo(() => createWS(roomId, videoId), [roomId, videoId]);
+	const [currentVideoId, setCurrentVideoId] = useState(null);
 
 	const video = useRef(document.getElementById("video"));
 	const [watching, setWatching] = useState(1);
@@ -46,13 +48,18 @@ const Player = ({ roomId, videoId }) => {
 		console.log("Connected to WS Server");
 	});
 	ws.addEventListener("message", function (event) {
-		console.log(typeof event.data);
+		console.log(event.data);
 		if ("string" != typeof event.data) {
 			console.log(heartbeat);
 			heartbeat();
 			return;
 		}
 		let arrData = event.data.split(",");
+		console.log(arrData);
+
+		if (arrData[0] === "videoId") {
+			setCurrentVideoId(arrData[1]);
+		}
 
 		if (arrData[0] === "play") {
 			video.current.currentTime = parseFloat(arrData[1]);
@@ -68,7 +75,7 @@ const Player = ({ roomId, videoId }) => {
 				video.current.currentTime - arrData[1] < -2
 			) {
 				video.current.currentTime = parseFloat(arrData[1]);
-				video.current.play();
+				// video.current.play();
 			}
 		}
 		if (arrData[0] === "watching") {
@@ -76,23 +83,37 @@ const Player = ({ roomId, videoId }) => {
 		}
 	});
 
+	useEffect(() => {
+		console.log("currid ", currentVideoId);
+	}, [currentVideoId, setCurrentVideoId]);
+
 	return (
 		<>
-			<video
-				key={videoId}
-				id="video"
-				controls
-				onPlay={sendEvent("play")}
-				onPause={sendEvent("pause")}
-				onTimeUpdate={sendEvent("timeupdate")}
-				ref={video}
-				className="w-full mt-6 h-96"
-			>
-				<source
-					src={`http://localhost:5000/api/videos/${videoId}`}
-					type="video/mp4"
+			{currentVideoId === null ? (
+				<Skeleton
+					variant="rectangular"
+					width={"full"}
+					height={380}
+					sx={{ bgcolor: "rgb(64 64 64)" }}
+					className="w-full mt-6 h-96"
 				/>
-			</video>
+			) : (
+				<video
+					key={currentVideoId}
+					id="video"
+					controls
+					onPlay={sendEvent("play")}
+					onPause={sendEvent("pause")}
+					onTimeUpdate={sendEvent("timeupdate")}
+					ref={video}
+					className="w-full mt-6 h-96"
+				>
+					<source
+						src={`http://localhost:5000/api/videos/${currentVideoId}`}
+						type="video/mp4"
+					/>
+				</video>
+			)}
 			{watching && (
 				<div className="mt-3 flex items-center justify-end gap-2">
 					{watching}{" "}

@@ -18,13 +18,18 @@ const sendRoomId = (ws, roomId, videoId) => {
 		return;
 	}
 	const rooms = clients.rooms;
-	if (!rooms[roomId]) {
+	if (!rooms[roomId] && videoId != undefined) {
 		rooms[roomId] = { sockets: [ws], videoId: videoId };
+		ws.send("videoId," + rooms[roomId].videoId),
+			{
+				binary: false,
+			};
 	} else {
 		rooms[roomId].sockets.push(ws);
-		ws.send(JSON.stringify(["videoId", rooms[roomId].videoId]), {
-			binary: false,
-		});
+		ws.send("videoId," + rooms[roomId].videoId),
+			{
+				binary: false,
+			};
 	}
 
 	ws.on("message", function incoming(message) {
