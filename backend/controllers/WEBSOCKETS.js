@@ -24,9 +24,17 @@ const sendRoomId = (ws, roomId, videoId) => {
 			{
 				binary: false,
 			};
+		ws.send("watching," + rooms[roomId].sockets.length),
+			{
+				binary: false,
+			};
 	} else {
 		rooms[roomId].sockets.push(ws);
 		ws.send("videoId," + rooms[roomId].videoId),
+			{
+				binary: false,
+			};
+		ws.send("watching," + rooms[roomId].sockets.length),
 			{
 				binary: false,
 			};
