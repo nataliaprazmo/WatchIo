@@ -9,15 +9,19 @@ const offer = [
 			{
 				name: "Stwórz pokój",
 				content: [
-					"Kliknij znak '+' w swoim panelu, aby utworzyć pokój",
-					"Wybierz film",
-					"Skopiuj link udostępniania",
-					"Udostępnij link i zaproś do pokoju!",
+					"Wybierz serię i wejdź w jej szczegóły",
+					"Kliknij bilecik obok wybranego odcinka",
+					"Skopiuj kod udostępniania pokoju",
+					"Podziel się kodem z innymi!",
 				],
 			},
 			{
 				name: "Dołącz do pokoju",
-				content: ["Skopiuj otrzymany link", "Wklej go w przeglądarkę"],
+				content: [
+					"Skopiuj otrzymany kod",
+					"Wejdź w pokoje w panelu po lewej stronie (fotel)",
+					"Wklej kod w pole i kliknij dołącz!",
+				],
 			},
 		],
 	},
@@ -33,14 +37,14 @@ const offer = [
 				content: [
 					"Wejdź w ustawienia",
 					"Zarządzaj subskrypcją",
-					"Skopiuj link udostępniania",
+					"Wygeneruj i skopiuj link udostępniania",
 					"Podziel się z innymi!",
 				],
 			},
 			{
 				name: "Dołączanie do subskrypcji",
 				content: [
-					"Po rejestracji wybierz subskrypcję dzieloną",
+					"Po zalogowaniu wybierz subskrypcję dzieloną",
 					"Wklej link otrzymany od jednego z naszych subskrybentów",
 					"Dołącz do subskrypcji!",
 				],

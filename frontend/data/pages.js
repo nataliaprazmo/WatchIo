@@ -26,15 +26,15 @@ const pages = [
 		},
 		subpages: [
 			{
-				href: "/offer#rooms",
+				href: "/offer?offer=rooms",
 				name: "Wspólne pokoje",
 			},
 			{
-				href: "/offer#sharingSub",
+				href: "/offer?offer=sharingSub",
 				name: "Dzielenie subskrypcją",
 			},
 			{
-				href: "/offer#sharingPlaylist",
+				href: "/offer?offer=sharingPlaylist",
 				name: "Udostępnianie playlist",
 			},
 		],
