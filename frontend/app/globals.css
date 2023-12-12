@@ -50,6 +50,19 @@ body {
 	margin-right: 32px !important;
 }
 
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+	position: absolute !important;
+	bottom: 0 !important;
+	width: 120px !important;
+	height: 12px !important;
+	background-color: #101010;
+	opacity: 60%;
+}
+.swiper-scrollbar-drag {
+	background-color: #9126d9 !important;
+	width: 12px !important;
+}
+
 .active {
 	@apply text-primary-orange font-bold after:absolute after:w-full after:h-[2.5px] after:bg-primary-orange after:left-0 after:bottom-[-29px] after:rounded;
 }

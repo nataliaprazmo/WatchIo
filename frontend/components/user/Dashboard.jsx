@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSubscription } from "./SubscriptionContext";
 import SeriesSections from "./categories/SeriesSections";
+import HeroSlider from "./HeroSlider";
 
 const Dashboard = () => {
 	const [open, setOpen] = useState(false);
@@ -64,6 +65,7 @@ const Dashboard = () => {
 					/>
 				</div>
 			) : null}
+			<HeroSlider />
 			<SeriesSections />
 			<Snackbar
 				open={open}
