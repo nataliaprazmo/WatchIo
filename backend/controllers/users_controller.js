@@ -5,8 +5,9 @@ const { Watchlist } = require("../models/Watchlist");
 
 const getCurrentUserData = async (userId) => {
 	try {
-		const user = await User.findOne({ _id: userId });
-		const user_data = user.user_data;
+		const user = await User.findOne({ _id: userId }).lean();
+		user_data = user.user_data;
+		user_data.email = user.credentials.email;
 		return user_data;
 	} catch (error) {
 		throw error;
