@@ -25,7 +25,7 @@ const Footer = () => {
 			</div>
 			<div className="md:grid md:grid-cols-5 flex flex-col-reverse gap-4 mt-16">
 				<p className="font-regular text-xs">
-					&copy; 2023 Radłowski K. Prażmo N.
+					&copy; 2023 Prażmo N. Radłowski K.
 				</p>
 				{policies.map((policy, id) => (
 					<Link

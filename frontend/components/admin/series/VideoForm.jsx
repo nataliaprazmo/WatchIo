@@ -2,7 +2,6 @@ import React from "react";
 import Input from "./Input";
 import MultilineInput from "./MultilineInput";
 import { Button, Chip, Divider } from "@mui/material";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import { useSeries } from "./SeriesContext";
 import FileUploader from "./FileUploader";
 
@@ -16,9 +15,22 @@ const VideoForm = () => {
 		setBodyData,
 		handleAddVideoThumbnail,
 		handleAddVideo,
+		errors,
+		setErrors,
 	} = useSeries();
 	const handleChange = ({ currentTarget: input }) => {
 		const { name, value } = input;
+		if (!value || value === "") {
+			setErrors((prev) => ({
+				...prev,
+				[name]: "Uzupełnij pole",
+			}));
+		} else {
+			setErrors((prev) => ({
+				...prev,
+				[name]: null,
+			}));
+		}
 		setEpisode((ep) => ({ ...ep, [name]: value }));
 	};
 	const areEpisodesEmpty =
@@ -84,6 +96,7 @@ const VideoForm = () => {
 						type="text"
 						value={episode.title}
 						handleChange={handleChange}
+						error={errors.title}
 					/>
 					<MultilineInput
 						id="desc"
@@ -92,6 +105,7 @@ const VideoForm = () => {
 						type="text"
 						value={episode.desc}
 						handleChange={handleChange}
+						error={errors.desc}
 					/>
 				</div>
 				<div className="flex flex-wrap items-center gap-4 mt-8">
@@ -102,6 +116,8 @@ const VideoForm = () => {
 							setEpisode((ep) => ({ ...ep, thumb: file }))
 						}
 						label="Miniaturka odcinka"
+						errorName="thumb"
+						error={errors.thumb}
 					/>
 					<FileUploader
 						fileType="video"
@@ -110,6 +126,8 @@ const VideoForm = () => {
 							setEpisode((ep) => ({ ...ep, video: file }))
 						}
 						label="Wideo odcinka"
+						errorName="video"
+						error={errors.video}
 					/>
 				</div>
 			</div>
@@ -118,12 +136,13 @@ const VideoForm = () => {
 				sx={{
 					backgroundColor: "#9126d9",
 					color: "#1a1a1a",
+					fontWeight: "600",
 					"&:hover": {
 						backgroundColor: "#9126d9",
 						color: "#fafaf5",
 					},
 				}}
-				className="flex justify-center w-48 mt-2 md:pb-2 pb-[6px] md:pt-[7px] pt-[5px] border-2 border-secondary-violet rounded-lg h-fit font-medium transition duration-300 2xl:text-base xl:text-sm text-xs hover:bg-transparent bg-secondary-violet text-black hover:text-white"
+				className="flex justify-center w-full mt-2 md:pb-2 pb-[6px] md:pt-[7px] pt-[5px] border-2 border-secondary-violet rounded-lg h-fit transition duration-300 2xl:text-base xl:text-sm text-xs hover:bg-transparent bg-secondary-violet text-black hover:text-white"
 			>
 				Dodaj odcinek
 			</Button>

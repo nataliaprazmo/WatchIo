@@ -92,6 +92,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 Content-Type: application/json
 ###
 GET  http://localhost:5000/api/watchlists/ HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVkOWMzNWFkY2NmNTljNDE0NWEwNzkiLCJpYXQiOjE3MDA2NTc2MjUsImV4cCI6MTcwMTI2MjQyNX0.cPbWvy1LIEFP4xY7NuxOM7z9gqSXzUZtDlGv3ubdp5A
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA3NjE2OTMsImV4cCI6MTcwMTM2NjQ5M30.9FUxF6lskheA4XNC1KCjyuyzmdz3T2-RBaiBbk9sLQ8
 Content-Type: application/json
 ###
@@ -123,11 +124,14 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/api/subscriptions/ HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViYWM1YjY2Y2JjMjc4NjU0NTZhNWMiLCJpYXQiOjE3MDA1MDY3MjAsImV4cCI6MTcwMTExMTUyMH0.j4_XnfdvJd0W2NTWUqAK3UFQFiLhzZxho9g9SLBnHNE
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVkOWMzNWFkY2NmNTljNDE0NWEwNzkiLCJpYXQiOjE3MDA2MzY3NzMsImV4cCI6MTcwMTI0MTU3M30.i9JqWwv4BNQnZtmSTl5lpZ8btUdcqUMRjIVyXmSaGK0
 Content-Type: application/json
 ###
 GET http://localhost:5000/api/subscriptions/subscriptionCheck
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTVhNTQ4YjYyM2I4ZjNkOTc0N2E4MjUiLCJpYXQiOjE3MDA1ODAyODcsImV4cCI6MTcwMTE4NTA4N30.4J1H-xxoyR2vHItsPqwoxAYXtkv8piRf7qqXRy91NxQ
+
+###
+GET http://localhost:5000/test/ws
 ###
 GET  http://localhost:5000/api/series?getByEpisodeCount=1&howMany=2 HTTP/1.1
 

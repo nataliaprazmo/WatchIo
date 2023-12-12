@@ -24,7 +24,7 @@ const Analytics = () => {
 						sx={{ path: { color: "#9126d9" } }}
 					/>
 				}
-				number="500"
+				number="5"
 				name="filmów"
 			/>
 			<Column
@@ -34,7 +34,7 @@ const Analytics = () => {
 						sx={{ path: { color: "#9126d9" } }}
 					/>
 				}
-				number="2000"
+				number="5"
 				name="użytkowników"
 			/>
 			<Column
@@ -44,8 +44,8 @@ const Analytics = () => {
 						sx={{ path: { color: "#9126d9" } }}
 					/>
 				}
-				number="25"
-				name="kategorii"
+				number="9"
+				name="gatunków"
 				addClass="md:flex hidden"
 			/>
 			<Column
@@ -55,8 +55,8 @@ const Analytics = () => {
 						sx={{ path: { color: "#9126d9" } }}
 					/>
 				}
-				number="120"
-				name="playlist"
+				number="2"
+				name="playlisty"
 				addClass="lg:flex hidden"
 			/>
 			<Column
@@ -66,7 +66,7 @@ const Analytics = () => {
 						sx={{ path: { color: "#9126d9" } }}
 					/>
 				}
-				number="100"
+				number="7"
 				name="seriali"
 			/>
 		</div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
 	Chip,
 	FormControl,
@@ -11,20 +11,35 @@ import {
 	TextField,
 } from "@mui/material";
 import { useSeries } from "./SeriesContext";
-
-const initialGenres = [
-	"Komedia",
-	"Dramat",
-	"Akcja",
-	"Przygodowy",
-	"Romans",
-	"Animacja",
-	"Familijny",
-];
+import ErrorDesc from "./ErrorDesc";
 
 const CategoriesInput = () => {
-	const { bodyData, handleGenresChange, handleAddGenre } = useSeries();
+	const [initialGenres, setInitialGenres] = useState([
+		"Animacja",
+		"Przygodowy",
+	]);
 	const [genres, setGenres] = useState(initialGenres);
+	useEffect(() => {
+		const getGenres = async () => {
+			try {
+				const response = await fetch(
+					"http://localhost:5000/api/genres",
+					{ method: "GET" }
+				);
+				if (response.status === 200) {
+					const res = await response.json();
+					setInitialGenres(res.data.genres);
+					setGenres(res.data.genres);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getGenres();
+	}, []);
+	const { bodyData, handleGenresChange, handleAddGenre, errors } =
+		useSeries();
+
 	const [newGenre, setNewGenre] = useState("");
 	const [showTextField, setShowTextField] = useState(false);
 	const inputRef = useRef(null);
@@ -48,7 +63,11 @@ const CategoriesInput = () => {
 		}
 	};
 	return (
-		<FormControl sx={{ m: 1, width: 300 }} className="md:w-72 w-full">
+		<FormControl
+			error={errors.genre}
+			sx={{ m: 1, width: 300 }}
+			className="md:w-72 w-full"
+		>
 			<InputLabel id="categories_label" className="text-white">
 				Gatunki
 			</InputLabel>
@@ -102,6 +121,7 @@ const CategoriesInput = () => {
 					</MenuItem>
 				)}
 			</Select>
+			<ErrorDesc error={errors.genre} />
 		</FormControl>
 	);
 };

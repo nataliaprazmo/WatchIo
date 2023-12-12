@@ -22,6 +22,7 @@ import ProfileOptions from "./admin/ProfileOptions";
 import { usePathname } from "next/navigation";
 import UserProfileOptions from "./user/UserProfileOptions";
 import UserOptions from "./user/UserOptions";
+import Link from "next/link";
 
 const drawerWidth = 240;
 
@@ -134,8 +135,16 @@ const NavMenu = () => {
 					{pathname.startsWith("/user") ? (
 						<div className="flex justify-between items-center w-full pr-24">
 							<div className="flex gap-6">
-								<p>Filmy</p>
-								<p>Seriale</p>
+								<Link
+									href="/user/explore"
+									className={`hover:font-semibold ${
+										pathname === "/user/explore"
+											? "text-primary-orange"
+											: "hover:text-primary-orange"
+									}`}
+								>
+									Eksploruj
+								</Link>
 							</div>
 							<OutlinedInput
 								className="w-fit bg-grey-250 rounded-lg h-10"

@@ -94,7 +94,10 @@ const getSubscriptionData = async (user_id) => {
 
 		subscription = await Subscription.findOne({
 			shared_with: user_id,
-		});
+		})
+			.populate("owner")
+			.populate("shared_with")
+			.exec();
 
 		if (subscription) {
 			return {

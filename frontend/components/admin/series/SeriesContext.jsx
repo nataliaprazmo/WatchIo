@@ -17,6 +17,21 @@ export function SeriesProvider({ children }) {
 		episode_titles: [],
 		episode_desc: [],
 	});
+	const [errors, setErrors] = useState({
+		series_title: null,
+		series_year_of_production: null,
+		series_desc: null,
+		series_thumbnail: null,
+		genre: null,
+		name: null,
+		surname: null,
+		series_staff: null,
+		title: null,
+		desc: null,
+		thumb: null,
+		video: null,
+		videosCount: null,
+	});
 	const handleGenresChange = (event) => {
 		const {
 			target: { value },
@@ -87,8 +102,6 @@ export function SeriesProvider({ children }) {
 					formData.append("video_thumbnails", thumbnail);
 				});
 				formData.append("series_thumbnail", series_thumbnail);
-				console.log("dziala");
-				console.log(formData);
 				const response = await fetch(
 					"http://localhost:5000/api/series/",
 					{
@@ -97,11 +110,9 @@ export function SeriesProvider({ children }) {
 						body: formData,
 					}
 				);
-				console.log("zadzialalo");
 				if (response.status == 200) {
 					const res = response.json();
 					console.log("added series");
-					console.log(res.message);
 					setBodyData({
 						series_title: "",
 						series_desc: "",
@@ -151,6 +162,8 @@ export function SeriesProvider({ children }) {
 				videosCount,
 				setVideosCount,
 				handleAddSeries,
+				errors,
+				setErrors,
 			}}
 		>
 			{children}

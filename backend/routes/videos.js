@@ -1,73 +1,12 @@
 const router = require("express").Router();
 const fs = require("fs");
-const multer = require("multer");
 const { Video, validate } = require("../models/Video");
 
-const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, __dirname + "/../videos/");
-	},
-	filename: function (req, file, cb) {
-		console.log(file);
-		const uniqueNum = Date.now() + "" + Math.round(Math.random() * 1e9);
-		cb(null, file.originalname.slice(0, -4) + "_" + uniqueNum + ".mp4");
-	},
-});
 
-const uploads = multer({ storage: storage });
-
-router.post("/upload", uploads.single("file"), async (req, res) => {
+router.get("/:id", async (req, res) => {
 	try {
-		const { error } = validate();
-		if (error)
-			return res.status(400).send({ message: error.details[0].message });
-		const video = {
-			fileName: req.file.filename.slice(0, -4),
-			title: req.body.videoTitle,
-			desc: req.body.videoDesc,
-			path: "videos/" + req.file.filename,
-		};
-		const vid = await Video.findOne({ fileName: req.file.filename });
-		if (vid)
-			return res
-				.status(409)
-				.send({ message: "Video with given filename already Exist!" });
-		await new Video({ ...video }).save();
-		return res.status(201).send({ message: "Video added successfully" });
-	} catch (error) {
-		console.error(error);
-		return res.status(500).send({ message: "Internal Server Error" });
-	}
-});
-
-router.get("/", async (req, res) => {
-	try {
-		const vid = await Video.find();
-		return res.status(200).send({ data: vid });
-	} catch (error) {
-		console.error(error);
-		return res.status(500).send({ message: "Internal Server Error" });
-	}
-});
-
-router.delete("/:filename", async (req, res) => {
-	try {
-		const vid = await Video.findOne({ fileName: req.params.filename });
-		const filePath = vid.path;
-		await fs.unlink(filePath, (err) => {
-			console.error(err);
-		});
-		await vid.deleteOne();
-		return res.status(200).send({ message: "Video deleted successfully" });
-	} catch (err) {
-		console.error(err);
-		return res.status(500).send({ message: "Internal Server Error" });
-	}
-});
-
-router.get("/:filename", async (req, res) => {
-	try {
-		const vid = await Video.findOne({ fileName: req.params.filename });
+		// const vid = await Video.findOne({ fileName: req.params.filename });
+		const vid = await Video.findOne({ _id: req.params.id });
 		const filePath = vid.path;
 		if (!filePath) {
 			return res.status(404).send("file not found");

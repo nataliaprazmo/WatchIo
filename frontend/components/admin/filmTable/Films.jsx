@@ -4,7 +4,14 @@ import { TableBody, TableRow, TableCell, Checkbox } from "@mui/material";
 import Actions from "./Actions";
 import Chips from "../Chips";
 
-const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
+const Films = ({
+	visibleRows,
+	emptyRows,
+	handleClick,
+	isSelected,
+	setOpenSnackbar,
+	getFilms,
+}) => {
 	return (
 		<TableBody>
 			{visibleRows.map((row, index) => {
@@ -20,15 +27,6 @@ const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
 						tabIndex={-1}
 						selected={isItemSelected}
 					>
-						{/* <TableCell padding="checkbox">
-							<Checkbox
-								color="primary"
-								checked={isItemSelected}
-								inputProps={{
-									"aria-labelledby": labelId,
-								}}
-							/>
-						</TableCell> */}
 						<TableCell
 							component="th"
 							id={labelId}
@@ -36,24 +34,32 @@ const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
 							padding="none"
 							sx={{ color: "#fafaf5", fontFamily: "montserrat" }}
 						>
-							{/* {row.poster} */}
 							<Image
-								src="/images/poster.webp"
-								alt="poster"
+								src={`data:image/jpg;base64, ${row.poster}`}
+								alt={row.name}
 								width={100}
 								height={200}
+								style={{ objectFit: "cover" }}
+								className="rounded-sm"
 							/>
 						</TableCell>
 						<TableCell
 							align="left"
-							sx={{ color: "#fafaf5", fontFamily: "montserrat" }}
+							sx={{
+								color: "#fafaf5",
+								fontFamily: "montserrat",
+								fontWeight: "600",
+							}}
 						>
 							{row.name}
 						</TableCell>
-						{/* <TableCell align="left" sx={{ color: "#fafaf5" }}>
-							{row.description}
+						<TableCell
+							align="left"
+							sx={{ color: "#fafaf5", width: "350px" }}
+						>
+							<p className="line-clamp-2">{row.description}</p>
 						</TableCell>
-						<TableCell align="left" sx={{ color: "#fafaf5" }}>
+						{/* <TableCell align="left" sx={{ color: "#fafaf5" }}>
 							{row.actors}
 						</TableCell> */}
 						<TableCell
@@ -66,7 +72,11 @@ const Films = ({ visibleRows, emptyRows, handleClick, isSelected }) => {
 						>
 							<Chips elements={row.categories} />
 						</TableCell>
-						<Actions seriesId={row.id} />
+						<Actions
+							seriesId={row.id}
+							setOpenSnackbar={setOpenSnackbar}
+							getFilms={getFilms}
+						/>
 					</TableRow>
 				);
 			})}

@@ -22,17 +22,6 @@ const FilmTableHead = ({
 	return (
 		<TableHead>
 			<TableRow>
-				{/* <TableCell padding="checkbox">
-					<Checkbox
-						color="primary"
-						indeterminate={
-							numSelected > 0 && numSelected < rowCount
-						}
-						checked={rowCount > 0 && numSelected === rowCount}
-						onChange={(event) => onSelectAllClick(event)}
-						inputProps={{ "aria-label": "Wybierz wszystko" }}
-					/>
-				</TableCell> */}
 				{headCells.map((headCell) => (
 					<TableCell
 						key={headCell.id}

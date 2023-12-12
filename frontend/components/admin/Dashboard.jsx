@@ -34,6 +34,7 @@ const Dashboard = () => {
 							backgroundColor: "#b267e4",
 						},
 					}}
+					className="bg-secondary-violet"
 				>
 					<AddIcon
 						sx={{
