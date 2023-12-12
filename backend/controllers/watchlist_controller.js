@@ -11,7 +11,7 @@ const getWatchlist = async (watchlistId) => {
 			.exec();
 		if (!watchlist) return false;
 
-		await addImgsToSeries(watchlist);
+		await addImgsToSeries(watchlist.series);
 		return watchlist;
 	} catch (error) {
 		throw error;

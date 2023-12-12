@@ -86,7 +86,7 @@ const getByEpisodeCount = async (howMany) => {
 			.limit(howMany)
 			.lean()
 			.exec();
-		// await addImgsToSeries(result);
+		await addImgsToSeries(result);
 		return result;
 	} catch (error) {
 		throw error;
@@ -108,7 +108,8 @@ const upload_Series = async (
 		console.log(episode_titles);
 		console.log(episode_desc);
 		const series = await Series.findOne({ series_title: series_title });
-		if (series) return { statusCode: 409, message: "Series already exists" };
+		if (series)
+			return { statusCode: 409, message: "Series already exists" };
 		let videos_ids = [];
 		for (let i = 0; i < files_videos.length; i++) {
 			const video = new Video({
