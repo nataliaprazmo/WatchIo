@@ -2,15 +2,17 @@ import React from "react";
 import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
 import SavedSearchOutlinedIcon from "@mui/icons-material/SavedSearchOutlined";
 import LocalPlayOutlinedIcon from "@mui/icons-material/LocalPlayOutlined";
-import CoPresentOutlinedIcon from "@mui/icons-material/CoPresentOutlined";
+import JoinRoom from "./JoinRoom";
 
 const RoomsInstruction = () => {
 	return (
 		<>
-			<h3 className="font-semibold text-neutral-400 text-center">
-				Nie stworzyłeś jeszcze swojego pokoju do wspólnego oglądania.
+			<h3 className="font-semibold text-neutral-400 text-center mt-1 mb-6">
+				Dołącz do pokoju - skopiuj kod od właściciela pokoju, a
+				następnie wklej go poniżej.
 			</h3>
-			<div className="flex w-full justify-center items-center mt-10 mb-2">
+			<JoinRoom />
+			<div className="flex w-full justify-center items-center mt-8">
 				<WeekendOutlinedIcon
 					sx={{
 						fontSize: "96px",
@@ -18,10 +20,10 @@ const RoomsInstruction = () => {
 					}}
 				/>
 			</div>
-			<p className="font-medium text-neutral-400 text-center">
-				Aby stworzyć swój pierwszy pokój, podążaj za instrukcją:
+			<p className="font-medium text-neutral-400 text-center mt-10">
+				Lub stwórz swój pierwszy pokój, podążając za instrukcją:
 			</p>
-			<div className="flex items-center p-4 h-fit border-neutral-500 hover:border-secondary-violet border-2 rounded-lg mt-8 gap-3 cursor-pointer">
+			<div className="flex items-center p-4 h-fit border-neutral-500 hover:border-secondary-violet border-2 rounded-lg mt-6 gap-3 cursor-pointer">
 				<SavedSearchOutlinedIcon
 					sx={{
 						fontSize: "32px",
@@ -44,18 +46,6 @@ const RoomsInstruction = () => {
 					przycisk!
 				</p>
 			</div>
-			{/* <p className="font-medium text-neutral-400 text-center mt-8">
-				Lub:
-			</p>
-			<div className="flex items-center p-4 h-fit border-neutral-500 hover:border-secondary-violet border-2 rounded-lg mt-2 gap-3">
-				<CoPresentOutlinedIcon
-					sx={{
-						fontSize: "32px",
-						path: { color: "#9126d9" },
-					}}
-				/>
-				<p>Stwórz pokój teraz!</p>
-			</div> */}
 		</>
 	);
 };

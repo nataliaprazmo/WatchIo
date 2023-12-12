@@ -12,7 +12,7 @@ const Rooms = () => {
 				]}
 			/>
 			<h1 className="mt-12 text-32 font-bold text-center">
-				Twoje <span className="text-secondary-violet">Pokoje</span>
+				<span className="text-secondary-violet">Wspólne</span> oglądanie
 			</h1>
 			<RoomsInstruction />
 		</div>

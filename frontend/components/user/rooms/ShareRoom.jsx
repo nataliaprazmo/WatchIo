@@ -14,7 +14,7 @@ const ShareRoom = ({ link }) => {
 				setOpen(false);
 			}}
 			open={open}
-			title="Skopiowano link"
+			title="Skopiowano kod"
 		>
 			<button
 				onClick={() => {
