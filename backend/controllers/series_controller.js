@@ -17,18 +17,14 @@ const getSeries = async () => {
 
 const getSeriesDetails = async (seriesId) => {
 	try {
-		// console.log(seriesId);
 		var series = await Series.findById(seriesId)
 			.populate("episodes")
 			.lean()
 			.exec();
 		if (!series) return false;
-		// console.log(series);
 		console.log(series);
 		await addImgsToSeries([series]);
-		// console.log(series.episodes.length);
 		await addImgsToEpisodes(series.episodes);
-		// console.log(series);
 		return series;
 	} catch (error) {
 		throw error;
