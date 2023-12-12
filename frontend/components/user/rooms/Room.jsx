@@ -18,7 +18,7 @@ const Room = ({ roomId, videoId }) => {
 			/>
 			<div className="flex justify-between items-center mt-12">
 				{/* <h1 className="text-32 font-semibold">Tytuł serii</h1> */}
-				<ShareRoom link={`${roomId}`} />
+				{videoId && <ShareRoom link={`${roomId}`} />}
 			</div>
 			{/* <p>Odcinek 1</p> */}
 			<Player roomId={roomId} videoId={videoId} />

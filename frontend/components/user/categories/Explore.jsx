@@ -57,7 +57,7 @@ const Explore = () => {
 					))}
 				</div>
 			)}
-			{series && series.length !== 0 ? (
+			{/* {series && series.length !== 0 ? (
 				<div className="flex flex-wrap gap-8">
 					{series.map((serie, id) => (
 						<Serie key={id} serie={serie} />
@@ -65,7 +65,7 @@ const Explore = () => {
 				</div>
 			) : (
 				<p className="mt-8">Nie znaleziono serii</p>
-			)}
+			)} */}
 		</div>
 	);
 };
