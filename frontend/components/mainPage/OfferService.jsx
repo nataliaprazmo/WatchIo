@@ -10,10 +10,10 @@ const OfferService = ({ id, title, description, image, tutorial }) => {
 			className="px-13 pt-16 flex lg:flex-row flex-col justify-between items-center gap-16"
 		>
 			<div className="flex flex-col">
-				<h1 className="text-2xl font-semibold pb-2 text-primary-orange uppercase flex items-center gap-2">
+				<h1 className="text-2xl font-semibold pb-2 text-secondary-violet uppercase flex items-center gap-2">
 					<ArrowForwardRoundedIcon
 						size="28"
-						sx={{ path: { color: "#ff9900" } }}
+						sx={{ path: { color: "#9126d9" } }}
 					/>
 					{title}
 				</h1>

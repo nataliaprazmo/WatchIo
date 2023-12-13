@@ -9,7 +9,7 @@ const Player = ({ roomId, videoId }) => {
 	const [currentVideoId, setCurrentVideoId] = useState(null);
 
 	const video = useRef(document.getElementById("video"));
-	const [watching, setWatching] = useState(1);
+	const [watching, setWatching] = useState(null);
 	const HEARTBEAT_TIMEOUT = 1000 * 5 + 1000 * 1; // 5 + 1 second
 	const HEARTBEAT_VALUE = 1;
 
@@ -79,7 +79,7 @@ const Player = ({ roomId, videoId }) => {
 			}
 		}
 		if (arrData[0] === "watching") {
-			setWatching(arrData[1]);
+			setWatching(arrData[1] - 0);
 		}
 	});
 

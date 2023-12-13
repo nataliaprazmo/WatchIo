@@ -1,30 +1,41 @@
 import React from "react";
-import SeriesHero from "../SeriesHero";
-import { getByOneEpisode } from "./categories";
-import { getByEpisodeCount } from "./categories";
-import { getByQuery } from "./categories";
 import Category from "./Category";
 
 const SeriesSections = () => {
+	const getByQuery = async (howMany, query) => {
+		const response = await fetch(
+			"http://localhost:5000/api/series?" + query + "&howMany=" + howMany,
+			{
+				method: "GET",
+			}
+		);
+		if (response.status === 200) {
+			const res = await response.json();
+			return res.data.series;
+		} else return [];
+	};
 	return (
 		<>
-			<SeriesHero />
-			{/* <Category
+			<Category
+				text="Najnowsze produkcje"
 				getFunction={() => getByQuery(4, "sortedBy=year_of_production")}
 				count={4}
-				text="Najnowsze"
 			/>
 			<Category
-				getFunction={() => getByQuery(4, "sortedBy=imdb_score")}
-				count={4}
 				text="Najlepiej oceniane"
-			/>
-			<Category getFunction={getByOneEpisode} count={6} text="Filmy" />
-			<Category
-				getFunction={() => getByEpisodeCount(1)}
+				getFunction={() => getByQuery(6, "sortedBy=imdb_score")}
 				count={6}
+			/>
+			<Category
+				text="Filmy"
+				getFunction={() => getByQuery(6, "getByOneEpisode=1")}
+				count={6}
+			/>
+			<Category
 				text="Seriale"
-			/> */}
+				getFunction={() => getByQuery(6, "getByEpisodeCount=1")}
+				count={6}
+			/>
 		</>
 	);
 };

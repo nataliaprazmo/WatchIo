@@ -1,28 +1,23 @@
-import React, { Suspense } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Section from "./Section";
-import Serie from "./Serie";
 
 const Category = ({ getFunction, count, text }) => {
-	const Series = React.lazy(async () => {
-		let series = await getFunction();
-		if (series === null) return <></>;
-		else
-			return {
-				default: () => (
-					<div className="w-full flex justify-between items-center gap-8">
-						{series.map((serie, index) => (
-							<Serie key={index} serie={serie} />
-						))}
-					</div>
-				),
-			};
+	const [series, setSeries] = useState(null);
+	useEffect(() => {
+		getFunction().then((data) => {
+			setSeries(data);
+		});
+	}, []);
+	const Series = dynamic(() => import("./Series"), {
+		ssr: false,
+		loading: () => <Section items_count={count} />,
 	});
 	return (
 		<div className="my-8">
 			<h1 className="text-xl font-semibold mb-4">{text}</h1>
-			<Suspense fallback={<Section items_count={count} />}>
-				<Series />
-			</Suspense>
+			<Series series={series} />
 		</div>
 	);
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import Explore from "@/components/user/categories/Explore";
+import Explore from "@/components/user/explore/Explore";
 
 export default function Page() {
 	return (

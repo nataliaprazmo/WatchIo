@@ -1,84 +1,108 @@
 "use client";
 
-import React from "react";
-import { Chips } from "@/components/admin";
-import { Chip } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
+import Image from "next/image";
+import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
+import { Chip } from "@mui/material";
 
-const SeriesDetails = ({ id }) => {
+const serie = ({ id }) => {
+	const [serie, setSerie] = useState(null);
+	const getSerie = async () => {
+		try {
+			const response = await fetch(
+				"http://localhost:5000/api/series/" + id,
+				{
+					method: "GET",
+				}
+			);
+			if (response.status === 200) {
+				const res = await response.json();
+				setSerie(res.data.seriesDetails);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		getSerie();
+	}, []);
+	useEffect(() => {
+		console.log(serie);
+	}, [setSerie, serie]);
 	return (
-		<div>
-			<div className="sm:mt-16 mt-14 w-full sm:h-96 h-80 bg-[url('/images/poster.webp')] bg-cover bg-center flex justify-end">
-				<div className="absolute top-0 left-0 sm:mt-16 mt-14 w-full sm:h-96 h-80 bg-gradient-to-t from-black to-transparent" />
-				<div className="flex items-center gap-4 absolute right-8 top-[430px]">
-					<Chips
-						variant="outlined"
-						elements={["1h 40m", "2022", "PG"]}
+		<div className="pt-24 pb-18 pl-[115px] pr-13">
+			<SiteBreadcrumbs
+				links={[
+					{ to: "/admin", label: "Serie" },
+					{
+						to: `/admin/series/${id}`,
+						label: "Szczegóły",
+					},
+				]}
+			/>
+			{serie ? (
+				<div className="mt-8 flex flex-row flex-wrap items-start gap-8">
+					<Image
+						src={`data:image/jpg;base64, ${serie.picture}`}
+						alt={serie.series_title}
+						width={240}
+						height={400}
+						style={{ objectFit: "cover" }}
+						className="bg-cover rounded"
 					/>
-				</div>
-			</div>
-			<div className="absolute top-80 left-24 flex justify-between pb-18 pr-12">
-				<div className="flex flex-col w-[60%]">
-					<SiteBreadcrumbs
-						links={[
-							{ to: "/admin", label: "Serie" },
-							{ to: `/admin/series/${id}`, label: "Szczegóły" },
-						]}
-					/>
-					<div className="flex gap-6 items-center">
-						<h2 className="text-[32px] font-semibold">
-							Buzz Astral
-						</h2>
-						<Chip
-							label={
-								<p className="flex gap-2 font-semibold">
-									IMDB{" "}
-									<p className="text-primary-orange ">6.0</p>
+					<div className="flex flex-col w-96">
+						<h1 className="font-semibold sm:text-32 text-2xl">
+							{serie.series_title}
+						</h1>
+						<div className="flex flex-row items-center my-1">
+							<StarOutlineRoundedIcon
+								sx={{
+									fontSize: "18px",
+									path: { color: "#ff9900" },
+								}}
+							/>
+							<p className="text-sm mr-1 text-neutral-400">
+								{serie.imdb_score ? serie.imdb_score : 5.0}
+							</p>
+							<p className="text-sm ml-1 text-neutral-400">
+								IMDB
+							</p>
+							<p className="mx-6 text-sm text-neutral-400">
+								{serie.year_of_production}
+							</p>
+							<p className="text-sm mr-6 text-neutral-400">
+								liczba odcinków: {serie.episodes.length}
+							</p>
+							{serie.age_rating && (
+								<p className="text-sm text-neutral-400">
+									{serie.age_rating}
 								</p>
-							}
-							variant="outlined"
-							className="px-2 bg-grey-200 border-white rounded"
-							sx={{
-								span: { color: "#fafaf5" },
-							}}
-						/>
+							)}
+						</div>
+						<p className="line-clamp-6 text-justify sm:text-base text-sm">
+							{serie.description}
+						</p>
+						<div className="flex flex-row items-center gap-2 mt-8">
+							<p className="text-neutral-400 mr-2">Gatunki:</p>
+							{serie.genres.map((gatunek, index) => (
+								<Chip
+									key={index}
+									label={gatunek}
+									variant="outlined"
+									sx={{
+										borderColor: "#9126d9",
+									}}
+								/>
+							))}
+						</div>
 					</div>
-					<p className="font-medium pb-4 text-justify">
-						Animowany film przygodowy science-fiction
-						przedstawiający początki Buzza Astrala, bohatera, który
-						zainspirował powstanie sławnej figurki. "Buzz Astral"
-						śledzi losy legendarnego strażnika kosmosu, który wraz z
-						komandor i załogą trafia na wrogą planetę odległą 4,2
-						mln lat świetlnych od Ziemi. Buzz próbuje odnaleźć drogę
-						powrotną w przestrzeni i czasie, a towarzyszy mu grupa
-						ambitnych rekrutów oraz uroczy robot-kot Kotex. Sytuację
-						komplikuje przybycie Zurga, który zagraża powodzeniu
-						misji. Nie są znane jego zamiary, lecz towarzyszy mu
-						armia bezlitosnych robotów.
-					</p>
-					<Chips
-						variant="outlined"
-						elements={["Animacja", "Familijny", "Przygodowy"]}
-					/>
-					<span className="pb-4" />
-					<table className="lg:w-[45%] md:w-[75%] w-full text-sm mb-4 ">
-						<tr>
-							<td className="text-gray-400">Dystrybucja</td>
-							<td>Disney</td>
-						</tr>
-						<tr>
-							<td className="text-gray-400">Studio</td>
-							<td>Walt Disney Pictures</td>
-						</tr>
-						<tr>
-							<td className="text-gray-400">Tytuł oryginalny</td>
-							<td>Lightyear</td>
-						</tr>
-					</table>
 				</div>
-			</div>
+			) : (
+				<p className="mt-8">Nie odnaleziono serii o danym id.</p>
+			)}
 		</div>
 	);
 };
 
-export default SeriesDetails;
+export default serie;

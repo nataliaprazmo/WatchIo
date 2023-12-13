@@ -16,6 +16,7 @@ const Profile = () => {
 		first_name: "",
 		last_name: "",
 		phone_number: "",
+		email: "",
 	});
 	const getUserData = async () => {
 		const token = localStorage.getItem("token");
@@ -33,12 +34,13 @@ const Profile = () => {
 				);
 				if (response.status == 200) {
 					const res = await response.json();
-					const { first_name, last_name, phone_number } =
+					const { first_name, last_name, phone_number, email } =
 						res.data.userData;
 					setUserData({
 						first_name,
 						last_name,
 						phone_number,
+						email,
 					});
 				}
 			} catch (error) {
@@ -142,11 +144,7 @@ const Profile = () => {
 			</div>
 			<div className="grid grid-cols-4 mb-8 mt-6 gap-1">
 				<p>Email:</p>
-				{role === "admin" ? (
-					<p className="col-span-3">admin@mail.com</p>
-				) : (
-					<p className="col-span-3">user@mail.com</p>
-				)}
+				<p className="col-span-3">{userData.email}</p>
 				<p>Nr telefonu:</p>
 				<p className="col-span-2">{userData.phone_number}</p>
 				{passwordEdit ? (
