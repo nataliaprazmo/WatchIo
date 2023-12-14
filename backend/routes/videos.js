@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const fs = require("fs");
 const { Video, validate } = require("../models/Video");
-
+const { Series } = require("../models/Series");
 
 router.get("/:id", async (req, res) => {
 	try {
@@ -39,6 +39,29 @@ router.get("/:id", async (req, res) => {
 			res.writeHead(200, head);
 			fs.createReadStream(filePath).pipe(res);
 		}
+	} catch (err) {
+		console.error(err);
+		return res.status(500).send({ message: "Internal Server Error" });
+	}
+});
+
+router.get("/:id/details", async (req, res) => {
+	try {
+		const series = await Series.findOne({ episodes: req.params.id }).select(
+			"-series_picture_path -series_picture_path"
+		);
+		const video = await Video.findOne({ _id: req.params.id }).select(
+			"-fileName -thumbnail_path -path"
+		);
+		if (!series || !video)
+			return res.status(404).send({ message: "NotFound" });
+		return res.status(200).send({
+			message: "success",
+			data: {
+				video_data: video,
+				series_data: series,
+			},
+		});
 	} catch (err) {
 		console.error(err);
 		return res.status(500).send({ message: "Internal Server Error" });

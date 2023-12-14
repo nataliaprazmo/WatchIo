@@ -137,3 +137,5 @@ GET  http://localhost:5000/api/series?getByEpisodeCount=1&howMany=2 HTTP/1.1
 
 ###
 GET  http://localhost:5000/api/statistics HTTP/1.1
+###
+GET  http://localhost:5000/api/videos/65736841f388c05e00d914b9/details HTTP/1.1
