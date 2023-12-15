@@ -57,12 +57,21 @@ const createSession = async (userId, priceId) => {
 	}
 };
 
-const cancelSubscription = async (subscriptionId) => {
+const cancelSubscription = async (stripeId) => {
 	try {
-		const sub = await stripe.subscriptions.update(subscriptionId, {
+		const stripeSubscription = await stripe.subscriptions.update(stripeId, {
 			cancel_at_period_end: true,
 		});
-		console.log("po cancelu");
+		console.log(stripeSubscription);
+		console.log(stripeId);
+		const subscription = await Subscription.findOne({
+			stripe_subscription_id: stripeId,
+		});
+		if (!subscription) throw new Error("No such subscription");
+		console.log(subscription);
+		subscription.end_date = stripeSubscription.current_period_end;
+		subscription.status = "canceled";
+		await subscription.save();
 		return true;
 	} catch (error) {
 		throw error;

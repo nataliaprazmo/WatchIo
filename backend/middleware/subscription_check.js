@@ -1,6 +1,6 @@
 const { Subscription } = require("../models/Subscription");
 const stripe = require("../utils/Stripe");
-const { getSubscriptionId } = require("../utils/Stripe_utils");
+const { getStripeSubscriptionId } = require("../utils/Stripe_utils");
 
 const checkSubscription = async (req, res, next) => {
 	try {
@@ -20,7 +20,9 @@ const checkSubscription = async (req, res, next) => {
 			return res.status(403).send({ message: "No active subscription" });
 		}
 
-		const stripeSubscriptionId = await getSubscriptionId(req.user._id);
+		const stripeSubscriptionId = await getStripeSubscriptionId(
+			req.user._id
+		);
 		if (!stripeSubscriptionId)
 			return res.status(403).send({ message: "No active subscription" });
 

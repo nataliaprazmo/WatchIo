@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "credentials":{
-        "email":"example@com.com",
+        "email":"1example@com.com",
         "password":"Qwerty1234!",
         "repeatedPassword":"Qwerty1234!"
     },
@@ -20,7 +20,7 @@ POST http://localhost:5000/api/auth HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"example22@com.com",
+    "email":"1example@com.com",
     "password":"Qwerty1234!"
 }
 ###
@@ -44,7 +44,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1MmE4NDBiMDd
 
 POST http://localhost:5000/api/subscriptions/session HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViYWM1YjY2Y2JjMjc4NjU0NTZhNWMiLCJpYXQiOjE3MDA1MDY3MjAsImV4cCI6MTcwMTExMTUyMH0.j4_XnfdvJd0W2NTWUqAK3UFQFiLhzZxho9g9SLBnHNE
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
 
 {
     "priceId":"price_1OC534An9ZF4sVGm1A5YRzGh"
@@ -53,12 +53,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTViYWM1YjY2Y2J
 ###
 POST http://localhost:5000/api/subscriptions/cancel HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU2NGQ5YjdmNTczNDVhZjg1NjU1ZTIiLCJpYXQiOjE3MDAxNTQ3OTYsImV4cCI6MTcwMDc1OTU5Nn0.MuBgrtScA1TKWRLbpXsJIYwYaqLOTooqSzZM0vx0pPQ
-
-{
-    "subscriptionId":"sub_1OD9hrAn9ZF4sVGmKTDPmiH7"
-}
-
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
 
 ###
 GET http://localhost:5000/api/subscriptions/prices?currency=pln HTTP/1.1
@@ -70,6 +65,8 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQzZDY5MGNjNjR
 ###
 POST http://localhost:5000/api/subsciptions/sharing/join HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
+
+###
 POST http://localhost:5000/api/subsciptions/sharing/join HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
 Content-Type: application/json
@@ -139,3 +136,12 @@ GET  http://localhost:5000/api/series?getByEpisodeCount=1&howMany=2 HTTP/1.1
 GET  http://localhost:5000/api/statistics HTTP/1.1
 ###
 GET  http://localhost:5000/api/videos/65736841f388c05e00d914b9/details HTTP/1.1
+###
+GET http://localhost:5000/api/subscriptions/subscriptionCheck HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
+###
+GET http://localhost:5000/api/subscriptions/ HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
+###
+GET http://localhost:5000/api/series/ HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw

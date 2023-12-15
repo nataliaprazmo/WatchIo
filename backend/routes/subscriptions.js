@@ -7,7 +7,7 @@ const {
 	cancelSubscription,
 	getSubscriptionData,
 } = require("../controllers/subscriptions_controller");
-const { getSubscriptionId } = require("../utils/Stripe_utils");
+const { getStripeSubscriptionId } = require("../utils/Stripe_utils");
 const { Subscription } = require("../models/Subscription");
 const stripe = require("../utils/Stripe");
 
@@ -39,14 +39,14 @@ router.post("/session", jwt_auth, async (req, res) => {
 
 router.post("/cancel", jwt_auth, async (req, res) => {
 	try {
-		// const subId = await cancelSubscription(req.user._id);
+		const subId = await getStripeSubscriptionId(req.user._id);
 		if (!cancelSubscription(subId)) {
 			return res.status(500).send({ message: "Something gone wrong" });
 		}
 		return res.status(200).send({ message: "canceled" });
 	} catch (error) {
 		console.error(error);
-		return res.status(500).send({ message: error.message });
+		return res.status(500).send({ message: "Server error occured" });
 	}
 });
 
@@ -60,28 +60,58 @@ router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 			});
 			subscriptionUserType = "shared";
 		}
+		let stripeSubscription;
+
 		console.log(subscription);
 		if (subscription) {
-			const stripeSubscription = await stripe.subscriptions.retrieve(
-				subscription.stripe_subscription_id
-			);
-			if (stripeSubscription.status == "active")
+			try {
+				stripeSubscription = await stripe.subscriptions.retrieve(
+					subscription.stripe_subscription_id
+				);
+			} catch (error) {
+				console.error(error);
+				subscription = null;
+				console.log(subscription);
+			}
+		}
+		console.log(subscription);
+		if (subscription) {
+			// const stripeSubscription = await stripe.subscriptions.retrieve(
+			// 	subscription.stripe_subscription_id
+			// );
+			if (stripeSubscription.status == "active") {
+				if (stripeSubscription.cancel_at_period_end) {
+					subscription.status = "cancelled";
+					subscription.end_date =
+						stripeSubscription.current_period_end;
+				}
+				subscription.save();
+				console.log("________-----------________");
+				console.log(subscription);
 				return res.status(200).send({
 					message: "success",
-					data: { subscription_user_type: subscriptionUserType },
+					data: {
+						subscription_user_type: subscriptionUserType,
+						status: subscription.status,
+						end_date: subscription.end_date,
+						status: subscription.status,
+					},
 				});
+			}
 
 			await Subscription.deleteOne({ _id: subscription._id });
 			return res.status(403).send({ message: "noSubscription" });
 		}
 
-		const stripeSubscriptionId = await getSubscriptionId(req.user._id);
+		const stripeSubscriptionId = await getStripeSubscriptionId(
+			req.user._id
+		);
 		if (!stripeSubscriptionId)
 			return res.status(403).send({ message: "noSubscription" });
 
 		var stripeData = {};
 		try {
-			const stripeSubscription = await stripe.subscriptions.retrieve(
+			stripeSubscription = await stripe.subscriptions.retrieve(
 				stripeSubscriptionId
 			);
 			stripeData.current_period_end =
@@ -89,11 +119,11 @@ router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 			stripeData.status = "active";
 			if (stripeData.cancel_at_period_end) stripeData.status = "canceled";
 		} catch (error) {
-			console.error(error);
-			return res.status(500).send({ message: "Server error" });
+			console.error("SERVERERROR: " + error);
+			// return res.status(500).send({ message: "Server error" });
 		}
 
-		await new Subscription({
+		const sub = await new Subscription({
 			owner: req.user._id,
 			stripe_subscription_id: stripeSubscriptionId,
 			sharing_code: "",
@@ -102,10 +132,15 @@ router.get("/subscriptionCheck", jwt_auth, async (req, res) => {
 			status: stripeData.status,
 			end_date: stripeData.current_period_end,
 		}).save();
+		console.log(sub);
 		subscriptionUserType = "owner";
 		return res.status(200).send({
 			message: "success",
-			data: { subscription_user_type: subscriptionUserType },
+			data: {
+				subscription_user_type: subscriptionUserType,
+				status: sub.status,
+				end_date: sub.end_date,
+			},
 		});
 	} catch (error) {
 		console.error(error);

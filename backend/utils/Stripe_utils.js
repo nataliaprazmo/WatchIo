@@ -1,9 +1,12 @@
 const stripe = require("./Stripe");
 const { User } = require("../models/User");
 
-const getSubscriptionId = async (userId) => {
+const getStripeSubscriptionId = async (userId) => {
 	try {
 		const user = await User.findOne({ _id: userId });
+		if (!user) {
+			throw new Error("User not found");
+		}
 		const subscriptions = await stripe.subscriptions.list({
 			customer: user.stripe_customer_id,
 			status: "active",
@@ -17,4 +20,4 @@ const getSubscriptionId = async (userId) => {
 	}
 };
 
-module.exports = { getSubscriptionId };
+module.exports = { getStripeSubscriptionId };
