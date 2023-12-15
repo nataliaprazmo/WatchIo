@@ -57,18 +57,23 @@ const createSession = async (userId, priceId) => {
 	}
 };
 
-const cancelSubscription = async (stripeId) => {
+const cancelSubscription = async (userId) => {
 	try {
+		const sharedResult = await Subscription.findOneAndUpdate(
+			{ shared_with: userId },
+			{ $pull: { shared_with: userId } },
+			{ new: true }
+		);
+		if (sharedResult) return true;
+
+		const stripeId = await getStripeSubscriptionId(userId);
 		const stripeSubscription = await stripe.subscriptions.update(stripeId, {
 			cancel_at_period_end: true,
 		});
-		console.log(stripeSubscription);
-		console.log(stripeId);
-		const subscription = await Subscription.findOne({
+		subscription = await Subscription.findOne({
 			stripe_subscription_id: stripeId,
 		});
 		if (!subscription) throw new Error("No such subscription");
-		console.log(subscription);
 		subscription.end_date = stripeSubscription.current_period_end;
 		subscription.status = "canceled";
 		await subscription.save();

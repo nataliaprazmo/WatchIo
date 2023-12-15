@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "credentials":{
-        "email":"1example@com.com",
+        "email":"2example@com.com",
         "password":"Qwerty1234!",
         "repeatedPassword":"Qwerty1234!"
     },
@@ -20,7 +20,7 @@ POST http://localhost:5000/api/auth HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"1example@com.com",
+    "email":"2example@com.com",
     "password":"Qwerty1234!"
 }
 ###
@@ -53,7 +53,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI
 ###
 POST http://localhost:5000/api/subscriptions/cancel HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
 
 ###
 GET http://localhost:5000/api/subscriptions/prices?currency=pln HTTP/1.1
@@ -68,16 +68,16 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI
 
 ###
 POST http://localhost:5000/api/subsciptions/sharing/join HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
 Content-Type: application/json
 
 {
-    "shareCode":246004138
+    "shareCode":462278309
 }
 ###
 
 GET http://localhost:5000/api/subsciptions/sharing/code HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI5ZjczYzkzMzFiZjciLCJpYXQiOjE3MDAzODI2NDcsImV4cCI6MTcwMDk4NzQ0N30.rmKIOkntR4vCjVX4Z4lC6_kux47dj7EeVoouT1wbg2c
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
 Content-Type: application/json
 ###
 POST  http://localhost:5000/api/watchlists/655f9a6382947eb6fb5c9142 HTTP/1.1
@@ -138,10 +138,10 @@ GET  http://localhost:5000/api/statistics HTTP/1.1
 GET  http://localhost:5000/api/videos/65736841f388c05e00d914b9/details HTTP/1.1
 ###
 GET http://localhost:5000/api/subscriptions/subscriptionCheck HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
 ###
 GET http://localhost:5000/api/subscriptions/ HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
 ###
 GET http://localhost:5000/api/series/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw

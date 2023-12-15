@@ -39,14 +39,12 @@ router.post("/session", jwt_auth, async (req, res) => {
 
 router.post("/cancel", jwt_auth, async (req, res) => {
 	try {
-		const subId = await getStripeSubscriptionId(req.user._id);
-		if (!cancelSubscription(subId)) {
-			return res.status(500).send({ message: "Something gone wrong" });
-		}
+		const result = await cancelSubscription(req.user._id);
+		if (!result) res.status(500).send({ message: "Something gone wrong" });
 		return res.status(200).send({ message: "canceled" });
 	} catch (error) {
 		console.error(error);
-		return res.status(500).send({ message: "Server error occured" });
+		return res.status(500).send({ message: error.message });
 	}
 });
 
@@ -152,7 +150,7 @@ router.get("/", jwt_auth, async (req, res) => {
 	try {
 		const subscriptionData = await getSubscriptionData(req.user._id);
 		if (!subscriptionData)
-			return res.status(400).send({ message: "error" }); // change to proper status code and error mesaage later
+			return res.status(404).send({ message: "Subscription not found" }); // change to proper status code and error mesaage later
 		return res.status(200).send({
 			message: "retrieved",
 			data: { subscription: subscriptionData },
