@@ -11,6 +11,8 @@ const {
 	getByEpisodeCount,
 	getByOneEpisode,
 	getSeriesSortedBy,
+	search,
+	getByStaff,
 } = require("../controllers/series_controller");
 
 // router.use(jwt_auth);
@@ -21,6 +23,8 @@ router.get("/", async (req, res) => {
 		console.log(req.query);
 		if (req.query?.genres) {
 			result = await getSeriesByGenre(req.query.genres);
+		} else if (req.query?.search) {
+			result = await search(req.query.search);
 		} else if (req.query?.howMany && req.query?.sortedBy) {
 			result = await getSeriesSortedBy(
 				req.query.sortedBy,
@@ -30,6 +34,12 @@ router.get("/", async (req, res) => {
 			result = await getByOneEpisode(req.query.howMany);
 		} else if (req.query?.howMany && req.query?.getByEpisodeCount) {
 			result = await getByEpisodeCount(req.query.howMany);
+		} else if (req.query?.name && req.query?.surname && req.query?.role) {
+			result = await getByStaff(
+				req.query.name,
+				req.query.surname,
+				req.query.role
+			);
 		} else result = await getSeries();
 		return res.status(200).send({
 			message: "Data fetched succesfully",

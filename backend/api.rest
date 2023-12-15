@@ -143,5 +143,6 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQ
 GET http://localhost:5000/api/subscriptions/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
 ###
-GET http://localhost:5000/api/series/ HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI2NjkwMTYsImV4cCI6MTcwMzI3MzgxNn0.NM_8DYmH3-8GsWdJ4dBljQNJGPBk-bpb46FJmStc8Sw
+GET http://localhost:5000/api/series/?search=iron HTTP/1.1
+###
+GET http://localhost:5000/api/series/?name=asdf&surname=asdf&role=aktor HTTP/1.1

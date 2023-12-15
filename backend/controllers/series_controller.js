@@ -43,6 +43,39 @@ const getSeriesByGenre = async (genre) => {
 	}
 };
 
+const search = async (searchQuery) => {
+	try {
+		const regex = new RegExp(searchQuery, "i");
+		const result = await Series.find({ series_title: { $regex: regex } })
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
+const getByStaff = async (staffName, staffSurname, staffRole) => {
+	try {
+		const result = await Series.find({
+			staff: {
+				$elemMatch: {
+					name: staffName,
+					surname: staffSurname,
+					role: staffRole,
+				},
+			},
+		})
+			.lean()
+			.exec();
+		await addImgsToSeries(result);
+		return result;
+	} catch (error) {
+		throw error;
+	}
+};
+
 const getSeriesSortedBy = async (sortedBy, howMany) => {
 	try {
 		const result = await Series.find()
@@ -194,4 +227,6 @@ module.exports = {
 	getByEpisodeCount,
 	getByOneEpisode,
 	getSeriesSortedBy,
+	search,
+	getByStaff,
 };
