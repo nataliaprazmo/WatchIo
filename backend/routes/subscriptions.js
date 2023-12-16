@@ -41,7 +41,15 @@ router.post("/cancel", jwt_auth, async (req, res) => {
 	try {
 		const result = await cancelSubscription(req.user._id);
 		if (!result) res.status(500).send({ message: "Something gone wrong" });
-		return res.status(200).send({ message: "canceled" });
+		if (result.message == "sharedUserCancelled")
+			return res.status(200).send({ message: "sharedUserCancelled" });
+		if (result.message == "ownerCancelled")
+			return res
+				.status(200)
+				.send({
+					message: "ownerCancelled",
+					data: { end_date: result.data.end_date },
+				});
 	} catch (error) {
 		console.error(error);
 		return res.status(500).send({ message: error.message });

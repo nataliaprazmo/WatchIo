@@ -1,6 +1,7 @@
 const stripe = require("../utils/Stripe");
 const { User } = require("../models/User");
 const { Subscription } = require("../models/Subscription");
+const { getStripeSubscriptionId } = require("../utils/Stripe_utils");
 
 const getPrices = async (currency) => {
 	try {
@@ -64,7 +65,7 @@ const cancelSubscription = async (userId) => {
 			{ $pull: { shared_with: userId } },
 			{ new: true }
 		);
-		if (sharedResult) return true;
+		if (sharedResult) return { message: "sharedUserCancelled" };
 
 		const stripeId = await getStripeSubscriptionId(userId);
 		const stripeSubscription = await stripe.subscriptions.update(stripeId, {
@@ -77,7 +78,12 @@ const cancelSubscription = async (userId) => {
 		subscription.end_date = stripeSubscription.current_period_end;
 		subscription.status = "canceled";
 		await subscription.save();
-		return true;
+		return {
+			message: "ownerCancelled",
+			data: {
+				end_date: subscription.end_date,
+			},
+		};
 	} catch (error) {
 		throw error;
 	}

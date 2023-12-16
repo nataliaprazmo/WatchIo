@@ -20,7 +20,7 @@ POST http://localhost:5000/api/auth HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"2example@com.com",
+    "email":"1example@com.com",
     "password":"Qwerty1234!"
 }
 ###
@@ -53,7 +53,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI
 ###
 POST http://localhost:5000/api/subscriptions/cancel HTTP/1.1
 Content-Type: application/json
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYWFiMGRiZGI2MTc3OGU4MWNmZGIiLCJpYXQiOjE3MDI3MjQxOTEsImV4cCI6MTcwMzMyODk5MX0.pLhc8_35L09xw5FvrH5TgKXYmGKv5_d6WDDU5p0Oe48
 
 ###
 GET http://localhost:5000/api/subscriptions/prices?currency=pln HTTP/1.1
@@ -68,7 +68,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3Y2NmN2ZjZWI
 
 ###
 POST http://localhost:5000/api/subsciptions/sharing/join HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI3MjQxMzQsImV4cCI6MTcwMzMyODkzNH0.ZE1El8Y6s_L5aMmDPesRpQJOjlWAjaULZX8Ud9t-pJY
 Content-Type: application/json
 
 {
