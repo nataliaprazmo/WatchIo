@@ -33,7 +33,7 @@ const server = require("http").createServer(app);
 // 	});
 // });
 
-const webS = require("./controllers/WEBSOCKETS");
+const webS = require("./controllers/websockets");
 webS.init(server);
 app.get("/test/ws", (req, res) => {
 	console.log(webS.clients.rooms);
