@@ -16,7 +16,7 @@ const sendRoomId = (ws, roomId, videoId) => {
 			console.log("closed");
 			clients.rooms[roomId].sockets.forEach(function each(client) {
 				if (client.readyState === WebSocket.OPEN) {
-					ws.send("watching," + rooms[roomId].sockets.length),
+					client.send("watching," + rooms[roomId].sockets.length),
 						{
 							binary: false,
 						};
@@ -34,7 +34,7 @@ const sendRoomId = (ws, roomId, videoId) => {
 			};
 		rooms[roomId].sockets.forEach(function each(client) {
 			if (client.readyState === WebSocket.OPEN) {
-				ws.send("watching," + rooms[roomId].sockets.length),
+				client.send("watching," + rooms[roomId].sockets.length),
 					{
 						binary: false,
 					};
@@ -48,7 +48,7 @@ const sendRoomId = (ws, roomId, videoId) => {
 			};
 		rooms[roomId].sockets.forEach(function each(client) {
 			if (client.readyState === WebSocket.OPEN) {
-				ws.send("watching," + rooms[roomId].sockets.length),
+				client.send("watching," + rooms[roomId].sockets.length),
 					{
 						binary: false,
 					};
