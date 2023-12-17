@@ -11,34 +11,15 @@ const subscriptionSharing = require("./routes/subscriptionSharing");
 const watchlists = require("./routes/watchlists");
 const genres = require("./routes/genres");
 const videos = require("./routes/videos");
-const tests = require("./routes/test_sync");
 const statistics = require("./routes/statistics");
-// const WebSocket = require("ws");
+const webS = require("./controllers/websockets");
 
 const server = require("http").createServer(app);
-// const wss = new WebSocket.Server({ server, server });
 
-// wss.on("connection", function connection(ws) {
-// 	console.log("A new client Connected!");
-// 	ws.send("Welcome New Client!");
-
-// 	ws.on("message", function incoming(message) {
-// 		console.log("received: %s", message);
-
-// 		wss.clients.forEach(function each(client) {
-// 			if (client !== ws && client.readyState === WebSocket.OPEN) {
-// 				client.send("BLAY");
-// 			}
-// 		});
-// 	});
-// });
-
-const webS = require("./controllers/websockets");
 webS.init(server);
 app.get("/test/ws", (req, res) => {
-	console.log(webS.clients.rooms);
-	res.send(JSON.stringify(webS.clients));
-	// console.log(JSON.stringify(webS.clients));
+	console.log(webS.clients);
+	res.send(webS);
 });
 app.use(express.json());
 app.use(cors());
@@ -54,7 +35,6 @@ app.use("/api/subsciptions/sharing", subscriptionSharing);
 app.use("/api/subscriptions", subscriptions);
 app.use("/api/watchlists", watchlists);
 app.use("/api/videos", videos);
-app.use("/tests", tests);
 app.use("/api/statistics", statistics);
 
 server.listen(process.env.PORT, () => {

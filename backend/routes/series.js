@@ -15,8 +15,6 @@ const {
 	getByStaff,
 } = require("../controllers/series_controller");
 
-// router.use(jwt_auth);
-
 router.get("/", async (req, res) => {
 	try {
 		let result;
@@ -54,7 +52,6 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
 	try {
 		const result = await getSeriesDetails(req.params.id);
-		// console.log(result);
 		return res.status(200).send({
 			message: "Data fetched succesfully",
 			data: { seriesDetails: result },
@@ -64,22 +61,6 @@ router.get("/:id", async (req, res) => {
 		return res.status(500).send({ message: error.message });
 	}
 });
-
-// router.get("/", async (req, res) => {
-// 	try {
-// 		const result = await getSeriesByGenre(
-// 			req.query.howMany,
-// 			req.query.genre
-// 		);
-// 		return res.status(200).send({
-// 			message: "Data fetched successfully",
-// 			data: { series: result },
-// 		});
-// 	} catch (error) {
-// 		console.error(error);
-// 		return res.status(500).send({ message: error.message });
-// 	}
-// });
 
 router.delete("/:id", jwt_auth, admin_auth, async (req, res) => {
 	try {
