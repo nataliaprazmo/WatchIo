@@ -20,7 +20,7 @@ POST http://localhost:5000/api/auth HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"1example@com.com",
+    "email":"2example@com.com",
     "password":"Qwerty1234!"
 }
 ###
@@ -137,8 +137,8 @@ GET  http://localhost:5000/api/statistics HTTP/1.1
 ###
 GET  http://localhost:5000/api/videos/65736841f388c05e00d914b9/details HTTP/1.1
 ###
-GET http://localhost:5000/api/subscriptions/subscriptionCheck HTTP/1.1
-x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0
+GET http://localhost:5000/api/subscriptions/subscriptionCheck_v2 HTTP/1.1
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI3MjY5NTYsImV4cCI6MTcwMzMzMTc1Nn0.FFFsY4Rzv0w-0R4MrVS9hNueoUuUSsxBlBqvwtlzlC8
 ###
 GET http://localhost:5000/api/subscriptions/ HTTP/1.1
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTdjYjU0NDc4NzQwYWVhZjMzZThkMDEiLCJpYXQiOjE3MDI2NzE2ODksImV4cCI6MTcwMzI3NjQ4OX0.zpovnfTcFJuO32qAg4hIKSui29M4ibTin63H1r8k_x0

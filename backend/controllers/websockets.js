@@ -14,6 +14,14 @@ const sendRoomId = (ws, roomId, videoId) => {
 	if (!roomId) {
 		ws.on("close", () => {
 			console.log("closed");
+			clients.rooms[roomId].sockets.forEach(function each(client) {
+				if (client.readyState === WebSocket.OPEN) {
+					ws.send("watching," + rooms[roomId].sockets.length),
+						{
+							binary: false,
+						};
+				}
+			});
 		});
 		return;
 	}
@@ -54,7 +62,7 @@ const sendRoomId = (ws, roomId, videoId) => {
 			return;
 		}
 
-		console.log("received: %s", message);
+		// console.log("received: %s", message);
 		rooms[roomId].sockets.forEach(function each(client) {
 			if (client !== ws && client.readyState === WebSocket.OPEN) {
 				client.send(message, { binary: false });
@@ -64,6 +72,10 @@ const sendRoomId = (ws, roomId, videoId) => {
 
 	ws.on("close", () => {
 		console.log("connection closed");
+		ws.send("watching," + rooms[roomId].sockets.length),
+			{
+				binary: false,
+			};
 		const idr = rooms[roomId].sockets.indexOf(ws);
 		if (idr >= 0) {
 			rooms[roomId].sockets.splice(idr, 1);
@@ -86,9 +98,6 @@ const init = (server) => {
 		console.log("connected");
 		ws.send("Welcome New Client!");
 		const parsedUrl = url.parse(req.url, true);
-		// console.log(parsedUrl);
-		// const idr = req.url.indexOf("?");
-		// const uri = idr >= 0 ? req.url.slice(0, idr) : req.url;
 		const paths = parsedUrl.pathname.split("/").filter((p) => !!p);
 		switch (paths[1]) {
 			case "rooms":

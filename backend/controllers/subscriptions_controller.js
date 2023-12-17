@@ -137,9 +137,98 @@ const getSubscriptionData = async (user_id) => {
 	}
 };
 
+const checkSubscription = async (userId) => {
+	try {
+		var subscription = await Subscription.findOne({ owner: userId });
+		var subscriptionUserType = "owner";
+		if (!subscription) {
+			subscription = await Subscription.findOne({
+				shared_with: userId,
+			});
+			subscriptionUserType = "shared";
+		}
+		let stripeSubscription;
+
+		console.log(subscription);
+		if (subscription) {
+			try {
+				stripeSubscription = await stripe.subscriptions.retrieve(
+					subscription.stripe_subscription_id
+				);
+			} catch (error) {
+				console.error(error);
+				subscription = null;
+			}
+		}
+		console.log(subscription);
+		if (subscription) {
+			if (stripeSubscription.status == "active") {
+				if (stripeSubscription.cancel_at_period_end) {
+					subscription.status = "cancelled";
+					subscription.end_date =
+						stripeSubscription.current_period_end;
+				}
+				subscription.save();
+				return {
+					message: "success",
+					data: {
+						subscription_user_type: subscriptionUserType,
+						status: subscription.status,
+						end_date: subscription.end_date,
+					},
+				};
+			}
+
+			await Subscription.deleteOne({ _id: subscription._id });
+			return { message: "noSubscription" };
+		}
+
+		const stripeSubscriptionId = await getStripeSubscriptionId(userId);
+		if (!stripeSubscriptionId) return { message: "noSubscription" };
+
+		var stripeData = {};
+		try {
+			stripeSubscription = await stripe.subscriptions.retrieve(
+				stripeSubscriptionId
+			);
+			stripeData.current_period_end =
+				stripeSubscription.current_period_end;
+			stripeData.status = "active";
+			if (stripeData.cancel_at_period_end) stripeData.status = "canceled";
+		} catch (error) {
+			console.error("SERVERERROR: " + error);
+			// return res.status(500).send({ message: "Server error" });
+		}
+
+		const sub = await new Subscription({
+			owner: userId,
+			stripe_subscription_id: stripeSubscriptionId,
+			sharing_code: "",
+			sharing_users_limit: 5,
+			shared_with: [],
+			status: stripeData.status,
+			end_date: stripeData.current_period_end,
+		}).save();
+		console.log(sub);
+		subscriptionUserType = "owner";
+		return {
+			message: "success",
+			data: {
+				subscription_user_type: subscriptionUserType,
+				status: sub.status,
+				end_date: sub.end_date,
+			},
+		};
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
 module.exports = {
 	getPrices,
 	createSession,
 	cancelSubscription,
 	getSubscriptionData,
+	checkSubscription,
 };
