@@ -3,6 +3,7 @@ import React, { useRef, useState, useMemo, useEffect } from "react";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import Skeleton from "@mui/material/Skeleton";
 import createWS from "./socket";
+import SerieDetails from "./SerieDetails";
 
 const Player = ({ roomId, videoId }) => {
 	const ws = useMemo(() => createWS(roomId, videoId), [roomId, videoId]);
@@ -82,9 +83,26 @@ const Player = ({ roomId, videoId }) => {
 			setWatching(arrData[1] - 0);
 		}
 	});
-
+	const [details, setDetails] = useState(null);
 	useEffect(() => {
-		console.log("currid ", currentVideoId);
+		const getDetails = async () => {
+			const response = await fetch(
+				`http://localhost:5000/api/videos/${currentVideoId}/details`,
+				{
+					method: "GET",
+				}
+			);
+			if (response.status === 200) {
+				const res = await response.json();
+				setDetails({
+					serie: res.data.series_data,
+					video: res.data.video_data,
+				});
+				console.log(res.data.series_data);
+				console.log(res.data.video_data);
+			}
+		};
+		if (currentVideoId !== null) getDetails();
 	}, [currentVideoId, setCurrentVideoId]);
 
 	return (
@@ -98,21 +116,33 @@ const Player = ({ roomId, videoId }) => {
 					className="w-full mt-6 h-96"
 				/>
 			) : (
-				<video
-					key={currentVideoId}
-					id="video"
-					controls
-					onPlay={sendEvent("play")}
-					onPause={sendEvent("pause")}
-					onTimeUpdate={sendEvent("timeupdate")}
-					ref={video}
-					className="w-full mt-6 h-96"
-				>
-					<source
-						src={`http://localhost:5000/api/videos/${currentVideoId}`}
-						type="video/mp4"
-					/>
-				</video>
+				<>
+					{details && (
+						<h1 className="text-2xl font-semibold mt-3">
+							{details.serie.series_title}
+						</h1>
+					)}
+					{details && (
+						<p className="mt-1 font-medium text-neutral-400">
+							{details.video.title}
+						</p>
+					)}
+					<video
+						key={currentVideoId}
+						id="video"
+						controls
+						onPlay={sendEvent("play")}
+						onPause={sendEvent("pause")}
+						onTimeUpdate={sendEvent("timeupdate")}
+						ref={video}
+						className="w-full mt-6 h-96"
+					>
+						<source
+							src={`http://localhost:5000/api/videos/${currentVideoId}`}
+							type="video/mp4"
+						/>
+					</video>
+				</>
 			)}
 			{watching && (
 				<div className="mt-3 flex items-center justify-end gap-2">
@@ -121,6 +151,18 @@ const Player = ({ roomId, videoId }) => {
 						sx={{ fontSize: "20px", path: { color: "#9126d9" } }}
 					/>
 				</div>
+			)}
+			{details && (
+				<>
+					<p className="mt-2 font-medium text-sm text-neutral-400">
+						{details.video.desc}
+					</p>
+					<SerieDetails
+						id={details.serie._id}
+						epId={details.video._id}
+						setCurrentVideoId={setCurrentVideoId}
+					/>
+				</>
 			)}
 		</>
 	);
