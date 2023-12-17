@@ -9,8 +9,13 @@ const Benefit = ({ side, imageSrc, name, title, description, more }) => {
 			src={imageSrc}
 			height={306}
 			width={894}
-			style={{ objectFit: "contain" }}
+			style={{
+				objectFit: "contain",
+				width: "auto",
+				height: "auto",
+			}}
 			alt="benefit"
+			className="rounded-sm"
 		/>
 	);
 	return (

@@ -117,7 +117,12 @@ const FileUploader = ({ fileType, file, setFile, label, errorName, error }) => {
 								src={previewUrl}
 								width={256}
 								height={200}
-								className="bg-cover bg-fixed"
+								style={{
+									objectFit: "cover",
+									width: "auto",
+									height: "auto",
+								}}
+								className="bg-cover rounded-lg bg-fixed"
 							/>
 						) : (
 							<video width={256} height={200} controls>

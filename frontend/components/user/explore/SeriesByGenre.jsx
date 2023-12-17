@@ -33,6 +33,7 @@ const SeriesByGenre = ({ genre }) => {
 					{series.map((serie, id) => (
 						<>
 							<Link
+								key={id}
 								href={`/user/series/${serie._id}`}
 								className="relative"
 							>
@@ -40,8 +41,12 @@ const SeriesByGenre = ({ genre }) => {
 									src={`data:image/jpg;base64, ${serie.picture}`}
 									alt={serie.series_title}
 									height={320}
-									width={320}
-									style={{ objectFit: "cover" }}
+									width={288}
+									style={{
+										objectFit: "cover",
+										width: "288px",
+										height: "320px",
+									}}
 									className="w-72 h-80 rounded"
 								/>
 								<div className="absolute left-0 bottom-0 w-full rounded h-full bg-black hover:bg-opacity-0 bg-opacity-30 transition-all duration-300">

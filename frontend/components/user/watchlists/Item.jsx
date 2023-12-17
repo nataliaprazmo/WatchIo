@@ -13,7 +13,7 @@ const Item = ({ serie, index, deleteFromWatchlist, redirect, guest }) => {
 				alt={serie.series_title}
 				width={120}
 				height={200}
-				style={{ objectFit: "cover" }}
+				style={{ objectFit: "cover", width: "120px", height: "200px" }}
 				className="bg-cover rounded"
 			/>
 			<div className="flex flex-col justify-center items-start">

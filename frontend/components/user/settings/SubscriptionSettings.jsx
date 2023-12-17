@@ -6,8 +6,12 @@ import KeyRoundedIcon from "@mui/icons-material/KeyRounded";
 import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
 import DeleteShareUser from "./DeleteShareUser";
 import SiteBreadcrumbs from "@/components/SiteBreadcrumbs";
+import CancelSubscription from "./CancelSubscription";
+import SuccessMessage from "../SuccessMessage";
 
 const SubscriptionSettings = () => {
+	const [message, setMessage] = useState(null);
+	const [openMess, setOpenMess] = useState(false);
 	const [active, setActive] = useState(false);
 	const [code, setCode] = useState("");
 	const copy = () => {
@@ -110,6 +114,7 @@ const SubscriptionSettings = () => {
 		setToDelete(email);
 		setOpen(true);
 	};
+	const [openCancel, setOpenCancel] = useState(false);
 	return (
 		<div className="pt-24 pb-18 pl-24 pr-8">
 			<SiteBreadcrumbs
@@ -218,22 +223,49 @@ const SubscriptionSettings = () => {
 							  )
 							: null}
 					</div>
-					{subscriptionUserType === "owner" ? (
-						<button
-							onClick={() => setManage(!manage)}
-							className="pt-2 font-medium hover:border-secondary-violet hover:border-b-2 transition-all ease-linear duration-300"
-						>
-							Zarządzaj użytkownikami
-						</button>
-					) : null}
+					<div className="flex flex-col justify-start items-start">
+						{subscriptionUserType === "owner" ? (
+							<button
+								onClick={() => setManage(!manage)}
+								className="pt-2 font-medium hover:border-secondary-violet hover:border-b-2 transition-all ease-linear duration-300"
+							>
+								Zarządzaj użytkownikami
+							</button>
+						) : null}
+					</div>
 				</>
+			)}
+			{!message && (
+				<button
+					onClick={() => setOpenCancel(true)}
+					className="mt-6 text-red-600 font-medium hover:text-red-500 transition-colors duration-300"
+				>
+					Zrezygnuj z subskrypcji
+				</button>
 			)}
 			<DeleteShareUser
 				open={open}
 				setOpen={setOpen}
+				sharedWith={sharedWith}
 				setSharedWith={setSharedWith}
 				toDelete={toDelete}
 			/>
+			<CancelSubscription
+				open={openCancel}
+				setOpen={setOpenCancel}
+				setSharedWith={setSharedWith}
+				setSubscriptionUserType={setSubscriptionUserType}
+				setOwner={setOwner}
+				setMessage={setMessage}
+				setOpenMess={setOpenMess}
+			/>
+			{message && (
+				<SuccessMessage
+					open={openMess}
+					setOpen={setOpenMess}
+					message={`Anulowano subskrypcję. Możesz korzystać z platformy do ${message}`}
+				/>
+			)}
 		</div>
 	);
 };

@@ -33,7 +33,6 @@ export function SubscriptionProvider({ children }) {
 					const res = await response.json();
 					setHasSubscription(true);
 					setSubscriptionUserType(res.data.subscription_user_type);
-					console.log(res.data.subscription_user_type);
 				}
 				if (response.status === 403) {
 					const res = await response.json();

@@ -8,7 +8,11 @@ const Logo = ({ classes }) => {
 				src="/images/logo.svg"
 				height={48}
 				width={376.5}
-				style={{ objectFit: "contain" }}
+				style={{
+					objectFit: "contain",
+					width: "auto",
+					height: "auto",
+				}}
 				alt="logo"
 			/>
 		</div>

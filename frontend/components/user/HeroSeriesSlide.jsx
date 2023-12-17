@@ -30,7 +30,11 @@ const HeroSerieSlide = ({ serie, redirect }) => {
 					alt={serie.series_title}
 					height={320}
 					width={320}
-					style={{ objectFit: "cover" }}
+					style={{
+						width: "auto",
+						height: "auto",
+						objectFit: "cover",
+					}}
 					className="h-full w-full bg-cover rounded-lg"
 				/>
 			</div>

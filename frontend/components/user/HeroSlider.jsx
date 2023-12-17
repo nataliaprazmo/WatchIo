@@ -29,7 +29,7 @@ const HeroSlider = () => {
 	});
 	return (
 		<div className="h-72 min-[1007px]:mb-48">
-			<HeroSeries series={series} redirect={redirect} />
+			{series && <HeroSeries series={series} redirect={redirect} />}
 		</div>
 	);
 };
