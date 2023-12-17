@@ -149,7 +149,6 @@ const checkSubscription = async (userId) => {
 		}
 		let stripeSubscription;
 
-		console.log(subscription);
 		if (subscription) {
 			try {
 				stripeSubscription = await stripe.subscriptions.retrieve(
@@ -160,7 +159,6 @@ const checkSubscription = async (userId) => {
 				subscription = null;
 			}
 		}
-		console.log(subscription);
 		if (subscription) {
 			if (stripeSubscription.status == "active") {
 				if (stripeSubscription.cancel_at_period_end) {
@@ -209,7 +207,6 @@ const checkSubscription = async (userId) => {
 			status: stripeData.status,
 			end_date: stripeData.current_period_end,
 		}).save();
-		console.log(sub);
 		subscriptionUserType = "owner";
 		return {
 			message: "success",

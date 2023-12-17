@@ -134,6 +134,6 @@ body {
 }
 
 /* TODO HIDING HYDRATION ERROR */
-/* nextjs-portal {
+nextjs-portal {
 	display: none;
-} */
+}

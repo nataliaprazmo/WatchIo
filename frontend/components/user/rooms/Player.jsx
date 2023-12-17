@@ -49,14 +49,11 @@ const Player = ({ roomId, videoId }) => {
 		console.log("Connected to WS Server");
 	});
 	ws.addEventListener("message", function (event) {
-		console.log(event.data);
 		if ("string" != typeof event.data) {
-			console.log(heartbeat);
 			heartbeat();
 			return;
 		}
 		let arrData = event.data.split(",");
-		console.log(arrData);
 
 		if (arrData[0] === "videoId") {
 			setCurrentVideoId(arrData[1]);
@@ -80,6 +77,7 @@ const Player = ({ roomId, videoId }) => {
 			}
 		}
 		if (arrData[0] === "watching") {
+			console.log(arrData);
 			setWatching(arrData[1] - 0);
 		}
 	});
@@ -98,8 +96,6 @@ const Player = ({ roomId, videoId }) => {
 					serie: res.data.series_data,
 					video: res.data.video_data,
 				});
-				console.log(res.data.series_data);
-				console.log(res.data.video_data);
 			}
 		};
 		if (currentVideoId !== null) getDetails();
@@ -130,11 +126,11 @@ const Player = ({ roomId, videoId }) => {
 					<video
 						key={currentVideoId}
 						id="video"
+						ref={video}
 						controls
 						onPlay={sendEvent("play")}
 						onPause={sendEvent("pause")}
 						onTimeUpdate={sendEvent("timeupdate")}
-						ref={video}
 						className="w-full mt-6 h-96"
 					>
 						<source

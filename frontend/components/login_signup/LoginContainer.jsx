@@ -49,7 +49,6 @@ export const LoginContainer = () => {
 				router.push(`/${res.role}`); //role: user/admin
 			} else {
 				setError("Podano nieprawidłowe dane");
-				console.log(response);
 				console.error("Authentication failed");
 			}
 		} catch (error) {

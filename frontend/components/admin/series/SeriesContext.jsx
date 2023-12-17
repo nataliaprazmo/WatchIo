@@ -112,7 +112,6 @@ export function SeriesProvider({ children }) {
 				);
 				if (response.status == 200) {
 					const res = response.json();
-					console.log("added series");
 					setBodyData({
 						series_title: "",
 						series_desc: "",

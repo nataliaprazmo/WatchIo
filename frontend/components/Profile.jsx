@@ -68,7 +68,6 @@ const Profile = () => {
 	};
 	const changeUserPassword = async () => {
 		if (passwords.oldPassword === "" || passwords.newPassword === "") {
-			console.log("Podaj hasła");
 			setPasswordEdit(false);
 			return;
 		}
@@ -86,14 +85,11 @@ const Profile = () => {
 						body: JSON.stringify({ ...passwords }),
 					}
 				);
-				console.log(response.status);
 				if (response.status == 409) {
-					console.log("wrong password");
 					setError_state(true);
 				}
 				if (response.status == 200) {
 					const res = await response.json();
-					console.log("changed password");
 					setAlertState(true);
 					setError_state(false);
 					setPasswordEdit(false);

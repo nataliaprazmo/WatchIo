@@ -77,11 +77,8 @@ export const SignupContainer = () => {
 					body: JSON.stringify({ ...data }),
 				}
 			);
-			console.log(data);
-			console.log(response.status);
 			if (response.status == 201) {
 				localStorage.removeItem("formData");
-				console.log("success");
 				router.push("/login");
 			} else {
 				if (response.status == 409)

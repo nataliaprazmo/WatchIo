@@ -22,7 +22,6 @@ const getSeriesDetails = async (seriesId) => {
 			.lean()
 			.exec();
 		if (!series) return false;
-		console.log(series);
 		await addImgsToSeries([series]);
 		await addImgsToEpisodes(series.episodes);
 		return series;
@@ -134,8 +133,6 @@ const upload_Series = async (
 	files_video_thumbnail
 ) => {
 	try {
-		console.log(episode_titles);
-		console.log(episode_desc);
 		const series = await Series.findOne({ series_title: series_title });
 		if (series)
 			return { statusCode: 409, message: "Series already exists" };
@@ -151,8 +148,6 @@ const upload_Series = async (
 			await video.save();
 			videos_ids.push(video._id);
 		}
-		console.log(files_series_thumbnail);
-		console.log();
 		const URL =
 			"http://www.omdbapi.com/?t=" +
 			series_title.replace(" ", "+") +
@@ -160,7 +155,6 @@ const upload_Series = async (
 			series_year_of_production +
 			"&apikey=" +
 			process.env.OMDB_API_KEY;
-		console.log(URL);
 
 		var apiData = {};
 		try {

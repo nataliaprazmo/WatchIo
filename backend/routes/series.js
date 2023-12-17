@@ -18,7 +18,6 @@ const {
 router.get("/", async (req, res) => {
 	try {
 		let result;
-		console.log(req.query);
 		if (req.query?.genres) {
 			result = await getSeriesByGenre(req.query.genres);
 		} else if (req.query?.search) {
@@ -86,7 +85,6 @@ router.post(
 	]),
 	async (req, res) => {
 		try {
-			console.log(req.body);
 			const result = await upload_Series(
 				req.body.series_title,
 				JSON.parse(req.body.series_genres),

@@ -37,7 +37,6 @@ export function SubscriptionProvider({ children }) {
 				if (response.status === 403) {
 					const res = await response.json();
 					setHasSubscription(false);
-					console.log(res.message);
 				}
 				setLoading(false);
 			} catch (error) {

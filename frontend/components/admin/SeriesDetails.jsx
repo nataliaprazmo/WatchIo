@@ -27,9 +27,6 @@ const serie = ({ id }) => {
 	useEffect(() => {
 		getSerie();
 	}, []);
-	useEffect(() => {
-		console.log(serie);
-	}, [setSerie, serie]);
 	return (
 		<div className="pt-24 pb-18 pl-[115px] pr-13">
 			<SiteBreadcrumbs

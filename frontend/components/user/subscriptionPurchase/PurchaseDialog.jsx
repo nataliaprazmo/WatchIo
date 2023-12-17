@@ -34,7 +34,6 @@ const PurchaseDialog = ({ price, setHasSubscription, setOpen }) => {
 				if (response.status == 200) {
 					const res = await response.json();
 					const url = res.data.url;
-					console.log(url);
 					window.location.href = url;
 				}
 			} catch (error) {
