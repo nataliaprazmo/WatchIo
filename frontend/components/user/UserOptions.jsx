@@ -12,10 +12,11 @@ import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBullete
 import Link from "next/link";
 import { Divider, IconButton } from "@mui/material";
 import { usePathname } from "next/navigation";
-import { useAuth } from "@/app/AuthContext";
+import useLogout from "../login_signup/logout";
 
 const UserOptions = ({ open }) => {
 	const pathname = usePathname();
+	const logout = useLogout();
 	const opacity = `${
 		open ? "opacity-100" : "opacity-0"
 	} hover:text-primary-orange`;
@@ -27,7 +28,6 @@ const UserOptions = ({ open }) => {
 			</Link>
 		);
 	};
-	const { logout } = useAuth();
 	const handleLogout = () => {
 		logout();
 	};

@@ -31,11 +31,7 @@ const FilmsSlider = () => {
 		loading: () => <LoadingFilms />,
 	});
 
-	return (
-		<div>
-			<Films series={series} />
-		</div>
-	);
+	return <div>{series && <Films series={series} />}</div>;
 };
 
 export default FilmsSlider;

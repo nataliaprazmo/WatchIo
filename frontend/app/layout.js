@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Montserrat } from "next/font/google";
-import { AuthProvider } from "./AuthContext";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -17,9 +16,7 @@ export const viewport = { colorScheme: "dark" };
 export default function RootLayout({ children }) {
 	return (
 		<html lang="pl">
-			<body className={montserrat.className}>
-				<AuthProvider>{children}</AuthProvider>
-			</body>
+			<body className={montserrat.className}>{children}</body>
 		</html>
 	);
 }

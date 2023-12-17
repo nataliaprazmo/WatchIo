@@ -12,39 +12,44 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DeleteShareUser = ({
+const CancelSubscription = ({
 	open,
 	setOpen,
-	sharedWith,
 	setSharedWith,
-	toDelete,
+	setSubscriptionUserType,
+	setOwner,
+	setMessage,
+	setOpenMess,
 }) => {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	const handleDelete = async () => {
+	const cancelSubscription = async () => {
 		const token = localStorage.getItem("token");
 		try {
 			const response = await fetch(
-				"http://localhost:5000/api/subsciptions/sharing/shared",
+				"http://localhost:5000/api/subscriptions/cancel",
 				{
-					method: "DELETE",
+					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
 						"x-access-token": token,
 					},
-					body: JSON.stringify({ userToDelete: toDelete }),
 				}
 			);
 			if (response.status == 200) {
-				setSharedWith(
-					sharedWith.filter((shared) => shared !== toDelete)
-				);
+				const res = await response.json();
+				setSharedWith(null);
+				setSubscriptionUserType(null);
+				setOwner(null);
+				const endDate = new Date(res.data.end_date * 1000);
+				setMessage("" + endDate.toLocaleDateString("pl-PL"));
+				setOpenMess(true);
+				handleClose();
 			}
 		} catch (error) {
 			console.error(error);
 		}
-		setOpen(false);
 	};
 	return (
 		<Dialog
@@ -60,7 +65,7 @@ const DeleteShareUser = ({
 				}}
 				className="bg-neutral-700"
 			>
-				Czy na pewno chcesz usunąć użytkownika?
+				Czy na pewno chcesz zrezygnować z subskrypcji?
 			</DialogTitle>
 			<DialogContent className="bg-neutral-700">
 				<DialogContentText
@@ -70,9 +75,9 @@ const DeleteShareUser = ({
 						fontFamily: "montserrat",
 					}}
 				>
-					Akcja spowoduje, że użytkownik zostanie usunięty z Twojego
-					planu subskrypcyjnego i nie będzie mógł korzystać z
-					platformy. Czy jesteś pewien?
+					Akcja spowoduje, rezygnację z planu subskrypcyjnego oraz
+					ograniczenie możliwości korzystania z platformy. Czy jesteś
+					pewien?
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions className="bg-neutral-700">
@@ -87,17 +92,18 @@ const DeleteShareUser = ({
 					Anuluj
 				</Button>
 				<Button
-					onClick={handleDelete}
+					onClick={cancelSubscription}
 					sx={{
-						color: "#ff9900",
-						fontWeight: "600",
+						color: "rgb(220 38 38)",
+						fontWeight: "700",
 						fontFamily: "montserrat",
 					}}
 				>
-					Usuń z subskrypcji
+					Zrezygnuj
 				</Button>
 			</DialogActions>
 		</Dialog>
 	);
 };
-export default DeleteShareUser;
+
+export default CancelSubscription;

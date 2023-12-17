@@ -11,7 +11,8 @@ import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
 import { Alert } from "@mui/material";
 
 const Profile = () => {
-	const role = localStorage.getItem("role");
+	const role =
+		typeof window !== "undefined" ? localStorage.getItem("role") : null;
 	const [userData, setUserData] = useState({
 		first_name: "",
 		last_name: "",

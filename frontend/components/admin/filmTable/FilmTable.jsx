@@ -2,7 +2,13 @@
 
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import FilmToolbar from "./FilmToolbar";
-import { TableContainer, Table, TableRow, TableCell } from "@mui/material";
+import {
+	TableContainer,
+	Table,
+	TableRow,
+	TableCell,
+	TableBody,
+} from "@mui/material";
 import FilmPagination from "./FilmPagination";
 import Films from "./Films";
 import FilmTableHead from "./FilmTableHead";
@@ -228,22 +234,24 @@ const FilmTable = () => {
 						onRequestSort={handleRequestSort}
 						rowCount={rows.length}
 					/>
-					{visibleRows.length > 0 ? (
-						<Films
-							visibleRows={visibleRows}
-							emptyRows={emptyRows}
-							handleClick={handleClick}
-							isSelected={isSelected}
-							setOpenSnackbar={setOpenSnackbar}
-							getFilms={getFilms}
-						/>
-					) : (
-						<TableRow>
-							<TableCell colSpan={6} className="text-center">
-								Brak wyników
-							</TableCell>
-						</TableRow>
-					)}
+					<TableBody>
+						{visibleRows.length > 0 ? (
+							<Films
+								visibleRows={visibleRows}
+								emptyRows={emptyRows}
+								handleClick={handleClick}
+								isSelected={isSelected}
+								setOpenSnackbar={setOpenSnackbar}
+								getFilms={getFilms}
+							/>
+						) : (
+							<TableRow>
+								<TableCell colSpan={6} className="text-center">
+									Brak wyników
+								</TableCell>
+							</TableRow>
+						)}
+					</TableBody>
 				</Table>
 			</TableContainer>
 			<FilmPagination

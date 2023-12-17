@@ -10,7 +10,12 @@ const FilmSlide = ({ serie }) => {
 				alt={serie.series_title}
 				height={320}
 				width={320}
-				style={{ objectFit: "cover" }}
+				style={{
+					objectFit: "cover",
+					height: "320px",
+					width: "320px",
+					aspectRatio: "1/1",
+				}}
 				className="h-80 w-full bg-cover rounded"
 			/>
 			<div className="absolute left-0 top-0 w-[280px] rounded h-80 bg-black bg-opacity-30 3xl:my-18 2xl:my-16 lg:my-12 md:my-10 my-8" />

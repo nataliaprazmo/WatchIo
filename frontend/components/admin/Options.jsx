@@ -9,10 +9,11 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import Link from "next/link";
 import { Divider, IconButton } from "@mui/material";
 import { usePathname } from "next/navigation";
-import { useAuth } from "@/app/AuthContext";
+import useLogout from "../login_signup/logout";
 
 const Options = ({ open }) => {
 	const pathname = usePathname();
+	const logout = useLogout();
 	const opacity = `${
 		open ? "opacity-100" : "opacity-0"
 	} hover:text-primary-orange`;
@@ -24,7 +25,6 @@ const Options = ({ open }) => {
 			</Link>
 		);
 	};
-	const { logout } = useAuth();
 	const handleLogout = () => {
 		logout();
 	};

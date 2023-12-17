@@ -17,7 +17,7 @@ const Category = ({ getFunction, count, text }) => {
 	return (
 		<div className="my-8">
 			<h1 className="text-xl font-semibold mb-4">{text}</h1>
-			<Series series={series} />
+			{series && <Series series={series} />}
 		</div>
 	);
 };

@@ -43,6 +43,7 @@ const SharedWatchlist = ({ id }) => {
 					<div className="bg-neutral-800 px-4 py-4 rounded-lg flex flex-col xl:px-24 lg:px-12 md:px-4">
 						{series.map((serie, index) => (
 							<Item
+								key={index}
 								guest={true}
 								index={index + 1}
 								serie={serie}

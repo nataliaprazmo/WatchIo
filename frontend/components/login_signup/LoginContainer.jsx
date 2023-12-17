@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/app/AuthContext";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -13,7 +12,6 @@ import Input from "./Input";
 import PasswordInput from "./PasswordInput";
 
 export const LoginContainer = () => {
-	const { login } = useAuth();
 	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 	const [data, setData] = useState({ email: "", password: "" });
@@ -46,7 +44,8 @@ export const LoginContainer = () => {
 				if (rememberMe == false) localStorage.removeItem("loginData");
 				localStorage.setItem("token", res.data.token);
 				localStorage.setItem("role", res.role);
-				login();
+				document.cookie = `token=${res.data.token}; path=/; Secure; SameSite=None`;
+				document.cookie = `role=${res.role}; path=/; Secure; SameSite=None`;
 				router.push(`/${res.role}`); //role: user/admin
 			} else {
 				setError("Podano nieprawidłowe dane");

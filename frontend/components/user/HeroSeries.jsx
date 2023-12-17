@@ -12,7 +12,9 @@ const HeroSeries = ({ series, redirect }) => {
 		<div className="xl:col-span-9 lg:col-span-8 md:col-span-7 rounded-lg lg:h-96 md:h-72 h-64 relative">
 			<Swiper
 				modules={[Scrollbar, Autoplay]}
-				slidesPerView={1}
+				slidesPerView={
+					series.length >= 2 ? 1 : Math.floor(series.length / 2)
+				}
 				scrollbar={{
 					hide: false,
 					el: ".swiper-scrollbar",

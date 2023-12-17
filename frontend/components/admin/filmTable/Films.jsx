@@ -13,7 +13,7 @@ const Films = ({
 	getFilms,
 }) => {
 	return (
-		<TableBody>
+		<>
 			{visibleRows.map((row, index) => {
 				const isItemSelected = isSelected(row.id);
 				const labelId = `enhanced-table-checkbox-${index}`;
@@ -37,10 +37,14 @@ const Films = ({
 							<Image
 								src={`data:image/jpg;base64, ${row.poster}`}
 								alt={row.name}
-								width={100}
+								width={120}
 								height={200}
-								style={{ objectFit: "cover" }}
-								className="rounded-sm"
+								style={{
+									objectFit: "cover",
+									width: "120px",
+									height: "200px",
+								}}
+								className="bg-cover rounded-sm"
 							/>
 						</TableCell>
 						<TableCell
@@ -89,7 +93,7 @@ const Films = ({
 					<TableCell colSpan={6} />
 				</TableRow>
 			)}
-		</TableBody>
+		</>
 	);
 };
 

@@ -17,12 +17,12 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import Options from "./admin/Options";
-import { useAuth } from "@/app/AuthContext";
 import ProfileOptions from "./admin/ProfileOptions";
 import { usePathname } from "next/navigation";
 import UserProfileOptions from "./user/UserProfileOptions";
 import UserOptions from "./user/UserOptions";
 import Link from "next/link";
+import useLogout from "./login_signup/logout";
 
 const drawerWidth = 240;
 
@@ -52,7 +52,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 	alignItems: "center",
 	justifyContent: "flex-end",
 	padding: theme.spacing(0, 1),
-	// necessary for content to be below app bar
 	...theme.mixins.toolbar,
 }));
 
@@ -93,6 +92,7 @@ const SiteDrawer = styled(Drawer, {
 
 const NavMenu = () => {
 	const pathname = usePathname();
+	const logout = useLogout();
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -104,7 +104,6 @@ const NavMenu = () => {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
-	const { logout } = useAuth();
 	const handleLogout = () => {
 		setAnchorElUser(null);
 		logout();

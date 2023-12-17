@@ -48,7 +48,11 @@ const serie = ({ id }) => {
 						alt={serie.series_title}
 						width={240}
 						height={400}
-						style={{ objectFit: "cover" }}
+						style={{
+							objectFit: "cover",
+							width: "240px",
+							height: "400px",
+						}}
 						className="bg-cover rounded"
 					/>
 					<div className="flex flex-col w-96">

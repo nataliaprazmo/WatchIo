@@ -66,7 +66,11 @@ const SeriesDetails = ({ id }) => {
 								alt={seriesDetails.series_title}
 								width={240}
 								height={400}
-								style={{ objectFit: "cover" }}
+								style={{
+									objectFit: "cover",
+									width: "240px",
+									height: "400px",
+								}}
 								className="bg-cover rounded"
 							/>
 							<div className="flex flex-col w-96">
@@ -146,26 +150,26 @@ const SeriesDetails = ({ id }) => {
 										/>
 									)}
 								</div>
+								<div className="flex flex-row items-center gap-2 mt-8">
+									<p className="text-neutral-400 mr-2">
+										Obsada:
+									</p>
+									{seriesDetails.staff.map((person, index) =>
+										person.role === "aktor" ? (
+											<Chip
+												key={index}
+												label={`${person.name} ${person.surname}`}
+												variant="outlined"
+												sx={{
+													borderColor: "#9126d9",
+												}}
+											/>
+										) : null
+									)}
+								</div>
 							</div>
 						</div>
-						{/* <div className="flex flex-col w-96 bg-grey-150 rounded px-4 py-2 xl:mt-0 mt-8 md:mr-16 mr-4">
-							<p className="text-xl font-semibold text-center border-b-[1px] pb-1 border-grey-100">
-								Odcinki
-							</p>
-							{seriesDetails.episodes.map((ep, index) =>
-								ep._id === episodeId ? (
-									<p className="font-bold pt-2 text-base text-primary-orange">
-										Odcinek {index + 1}
-									</p>
-								) : (
-									<p className="font-medium pt-2 text-base">
-										Odcinek {index + 1}
-									</p>
-								)
-							)}
-						</div> */}
 					</div>
-
 					<div className="flex flex-row items-center gap-2 mt-8">
 						<p className="text-neutral-400 mr-2">Odcinki:</p>
 						{seriesDetails.episodes.map((ep, index) =>

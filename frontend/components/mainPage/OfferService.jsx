@@ -35,8 +35,13 @@ const OfferService = ({ id, title, description, image, tutorial }) => {
 				src={image}
 				height={150}
 				width={450}
-				style={{ objectFit: "contain" }}
+				style={{
+					objectFit: "contain",
+					width: "auto",
+					height: "auto",
+				}}
 				alt="service"
+				className="rounded"
 			/>
 		</div>
 	);

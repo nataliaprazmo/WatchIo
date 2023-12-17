@@ -13,7 +13,7 @@ const Serie = ({ serie }) => {
 				alt={serie.series_title}
 				height={320}
 				width={320}
-				style={{ objectFit: "cover" }}
+				style={{ objectFit: "cover", width: "320px", height: "320px" }}
 				className="h-80 w-full bg-cover rounded"
 			/>
 			<div className="absolute left-0 bottom-0 w-full rounded h-full bg-black hover:bg-opacity-0 bg-opacity-30 transition-all duration-300">

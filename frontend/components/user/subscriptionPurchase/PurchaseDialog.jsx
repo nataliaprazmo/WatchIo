@@ -57,7 +57,7 @@ const PurchaseDialog = ({ price, setHasSubscription, setOpen }) => {
 		setStep(1);
 	};
 	return (
-		<div className="flex flex-col justify-center items-center p-16 bg-grey-200 rounded-lg w-fit h-fit border-neutral-900 border-[1px]">
+		<div className="flex flex-col justify-center items-center p-16 bg-grey-200 rounded-lg w-fit h-fit border-neutral-900 border-[1px] z-50">
 			<h1 className="font-bold lg:text-5xl md:text-32 text-2xl mb-4">
 				Zakup subskrypcji
 			</h1>
