@@ -9,6 +9,7 @@ import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded
 import BookmarkAddedRoundedIcon from "@mui/icons-material/BookmarkAddedRounded";
 import LocalPlayOutlinedIcon from "@mui/icons-material/LocalPlayOutlined";
 import roomId from "./roomId";
+import Video from "./Video";
 
 const SeriesDetails = ({ id }) => {
 	const [seriesDetails, setSeriesDetails] = useState(null);
@@ -176,7 +177,7 @@ const SeriesDetails = ({ id }) => {
 							ep._id === episodeId ? (
 								<button
 									key={index}
-									className="text-sm bg-secondary-violet rounded py-2 px-4 font-medium uppercase hover:text-black hover:bg-[#bd7de8]"
+									className="text-sm bg-secondary-violet rounded py-2 px-4 font-medium uppercase hover:text-black hover:bg-[#bd7de8] transition-colors duration-300"
 									onClick={() => setEpisodeId(ep._id)}
 								>
 									Odcinek {index + 1}.
@@ -184,7 +185,7 @@ const SeriesDetails = ({ id }) => {
 							) : (
 								<button
 									key={index}
-									className="text-sm border-[1px] border-secondary-violet rounded py-2 px-4 font-medium uppercase hover:border-2 hover:border-[#bd7de8]"
+									className="text-sm border-[1px] border-secondary-violet rounded py-2 px-4 font-medium uppercase hover:border-[#bd7de8] transition-colors duration-300"
 									onClick={() => setEpisodeId(ep._id)}
 								>
 									Odcinek {index + 1}.
@@ -209,12 +210,19 @@ const SeriesDetails = ({ id }) => {
 				</>
 			)}
 			{episodeId && (
-				<video key={episodeId} controls className="w-full mt-6 h-96">
-					<source
-						src={`http://localhost:5000/api/videos/${episodeId}`}
-						type="video/mp4"
-					/>
-				</video>
+				<>
+					<video
+						key={episodeId}
+						controls
+						className="w-full mt-6 h-96"
+					>
+						<source
+							src={`http://localhost:5000/api/videos/${episodeId}`}
+							type="video/mp4"
+						/>
+					</video>
+					{/* <Video key={episodeId} episodeId={episodeId} /> */}
+				</>
 			)}
 		</div>
 	);

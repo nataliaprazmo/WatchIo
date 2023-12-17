@@ -7,13 +7,10 @@ import {
 	Avatar,
 	Drawer,
 	IconButton,
-	InputAdornment,
 	Menu,
-	OutlinedInput,
 	Toolbar,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import Options from "./admin/Options";
@@ -23,6 +20,7 @@ import UserProfileOptions from "./user/UserProfileOptions";
 import UserOptions from "./user/UserOptions";
 import Link from "next/link";
 import useLogout from "./login_signup/logout";
+import Search from "./user/Search";
 
 const drawerWidth = 240;
 
@@ -145,21 +143,7 @@ const NavMenu = () => {
 									Eksploruj
 								</Link>
 							</div>
-							<OutlinedInput
-								className="w-fit bg-grey-250 rounded-lg h-10"
-								sx={{
-									input: {
-										paddingLeft: "4px",
-										color: "#fafaf5",
-									},
-								}}
-								placeholder="Szukaj"
-								startAdornment={
-									<InputAdornment position="start">
-										<SearchRoundedIcon />
-									</InputAdornment>
-								}
-							/>
+							<Search />
 						</div>
 					) : null}
 					<IconButton
