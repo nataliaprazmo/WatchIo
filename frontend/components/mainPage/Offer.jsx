@@ -38,20 +38,29 @@ const Offer = () => {
 						key={index}
 						className={`flex flex-col items-center gap-4 border-2 ${
 							activeOffer === index
-								? "border-secondary-violet"
+								? "border-primary-orange"
 								: "border-white"
-						} rounded-lg px-8 py-12 cursor-pointer hover:border-secondary-violet hover:px-10 transition-all duration-500`}
+						} rounded-lg px-8 py-12 cursor-pointer hover:border-primary-orange hover:px-10 transition-all duration-500`}
 						onClick={() => setOffer(index)}
 					>
 						{index === 0 ? (
-							<ChairOutlinedIcon className="text-5xl mb-4" />
+							<ChairOutlinedIcon
+								className="text-5xl mb-4"
+								fontSize="48px"
+							/>
 						) : index === 1 ? (
-							<SubscriptionsOutlinedIcon className="text-5xl mb-4" />
+							<SubscriptionsOutlinedIcon
+								className="text-5xl mb-4"
+								fontSize="48px"
+							/>
 						) : (
-							<ScreenShareOutlinedIcon className="text-5xl mb-4" />
+							<ScreenShareOutlinedIcon
+								className="text-5xl mb-4"
+								fontSize="48px"
+							/>
 						)}
 						<div className="md:w-[300px] w-[235px] h-[1.5px] bg-white" />
-						<h1 className="md:text-2xl text-xl font-semibold text-secondary-violet">
+						<h1 className="md:text-2xl text-xl font-semibold text-primary-orange">
 							{item.title}
 						</h1>
 					</div>

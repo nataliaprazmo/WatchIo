@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Montserrat } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export const viewport = { colorScheme: "dark" };
 export default function RootLayout({ children }) {
 	return (
 		<html lang="pl">
-			<body className={montserrat.className}>{children}</body>
+			<body className={montserrat.className}>
+				<AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+			</body>
 		</html>
 	);
 }

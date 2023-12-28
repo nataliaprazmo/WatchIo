@@ -75,7 +75,12 @@ export const LoginContainer = () => {
 					name="email"
 					value={data.email}
 					handleChange={handleChange}
-					icon={<AlternateEmailIcon className="text-lg" />}
+					icon={
+						<AlternateEmailIcon
+							fontSize="28px"
+							className="text-lg"
+						/>
+					}
 				/>
 				<PasswordInput
 					label="Hasło"
@@ -111,12 +116,6 @@ export const LoginContainer = () => {
 							},
 						}}
 					/>
-					{/* <Link
-						href="/"
-						className="text-primary-orange text-[12px] font-regular"
-					>
-						Odzyskiwanie hasła
-					</Link> */}
 				</div>
 				<Button variant="filled" type="submit">
 					Zaloguj się

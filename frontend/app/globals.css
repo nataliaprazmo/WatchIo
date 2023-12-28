@@ -132,6 +132,9 @@ body {
 .MuiOutlinedInput-input.Mui-disabled {
 	-webkit-text-fill-color: #a3a3a3 !important;
 }
+.mui-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+	font-family: "Montserrat", "sans-serif" !important;
+}
 
 /* TODO HIDING HYDRATION ERROR */
 nextjs-portal {

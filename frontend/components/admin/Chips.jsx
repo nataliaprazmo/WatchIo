@@ -1,29 +1,20 @@
 import React from "react";
-import { Chip } from "@mui/material";
 
 const Chips = ({ elements, variant }) => {
-	const color = variant === "outlined" ? "#fafaf5" : "#101010";
 	const limitedElements = elements.slice(0, 4);
 	return (
 		<div className="flex flex-wrap gap-2">
 			{limitedElements.map((element, index) => (
-				<Chip
+				<p
 					key={index}
-					label={element}
-					variant={variant}
-					className={
+					className={`${
 						variant === "outlined"
-							? "border-primary-orange"
-							: "bg-white hover:bg-orange-200"
-					}
-					sx={{
-						span: { color: { color } },
-						fontFamily: "montserrat",
-						fontSize: "12px",
-						backgroundColor: !color,
-					}}
-					size="small"
-				/>
+							? "border-primary-orange bg-transparent text-white border-[1px]"
+							: "bg-white text-black hover:bg-orange-200"
+					} text-xs rounded-full py-1 px-2`}
+				>
+					{element}
+				</p>
 			))}
 		</div>
 	);

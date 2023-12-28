@@ -110,7 +110,9 @@ export const SignupContainer = () => {
 					value={data.user_data.first_name}
 					handleChange={handleChange}
 					type="text"
-					icon={<Person2Outlined className="text-xl" />}
+					icon={
+						<Person2Outlined fontSize="36px" className="text-xl" />
+					}
 				/>
 				<Input
 					label="Nazwisko"
@@ -119,7 +121,9 @@ export const SignupContainer = () => {
 					value={data.user_data.last_name}
 					type="text"
 					handleChange={handleChange}
-					icon={<Person2Outlined className="text-xl" />}
+					icon={
+						<Person2Outlined fontSize="36px" className="text-xl" />
+					}
 				/>
 				<Input
 					label="Numer telefonu"
@@ -128,7 +132,12 @@ export const SignupContainer = () => {
 					value={data.user_data.phone_number}
 					type="tel"
 					handleChange={handleChange}
-					icon={<LocalPhoneOutlined className="text-xl" />}
+					icon={
+						<LocalPhoneOutlined
+							fontSize="36px"
+							className="text-xl"
+						/>
+					}
 				/>
 				<Input
 					label="Adres Email"
@@ -137,7 +146,12 @@ export const SignupContainer = () => {
 					value={data.credentials.email}
 					type="email"
 					handleChange={handleChange}
-					icon={<AlternateEmailIcon className="text-xl" />}
+					icon={
+						<AlternateEmailIcon
+							fontSize="36px"
+							className="text-xl"
+						/>
+					}
 				/>
 				<PasswordInput
 					label="Hasło"

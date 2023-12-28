@@ -45,7 +45,10 @@ const PasswordInput = ({
 				onChange={handleChange}
 				startAdornment={
 					<InputAdornment position="start">
-						<HttpsOutlinedIcon className="text-lg" />
+						<HttpsOutlinedIcon
+							className="text-lg"
+							fontSize="28px"
+						/>
 					</InputAdornment>
 				}
 				endAdornment={
@@ -58,9 +61,15 @@ const PasswordInput = ({
 							className="pr-3"
 						>
 							{showPassword ? (
-								<VisibilityOffOutlined className="text-xl" />
+								<VisibilityOffOutlined
+									className="text-xl"
+									fontSize="28px"
+								/>
 							) : (
-								<VisibilityOutlined className="text-xl" />
+								<VisibilityOutlined
+									className="text-xl"
+									fontSize="28px"
+								/>
 							)}
 						</IconButton>
 					</InputAdornment>

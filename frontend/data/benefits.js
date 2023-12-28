@@ -6,7 +6,7 @@ const benefits = [
 		title: "Oglądaj wspólnie z bliskimi",
 		description:
 			"Dzięki oferowanym przez nas pokojach, możesz podzielić się kodem do wspólnego oglądania z innymi subskrybentami. Aby stworzyć pokój i cieszyć się bliskością oglądania, wystarczy dołączyć do nas!",
-		more: "/offer#rooms",
+		more: "/offer?offer=rooms",
 	},
 	{
 		side: "right",
@@ -15,7 +15,7 @@ const benefits = [
 		title: "Zaproś swoich znajomych",
 		description:
 			"Jesteśmy jedyną platformą, która oferuje możliwość dzielenia się subskrybcją. Kiedy dołączamy do pakietu właściciela, nie musimy marwić się już płatnościami.",
-		more: "/offer#sharingSub",
+		more: "/offer?offer=sharingSub",
 	},
 	{
 		side: "left",
@@ -24,7 +24,7 @@ const benefits = [
 		title: "Dziel się z innymi",
 		description:
 			"Z nami możesz udostępniać swoje ulubione filmy bliskim. Dzięki temu mają dostęp do całej Twojej playlisty najlepszych filmów, tak jak i Ty masz dostęp do ich playlist!",
-		more: "/offer#sharingPlaylist",
+		more: "/offer?offer=sharingPlaylist",
 	},
 ];
 

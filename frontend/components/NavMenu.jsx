@@ -113,7 +113,7 @@ const NavMenu = () => {
 				open={open}
 				sx={{ backgroundColor: "#101010" }}
 			>
-				<Toolbar className="relative px-4">
+				<Toolbar className="relative px-4 flex justify-between">
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
