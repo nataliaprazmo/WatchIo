@@ -130,7 +130,6 @@ const upload_Series = async (
 	episode_desc,
 	files_videos,
 	files_series_thumbnail,
-	// files_video_thumbnail
 ) => {
 	try {
 		const series = await Series.findOne({ series_title: series_title });
@@ -143,7 +142,6 @@ const upload_Series = async (
 				title: episode_titles[i],
 				desc: episode_desc[i],
 				path: files_videos[i].path,
-				// thumbnail_path: files_video_thumbnail[i].path,
 			});
 			await video.save();
 			videos_ids.push(video._id);

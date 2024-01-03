@@ -10,18 +10,22 @@ const clients = {
 const HEARTBEAT_INTERVAL = 1000 * 5; // 5 seconds
 const HEARTBEAT_VALUE = 1;
 
+const updateWatchingCount = (sockets)=>{
+	sockets.forEach(function each(client) {
+		if (client.readyState === WebSocket.OPEN) {
+			client.send("watching," + rooms[roomId].sockets.length),
+				{
+					binary: false,
+				};
+		}
+	});
+}
+
 const sendRoomId = (ws, roomId, videoId) => {
 	if (!roomId) {
 		ws.on("close", () => {
 			console.log("closed");
-			clients.rooms[roomId].sockets.forEach(function each(client) {
-				if (client.readyState === WebSocket.OPEN) {
-					client.send("watching," + rooms[roomId].sockets.length),
-						{
-							binary: false,
-						};
-				}
-			});
+			updateWatchingCount(clients.rooms[roomId].sockets);
 		});
 		return;
 	}
@@ -32,28 +36,14 @@ const sendRoomId = (ws, roomId, videoId) => {
 			{
 				binary: false,
 			};
-		rooms[roomId].sockets.forEach(function each(client) {
-			if (client.readyState === WebSocket.OPEN) {
-				client.send("watching," + rooms[roomId].sockets.length),
-					{
-						binary: false,
-					};
-			}
-		});
+		updateWatchingCount(rooms[roomId].sockets)
 	} else {
 		rooms[roomId].sockets.push(ws);
 		ws.send("videoId," + rooms[roomId].videoId),
 			{
 				binary: false,
 			};
-		rooms[roomId].sockets.forEach(function each(client) {
-			if (client.readyState === WebSocket.OPEN) {
-				client.send("watching," + rooms[roomId].sockets.length),
-					{
-						binary: false,
-					};
-			}
-		});
+		updateWatchingCount(rooms[roomId].sockets)
 	}
 
 	ws.on("message", function incoming(message) {
@@ -61,8 +51,6 @@ const sendRoomId = (ws, roomId, videoId) => {
 			ws.isAlive = true;
 			return;
 		}
-
-		// console.log("received: %s", message);
 		rooms[roomId].sockets.forEach(function each(client) {
 			if (client !== ws && client.readyState === WebSocket.OPEN) {
 				client.send(message, { binary: false });

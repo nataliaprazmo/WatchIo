@@ -81,7 +81,6 @@ router.post(
 	video_upload.fields([
 		{ name: "videos" },
 		{ name: "series_thumbnail" },
-		// { name: "video_thumbnails" },
 	]),
 	async (req, res) => {
 		try {
@@ -95,7 +94,6 @@ router.post(
 				JSON.parse(req.body.episode_desc),
 				req.files.videos,
 				req.files.series_thumbnail,
-				// req.files.video_thumbnails
 			);
 			return res
 				.status(result.statusCode)
