@@ -3,7 +3,7 @@ const Joi = require("joi");
 
 const videoSchema = new mongoose.Schema({
 	fileName: { type: String, required: true },
-	thumbnail_path: { type: String },
+	// thumbnail_path: { type: String },
 	title: { type: String, required: true },
 	desc: { type: String },
 	video_length: { type: String },

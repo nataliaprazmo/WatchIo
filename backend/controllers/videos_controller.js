@@ -7,7 +7,8 @@ const getVideoDetails = async (videoId) => {
 			"-series_picture_path -series_picture_path"
 		);
 		const video = await Video.findOne({ _id: videoId }).select(
-			"-fileName -thumbnail_path -path"
+			//"-fileName -thumbnail_path -path"
+			"-fileName -path"
 		);
 		if (!series || !video) return { message: "notFound" };
 		return {

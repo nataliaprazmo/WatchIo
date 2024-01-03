@@ -2,6 +2,7 @@ const router = require("express").Router();
 const fs = require("fs");
 const { Video, validate } = require("../models/Video");
 const { getVideoDetails } = require("../controllers/videos_controller");
+const {pipeline} = require("stream/promises")
 router.get("/:id", async (req, res) => {
 	try {
 		const vid = await Video.findOne({ _id: req.params.id });
@@ -31,14 +32,16 @@ router.get("/:id", async (req, res) => {
 				"Content-Type": "video/mp4",
 			};
 			res.writeHead(206, head);
-			file.pipe(res);
+			await pipeline(file,res)
+			// file.pipe(res);
 		} else {
 			const head = {
 				"Content-Length": fileSize,
 				"Content-Type": "video/mp4",
 			};
 			res.writeHead(200, head);
-			fs.createReadStream(filePath).pipe(res);
+			await pipeline(fs.createReadStream(filePath),res)
+			// fs.createReadStream(filePath).pipe(res);
 		}
 	} catch (err) {
 		console.error(err);

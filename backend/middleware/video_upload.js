@@ -6,8 +6,8 @@ const storage = multer.diskStorage({
 		if (file.fieldname == "videos") cb(null, __dirname + "/../videos/");
 		if (file.fieldname == "series_thumbnail")
 			cb(null, __dirname + "/../series_thumbnails/");
-		if (file.fieldname == "video_thumbnails")
-			cb(null, __dirname + "/../video_thumbnails/");
+		// if (file.fieldname == "video_thumbnails")
+		// 	cb(null, __dirname + "/../video_thumbnails/");
 	},
 	filename: function (req, file, cb) {
 		const uniqueNum = Date.now() + "" + Math.round(Math.random() * 1e9);
