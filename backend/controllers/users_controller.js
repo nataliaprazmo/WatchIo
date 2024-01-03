@@ -85,6 +85,7 @@ const registerNewUser = async (userData) => {
 
 		const newUser = await new User({
 			...userData,
+			"is_admin":false,
 			"credentials.password": hashPassword,
 			stripe_customer_id: stripeCustomerId.id,
 		}).save();
