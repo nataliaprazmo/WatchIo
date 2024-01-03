@@ -69,15 +69,15 @@ export function SeriesProvider({ children }) {
 	const [episode, setEpisode] = useState({
 		title: "",
 		desc: "",
-		thumb: null,
+		// thumb: null,
 		video: null,
 	});
 	const [series_thumbnail, setSeries_thumbnail] = useState(null);
-	const [video_thumbnails, setVideo_thumbnails] = useState([]);
+	// const [video_thumbnails, setVideo_thumbnails] = useState([]);
 	const [videos, setVideos] = useState([]);
-	const handleAddVideoThumbnail = () => {
-		setVideo_thumbnails((prev) => [...prev, episode.thumb]);
-	};
+	// const handleAddVideoThumbnail = () => {
+	// 	setVideo_thumbnails((prev) => [...prev, episode.thumb]);
+	// };
 	const handleAddVideo = () => {
 		setVideos((prev) => [...prev, episode.video]);
 	};
@@ -98,9 +98,9 @@ export function SeriesProvider({ children }) {
 				videos.forEach((video, index) => {
 					formData.append("videos", video);
 				});
-				video_thumbnails.forEach((thumbnail, index) => {
-					formData.append("video_thumbnails", thumbnail);
-				});
+				// video_thumbnails.forEach((thumbnail, index) => {
+				// 	formData.append("video_thumbnails", thumbnail);
+				// });
 				formData.append("series_thumbnail", series_thumbnail);
 				const response = await fetch(
 					"http://localhost:5000/api/series/",
@@ -122,7 +122,7 @@ export function SeriesProvider({ children }) {
 						episode_desc: [],
 					});
 					setSeries_thumbnail(null);
-					setVideo_thumbnails([]);
+					// setVideo_thumbnails([]);
 					setVideos([]);
 					setVideosCount(1);
 				}
@@ -152,11 +152,11 @@ export function SeriesProvider({ children }) {
 				setEpisode,
 				series_thumbnail,
 				setSeries_thumbnail,
-				video_thumbnails,
-				setVideo_thumbnails,
+				// video_thumbnails,
+				// setVideo_thumbnails,
 				videos,
 				setVideos,
-				handleAddVideoThumbnail,
+				// handleAddVideoThumbnail,
 				handleAddVideo,
 				videosCount,
 				setVideosCount,

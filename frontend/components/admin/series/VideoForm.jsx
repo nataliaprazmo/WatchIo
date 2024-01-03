@@ -13,7 +13,7 @@ const VideoForm = () => {
 		setEpisode,
 		setVideosCount,
 		setBodyData,
-		handleAddVideoThumbnail,
+		// handleAddVideoThumbnail,
 		handleAddVideo,
 		errors,
 		setErrors,
@@ -48,12 +48,12 @@ const VideoForm = () => {
 			episode_titles: [...prevData.episode_titles, episode.title],
 			episode_desc: [...prevData.episode_desc, episode.desc],
 		}));
-		handleAddVideoThumbnail();
+		// handleAddVideoThumbnail();
 		handleAddVideo();
 		setEpisode({
 			title: "",
 			desc: "",
-			thumb: null,
+			// thumb: null,
 			video: null,
 		});
 		setVideosCount((count) => count + 1);
@@ -109,7 +109,7 @@ const VideoForm = () => {
 					/>
 				</div>
 				<div className="flex flex-wrap items-center gap-4 mt-8">
-					<FileUploader
+					{/* <FileUploader
 						fileType="img"
 						file={episode.thumb}
 						setFile={(file) =>
@@ -118,7 +118,7 @@ const VideoForm = () => {
 						label="Miniaturka odcinka"
 						errorName="thumb"
 						error={errors.thumb}
-					/>
+					/> */}
 					<FileUploader
 						fileType="video"
 						file={episode.video}
