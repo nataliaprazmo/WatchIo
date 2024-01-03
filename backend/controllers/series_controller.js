@@ -15,21 +15,6 @@ const getSeries = async () => {
 	}
 };
 
-const getSeriesDetails = async (seriesId) => {
-	try {
-		var series = await Series.findById(seriesId)
-			.populate("episodes")
-			.lean()
-			.exec();
-		if (!series) return false;
-		await addImgsToSeries([series]);
-		// await addImgsToEpisodes(series.episodes);
-		return series;
-	} catch (error) {
-		throw error;
-	}
-};
-
 const getSeriesByGenre = async (genre) => {
 	try {
 		const result = await Series.find({ genres: { $in: [genre] } })
@@ -41,6 +26,21 @@ const getSeriesByGenre = async (genre) => {
 		throw error;
 	}
 };
+
+const getSeriesDetails = async (seriesId) => {
+	try {
+		var series = await Series.findById(seriesId)
+			.populate("episodes")
+			.lean()
+			.exec();
+		if (!series) return false;
+		await addImgsToSeries([series]);
+		return series;
+	} catch (error) {
+		throw error;
+	}
+};
+
 
 const search = async (searchQuery) => {
 	try {

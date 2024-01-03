@@ -33,7 +33,6 @@ router.get("/:id", async (req, res) => {
 			};
 			res.writeHead(206, head);
 			await pipeline(file,res)
-			// file.pipe(res);
 		} else {
 			const head = {
 				"Content-Length": fileSize,
@@ -41,7 +40,6 @@ router.get("/:id", async (req, res) => {
 			};
 			res.writeHead(200, head);
 			await pipeline(fs.createReadStream(filePath),res)
-			// fs.createReadStream(filePath).pipe(res);
 		}
 	} catch (err) {
 		console.error(err);
