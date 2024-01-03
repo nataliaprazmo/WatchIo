@@ -43,7 +43,7 @@ const validate = (data) => {
 			last_name: Joi.string().required().label("Last Name"),
 			phone_number: Joi.number().required().label("Phone Number"),
 		},
-		is_admin: Joi.boolean().required().label("Is admin"),
+		// is_admin: Joi.boolean().required().label("Is admin"),
 		// stripe_customer_id: Joi.string().required().label("Stripe customer id"),
 	});
 	return schema.validate(data);
