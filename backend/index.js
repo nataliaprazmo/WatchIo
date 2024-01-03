@@ -2,9 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const server = require("http").createServer(app);
+
 const users = require("./routes/users");
 const auth = require("./routes/auth");
-const jwt_auth = require("./middleware/jwt_auth");
 const subscriptions = require("./routes/subscriptions");
 const series = require("./routes/series");
 const subscriptionSharing = require("./routes/subscriptionSharing");
@@ -12,9 +13,8 @@ const watchlists = require("./routes/watchlists");
 const genres = require("./routes/genres");
 const videos = require("./routes/videos");
 const statistics = require("./routes/statistics");
-const webS = require("./controllers/websockets");
 
-const server = require("http").createServer(app);
+const webS = require("./controllers/websockets");
 
 webS.init(server);
 app.get("/test/ws", (req, res) => {

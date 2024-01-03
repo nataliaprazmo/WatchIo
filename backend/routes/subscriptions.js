@@ -28,6 +28,7 @@ router.get("/prices", async (req, res) => {
 router.post("/session", jwt_auth, async (req, res) => {
 	try {
 		const session = await createSession(req.user._id, req.body.priceId);
+		if (!session) return res.status(401).send({ message: "Unauthorized" });
 		return res
 			.status(200)
 			.send({ message: "Session created", data: { url: session } });

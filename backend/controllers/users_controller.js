@@ -18,10 +18,7 @@ const deleteCurrentUser = async (userId, password) => {
 	try {
 		const user = await User.findOne({ _id: userId });
 
-		const isValid = await bcrypt.compare(
-			password,
-			user.credentials.password
-		);
+		const isValid = await bcrypt.compare(password, user.credentials.password);
 		if (!isValid) {
 			return false;
 		}
@@ -57,20 +54,14 @@ const changeCurrentUserPassword = async (userId, oldPassword, newPassword) => {
 
 const registerNewUser = async (userData) => {
 	try {
-		if (userData?.is_admin !== true) {
-			userData.is_admin = false;
-		}
-
 		if (
-			userData.credentials.password !==
-			userData.credentials.repeatedPassword
+			userData.credentials.password !== userData.credentials.repeatedPassword
 		) {
-			return { statusCode: 409, message: "Passwords are different" };
+			return { statusCode: 400, message: "Passwords are different" };
 		}
 		delete userData.credentials.repeatedPassword;
 		const { error } = validate(userData);
-		if (error)
-			return { statusCode: 400, message: error.details[0].message };
+		if (error) return { statusCode: 400, message: error.details[0].message };
 		const user = await User.findOne({
 			"credentials.email": userData.credentials.email,
 		});
@@ -82,10 +73,7 @@ const registerNewUser = async (userData) => {
 			};
 
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
-		const hashPassword = await bcrypt.hash(
-			userData.credentials.password,
-			salt
-		);
+		const hashPassword = await bcrypt.hash(userData.credentials.password, salt);
 		const stripeCustomerId = await stripe.customers.create(
 			{
 				email: userData.credentials.email,

@@ -7,15 +7,14 @@ const login = async (email, password) => {
 		const { error } = validate({ email, password });
 
 		if (error) {
-			return { statusCode: 400, message: error.details[0].message };
+			return { statusCode: 400, message: "Invalid Email or Password" };
 		}
 
 		const user = await User.findOne({
 			"credentials.email": email,
 		});
 
-		if (!user)
-			return { statusCode: 401, message: "Invalid Email or Password" };
+		if (!user) return { statusCode: 401, message: "Invalid Email or Password" };
 
 		const validPassword = await bcrypt.compare(
 			password,

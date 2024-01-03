@@ -3,6 +3,7 @@ const { User } = require("../models/User");
 
 const joinSubscription = async (userId, shareCode) => {
 	try {
+		if (!shareCode || shareCode == "") return null;
 		const subscription = await Subscription.findOne({
 			sharing_code: shareCode,
 		});

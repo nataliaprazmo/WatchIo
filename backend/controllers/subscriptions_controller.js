@@ -34,6 +34,7 @@ const getPrices = async (currency) => {
 const createSession = async (userId, priceId) => {
 	try {
 		const user = await User.findOne({ _id: userId });
+		if (!user) return false;
 		const session = await stripe.checkout.sessions.create(
 			{
 				mode: "subscription",
@@ -163,8 +164,7 @@ const checkSubscription = async (userId) => {
 			if (stripeSubscription.status == "active") {
 				if (stripeSubscription.cancel_at_period_end) {
 					subscription.status = "cancelled";
-					subscription.end_date =
-						stripeSubscription.current_period_end;
+					subscription.end_date = stripeSubscription.current_period_end;
 				}
 				subscription.save();
 				return {
@@ -189,8 +189,7 @@ const checkSubscription = async (userId) => {
 			stripeSubscription = await stripe.subscriptions.retrieve(
 				stripeSubscriptionId
 			);
-			stripeData.current_period_end =
-				stripeSubscription.current_period_end;
+			stripeData.current_period_end = stripeSubscription.current_period_end;
 			stripeData.status = "active";
 			if (stripeData.cancel_at_period_end) stripeData.status = "canceled";
 		} catch (error) {
