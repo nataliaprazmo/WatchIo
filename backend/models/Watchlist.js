@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const watchlistSchema = new mongoose.Schema({
-	owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+	owner: { type: mongoose.Schema.Types.ObjectId,require:true, ref: "User" },
 	series: [{ type: mongoose.Schema.Types.ObjectId, ref: "Series" }],
 });
 
