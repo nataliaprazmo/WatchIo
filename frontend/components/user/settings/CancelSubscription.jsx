@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -42,14 +42,18 @@ const CancelSubscription = ({
 				setSharedWith(null);
 				setSubscriptionUserType(null);
 				setOwner(null);
-				const endDate = new Date(res.data.end_date * 1000);
-				setMessage("" + endDate.toLocaleDateString("pl-PL"));
-				setOpenMess(true);
-				handleClose();
+				if (res.data) {
+					const endDate = new Date(res.data.end_date * 1000);
+					setMessage("" + endDate.toLocaleDateString("pl-PL"));
+					setOpenMess(true);
+				} else {
+					location.reload();
+				}
 			}
 		} catch (error) {
 			console.error(error);
 		}
+		setOpen(false);
 	};
 	return (
 		<Dialog

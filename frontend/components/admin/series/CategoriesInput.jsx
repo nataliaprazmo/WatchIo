@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import {
-	Chip,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -68,7 +67,10 @@ const CategoriesInput = () => {
 			sx={{ m: 1, width: 300 }}
 			className="md:w-72 w-full"
 		>
-			<InputLabel id="categories_label" className="text-white">
+			<InputLabel
+				id="categories_label"
+				className="select-label text-white"
+			>
 				Gatunki
 			</InputLabel>
 			<Select
@@ -78,16 +80,22 @@ const CategoriesInput = () => {
 				multiple
 				value={bodyData.series_genres}
 				onChange={(e) => handleGenresChange(e)}
-				input={<Input id="select_genres" label="Gatunek" />}
+				input={
+					<Input
+						id="select_genres"
+						label="Gatunek"
+						className="select-input"
+					/>
+				}
 				renderValue={(selected) => (
 					<div className="flex flex-wrap gap-1">
 						{selected.map((value) => (
-							<Chip
+							<p
 								key={value}
-								label={value}
-								variant="outlined"
-								className="border-secondary-violet"
-							/>
+								className="border-[1px] border-secondary-violet text-sm rounded-full py-1 px-2"
+							>
+								{value}
+							</p>
 						))}
 					</div>
 				)}
