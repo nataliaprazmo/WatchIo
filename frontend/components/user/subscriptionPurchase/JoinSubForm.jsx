@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 const JoinSubForm = ({ setHasSubscription, setOpen }) => {
 	const [shareCode, setShareCode] = useState("");
+	const [error, setError] = useState(false);
 	const change = (e) => {
 		e.preventDefault();
 		setShareCode(e.target.value);
@@ -26,14 +27,16 @@ const JoinSubForm = ({ setHasSubscription, setOpen }) => {
 				if (response.status == 200) {
 					const res = await response.json();
 					setHasSubscription(true);
+					setError(false);
 					setOpen(true);
-				}
+				} else setError(true);
 			} catch (error) {
 				if (
 					error.response &&
 					error.response.status >= 400 &&
 					error.response.status <= 500
 				) {
+					setError(true);
 					console.error(error);
 				}
 			}
@@ -57,6 +60,11 @@ const JoinSubForm = ({ setHasSubscription, setOpen }) => {
 			>
 				Dołącz
 			</button>
+			{error && (
+				<p className="text-red-500 font-medium">
+					Nie udało się dołączyć do subskrypcji
+				</p>
+			)}
 		</div>
 	);
 };

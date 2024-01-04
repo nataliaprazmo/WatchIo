@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
@@ -13,6 +13,7 @@ const steps = ["Dodaj szczegóły serii", "Dodaj obsadę", "Dodaj odcinki"];
 const StepForm = () => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [completed, setCompleted] = useState({});
+	const [areErrors, setAreErrors] = useState(false);
 
 	const totalSteps = () => {
 		return steps.length;
@@ -45,7 +46,7 @@ const StepForm = () => {
 	const handleStep = (step) => () => {
 		setActiveStep(step);
 	};
-	const { errors } = useSeries();
+	const { errors, addStatus } = useSeries();
 	const [open, setOpen] = useState(false);
 	const handleClose = (event, reason) => {
 		if (reason === "clickaway") {
@@ -65,14 +66,11 @@ const StepForm = () => {
 			</IconButton>
 		</React.Fragment>
 	);
-	const [anyErrorIsNull, setAnyErrorIsNull] = useState(true);
 	const handleComplete = () => {
-		setAnyErrorIsNull(
-			Object.values(errors).some((value) => value === null)
-		);
-		if (!anyErrorIsNull) {
+		if (areErrors) {
 			setOpen(true);
 		} else {
+			setOpen(false);
 			const newCompleted = completed;
 			newCompleted[activeStep] = true;
 			setCompleted(newCompleted);
@@ -80,6 +78,7 @@ const StepForm = () => {
 		}
 	};
 	const handleReset = () => {
+		setOpen(false);
 		setActiveStep(0);
 		setCompleted({});
 	};
@@ -101,14 +100,16 @@ const StepForm = () => {
 			<div>
 				{allStepsCompleted() ? (
 					<React.Fragment>
-						<p className="mt-8">Udało się dodać serię</p>
+						<p className="mt-8">{addStatus}</p>
 						<div className="flex mt-16 mb-[46px]">
 							<div className="flex flex-auto" />
 							<Button
 								onClick={handleReset}
 								sx={{ color: "#ff9900", fontWeight: "500" }}
 							>
-								Dodaj kolejną serię
+								{addStatus === "Udało się dodać serię"
+									? "Dodaj kolejną serię"
+									: "Spróbuj jeszcze raz"}
 							</Button>
 						</div>
 					</React.Fragment>

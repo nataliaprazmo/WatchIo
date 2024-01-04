@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "./Input";
 import ValueSelect from "./ValueSelect";
 import { Button, Chip } from "@mui/material";
@@ -16,6 +16,19 @@ const StaffForm = () => {
 	} = useSeries();
 	const isStaffEmpty =
 		bodyData.series_staff && bodyData.series_staff.length === 0;
+	useEffect(() => {
+		if (isStaffEmpty) {
+			setErrors((prev) => ({
+				...prev,
+				series_staff: "Dodaj obsadę",
+			}));
+		} else {
+			setErrors((prev) => ({
+				...prev,
+				series_staff: null,
+			}));
+		}
+	}, [isStaffEmpty]);
 	const handleChange = ({ currentTarget: input }) => {
 		const { name, value } = input;
 		if (!value || value === "") {
