@@ -136,6 +136,14 @@ body {
 	font-family: "Montserrat", "sans-serif" !important;
 }
 
+.select-label {
+	color: #fafaf5 !important;
+}
+
+.select-input::before {
+	border-bottom: 1px solid #fafaf5 !important;
+}
+
 /* TODO HIDING HYDRATION ERROR */
 nextjs-portal {
 	display: none;

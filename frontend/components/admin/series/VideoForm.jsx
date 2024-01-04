@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "./Input";
 import MultilineInput from "./MultilineInput";
 import { Button, Chip, Divider } from "@mui/material";
@@ -13,7 +13,6 @@ const VideoForm = () => {
 		setEpisode,
 		setVideosCount,
 		setBodyData,
-		// handleAddVideoThumbnail,
 		handleAddVideo,
 		errors,
 		setErrors,
@@ -35,25 +34,52 @@ const VideoForm = () => {
 	};
 	const areEpisodesEmpty =
 		bodyData.episode_titles && bodyData.episode_titles.length === 0;
+	useEffect(() => {
+		if (areEpisodesEmpty)
+			setErrors((prev) => ({
+				...prev,
+				videosCount: "Dodaj minimum jeden odcinek",
+			}));
+		else
+			setErrors((prev) => ({
+				...prev,
+				videosCount: null,
+			}));
+	}, [areEpisodesEmpty]);
 	const handleAddEpisode = () => {
-		if (
-			episode.title === "" ||
-			episode.desc === "" ||
-			episode.thumb === null ||
-			episode.video === null
-		)
+		if (episode.title === "") {
+			setErrors((prev) => ({
+				...prev,
+				title: "Uzupełnij dane",
+			}));
 			return;
+		} else if (episode.desc === "") {
+			setErrors((prev) => ({
+				...prev,
+				desc: "Uzupełnij dane",
+			}));
+			return;
+		} else if (episode.video === null) {
+			setErrors((prev) => ({
+				...prev,
+				video: "Uzupełnij dane",
+			}));
+			return;
+		} else {
+			setErrors((prev) => ({
+				...prev,
+				title: null,
+			}));
+		}
 		setBodyData((prevData) => ({
 			...prevData,
 			episode_titles: [...prevData.episode_titles, episode.title],
 			episode_desc: [...prevData.episode_desc, episode.desc],
 		}));
-		// handleAddVideoThumbnail();
 		handleAddVideo();
 		setEpisode({
 			title: "",
 			desc: "",
-			// thumb: null,
 			video: null,
 		});
 		setVideosCount((count) => count + 1);
@@ -109,16 +135,6 @@ const VideoForm = () => {
 					/>
 				</div>
 				<div className="flex flex-wrap items-center gap-4 mt-8">
-					{/* <FileUploader
-						fileType="img"
-						file={episode.thumb}
-						setFile={(file) =>
-							setEpisode((ep) => ({ ...ep, thumb: file }))
-						}
-						label="Miniaturka odcinka"
-						errorName="thumb"
-						error={errors.thumb}
-					/> */}
 					<FileUploader
 						fileType="video"
 						file={episode.video}

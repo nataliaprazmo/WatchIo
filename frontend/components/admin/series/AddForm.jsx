@@ -10,15 +10,20 @@ const AddForm = ({
 	handleComplete,
 	totalSteps,
 }) => {
-	const { handleAddSeries } = useSeries();
+	const { handleAddSeries, errors } = useSeries();
+	const submit = (e) => {
+		e.preventDefault();
+		if (
+			errors.title === null &&
+			errors.desc === null &&
+			errors.video === null &&
+			errors.videosCount === null
+		)
+			handleAddSeries(e);
+		handleComplete();
+	};
 	return (
-		<form
-			onSubmit={(e) => {
-				e.preventDefault();
-				handleComplete();
-				handleAddSeries(e);
-			}}
-		>
+		<form onSubmit={submit}>
 			<p className="py-4 pl-2">Krok {activeStep + 1}</p>
 			<Form part={activeStep} />
 			<div className="flex mt-20">

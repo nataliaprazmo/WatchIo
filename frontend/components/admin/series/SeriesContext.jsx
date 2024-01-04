@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const SeriesContext = createContext();
 
@@ -32,6 +32,11 @@ export function SeriesProvider({ children }) {
 		video: null,
 		videosCount: null,
 	});
+	useEffect(() => {
+		console.log(errors);
+	}, [errors, setErrors]);
+	const [addStatus, setAddStatus] = useState("Nie udało się dodać serii");
+
 	const handleGenresChange = (event) => {
 		const {
 			target: { value },
@@ -54,7 +59,9 @@ export function SeriesProvider({ children }) {
 		role: "aktor",
 	});
 	const handleAddStaff = () => {
-		if (staffDetails.name === "" || staffDetails.surname === "") return;
+		if (staffDetails.name === "" || staffDetails.surname === "") {
+			return;
+		}
 		const newStaffMember = { ...staffDetails };
 		setBodyData((prevBody) => ({
 			...prevBody,
@@ -65,19 +72,18 @@ export function SeriesProvider({ children }) {
 			surname: "",
 			role: "aktor",
 		});
+		setErrors((prev) => ({
+			...prev,
+			series_staff: null,
+		}));
 	};
 	const [episode, setEpisode] = useState({
 		title: "",
 		desc: "",
-		// thumb: null,
 		video: null,
 	});
 	const [series_thumbnail, setSeries_thumbnail] = useState(null);
-	// const [video_thumbnails, setVideo_thumbnails] = useState([]);
 	const [videos, setVideos] = useState([]);
-	// const handleAddVideoThumbnail = () => {
-	// 	setVideo_thumbnails((prev) => [...prev, episode.thumb]);
-	// };
 	const handleAddVideo = () => {
 		setVideos((prev) => [...prev, episode.video]);
 	};
@@ -98,9 +104,6 @@ export function SeriesProvider({ children }) {
 				videos.forEach((video, index) => {
 					formData.append("videos", video);
 				});
-				// video_thumbnails.forEach((thumbnail, index) => {
-				// 	formData.append("video_thumbnails", thumbnail);
-				// });
 				formData.append("series_thumbnail", series_thumbnail);
 				const response = await fetch(
 					"http://localhost:5000/api/series/",
@@ -111,7 +114,7 @@ export function SeriesProvider({ children }) {
 					}
 				);
 				if (response.status == 200) {
-					const res = response.json();
+					setAddStatus("Udało się dodać serię");
 					setBodyData({
 						series_title: "",
 						series_desc: "",
@@ -122,9 +125,10 @@ export function SeriesProvider({ children }) {
 						episode_desc: [],
 					});
 					setSeries_thumbnail(null);
-					// setVideo_thumbnails([]);
 					setVideos([]);
 					setVideosCount(1);
+				} else {
+					setAddStatus("Nie udało się dodać serii");
 				}
 			} catch (error) {
 				if (
@@ -132,6 +136,7 @@ export function SeriesProvider({ children }) {
 					error.response.status >= 400 &&
 					error.response.status <= 500
 				) {
+					setAddStatus("Nie udało się dodać serii");
 					console.error(error);
 				}
 			}
@@ -152,17 +157,16 @@ export function SeriesProvider({ children }) {
 				setEpisode,
 				series_thumbnail,
 				setSeries_thumbnail,
-				// video_thumbnails,
-				// setVideo_thumbnails,
 				videos,
 				setVideos,
-				// handleAddVideoThumbnail,
 				handleAddVideo,
 				videosCount,
 				setVideosCount,
 				handleAddSeries,
 				errors,
 				setErrors,
+				addStatus,
+				setAddStatus,
 			}}
 		>
 			{children}

@@ -87,7 +87,12 @@ const FileUploader = ({ fileType, file, setFile, label, errorName, error }) => {
 			return;
 		}
 		setFile(droppedFile);
+
 		setPreviewUrl(URL.createObjectURL(droppedFile));
+		setErrors((prev) => ({
+			...prev,
+			[errorName]: null,
+		}));
 		e.currentTarget.type = "text";
 		e.currentTarget.type = "file";
 	};
