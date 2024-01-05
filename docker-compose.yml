@@ -15,7 +15,7 @@ services: # lista kontenerów do stworzenia
       - "5000:5000" # przypisanie portu 5000 hosta do portu 5000 dockera
     volumes:
       - ./backend/videos:/app/videos
-      - ./backend/series_thumbnails:/app//series_thumbnails
+      - ./backend/series_thumbnails:/app/series_thumbnails
       - /app/node_modules
     depends_on: # wskazanie na kontener, który powinien zostać uruchomiony przed tym konetenerem
       - mongodb # wskazanie na mongodb
