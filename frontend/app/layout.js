@@ -1,8 +1,5 @@
 import "./globals.css";
-import { Montserrat } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-
-const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
 	applicationName: "Watch.IO",
@@ -17,7 +14,7 @@ export const viewport = { colorScheme: "dark" };
 export default function RootLayout({ children }) {
 	return (
 		<html lang="pl">
-			<body className={montserrat.className}>
+			<body>
 				<AppRouterCacheProvider>{children}</AppRouterCacheProvider>
 			</body>
 		</html>

@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext } from "react";
 
 const SeriesContext = createContext();
 
@@ -32,10 +32,8 @@ export function SeriesProvider({ children }) {
 		video: null,
 		videosCount: null,
 	});
-	useEffect(() => {
-		console.log(errors);
-	}, [errors, setErrors]);
 	const [addStatus, setAddStatus] = useState("Nie udało się dodać serii");
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleGenresChange = (event) => {
 		const {
@@ -90,6 +88,7 @@ export function SeriesProvider({ children }) {
 	const [videosCount, setVideosCount] = useState(1);
 	const handleAddSeries = async (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 		const token = localStorage.getItem("token");
 		if (token) {
 			try {
@@ -140,6 +139,7 @@ export function SeriesProvider({ children }) {
 					console.error(error);
 				}
 			}
+			setIsLoading(false);
 		}
 	};
 
@@ -167,6 +167,8 @@ export function SeriesProvider({ children }) {
 				setErrors,
 				addStatus,
 				setAddStatus,
+				isLoading,
+				setIsLoading,
 			}}
 		>
 			{children}

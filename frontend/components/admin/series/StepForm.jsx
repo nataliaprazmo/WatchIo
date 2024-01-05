@@ -46,7 +46,7 @@ const StepForm = () => {
 	const handleStep = (step) => () => {
 		setActiveStep(step);
 	};
-	const { errors, addStatus } = useSeries();
+	const { addStatus, isLoading } = useSeries();
 	const [open, setOpen] = useState(false);
 	const handleClose = (event, reason) => {
 		if (reason === "clickaway") {
@@ -100,18 +100,27 @@ const StepForm = () => {
 			<div>
 				{allStepsCompleted() ? (
 					<React.Fragment>
-						<p className="mt-8">{addStatus}</p>
-						<div className="flex mt-16 mb-[46px]">
-							<div className="flex flex-auto" />
-							<Button
-								onClick={handleReset}
-								sx={{ color: "#ff9900", fontWeight: "500" }}
-							>
-								{addStatus === "Udało się dodać serię"
-									? "Dodaj kolejną serię"
-									: "Spróbuj jeszcze raz"}
-							</Button>
-						</div>
+						{isLoading ? (
+							<div className="mt-8">Dodawanie...</div>
+						) : (
+							<>
+								<p className="mt-8">{addStatus}</p>
+								<div className="flex mt-16 mb-[46px]">
+									<div className="flex flex-auto" />
+									<Button
+										onClick={handleReset}
+										sx={{
+											color: "#ff9900",
+											fontWeight: "500",
+										}}
+									>
+										{addStatus === "Udało się dodać serię"
+											? "Dodaj kolejną serię"
+											: "Spróbuj jeszcze raz"}
+									</Button>
+								</div>
+							</>
+						)}
 					</React.Fragment>
 				) : (
 					<AddForm
