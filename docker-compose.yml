@@ -14,9 +14,8 @@ services: # lista kontenerów do stworzenia
     ports: # przypisanie portów
       - "5000:5000" # przypisanie portu 5000 hosta do portu 5000 dockera
     volumes:
-      # - ./backend:/app # przypisanie folderu backend do ścieżki /app w kontenerze
       - ./backend/videos:/app/videos
-      - ./backend/series_thumbnails:/app//series_thumbnails
+      - ./backend/series_thumbnails:/app/series_thumbnails
       - /app/node_modules
     depends_on: # wskazanie na kontener, który powinien zostać uruchomiony przed tym konetenerem
       - mongodb # wskazanie na mongodb
@@ -28,9 +27,6 @@ services: # lista kontenerów do stworzenia
     build: ./frontend # użycie dockerfile'a z folderu frontend
     ports:
       - "3000:3000" # przypisanie portu 3000 hosta do portu 3000 dockera
-    # volumes:
-    #   - ./frontend:/app/ # przypisanie folder ./frontend/src do /app/
-    #   - /app/node_modules
     depends_on:
       - backend
     networks:
