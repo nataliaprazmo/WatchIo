@@ -29,27 +29,6 @@ const SerieDetails = ({ id, epId, setCurrentVideoId }) => {
 		<>
 			{seriesDetails && (
 				<>
-					{/* <div className="flex items-center gap-4 w-full mt-8">
-						{seriesDetails.episodes.map((ep, index) =>
-							ep._id === epId ? (
-								<button
-									key={index}
-									className="text-sm bg-secondary-violet rounded py-2 px-4 font-medium uppercase"
-									disabled
-								>
-									Odcinek {index + 1}.
-								</button>
-							) : (
-								<button
-									key={index}
-									className="text-sm border-[1px] border-secondary-violet rounded py-2 px-4 font-medium uppercase hover:border-[#bd7de8] transition-colors duration-300"
-									onClick={() => setCurrentVideoId(ep._id)}
-								>
-									Odcinek {index + 1}.
-								</button>
-							)
-						)}
-					</div> */}
 					<div className="mt-12 flex flex-row flex-wrap items-start justify-between">
 						<div className="flex flex-row flex-wrap items-start gap-8">
 							<Image

@@ -15,11 +15,11 @@ const LinkButton = ({ to, children, variant, type, color }) => {
 			: ""
 	} `;
 	return (
-		<Button variant={variant} type={type} color={color}>
-			<Link className={linkClasses} href={to}>
+		<Link className={linkClasses} href={to}>
+			<Button variant={variant} type={type} color={color}>
 				{children}
-			</Link>
-		</Button>
+			</Button>
+		</Link>
 	);
 };
 export default LinkButton;

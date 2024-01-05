@@ -9,7 +9,6 @@ import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded
 import BookmarkAddedRoundedIcon from "@mui/icons-material/BookmarkAddedRounded";
 import LocalPlayOutlinedIcon from "@mui/icons-material/LocalPlayOutlined";
 import roomId from "./roomId";
-import Video from "./Video";
 
 const SeriesDetails = ({ id }) => {
 	const [seriesDetails, setSeriesDetails] = useState(null);
@@ -221,7 +220,6 @@ const SeriesDetails = ({ id }) => {
 							type="video/mp4"
 						/>
 					</video>
-					{/* <Video key={episodeId} episodeId={episodeId} /> */}
 				</>
 			)}
 		</div>

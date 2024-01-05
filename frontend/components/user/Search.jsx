@@ -52,7 +52,7 @@ const Search = () => {
 			/>
 			{results && (
 				<div
-					className="bg-neutral-800 absolute w-72 h-fit top-0 right-0 rounded mt-14 mr-24 py-3 px-4 bg-opacity-75 border-[1px] border-neutral-700 backdrop-blur-md flex flex-col gap-1 max-h-[396px] overflow-y-scroll"
+					className="bg-neutral-800 absolute w-72 h-fit top-0 right-0 rounded mt-14 mr-36 py-3 px-4 bg-opacity-75 border-[1px] border-neutral-700 backdrop-blur-md flex flex-col gap-1 max-h-[396px] overflow-y-scroll"
 					style={{
 						scrollbarWidth: "thin",
 						scrollbarColor:
