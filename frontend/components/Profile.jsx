@@ -115,7 +115,6 @@ const Profile = () => {
 	const [alertState, setAlertState] = useState(false);
 	return (
 		<div className="mt-10 relative p-6 rounded-md bg-grey-200">
-			{/* <div className="bg-gradient-to-tr from-secondary-violet to-purple-400 absolute bottom-48 right-4 w-full h-18 opacity-80 rounded-lg" /> */}
 			<Avatar alt="admin_avatar" className="w-16 h-16 bg-grey-250 ">
 				{role === "admin" ? (
 					<AdminPanelSettingsIcon

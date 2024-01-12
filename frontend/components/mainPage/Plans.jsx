@@ -40,14 +40,6 @@ const Plans = () => {
 	return (
 		<div className="flex sm:flex-row flex-col gap-8 items-center justify-center mt-8">
 			<Plan
-				type="Subskrypcja dzielona"
-				price="darmowy"
-				description={[
-					"Jeśli uzyskałeś kod od jednego z naszych subskrybentów, możesz dołączyć do planu!",
-					"Wystarczy wpisać otrzymany kod przy rejestracji",
-				]}
-			/>
-			<Plan
 				type="Plan podstawowy"
 				price={
 					price.amount_decimal
@@ -55,10 +47,18 @@ const Plans = () => {
 						: "12.99/mies."
 				}
 				description={[
-					"Pokoje do 5 osób",
+					"Wspólne oglądanie",
 					"Subskrybcja 5 osobowa",
-					"3 podkonta",
 					"Udostępnianie playlist",
+					"Oglądaj bez ograniczeń",
+				]}
+			/>
+			<Plan
+				type="Subskrypcja dzielona"
+				price="darmowy"
+				description={[
+					"Uzyskaj kod od jednego z naszych subskrybentów i wpisz przy zakupie",
+					"Dołącz już dziś!",
 				]}
 			/>
 		</div>

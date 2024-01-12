@@ -9,9 +9,11 @@ const LinkText = ({ to, children }) => {
 	const pathname = usePathname();
 	let linkClasses = `link ${pathname === to ? "active" : ""} `;
 	return (
-		<Link className={linkClasses} href={to}>
-			<Button>{children}</Button>
-		</Link>
+		<Button>
+			<Link className={linkClasses} href={to}>
+				{children}
+			</Link>
+		</Button>
 	);
 };
 export default LinkText;
