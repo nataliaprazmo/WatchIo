@@ -10,16 +10,16 @@ const clients = {
 const HEARTBEAT_INTERVAL = 1000 * 5; // 5 seconds
 const HEARTBEAT_VALUE = 1;
 
-const updateWatchingCount = (sockets)=>{
+const updateWatchingCount = (sockets) => {
 	sockets.forEach(function each(client) {
 		if (client.readyState === WebSocket.OPEN) {
-			client.send("watching," + rooms[roomId].sockets.length),
+			client.send("watching," + sockets.length),
 				{
 					binary: false,
 				};
 		}
 	});
-}
+};
 
 const sendRoomId = (ws, roomId, videoId) => {
 	if (!roomId) {
@@ -36,14 +36,14 @@ const sendRoomId = (ws, roomId, videoId) => {
 			{
 				binary: false,
 			};
-		updateWatchingCount(rooms[roomId].sockets)
+		updateWatchingCount(rooms[roomId].sockets);
 	} else {
 		rooms[roomId].sockets.push(ws);
 		ws.send("videoId," + rooms[roomId].videoId),
 			{
 				binary: false,
 			};
-		updateWatchingCount(rooms[roomId].sockets)
+		updateWatchingCount(rooms[roomId].sockets);
 	}
 
 	ws.on("message", function incoming(message) {
