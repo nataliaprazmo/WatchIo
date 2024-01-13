@@ -36,6 +36,7 @@ const DeleteDialog = ({
 						"Content-Type": "application/json",
 						"x-access-token": token,
 					},
+					body: JSON.stringify({ password }),
 				}
 			);
 			if (response.status === 200) {
