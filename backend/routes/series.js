@@ -23,10 +23,7 @@ router.get("/", async (req, res) => {
 		} else if (req.query?.search) {
 			result = await search(req.query.search);
 		} else if (req.query?.howMany && req.query?.sortedBy) {
-			result = await getSeriesSortedBy(
-				req.query.sortedBy,
-				req.query.howMany
-			);
+			result = await getSeriesSortedBy(req.query.sortedBy, req.query.howMany);
 		} else if (req.query?.howMany && req.query?.getByOneEpisode) {
 			result = await getByOneEpisode(req.query.howMany);
 		} else if (req.query?.howMany && req.query?.getByEpisodeCount) {
@@ -63,8 +60,14 @@ router.get("/:id", async (req, res) => {
 
 router.delete("/:id", jwt_auth, admin_auth, async (req, res) => {
 	try {
-		const result = await deleteSeries(req.params.id);
-		if (!result) return res.status(404).send({ message: "Not found" });
+		const result = await deleteSeries(
+			req.params.id,
+			req.user._id,
+			req.body.password
+		);
+		console.log(result);
+		if (result?.status != 200)
+			return res.status(result.status).send({ message: result.message });
 		return res.status(200).send({
 			message: "success",
 		});
@@ -78,10 +81,7 @@ router.post(
 	"/",
 	jwt_auth,
 	admin_auth,
-	video_upload.fields([
-		{ name: "videos" },
-		{ name: "series_thumbnail" },
-	]),
+	video_upload.fields([{ name: "videos" }, { name: "series_thumbnail" }]),
 	async (req, res) => {
 		try {
 			const result = await upload_Series(
@@ -93,11 +93,9 @@ router.post(
 				JSON.parse(req.body.episode_titles),
 				JSON.parse(req.body.episode_desc),
 				req.files.videos,
-				req.files.series_thumbnail,
+				req.files.series_thumbnail
 			);
-			return res
-				.status(result.statusCode)
-				.send({ message: result.message });
+			return res.status(result.statusCode).send({ message: result.message });
 		} catch (error) {
 			console.error(error);
 			return res.status(500).send({ message: error.message });

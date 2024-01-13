@@ -1,6 +1,8 @@
 const { Series, validateSeries } = require("../models/Series");
 const { Video, validateVideo } = require("../models/Video");
 const { Subscription } = require("../models/Subscription");
+const { User } = require("../models/User");
+const bcrypt = require("bcrypt");
 const { deleteFile } = require("../utils/File_utils");
 const { addImgsToSeries, addImgsToEpisodes } = require("../utils/Img_utils");
 const { genreCreateIfDontExists } = require("../utils/Genres_utils");
@@ -40,7 +42,6 @@ const getSeriesDetails = async (seriesId) => {
 		throw error;
 	}
 };
-
 
 const search = async (searchQuery) => {
 	try {
@@ -129,12 +130,11 @@ const upload_Series = async (
 	episode_titles,
 	episode_desc,
 	files_videos,
-	files_series_thumbnail,
+	files_series_thumbnail
 ) => {
 	try {
 		const series = await Series.findOne({ series_title: series_title });
-		if (series)
-			return { statusCode: 409, message: "Series already exists" };
+		if (series) return { statusCode: 409, message: "Series already exists" };
 		let videos_ids = [];
 		for (let i = 0; i < files_videos.length; i++) {
 			const video = new Video({
@@ -186,12 +186,18 @@ const upload_Series = async (
 	}
 };
 
-const deleteSeries = async (id) => {
+const deleteSeries = async (id, userId, password) => {
 	try {
+		const user = await User.findOne({ _id: userId });
+		console.log("DELETE: " + user);
+		const isValid = await bcrypt.compare(password, user.credentials.password);
+		if (!isValid) {
+			return { status: 401, message: "Wrong password" };
+		}
 		const series = await Series.findOne({ _id: id })
 			.populate("episodes")
 			.exec();
-		if (!series) return false;
+		if (!series) return { status: 404, message: "Not Found" };
 		try {
 			series.episodes.forEach(async (element) => {
 				deleteFile(element.path);
@@ -204,7 +210,7 @@ const deleteSeries = async (id) => {
 		}
 
 		await series.deleteOne();
-		return true;
+		return { status: 200, message: "Success" };
 	} catch (error) {
 		throw error;
 	}

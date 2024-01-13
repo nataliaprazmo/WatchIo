@@ -33,18 +33,15 @@ const changeCurrentUserPassword = async (userId, oldPassword, newPassword) => {
 	try {
 		const user = await User.findOne({ _id: userId });
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
-
 		const isValid = await bcrypt.compare(
 			oldPassword,
 			user.credentials.password
 		);
-
 		if (!isValid) {
 			return false;
 		}
-
 		const hashNewPassword = await bcrypt.hash(newPassword, salt);
-		user.password = hashNewPassword;
+		user.credentials.password = hashNewPassword;
 		await user.save();
 		return true;
 	} catch (error) {
@@ -85,7 +82,7 @@ const registerNewUser = async (userData) => {
 
 		const newUser = await new User({
 			...userData,
-			"is_admin":false,
+			is_admin: false,
 			"credentials.password": hashPassword,
 			stripe_customer_id: stripeCustomerId.id,
 		}).save();
